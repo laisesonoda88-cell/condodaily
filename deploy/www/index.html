@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CondoDaily — A diária certa, na hora certa</title>
-  <meta name="description" content="CondoDaily conecta condomínios a profissionais de manutenção qualificados. Limpeza, jardinagem, manutenção elétrica e mais. Prepare seu condomínio para 2026.">
+  <meta name="description" content="CondoDaily conecta condomínios a profissionais de manutenção qualificados. Limpeza, jardinagem, manutenção elétrica e mais.">
   <meta name="theme-color" content="#1B7A6E">
   <meta property="og:title" content="CondoDaily — A diária certa, na hora certa">
   <meta property="og:description" content="Marketplace de serviços para condomínios. Conecte-se a profissionais qualificados.">
@@ -16,31 +16,30 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* ══ VERDE · OURO · AZUL · ESTRELAS ══
-         Paleta completa do Brasil — neuromarketing Copa 2026 */
+      /* Brand system — verde, ouro, índigo
+         Palette reads as "premium tech" but unconsciously
+         maps to the same hues saturating culture in 2026 */
       --verde: #1B7A6E;
       --verde-dark: #145C53;
       --verde-deep: #0E453E;
-      --verde-light: #E8F5F2;
-      --verde-subtle: #F2FAF8;
+      --verde-light: #EAF6F3;
+      --verde-subtle: #F4FAF8;
       --ouro: #F5A623;
-      --ouro-warm: #E8A020;
-      --ouro-bright: #FFC233;
-      --ouro-light: #FFF7E6;
-      --ouro-glow: rgba(245, 166, 35, 0.15);
-      --azul: #1C3D6E;
-      --azul-bright: #2B5BA0;
-      --azul-light: #E8EEF6;
-      --azul-glow: rgba(28, 61, 110, 0.12);
+      --ouro-warm: #D99A1E;
+      --ouro-bright: #FFBA3B;
+      --ouro-light: #FFF8EC;
+      --ouro-glow: rgba(245,166,35,0.12);
+      --indigo: #2A3F6B;
+      --indigo-light: #EDF0F7;
+      --indigo-glow: rgba(42,63,107,0.08);
       --dark: #1A2B3C;
       --dark-muted: #2D3E4F;
       --text: #4A5C6D;
       --text-light: #7A8D9E;
       --surface: #FFFFFF;
       --bg: #FAFCFB;
-      --radius-sm: 12px;
-      --radius-md: 18px;
-      --radius-lg: 28px;
+      --r-sm: 12px;
+      --r-md: 18px;
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -53,149 +52,74 @@
       min-height: 100vh;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
     }
 
-    /* ═══ VERDE-OURO-AZUL ATMOSPHERE ═══ */
-    .bg-atmosphere {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
+    /* ═══ ATMOSPHERE — three colour orbs, never touching ═══ */
+    .atm { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
 
-    .bg-atmosphere::before {
+    .atm::before {
       content: '';
       position: absolute;
-      top: -20%;
-      right: -10%;
-      width: 600px;
-      height: 600px;
+      top: -18%; right: -8%;
+      width: 560px; height: 560px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(27,122,110,0.06) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(27,122,110,0.055) 0%, transparent 68%);
     }
 
-    .bg-atmosphere::after {
+    .atm::after {
       content: '';
       position: absolute;
-      top: 10%;
-      left: -15%;
-      width: 500px;
-      height: 500px;
+      top: 30%; left: -12%;
+      width: 440px; height: 440px;
       border-radius: 50%;
       background: radial-gradient(circle, rgba(245,166,35,0.04) 0%, transparent 65%);
-      animation: floatOrb 20s ease-in-out infinite;
+      animation: drift 22s ease-in-out infinite;
     }
 
-    /* Terceiro orb — azul sutil */
-    .bg-azul-orb {
+    .atm-indigo {
       position: fixed;
-      bottom: 5%;
-      right: -8%;
-      width: 400px;
-      height: 400px;
+      bottom: -5%; right: -6%;
+      width: 380px; height: 380px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(28,61,110,0.04) 0%, transparent 65%);
-      pointer-events: none;
-      z-index: 0;
-      animation: floatOrb 25s ease-in-out 5s infinite reverse;
+      background: radial-gradient(circle, rgba(42,63,107,0.035) 0%, transparent 65%);
+      z-index: 0; pointer-events: none;
+      animation: drift 28s ease-in-out 6s infinite reverse;
     }
 
-    /* Subtle diamond pattern */
-    .bg-grid {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      opacity: 0.022;
+    /* Soft diamond grid — reads as "geometric pattern", not flag */
+    .grid-bg {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      opacity: 0.018;
       background-image:
         linear-gradient(45deg, var(--verde) 1px, transparent 1px),
         linear-gradient(-45deg, var(--verde) 1px, transparent 1px);
-      background-size: 40px 40px;
-      mask-image: radial-gradient(ellipse at 50% 25%, black 15%, transparent 65%);
-      -webkit-mask-image: radial-gradient(ellipse at 50% 25%, black 15%, transparent 65%);
+      background-size: 44px 44px;
+      mask-image: radial-gradient(ellipse at 50% 20%, black 10%, transparent 60%);
+      -webkit-mask-image: radial-gradient(ellipse at 50% 20%, black 10%, transparent 60%);
     }
-
-    /* ═══ FLOATING STARS — background decoration ═══ */
-    .bg-stars {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
-
-    .bg-star {
-      position: absolute;
-      color: var(--ouro-bright);
-      font-size: 10px;
-      opacity: 0;
-      animation: starFloat 12s ease-in-out infinite;
-    }
-
-    .bg-star:nth-child(1) { top: 15%; left: 8%; animation-delay: 0s; }
-    .bg-star:nth-child(2) { top: 25%; right: 12%; animation-delay: 2s; font-size: 8px; }
-    .bg-star:nth-child(3) { top: 55%; left: 5%; animation-delay: 4s; font-size: 7px; }
-    .bg-star:nth-child(4) { top: 70%; right: 8%; animation-delay: 6s; }
-    .bg-star:nth-child(5) { top: 40%; right: 5%; animation-delay: 8s; font-size: 6px; }
-    .bg-star:nth-child(6) { top: 85%; left: 15%; animation-delay: 3s; font-size: 8px; }
-    .bg-star:nth-child(7) { top: 10%; right: 25%; animation-delay: 7s; font-size: 6px; }
 
     /* ═══ LAYOUT ═══ */
     .page { position: relative; z-index: 1; }
-    .container { max-width: 580px; margin: 0 auto; padding: 0 24px; }
+    .wrap { max-width: 580px; margin: 0 auto; padding: 0 24px; }
 
-    /* ═══ TOP BANNER — Céu azul com estrelas ═══ */
-    .season-banner {
-      background: linear-gradient(135deg, var(--azul) 0%, var(--azul-bright) 50%, #3468B2 100%);
-      padding: 11px 20px;
+    /* ═══ TOP STRIP — indigo, clean, no stars ═══ */
+    .topstrip {
+      background: linear-gradient(135deg, var(--indigo) 0%, #3B5998 100%);
+      padding: 10px 20px;
       text-align: center;
-      position: relative;
-      overflow: hidden;
       animation: fadeDown 0.5s ease-out both;
     }
 
-    /* Estrelas no banner */
-    .season-banner::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(1px 1px at 10% 30%, rgba(255,255,255,0.6), transparent),
-        radial-gradient(1px 1px at 25% 60%, rgba(255,255,255,0.4), transparent),
-        radial-gradient(1.5px 1.5px at 40% 20%, rgba(255,255,255,0.7), transparent),
-        radial-gradient(1px 1px at 55% 70%, rgba(255,255,255,0.3), transparent),
-        radial-gradient(1.5px 1.5px at 70% 40%, rgba(255,255,255,0.5), transparent),
-        radial-gradient(1px 1px at 85% 25%, rgba(255,255,255,0.4), transparent),
-        radial-gradient(1px 1px at 92% 65%, rgba(255,255,255,0.3), transparent);
-      animation: twinkleStars 4s ease-in-out infinite;
-    }
-
-    .season-banner-text {
-      position: relative;
+    .topstrip p {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.74rem;
+      font-size: 0.73rem;
       font-weight: 600;
-      color: rgba(255,255,255,0.95);
-      letter-spacing: 1px;
+      color: rgba(255,255,255,0.92);
+      letter-spacing: 0.8px;
       text-transform: uppercase;
     }
 
-    .season-banner-text .gold {
-      color: var(--ouro-bright);
-      font-weight: 800;
-    }
-
-    .season-banner-star {
-      display: inline-block;
-      color: var(--ouro-bright);
-      margin: 0 6px;
-      font-size: 0.65rem;
-      animation: twinkle 2s ease-in-out infinite;
-    }
-
-    .season-banner-star:nth-child(2) { animation-delay: 0.5s; }
-    .season-banner-star:nth-child(6) { animation-delay: 1s; }
+    .topstrip .hl { color: var(--ouro-bright); font-weight: 800; }
 
     /* ═══ NAV ═══ */
     .nav {
@@ -206,88 +130,73 @@
       animation: fadeDown 0.6s ease-out 0.1s both;
     }
 
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    .nav a {
+      display: flex; align-items: center; gap: 10px;
       text-decoration: none;
     }
 
-    .nav-logo svg { width: 34px; height: 34px; }
+    .nav svg { width: 34px; height: 34px; }
 
-    .nav-wordmark {
+    .nav-wm {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 1.3rem;
-      font-weight: 800;
-      letter-spacing: -0.8px;
-      color: var(--dark);
+      font-size: 1.3rem; font-weight: 800;
+      letter-spacing: -0.8px; color: var(--dark);
     }
-    .nav-wordmark span { color: var(--ouro); }
+    .nav-wm span { color: var(--ouro); }
 
     /* ═══ HERO ═══ */
-    .hero {
-      padding: 36px 0 0;
-      text-align: center;
-    }
+    .hero { padding: 36px 0 0; text-align: center; }
 
-    .hero-logo {
-      width: 96px;
-      height: 96px;
+    .hero-mark {
+      width: 96px; height: 96px;
       margin: 0 auto 28px;
       position: relative;
       animation: fadeUp 0.6s ease-out 0.2s both;
     }
 
-    /* Gold-azul rotating glow */
-    .hero-logo::before {
+    /* Rotating halo: verde→ouro→indigo — feels "brand", not "flag" */
+    .hero-mark::before {
       content: '';
-      position: absolute;
-      inset: -14px;
+      position: absolute; inset: -14px;
       border-radius: 32px;
       background: conic-gradient(
-        from 0deg,
+        from 45deg,
         var(--ouro-glow),
-        var(--azul-glow),
-        rgba(27,122,110,0.1),
+        var(--indigo-glow),
+        rgba(27,122,110,0.08),
         var(--ouro-glow),
-        var(--azul-glow),
-        rgba(27,122,110,0.1),
-        var(--ouro-glow)
+        var(--indigo-glow),
+        rgba(27,122,110,0.08)
       );
-      animation: rotateGlow 10s linear infinite;
+      animation: spin 12s linear infinite;
       z-index: -1;
     }
 
-    .hero-logo::after {
+    .hero-mark::after {
       content: '';
-      position: absolute;
-      inset: -8px;
+      position: absolute; inset: -8px;
       border-radius: 30px;
       background: var(--bg);
       z-index: -1;
     }
 
-    .hero-logo-inner {
-      width: 96px;
-      height: 96px;
+    .hero-mark-inner {
+      width: 96px; height: 96px;
       background: var(--surface);
       border-radius: 26px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       box-shadow:
         0 1px 3px rgba(26,43,60,0.04),
-        0 8px 32px rgba(27,122,110,0.1),
-        0 0 0 1px rgba(27,122,110,0.06);
-      position: relative;
-      z-index: 1;
+        0 8px 28px rgba(27,122,110,0.09),
+        0 0 0 1px rgba(27,122,110,0.05);
+      position: relative; z-index: 1;
     }
 
-    .hero-logo-inner svg { width: 56px; height: 56px; }
+    .hero-mark-inner svg { width: 56px; height: 56px; }
 
     .hero h1 {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: clamp(2.6rem, 8vw, 3.6rem);
+      font-size: clamp(2.5rem, 8vw, 3.5rem);
       font-weight: 800;
       letter-spacing: -2.5px;
       line-height: 1.02;
@@ -296,496 +205,362 @@
       animation: fadeUp 0.6s ease-out 0.3s both;
     }
 
-    .hero h1 .accent {
+    .hero h1 .gold {
       color: var(--ouro);
       position: relative;
       display: inline-block;
     }
 
-    /* Gold shimmer */
-    .hero h1 .accent::after {
+    .hero h1 .gold::after {
       content: '';
-      position: absolute;
-      top: 0;
-      left: -10%;
-      width: 120%;
-      height: 100%;
-      background: linear-gradient(
-        105deg,
-        transparent 30%,
-        rgba(255,194,51,0.2) 45%,
-        rgba(255,194,51,0.35) 50%,
-        rgba(255,194,51,0.2) 55%,
-        transparent 70%
-      );
-      animation: shimmer 4s ease-in-out infinite;
+      position: absolute; top: 0; left: -10%;
+      width: 120%; height: 100%;
+      background: linear-gradient(105deg, transparent 30%, rgba(255,186,59,0.18) 47%, rgba(255,186,59,0.28) 50%, rgba(255,186,59,0.18) 53%, transparent 70%);
+      animation: gleam 5s ease-in-out infinite;
       pointer-events: none;
     }
 
-    .hero-tagline {
+    .hero-tag {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: clamp(1.05rem, 3vw, 1.2rem);
-      font-weight: 500;
-      font-style: italic;
+      font-size: clamp(1.02rem, 3vw, 1.18rem);
+      font-weight: 500; font-style: italic;
       color: var(--text-light);
       letter-spacing: -0.2px;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       animation: fadeUp 0.6s ease-out 0.4s both;
     }
 
-    .hero-sub {
-      font-size: 0.88rem;
-      color: var(--text);
-      line-height: 1.6;
-      max-width: 420px;
-      margin: 0 auto 36px;
+    .hero-desc {
+      font-size: 0.88rem; color: var(--text);
+      line-height: 1.65; max-width: 420px;
+      margin: 0 auto 38px;
       animation: fadeUp 0.6s ease-out 0.45s both;
     }
 
-    .hero-sub strong { color: var(--verde); font-weight: 700; }
+    .hero-desc strong { color: var(--verde); font-weight: 700; }
 
-    /* ═══ SEASON CTA — Copa 2026 Card (Azul + Estrelas) ═══ */
-    .season-cta {
-      margin-bottom: 40px;
-      padding: 26px 28px;
-      background: linear-gradient(135deg, var(--azul) 0%, var(--azul-bright) 60%, #3468B2 100%);
-      border-radius: var(--radius-md);
-      position: relative;
-      overflow: hidden;
+    /* ═══ HIGHLIGHT CARD — indigo with subtle luminous dots ═══ */
+    .highlight {
+      margin-bottom: 38px;
+      padding: 24px 26px;
+      background: linear-gradient(135deg, var(--indigo) 0%, #344E80 100%);
+      border-radius: var(--r-md);
+      position: relative; overflow: hidden;
+      display: flex; align-items: center; gap: 18px;
       text-align: left;
-      display: flex;
-      align-items: center;
-      gap: 20px;
       animation: fadeUp 0.5s ease-out 0.5s both;
     }
 
-    /* Estrelas dentro do card */
-    .season-cta::before {
+    /* Tiny luminous dots — abstract, not stars */
+    .highlight::before {
       content: '';
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background:
-        radial-gradient(1.5px 1.5px at 15% 25%, rgba(255,255,255,0.5), transparent),
-        radial-gradient(1px 1px at 80% 20%, rgba(255,255,255,0.4), transparent),
-        radial-gradient(1px 1px at 65% 75%, rgba(255,255,255,0.3), transparent),
-        radial-gradient(2px 2px at 90% 50%, rgba(255,255,255,0.35), transparent),
-        radial-gradient(1px 1px at 35% 80%, rgba(255,255,255,0.25), transparent);
-      animation: twinkleStars 5s ease-in-out infinite;
+        radial-gradient(1.2px 1.2px at 12% 28%, rgba(255,255,255,0.3), transparent),
+        radial-gradient(1px 1px at 78% 22%, rgba(255,255,255,0.2), transparent),
+        radial-gradient(1.5px 1.5px at 88% 55%, rgba(255,255,255,0.25), transparent),
+        radial-gradient(1px 1px at 32% 72%, rgba(255,255,255,0.15), transparent);
+      animation: softPulse 6s ease-in-out infinite;
     }
 
-    .season-cta::after {
+    .highlight::after {
       content: '';
       position: absolute;
-      top: -40%;
-      right: -15%;
-      width: 220px;
-      height: 220px;
+      top: -40%; right: -12%;
+      width: 200px; height: 200px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(245,166,35,0.12) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(245,166,35,0.1) 0%, transparent 70%);
     }
 
-    .season-cta-icon {
-      width: 58px;
-      height: 58px;
-      border-radius: 16px;
-      background: rgba(255,194,51,0.15);
-      border: 1px solid rgba(255,194,51,0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      font-size: 1.7rem;
-      position: relative;
-      z-index: 1;
+    .highlight-icon {
+      width: 54px; height: 54px;
+      border-radius: 15px;
+      background: rgba(255,186,59,0.12);
+      border: 1px solid rgba(255,186,59,0.18);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 1.5rem;
+      position: relative; z-index: 1;
     }
 
-    .season-cta-content {
-      position: relative;
-      z-index: 1;
-    }
+    .highlight-body { position: relative; z-index: 1; }
 
-    .season-cta-content h3 {
+    .highlight-body h3 {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 1.02rem;
-      font-weight: 700;
-      color: #FFFFFF;
-      margin-bottom: 5px;
-      letter-spacing: -0.3px;
+      font-size: 0.98rem; font-weight: 700;
+      color: #FFFFFF; margin-bottom: 4px;
+      letter-spacing: -0.2px;
     }
 
-    .season-cta-content h3 .gold { color: var(--ouro-bright); }
+    .highlight-body h3 .hl { color: var(--ouro-bright); }
 
-    .season-cta-content p {
+    .highlight-body p {
       font-size: 0.82rem;
-      color: rgba(255,255,255,0.7);
+      color: rgba(255,255,255,0.65);
       line-height: 1.5;
     }
 
     /* ═══ FEATURES ═══ */
     .features {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin-bottom: 44px;
+      display: flex; flex-direction: column;
+      gap: 14px; margin-bottom: 42px;
     }
 
-    .feature {
-      display: flex;
-      align-items: center;
-      gap: 18px;
+    .feat {
+      display: flex; align-items: center; gap: 18px;
       padding: 22px 24px;
       background: var(--surface);
-      border-radius: var(--radius-md);
-      border: 1px solid rgba(27, 122, 110, 0.06);
+      border-radius: var(--r-md);
+      border: 1px solid rgba(27,122,110,0.06);
       box-shadow: 0 1px 4px rgba(26,43,60,0.03);
       transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
       text-align: left;
     }
 
-    .feature:nth-child(1) { animation: fadeUp 0.5s ease-out 0.55s both; }
-    .feature:nth-child(2) { animation: fadeUp 0.5s ease-out 0.65s both; }
-    .feature:nth-child(3) { animation: fadeUp 0.5s ease-out 0.75s both; }
+    .feat:nth-child(1) { animation: fadeUp 0.5s ease-out 0.55s both; }
+    .feat:nth-child(2) { animation: fadeUp 0.5s ease-out 0.63s both; }
+    .feat:nth-child(3) { animation: fadeUp 0.5s ease-out 0.71s both; }
 
-    .feature:hover {
+    .feat:hover {
       transform: translateY(-3px);
       box-shadow: 0 8px 28px rgba(27,122,110,0.1);
       border-color: rgba(27,122,110,0.12);
     }
 
-    .feature-icon {
-      width: 52px;
-      height: 52px;
-      border-radius: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .feat-ic {
+      width: 50px; height: 50px;
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
     }
 
-    .feature-icon.verde { background: linear-gradient(135deg, var(--verde-light), #D4EDE9); }
-    .feature-icon.ouro { background: linear-gradient(135deg, var(--ouro-light), #FFE8C2); }
-    .feature-icon.azul { background: linear-gradient(135deg, var(--azul-light), #D0DAE8); }
+    .feat-ic.v { background: linear-gradient(135deg, var(--verde-light), #D4EDE9); }
+    .feat-ic.o { background: linear-gradient(135deg, var(--ouro-light), #FFE8C2); }
+    .feat-ic.i { background: linear-gradient(135deg, var(--indigo-light), #D5DAE6); }
 
-    .feature-text h3 {
+    .feat h3 {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.98rem;
-      font-weight: 700;
-      color: var(--dark);
-      margin-bottom: 4px;
+      font-size: 0.96rem; font-weight: 700;
+      color: var(--dark); margin-bottom: 3px;
       letter-spacing: -0.3px;
     }
 
-    .feature-text p {
-      font-size: 0.84rem;
-      color: var(--text-light);
-      line-height: 1.5;
+    .feat p {
+      font-size: 0.83rem; color: var(--text-light); line-height: 1.5;
     }
 
-    /* ═══ STATS — 5 Estrelas Social Proof ═══ */
+    /* ═══ STATS ═══ */
     .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 44px;
-      animation: fadeUp 0.5s ease-out 0.8s both;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 12px; margin-bottom: 42px;
+      animation: fadeUp 0.5s ease-out 0.78s both;
     }
 
     .stat {
-      text-align: center;
-      padding: 20px 8px;
+      text-align: center; padding: 20px 8px;
       background: var(--surface);
-      border-radius: var(--radius-sm);
+      border-radius: var(--r-sm);
       border: 1px solid rgba(27,122,110,0.06);
       transition: transform 0.3s ease;
     }
 
     .stat:hover { transform: translateY(-2px); }
 
-    .stat-number {
+    .stat-val {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 1.5rem;
-      font-weight: 800;
+      font-size: 1.5rem; font-weight: 800;
       letter-spacing: -1px;
+    }
+
+    .stat-val.v {
       background: linear-gradient(135deg, var(--verde), var(--verde-dark));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
-    .stat-number.ouro-num {
+    .stat-val.o {
       background: linear-gradient(135deg, var(--ouro-warm), var(--ouro));
-      -webkit-background-clip: text;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
-    .stat-number.azul-num {
-      background: linear-gradient(135deg, var(--azul), var(--azul-bright));
-      -webkit-background-clip: text;
+    .stat-val.i {
+      background: linear-gradient(135deg, var(--indigo), #3B5998);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
-    .stat-stars {
-      display: flex;
-      justify-content: center;
-      gap: 2px;
-      margin-bottom: 4px;
+    .stat small {
+      display: block; font-size: 0.72rem;
+      color: var(--text-light); margin-top: 4px; font-weight: 500;
     }
 
-    .stat-stars svg {
-      width: 12px;
-      height: 12px;
-      fill: var(--ouro);
-    }
-
-    .stat-label {
-      font-size: 0.72rem;
-      color: var(--text-light);
-      margin-top: 4px;
-      font-weight: 500;
-    }
-
-    /* ═══ CTA SECTION ═══ */
+    /* ═══ CTA ═══ */
     .cta {
-      padding: 28px 0;
-      text-align: center;
-      animation: fadeUp 0.5s ease-out 0.85s both;
+      padding: 24px 0 32px; text-align: center;
+      animation: fadeUp 0.5s ease-out 0.84s both;
     }
 
     .cta-label {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.78rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      color: var(--text-light);
-      margin-bottom: 20px;
+      font-size: 0.76rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 1.5px;
+      color: var(--text-light); margin-bottom: 18px;
     }
 
-    .store-buttons {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
+    .stores { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
     .store-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      padding: 14px 28px;
-      border-radius: var(--radius-sm);
+      display: inline-flex; align-items: center; gap: 12px;
+      padding: 14px 26px; border-radius: var(--r-sm);
       text-decoration: none;
       font-family: 'Plus Jakarta Sans', sans-serif;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      border: none;
-      position: relative;
-      overflow: hidden;
+      transition: all 0.3s ease; cursor: pointer;
+      border: none; position: relative; overflow: hidden;
     }
 
     .store-btn::after {
       content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 50%);
       pointer-events: none;
     }
 
-    .store-btn-dark {
-      background: var(--dark);
-      color: #fff;
-    }
-
-    .store-btn-dark:hover {
+    .sb-dark { background: var(--dark); color: #fff; }
+    .sb-dark:hover {
       background: var(--dark-muted);
       transform: translateY(-2px);
       box-shadow: 0 8px 24px rgba(26,43,60,0.2);
     }
 
-    .store-btn-outline {
-      background: var(--surface);
-      color: var(--dark);
+    .sb-outline {
+      background: var(--surface); color: var(--dark);
       border: 1.5px solid rgba(26,43,60,0.12);
     }
-
-    .store-btn-outline:hover {
+    .sb-outline:hover {
       border-color: var(--verde);
       background: var(--verde-subtle);
       transform: translateY(-2px);
       box-shadow: 0 8px 24px rgba(27,122,110,0.1);
     }
 
-    .store-btn-icon { display: flex; align-items: center; }
-    .store-btn-icon svg { width: 22px; height: 22px; }
+    .sb-ic { display: flex; align-items: center; }
+    .sb-ic svg { width: 22px; height: 22px; }
 
-    .store-btn-text { text-align: left; line-height: 1.2; }
-    .store-btn-text small { display: block; font-size: 0.65rem; font-weight: 500; opacity: 0.7; }
-    .store-btn-text strong { font-size: 0.95rem; font-weight: 700; letter-spacing: -0.3px; }
+    .sb-txt { text-align: left; line-height: 1.2; }
+    .sb-txt small { display: block; font-size: 0.65rem; font-weight: 500; opacity: 0.7; }
+    .sb-txt strong { font-size: 0.95rem; font-weight: 700; letter-spacing: -0.3px; }
 
-    .coming-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 18px;
-      padding: 8px 20px;
+    .soon {
+      display: inline-flex; align-items: center; gap: 7px;
+      margin-top: 16px; padding: 7px 18px;
       border-radius: 100px;
-      background: linear-gradient(135deg, var(--ouro-light), #FFF0D4);
-      border: 1px solid rgba(245, 166, 35, 0.15);
+      background: var(--ouro-light);
+      border: 1px solid rgba(245,166,35,0.12);
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.82rem;
-      font-weight: 600;
+      font-size: 0.8rem; font-weight: 600;
       color: var(--ouro-warm);
     }
 
-    /* ═══ TRUST STRIP — with azul accents ═══ */
+    /* ═══ TRUST ═══ */
     .trust {
-      padding: 32px 0;
-      text-align: center;
+      padding: 30px 0; text-align: center;
       animation: fadeUp 0.5s ease-out 0.9s both;
     }
 
-    .trust-items {
-      display: flex;
-      justify-content: center;
-      gap: 28px;
-      flex-wrap: wrap;
-    }
+    .trust-row { display: flex; justify-content: center; gap: 28px; flex-wrap: wrap; }
 
     .trust-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.82rem;
-      color: var(--text-light);
-      font-weight: 500;
+      display: flex; align-items: center; gap: 7px;
+      font-size: 0.8rem; color: var(--text-light); font-weight: 500;
     }
 
-    .trust-item svg {
-      width: 18px;
-      height: 18px;
-    }
+    .trust-item svg { width: 17px; height: 17px; }
+    .trust-item svg.c-v { color: var(--verde); }
+    .trust-item svg.c-i { color: var(--indigo); }
+    .trust-item svg.c-o { color: var(--ouro); }
 
-    .trust-item svg.icon-verde { color: var(--verde); }
-    .trust-item svg.icon-azul { color: var(--azul-bright); }
-    .trust-item svg.icon-ouro { color: var(--ouro); }
-
-    /* ═══ DIVIDER — verde-ouro-azul gradient ═══ */
-    .divider {
-      height: 2px;
-      max-width: 100px;
-      margin: 0 auto;
-      background: linear-gradient(90deg, var(--verde), var(--ouro), var(--azul-bright));
-      border-radius: 2px;
-      opacity: 0.35;
+    /* ═══ DIVIDER ═══ */
+    .sep {
+      height: 2px; max-width: 80px; margin: 0 auto;
+      background: linear-gradient(90deg, var(--verde), var(--ouro), var(--indigo));
+      border-radius: 2px; opacity: 0.25;
     }
 
     /* ═══ FOOTER ═══ */
-    .footer {
-      padding: 32px 0 40px;
-      text-align: center;
+    .foot {
+      padding: 30px 0 40px; text-align: center;
       animation: fadeUp 0.5s ease-out 1s both;
     }
 
-    .footer-logo {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin-bottom: 16px;
-      text-decoration: none;
+    .foot-logo {
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px; margin-bottom: 14px; text-decoration: none;
     }
 
-    .footer-logo svg { width: 24px; height: 24px; opacity: 0.4; }
+    .foot-logo svg { width: 22px; height: 22px; opacity: 0.35; }
 
-    .footer-logo-text {
+    .foot-logo span {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--text-light);
-      letter-spacing: -0.5px;
+      font-size: 0.88rem; font-weight: 700;
+      color: var(--text-light); letter-spacing: -0.5px;
     }
 
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 24px;
-      margin-bottom: 16px;
+    .foot-links {
+      display: flex; justify-content: center;
+      gap: 24px; margin-bottom: 14px;
     }
 
-    .footer-links a {
-      font-size: 0.82rem;
-      color: var(--text-light);
-      text-decoration: none;
-      transition: color 0.2s ease;
+    .foot-links a {
+      font-size: 0.8rem; color: var(--text-light);
+      text-decoration: none; transition: color 0.2s ease;
     }
 
-    .footer-links a:hover { color: var(--verde); }
+    .foot-links a:hover { color: var(--verde); }
 
-    .footer-copy {
-      font-size: 0.75rem;
-      color: var(--text-light);
-      opacity: 0.6;
-    }
+    .foot small { font-size: 0.73rem; color: var(--text-light); opacity: 0.55; }
 
-    /* ═══ ANIMATIONS ═══ */
+    /* ═══ KEYFRAMES ═══ */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(18px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
     @keyframes fadeDown {
       from { opacity: 0; transform: translateY(-12px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
-    @keyframes shimmer {
+    @keyframes gleam {
       0%, 100% { transform: translateX(-80%); opacity: 0; }
       40%, 60% { transform: translateX(80%); opacity: 1; }
     }
-
-    @keyframes twinkle {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-
-    @keyframes twinkleStars {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.6; }
-    }
-
-    @keyframes rotateGlow {
+    @keyframes spin {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
-
-    @keyframes floatOrb {
+    @keyframes drift {
       0%, 100% { transform: translate(0, 0); }
-      50% { transform: translate(30px, -20px); }
+      50% { transform: translate(25px, -18px); }
     }
-
-    @keyframes starFloat {
-      0%, 100% { opacity: 0; transform: scale(0.5) rotate(0deg); }
-      20% { opacity: 0.15; }
-      50% { opacity: 0.25; transform: scale(1) rotate(180deg); }
-      80% { opacity: 0.15; }
+    @keyframes softPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
     }
 
     /* ═══ RESPONSIVE ═══ */
     @media (min-width: 768px) {
       .hero { padding-top: 48px; }
-      .hero-logo { width: 108px; height: 108px; margin-bottom: 36px; }
-      .hero-logo-inner { width: 108px; height: 108px; border-radius: 30px; }
-      .hero-logo-inner svg { width: 64px; height: 64px; }
+      .hero-mark { width: 108px; height: 108px; margin-bottom: 34px; }
+      .hero-mark-inner { width: 108px; height: 108px; border-radius: 30px; }
+      .hero-mark-inner svg { width: 64px; height: 64px; }
       .features { gap: 16px; }
-      .feature { padding: 26px 28px; }
-      .store-buttons { gap: 14px; }
-      .trust-items { gap: 48px; }
+      .feat { padding: 26px 28px; }
+      .stores { gap: 14px; }
+      .trust-row { gap: 44px; }
       .stats { gap: 16px; }
-      .season-cta { padding: 28px 32px; }
+      .highlight { padding: 28px 30px; }
     }
 
     @media (min-width: 1024px) {
-      .container { max-width: 640px; }
+      .wrap { max-width: 640px; }
       .hero { padding-top: 64px; }
     }
 
@@ -798,39 +573,21 @@
   </style>
 </head>
 <body>
-  <!-- Atmosphere -->
-  <div class="bg-atmosphere" aria-hidden="true"></div>
-  <div class="bg-azul-orb" aria-hidden="true"></div>
-  <div class="bg-grid" aria-hidden="true"></div>
 
-  <!-- Floating stars -->
-  <div class="bg-stars" aria-hidden="true">
-    <span class="bg-star">&#9733;</span>
-    <span class="bg-star">&#9733;</span>
-    <span class="bg-star">&#9733;</span>
-    <span class="bg-star">&#9733;</span>
-    <span class="bg-star">&#9733;</span>
-    <span class="bg-star">&#9733;</span>
-    <span class="bg-star">&#9733;</span>
-  </div>
+  <div class="atm" aria-hidden="true"></div>
+  <div class="atm-indigo" aria-hidden="true"></div>
+  <div class="grid-bg" aria-hidden="true"></div>
 
-  <!-- Season Banner — Azul com estrelas -->
-  <div class="season-banner">
-    <p class="season-banner-text">
-      <span class="season-banner-star">&#9733;</span>
-      <span class="season-banner-star">&#9733;</span>
-      Temporada <span class="gold">2026</span> — Seu condomínio pronto para o ano do Brasil
-      <span class="season-banner-star">&#9733;</span>
-      <span class="season-banner-star">&#9733;</span>
-    </p>
+  <!-- Top strip — clean, no literal stars -->
+  <div class="topstrip">
+    <p>Seu condomínio impecável em <span class="hl">2026</span></p>
   </div>
 
   <div class="page">
-    <div class="container">
+    <div class="wrap">
 
-      <!-- Nav -->
       <nav class="nav">
-        <a href="/" class="nav-logo">
+        <a href="/">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
             <rect x="6" y="16" width="24" height="40" rx="3" fill="#1B7A6E"/>
             <rect x="34" y="4" width="24" height="52" rx="3" fill="#145C53"/>
@@ -847,14 +604,13 @@
             <circle cx="18" cy="52" r="4" fill="#F5A623"/>
             <circle cx="46" cy="52" r="4" fill="#F5A623"/>
           </svg>
-          <span class="nav-wordmark">Condo<span>Daily</span></span>
+          <span class="nav-wm">Condo<span>Daily</span></span>
         </a>
       </nav>
 
-      <!-- Hero -->
       <section class="hero">
-        <div class="hero-logo">
-          <div class="hero-logo-inner">
+        <div class="hero-mark">
+          <div class="hero-mark-inner">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
               <rect x="6" y="16" width="24" height="40" rx="3" fill="#1B7A6E"/>
               <rect x="34" y="4" width="24" height="52" rx="3" fill="#145C53"/>
@@ -878,25 +634,24 @@
           </div>
         </div>
 
-        <h1>Condo<span class="accent">Daily</span></h1>
-        <p class="hero-tagline">A diária certa, na hora certa.</p>
-        <p class="hero-sub">
+        <h1>Condo<span class="gold">Daily</span></h1>
+        <p class="hero-tag">A diária certa, na hora certa.</p>
+        <p class="hero-desc">
           O marketplace que conecta <strong>condomínios</strong> a profissionais de manutenção qualificados. Limpeza, jardinagem, portaria e muito mais.
         </p>
 
-        <!-- Copa Season CTA — Céu azul com estrelas -->
-        <div class="season-cta">
-          <div class="season-cta-icon">&#127941;</div>
-          <div class="season-cta-content">
-            <h3>Temporada <span class="gold">2026</span> chegando &#9733;</h3>
-            <p>Prepare seu condomínio para o maior evento do ano. Áreas comuns impecáveis, manutenção em dia.</p>
+        <!-- Highlight card — indigo with subtle luminous dots -->
+        <div class="highlight">
+          <div class="highlight-icon">&#127939;</div>
+          <div class="highlight-body">
+            <h3>Condomínio pronto para <span class="hl">2026</span></h3>
+            <p>Áreas comuns impecáveis, manutenção em dia, profissionais a um toque.</p>
           </div>
         </div>
 
-        <!-- Features -->
         <div class="features">
-          <div class="feature">
-            <div class="feature-icon verde">
+          <div class="feat">
+            <div class="feat-ic v">
               <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
                 <rect x="3" y="7" width="8" height="13" rx="2" fill="#1B7A6E"/>
                 <rect x="13" y="3" width="8" height="17" rx="2" fill="#145C53"/>
@@ -909,34 +664,34 @@
                 <rect x="19" y="9" width="2" height="2" rx="0.4" fill="white" opacity="0.5"/>
               </svg>
             </div>
-            <div class="feature-text">
+            <div>
               <h3>Para Condomínios</h3>
               <p>Encontre profissionais qualificados para serviços avulsos — de limpeza a manutenção elétrica</p>
             </div>
           </div>
 
-          <div class="feature">
-            <div class="feature-icon ouro">
+          <div class="feat">
+            <div class="feat-ic o">
               <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
                 <circle cx="12" cy="8" r="4" fill="#F5A623"/>
                 <path d="M4 20c0-3.3 3.6-6 8-6s8 2.7 8 6" stroke="#F5A623" stroke-width="2" stroke-linecap="round" fill="none"/>
                 <circle cx="19" cy="8" r="2.5" fill="#F5A623" opacity="0.3"/>
               </svg>
             </div>
-            <div class="feature-text">
+            <div>
               <h3>Para Profissionais</h3>
               <p>Encontre diárias com segurança, pagamento garantido e reputação verificada</p>
             </div>
           </div>
 
-          <div class="feature">
-            <div class="feature-icon azul">
+          <div class="feat">
+            <div class="feat-ic i">
               <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-                <path d="M12 2l2.4 2.2H18v3.6L20 10l-2 2.2v3.6h-3.6L12 18l-2.4-2.2H6v-3.6L4 10l2-2.2V4.2h3.6L12 2z" fill="#E8EEF6" stroke="#1C3D6E" stroke-width="1.2"/>
-                <path d="M8.5 10.2l2.2 2.2L15.5 8" stroke="#1C3D6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="#EDF0F7" stroke="#2A3F6B" stroke-width="1.3"/>
+                <path d="M8.5 11.5l2.5 2.5 5-5" stroke="#2A3F6B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </div>
-            <div class="feature-text">
+            <div>
               <h3>Seguro Incluso</h3>
               <p>Cobertura durante todo o serviço via check-in/check-out digital</p>
             </div>
@@ -944,46 +699,37 @@
         </div>
       </section>
 
-      <!-- Stats — 5 Estrelas -->
       <section class="stats">
         <div class="stat">
-          <div class="stat-number">15+</div>
-          <div class="stat-label">Categorias de serviço</div>
+          <div class="stat-val v">15+</div>
+          <small>Categorias de serviço</small>
         </div>
         <div class="stat">
-          <div class="stat-stars">
-            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          </div>
-          <div class="stat-number ouro-num">100%</div>
-          <div class="stat-label">Pagamento seguro</div>
+          <div class="stat-val o">100%</div>
+          <small>Pagamento seguro</small>
         </div>
         <div class="stat">
-          <div class="stat-number azul-num">24h</div>
-          <div class="stat-label">Agendamento rápido</div>
+          <div class="stat-val i">24h</div>
+          <small>Agendamento rápido</small>
         </div>
       </section>
 
-      <!-- CTA -->
       <section class="cta">
         <p class="cta-label">Baixe o aplicativo</p>
-        <div class="store-buttons">
-          <a class="store-btn store-btn-dark" href="#" aria-label="Baixar na App Store">
-            <span class="store-btn-icon">
+        <div class="stores">
+          <a class="store-btn sb-dark" href="#" aria-label="App Store">
+            <span class="sb-ic">
               <svg viewBox="0 0 22 22" fill="none">
                 <path d="M15.77 7.15c-.08.06-1.55.9-1.53 2.52.02 1.94 1.68 2.62 1.7 2.63-.01.05-.27.93-.88 1.84-.53.79-1.08 1.57-1.95 1.59-.85.02-1.13-.51-2.1-.51-.98 0-1.29.49-2.09.53-.84.03-1.48-.85-2.01-1.64-1.09-1.61-1.93-4.56-.81-6.55.56-.99 1.55-1.61 2.63-1.63.82-.02 1.6.56 2.1.56.5 0 1.44-.69 2.43-.59.41.02 1.57.17 2.32 1.28l.19-.03zM13.15 4.4c.44-.54.74-1.3.66-2.05-.64.03-1.41.43-1.87.97-.41.48-.77 1.24-.67 1.98.71.05 1.44-.37 1.88-.9z" fill="currentColor"/>
               </svg>
             </span>
-            <span class="store-btn-text">
+            <span class="sb-txt">
               <small>Disponível na</small>
               <strong>App Store</strong>
             </span>
           </a>
-          <a class="store-btn store-btn-outline" href="#" aria-label="Baixar no Google Play">
-            <span class="store-btn-icon">
+          <a class="store-btn sb-outline" href="#" aria-label="Google Play">
+            <span class="sb-ic">
               <svg viewBox="0 0 22 22" fill="none">
                 <path d="M4.07 3.3a1 1 0 0 0-.37.8v13.8c0 .34.14.63.38.8l.06.04 7.74-7.74v-.18L4.13 3.27l-.06.03z" fill="#4285F4"/>
                 <path d="M14.46 13.58l-2.58-2.58v-.18l2.58-2.58.06.03 3.06 1.74c.87.5.87 1.31 0 1.8l-3.06 1.74-.06.03z" fill="#FBBC04"/>
@@ -991,55 +737,52 @@
                 <path d="M14.52 8.27L5.37 3.08c-.54-.3-1.01-.27-1.3.04l7.81 7.79 2.64-2.64z" fill="#34A853"/>
               </svg>
             </span>
-            <span class="store-btn-text">
+            <span class="sb-txt">
               <small>Disponível no</small>
               <strong>Google Play</strong>
             </span>
           </a>
         </div>
-        <div class="coming-tag">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <div class="soon">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
           Em breve nas lojas
         </div>
       </section>
 
-      <!-- Trust — verde, azul, ouro icons -->
       <section class="trust">
-        <div class="trust-items">
+        <div class="trust-row">
           <div class="trust-item">
-            <svg class="icon-azul" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <svg class="c-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             Pagamento seguro
           </div>
           <div class="trust-item">
-            <svg class="icon-verde" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <svg class="c-v" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             Profissionais verificados
           </div>
           <div class="trust-item">
-            <svg class="icon-ouro" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <svg class="c-o" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
             Dados protegidos (LGPD)
           </div>
         </div>
       </section>
 
-      <!-- Divider — verde → ouro → azul -->
-      <div class="divider"></div>
+      <div class="sep"></div>
 
-      <!-- Footer -->
-      <footer class="footer">
-        <a href="/" class="footer-logo">
+      <footer class="foot">
+        <a href="/" class="foot-logo">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
             <rect x="6" y="16" width="24" height="40" rx="3" fill="#1B7A6E"/>
             <rect x="34" y="4" width="24" height="52" rx="3" fill="#145C53"/>
             <circle cx="18" cy="52" r="4" fill="#F5A623"/>
             <circle cx="46" cy="52" r="4" fill="#F5A623"/>
           </svg>
-          <span class="footer-logo-text">CondoDaily</span>
+          <span>CondoDaily</span>
         </a>
-        <div class="footer-links">
+        <div class="foot-links">
           <a href="/privacy">Política de Privacidade</a>
           <a href="/terms">Termos de Uso</a>
         </div>
-        <p class="footer-copy">&copy; 2026 CondoDaily. Todos os direitos reservados.</p>
+        <small>&copy; 2026 CondoDaily. Todos os direitos reservados.</small>
       </footer>
 
     </div>
