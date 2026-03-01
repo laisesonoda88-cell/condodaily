@@ -6,232 +6,679 @@
   <title>CondoDaily — A diária certa, na hora certa</title>
   <meta name="description" content="CondoDaily conecta condomínios a profissionais de manutenção qualificados. Limpeza, jardinagem, manutenção elétrica e mais.">
   <meta name="theme-color" content="#1B7A6E">
+  <meta property="og:title" content="CondoDaily — A diária certa, na hora certa">
+  <meta property="og:description" content="Marketplace de serviços para condomínios. Conecte-se a profissionais qualificados.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://condodaily.com.br">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect x='8' y='24' width='21' height='36' rx='3' fill='%231B7A6E'/><rect x='35' y='12' width='21' height='48' rx='3' fill='%23145C53'/><circle cx='18.5' cy='54' r='4.5' fill='%23F5A623'/><circle cx='45.5' cy='54' r='4.5' fill='%23F5A623'/></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #F8FAFA;
-      min-height: 100vh;
-      color: #1A2B3C;
+    :root {
+      --primary: #1B7A6E;
+      --primary-dark: #145C53;
+      --primary-deeper: #0E453E;
+      --primary-light: #E8F5F2;
+      --primary-subtle: #F2FAF8;
+      --secondary: #F5A623;
+      --secondary-dark: #D4890A;
+      --secondary-light: #FFF4E0;
+      --dark: #1A2B3C;
+      --dark-muted: #2D3E4F;
+      --text: #4A5C6D;
+      --text-light: #7A8D9E;
+      --surface: #FFFFFF;
+      --bg: #F6F9F8;
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 28px;
     }
 
-    /* ── Hero section (matches app welcome screen) ── */
-    .hero {
-      background: #fff;
-      padding: 3rem 1.5rem 2.5rem;
-      text-align: center;
-      border-bottom-left-radius: 32px;
-      border-bottom-right-radius: 32px;
-      box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--dark);
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
-    .logo-row {
+
+    /* ═══ ANIMATED BACKGROUND PATTERN ═══ */
+    .bg-pattern {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.035;
+      background-image:
+        linear-gradient(var(--primary) 1px, transparent 1px),
+        linear-gradient(90deg, var(--primary) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse at 50% 30%, black 20%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse at 50% 30%, black 20%, transparent 70%);
+    }
+
+    /* ═══ LAYOUT ═══ */
+    .page { position: relative; z-index: 1; }
+
+    .container {
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ═══ NAV ═══ */
+    .nav {
+      padding: 20px 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
-      margin-bottom: 0.75rem;
-    }
-    .logo-row svg { width: 56px; height: 56px; }
-    .wordmark {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 2.2rem;
-      font-weight: 800;
-      letter-spacing: -1.5px;
-      color: #1A2B3C;
-    }
-    .wordmark .daily { color: #F5A623; }
-    .tagline {
-      font-size: 1.05rem;
-      color: #6B7B8D;
-      margin-bottom: 2rem;
+      animation: fadeDown 0.6s ease-out both;
     }
 
-    /* ── Feature cards (matches app) ── */
-    .features {
-      max-width: 420px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      padding: 0 0.5rem;
-    }
-    .feature-card {
+    .nav-logo {
       display: flex;
       align-items: center;
-      gap: 16px;
-      background: #F8FAFA;
-      border-radius: 16px;
-      padding: 1rem 1.25rem;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo svg { width: 32px; height: 32px; }
+
+    .nav-wordmark {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      color: var(--dark);
+    }
+    .nav-wordmark span { color: var(--secondary); }
+
+    /* ═══ HERO ═══ */
+    .hero {
+      padding: 48px 0 0;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: var(--secondary-light);
+      border: 1px solid rgba(245, 166, 35, 0.2);
+      border-radius: 100px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--secondary-dark);
+      margin-bottom: 28px;
+      animation: fadeUp 0.6s ease-out 0.1s both;
+    }
+
+    .hero-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--secondary);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .hero-logo {
+      width: 88px;
+      height: 88px;
+      margin: 0 auto 32px;
+      position: relative;
+      animation: fadeUp 0.6s ease-out 0.2s both;
+    }
+
+    .hero-logo::before {
+      content: '';
+      position: absolute;
+      inset: -12px;
+      border-radius: 30px;
+      background: linear-gradient(135deg, var(--primary-light), var(--secondary-light));
+      opacity: 0.5;
+      z-index: -1;
+    }
+
+    .hero-logo-inner {
+      width: 88px;
+      height: 88px;
+      background: var(--surface);
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow:
+        0 1px 3px rgba(26,43,60,0.04),
+        0 8px 24px rgba(27,122,110,0.08);
+    }
+
+    .hero-logo-inner svg { width: 52px; height: 52px; }
+
+    .hero h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(2.4rem, 7vw, 3.4rem);
+      font-weight: 800;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      color: var(--dark);
+      margin-bottom: 16px;
+      animation: fadeUp 0.6s ease-out 0.3s both;
+    }
+
+    .hero h1 .accent { color: var(--secondary); }
+
+    .hero-tagline {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(1.05rem, 3vw, 1.2rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--text-light);
+      letter-spacing: -0.2px;
+      margin-bottom: 40px;
+      animation: fadeUp 0.6s ease-out 0.4s both;
+    }
+
+    /* ═══ FEATURES ═══ */
+    .features {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 48px;
+    }
+
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 20px 22px;
+      background: var(--surface);
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(27, 122, 110, 0.06);
+      box-shadow: 0 1px 4px rgba(26,43,60,0.03);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
       text-align: left;
     }
+
+    .feature:nth-child(1) { animation: fadeUp 0.5s ease-out 0.5s both; }
+    .feature:nth-child(2) { animation: fadeUp 0.5s ease-out 0.6s both; }
+    .feature:nth-child(3) { animation: fadeUp 0.5s ease-out 0.7s both; }
+
+    .feature:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(27,122,110,0.08);
+    }
+
     .feature-icon {
-      width: 48px;
-      height: 48px;
+      width: 50px;
+      height: 50px;
       border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.4rem;
       flex-shrink: 0;
     }
-    .feature-icon.green { background: #E8F5F2; }
-    .feature-icon.orange { background: #FFF4E0; }
-    .feature-title {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 600;
-      font-size: 0.95rem;
-      color: #1A2B3C;
-      margin-bottom: 2px;
-    }
-    .feature-desc {
-      font-size: 0.82rem;
-      color: #6B7B8D;
-      line-height: 1.4;
+
+    .feature-icon.teal {
+      background: var(--primary-light);
     }
 
-    /* ── CTA buttons ── */
-    .cta-section {
-      max-width: 420px;
-      margin: 2rem auto 0;
-      padding: 0 0.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+    .feature-icon.amber {
+      background: var(--secondary-light);
     }
-    .btn {
+
+    .feature-text h3 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 3px;
+      letter-spacing: -0.3px;
+    }
+
+    .feature-text p {
+      font-size: 0.83rem;
+      color: var(--text-light);
+      line-height: 1.45;
+    }
+
+    /* ═══ CTA SECTION ═══ */
+    .cta {
+      padding: 40px 0;
+      text-align: center;
+      animation: fadeUp 0.5s ease-out 0.8s both;
+    }
+
+    .cta-label {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-light);
+      margin-bottom: 20px;
+    }
+
+    .store-buttons {
       display: flex;
-      align-items: center;
+      gap: 12px;
       justify-content: center;
-      gap: 10px;
-      padding: 1rem;
-      border-radius: 14px;
+      flex-wrap: wrap;
+    }
+
+    .store-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 28px;
+      border-radius: var(--radius-sm);
       text-decoration: none;
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: all 0.2s ease;
+      transition: all 0.3s ease;
       cursor: pointer;
       border: none;
+      position: relative;
+      overflow: hidden;
     }
-    .btn-primary {
-      background: #1B7A6E;
+
+    .store-btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .store-btn-dark {
+      background: var(--dark);
       color: #fff;
     }
-    .btn-primary:hover { background: #145C53; }
-    .btn-outline {
-      background: #fff;
-      color: #1B7A6E;
-      border: 2px solid #1B7A6E;
-    }
-    .btn-outline:hover { background: #E8F5F2; }
-    .btn-icon { font-size: 1.2rem; }
 
-    .coming-soon {
+    .store-btn-dark:hover {
+      background: var(--dark-muted);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(26,43,60,0.2);
+    }
+
+    .store-btn-outline {
+      background: var(--surface);
+      color: var(--dark);
+      border: 1.5px solid rgba(26,43,60,0.12);
+    }
+
+    .store-btn-outline:hover {
+      border-color: var(--primary);
+      background: var(--primary-subtle);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(27,122,110,0.1);
+    }
+
+    .store-btn-icon {
+      display: flex;
+      align-items: center;
+    }
+
+    .store-btn-icon svg { width: 22px; height: 22px; }
+
+    .store-btn-text {
+      text-align: left;
+      line-height: 1.2;
+    }
+
+    .store-btn-text small {
+      display: block;
+      font-size: 0.65rem;
+      font-weight: 500;
+      opacity: 0.7;
+    }
+
+    .store-btn-text strong {
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    .coming-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 20px;
+      padding: 8px 18px;
+      border-radius: 100px;
+      background: linear-gradient(135deg, var(--primary-light), var(--primary-subtle));
+      border: 1px solid rgba(27, 122, 110, 0.1);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    /* ═══ TRUST STRIP ═══ */
+    .trust {
+      padding: 36px 0;
       text-align: center;
-      margin-top: 1rem;
-      font-size: 0.85rem;
-      color: #F5A623;
+      animation: fadeUp 0.5s ease-out 0.9s both;
+    }
+
+    .trust-items {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: var(--text-light);
       font-weight: 500;
     }
 
-    /* ── Footer ── */
-    .footer {
-      text-align: center;
-      padding: 2rem 1rem;
-      font-size: 0.82rem;
-      color: #9BA8B5;
+    .trust-item svg {
+      width: 18px;
+      height: 18px;
+      color: var(--primary);
     }
-    .footer a { color: #1B7A6E; text-decoration: none; }
-    .footer a:hover { text-decoration: underline; }
 
-    /* ── Desktop: wider layout ── */
+    /* ═══ DIVIDER ═══ */
+    .divider {
+      height: 1px;
+      max-width: 120px;
+      margin: 0 auto;
+      background: linear-gradient(90deg, transparent, rgba(27,122,110,0.15), transparent);
+    }
+
+    /* ═══ FOOTER ═══ */
+    .footer {
+      padding: 32px 0 40px;
+      text-align: center;
+      animation: fadeUp 0.5s ease-out 1s both;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      text-decoration: none;
+    }
+
+    .footer-logo svg { width: 24px; height: 24px; opacity: 0.4; }
+
+    .footer-logo-text {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-light);
+      letter-spacing: -0.5px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 16px;
+    }
+
+    .footer-links a {
+      font-size: 0.82rem;
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover { color: var(--primary); }
+
+    .footer-copy {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      opacity: 0.6;
+    }
+
+    /* ═══ ANIMATIONS ═══ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.85); }
+    }
+
+    /* ═══ RESPONSIVE ═══ */
     @media (min-width: 768px) {
-      .hero { padding: 4rem 2rem 3rem; }
-      .logo-row svg { width: 72px; height: 72px; }
-      .wordmark { font-size: 2.8rem; }
-      .tagline { font-size: 1.15rem; }
-      .features, .cta-section { max-width: 480px; }
+      .hero { padding-top: 64px; }
+      .hero-logo { width: 100px; height: 100px; margin-bottom: 40px; }
+      .hero-logo-inner { width: 100px; height: 100px; border-radius: 28px; }
+      .hero-logo-inner svg { width: 60px; height: 60px; }
+      .features { gap: 16px; }
+      .feature { padding: 24px 26px; }
+      .store-buttons { gap: 14px; }
+      .trust-items { gap: 48px; }
+    }
+
+    @media (min-width: 1024px) {
+      .container { max-width: 620px; }
+      .hero { padding-top: 80px; }
+    }
+
+    /* ═══ REDUCED MOTION ═══ */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="hero">
-    <!-- Logo row (same as app) -->
-    <div class="logo-row">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-        <rect x="6" y="16" width="24" height="40" rx="3" fill="#1B7A6E"/>
-        <rect x="34" y="4" width="24" height="52" rx="3" fill="#145C53"/>
-        <rect x="12" y="22" width="5" height="5" rx="1" fill="white"/>
-        <rect x="20" y="22" width="5" height="5" rx="1" fill="white"/>
-        <rect x="12" y="31" width="5" height="5" rx="1" fill="white"/>
-        <rect x="20" y="31" width="5" height="5" rx="1" fill="white"/>
-        <rect x="12" y="40" width="5" height="5" rx="1" fill="white"/>
-        <rect x="20" y="40" width="5" height="5" rx="1" fill="white"/>
-        <rect x="40" y="10" width="5" height="5" rx="1" fill="white"/>
-        <rect x="48" y="10" width="5" height="5" rx="1" fill="white"/>
-        <rect x="40" y="19" width="5" height="5" rx="1" fill="white"/>
-        <rect x="48" y="19" width="5" height="5" rx="1" fill="white"/>
-        <rect x="40" y="28" width="5" height="5" rx="1" fill="white"/>
-        <rect x="48" y="28" width="5" height="5" rx="1" fill="white"/>
-        <rect x="40" y="37" width="5" height="5" rx="1" fill="white"/>
-        <rect x="48" y="37" width="5" height="5" rx="1" fill="white"/>
-        <circle cx="18" cy="52" r="4" fill="#F5A623"/>
-        <circle cx="46" cy="52" r="4" fill="#F5A623"/>
-      </svg>
-      <h1 class="wordmark">Condo<span class="daily">Daily</span></h1>
-    </div>
-    <p class="tagline">A diária certa, na hora certa.</p>
+  <!-- Subtle grid pattern -->
+  <div class="bg-pattern" aria-hidden="true"></div>
 
-    <!-- Feature cards (same as app welcome screen) -->
-    <div class="features">
-      <div class="feature-card">
-        <div class="feature-icon green">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="8" width="8" height="12" rx="1.5" fill="#1B7A6E"/><rect x="13" y="4" width="8" height="16" rx="1.5" fill="#145C53"/><rect x="5" y="10" width="2" height="2" rx="0.3" fill="white"/><rect x="15" y="6" width="2" height="2" rx="0.3" fill="white"/><rect x="15" y="10" width="2" height="2" rx="0.3" fill="white"/></svg>
-        </div>
-        <div>
-          <div class="feature-title">Para Condomínios</div>
-          <div class="feature-desc">Encontre profissionais qualificados para serviços avulsos</div>
-        </div>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon orange">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 12c2.5 0 4.5-2 4.5-4.5S14.5 3 12 3 7.5 5 7.5 7.5 9.5 12 12 12zm0 2c-3 0-9 1.5-9 4.5V21h18v-2.5c0-3-6-4.5-9-4.5z" fill="#F5A623"/></svg>
-        </div>
-        <div>
-          <div class="feature-title">Para Profissionais</div>
-          <div class="feature-desc">Encontre diárias com segurança e pagamento garantido</div>
-        </div>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon green">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-5-5 1.41-1.41L11 14.17l7.59-7.59L20 8l-9 9z" fill="#1B7A6E"/></svg>
-        </div>
-        <div>
-          <div class="feature-title">Seguro Incluso</div>
-          <div class="feature-desc">Cobertura durante todo o serviço via check-in/check-out</div>
-        </div>
-      </div>
-    </div>
+  <div class="page">
+    <div class="container">
 
-    <!-- CTA buttons -->
-    <div class="cta-section">
-      <a class="btn btn-primary" href="#">
-        <span class="btn-icon"></span> App Store
-      </a>
-      <a class="btn btn-outline" href="#">
-        <span class="btn-icon"></span> Google Play
-      </a>
-    </div>
-    <p class="coming-soon">Em breve nas lojas</p>
-  </div>
+      <!-- Nav -->
+      <nav class="nav">
+        <a href="/" class="nav-logo">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+            <rect x="6" y="16" width="24" height="40" rx="3" fill="#1B7A6E"/>
+            <rect x="34" y="4" width="24" height="52" rx="3" fill="#145C53"/>
+            <rect x="12" y="22" width="5" height="5" rx="1" fill="white"/>
+            <rect x="20" y="22" width="5" height="5" rx="1" fill="white"/>
+            <rect x="12" y="31" width="5" height="5" rx="1" fill="white"/>
+            <rect x="20" y="31" width="5" height="5" rx="1" fill="white"/>
+            <rect x="40" y="10" width="5" height="5" rx="1" fill="white"/>
+            <rect x="48" y="10" width="5" height="5" rx="1" fill="white"/>
+            <rect x="40" y="19" width="5" height="5" rx="1" fill="white"/>
+            <rect x="48" y="19" width="5" height="5" rx="1" fill="white"/>
+            <rect x="40" y="28" width="5" height="5" rx="1" fill="white"/>
+            <rect x="48" y="28" width="5" height="5" rx="1" fill="white"/>
+            <circle cx="18" cy="52" r="4" fill="#F5A623"/>
+            <circle cx="46" cy="52" r="4" fill="#F5A623"/>
+          </svg>
+          <span class="nav-wordmark">Condo<span>Daily</span></span>
+        </a>
+      </nav>
 
-  <div class="footer">
-    <p>&copy; 2026 CondoDaily. Todos os direitos reservados.</p>
-    <p><a href="/privacy">Privacidade</a> &middot; <a href="/terms">Termos de Uso</a></p>
+      <!-- Hero -->
+      <section class="hero">
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          Marketplace de serviços condominiais
+        </div>
+
+        <div class="hero-logo">
+          <div class="hero-logo-inner">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+              <rect x="6" y="16" width="24" height="40" rx="3" fill="#1B7A6E"/>
+              <rect x="34" y="4" width="24" height="52" rx="3" fill="#145C53"/>
+              <rect x="12" y="22" width="5" height="5" rx="1" fill="white"/>
+              <rect x="20" y="22" width="5" height="5" rx="1" fill="white"/>
+              <rect x="12" y="31" width="5" height="5" rx="1" fill="white"/>
+              <rect x="20" y="31" width="5" height="5" rx="1" fill="white"/>
+              <rect x="12" y="40" width="5" height="5" rx="1" fill="white"/>
+              <rect x="20" y="40" width="5" height="5" rx="1" fill="white"/>
+              <rect x="40" y="10" width="5" height="5" rx="1" fill="white"/>
+              <rect x="48" y="10" width="5" height="5" rx="1" fill="white"/>
+              <rect x="40" y="19" width="5" height="5" rx="1" fill="white"/>
+              <rect x="48" y="19" width="5" height="5" rx="1" fill="white"/>
+              <rect x="40" y="28" width="5" height="5" rx="1" fill="white"/>
+              <rect x="48" y="28" width="5" height="5" rx="1" fill="white"/>
+              <rect x="40" y="37" width="5" height="5" rx="1" fill="white"/>
+              <rect x="48" y="37" width="5" height="5" rx="1" fill="white"/>
+              <circle cx="18" cy="52" r="4" fill="#F5A623"/>
+              <circle cx="46" cy="52" r="4" fill="#F5A623"/>
+            </svg>
+          </div>
+        </div>
+
+        <h1>Condo<span class="accent">Daily</span></h1>
+        <p class="hero-tagline">A diária certa, na hora certa.</p>
+
+        <!-- Features -->
+        <div class="features">
+          <div class="feature">
+            <div class="feature-icon teal">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <rect x="3" y="7" width="8" height="13" rx="2" fill="#1B7A6E"/>
+                <rect x="13" y="3" width="8" height="17" rx="2" fill="#145C53"/>
+                <rect x="5" y="9.5" width="2" height="2" rx="0.4" fill="white"/>
+                <rect x="5" y="13" width="2" height="2" rx="0.4" fill="white"/>
+                <rect x="15" y="5.5" width="2" height="2" rx="0.4" fill="white"/>
+                <rect x="15" y="9" width="2" height="2" rx="0.4" fill="white"/>
+                <rect x="15" y="12.5" width="2" height="2" rx="0.4" fill="white"/>
+                <rect x="19" y="5.5" width="2" height="2" rx="0.4" fill="white" opacity="0.6"/>
+                <rect x="19" y="9" width="2" height="2" rx="0.4" fill="white" opacity="0.6"/>
+              </svg>
+            </div>
+            <div class="feature-text">
+              <h3>Para Condomínios</h3>
+              <p>Encontre profissionais qualificados para serviços avulsos</p>
+            </div>
+          </div>
+
+          <div class="feature">
+            <div class="feature-icon amber">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="8" r="4" fill="#F5A623"/>
+                <path d="M4 20c0-3.3 3.6-6 8-6s8 2.7 8 6" stroke="#F5A623" stroke-width="2" stroke-linecap="round" fill="none"/>
+                <circle cx="19" cy="8" r="2.5" fill="#F5A623" opacity="0.35"/>
+              </svg>
+            </div>
+            <div class="feature-text">
+              <h3>Para Profissionais</h3>
+              <p>Encontre diárias com segurança e pagamento garantido</p>
+            </div>
+          </div>
+
+          <div class="feature">
+            <div class="feature-icon teal">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" fill="#E8F5F2"/>
+                <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" stroke="#1B7A6E" stroke-width="1.5"/>
+                <path d="M8 12.5l2.5 2.5L16 9.5" stroke="#1B7A6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="feature-text">
+              <h3>Seguro Incluso</h3>
+              <p>Cobertura durante todo o serviço via check-in/check-out</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="cta">
+        <p class="cta-label">Baixe o aplicativo</p>
+        <div class="store-buttons">
+          <a class="store-btn store-btn-dark" href="#" aria-label="Baixar na App Store">
+            <span class="store-btn-icon">
+              <svg viewBox="0 0 22 22" fill="none">
+                <path d="M15.77 7.15c-.08.06-1.55.9-1.53 2.52.02 1.94 1.68 2.62 1.7 2.63-.01.05-.27.93-.88 1.84-.53.79-1.08 1.57-1.95 1.59-.85.02-1.13-.51-2.1-.51-.98 0-1.29.49-2.09.53-.84.03-1.48-.85-2.01-1.64-1.09-1.61-1.93-4.56-.81-6.55.56-.99 1.55-1.61 2.63-1.63.82-.02 1.6.56 2.1.56.5 0 1.44-.69 2.43-.59.41.02 1.57.17 2.32 1.28l.19-.03zM13.15 4.4c.44-.54.74-1.3.66-2.05-.64.03-1.41.43-1.87.97-.41.48-.77 1.24-.67 1.98.71.05 1.44-.37 1.88-.9z" fill="currentColor"/>
+              </svg>
+            </span>
+            <span class="store-btn-text">
+              <small>Disponível na</small>
+              <strong>App Store</strong>
+            </span>
+          </a>
+          <a class="store-btn store-btn-outline" href="#" aria-label="Baixar no Google Play">
+            <span class="store-btn-icon">
+              <svg viewBox="0 0 22 22" fill="none">
+                <path d="M4.07 3.3a1 1 0 0 0-.37.8v13.8c0 .34.14.63.38.8l.06.04 7.74-7.74v-.18L4.13 3.27l-.06.03z" fill="#4285F4"/>
+                <path d="M14.46 13.58l-2.58-2.58v-.18l2.58-2.58.06.03 3.06 1.74c.87.5.87 1.31 0 1.8l-3.06 1.74-.06.03z" fill="#FBBC04"/>
+                <path d="M14.52 13.55L11.88 10.91 4.07 18.7c.29.3.76.34 1.3.04l9.15-5.19z" fill="#EA4335"/>
+                <path d="M14.52 8.27L5.37 3.08c-.54-.3-1.01-.27-1.3.04l7.81 7.79 2.64-2.64z" fill="#34A853"/>
+              </svg>
+            </span>
+            <span class="store-btn-text">
+              <small>Disponível no</small>
+              <strong>Google Play</strong>
+            </span>
+          </a>
+        </div>
+        <div class="coming-tag">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          Em breve nas lojas
+        </div>
+      </section>
+
+      <!-- Trust -->
+      <section class="trust">
+        <div class="trust-items">
+          <div class="trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Pagamento seguro
+          </div>
+          <div class="trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Profissionais verificados
+          </div>
+          <div class="trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Dados protegidos (LGPD)
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <a href="/" class="footer-logo">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+            <rect x="6" y="16" width="24" height="40" rx="3" fill="#1B7A6E"/>
+            <rect x="34" y="4" width="24" height="52" rx="3" fill="#145C53"/>
+            <circle cx="18" cy="52" r="4" fill="#F5A623"/>
+            <circle cx="46" cy="52" r="4" fill="#F5A623"/>
+          </svg>
+          <span class="footer-logo-text">CondoDaily</span>
+        </a>
+        <div class="footer-links">
+          <a href="/privacy">Política de Privacidade</a>
+          <a href="/terms">Termos de Uso</a>
+        </div>
+        <p class="footer-copy">&copy; 2026 CondoDaily. Todos os direitos reservados.</p>
+      </footer>
+
+    </div>
   </div>
 </body>
 </html>
