@@ -194,6 +194,35 @@
 
     .hero-mark-inner svg { width: 56px; height: 56px; }
 
+    /* Window blink animation — each window lights up at different times */
+    @keyframes windowBlink {
+      0%, 100% { opacity: 1; fill: white; }
+      40% { opacity: 0.3; fill: rgba(255,255,255,0.25); }
+      60% { opacity: 0.3; fill: rgba(255,255,255,0.25); }
+    }
+
+    @keyframes windowGlow {
+      0%, 100% { opacity: 1; fill: #F5A623; }
+      50% { opacity: 0.5; fill: #FFBA3B; }
+    }
+
+    .w1 { animation: windowBlink 3.2s ease-in-out 0s infinite; }
+    .w2 { animation: windowBlink 3.2s ease-in-out 0.4s infinite; }
+    .w3 { animation: windowBlink 3.2s ease-in-out 1.1s infinite; }
+    .w4 { animation: windowBlink 3.2s ease-in-out 1.6s infinite; }
+    .w5 { animation: windowBlink 3.2s ease-in-out 0.7s infinite; }
+    .w6 { animation: windowBlink 3.2s ease-in-out 2.0s infinite; }
+    .w7 { animation: windowBlink 3.2s ease-in-out 0.2s infinite; }
+    .w8 { animation: windowBlink 3.2s ease-in-out 1.3s infinite; }
+    .w9 { animation: windowBlink 3.2s ease-in-out 2.4s infinite; }
+    .w10 { animation: windowBlink 3.2s ease-in-out 0.9s infinite; }
+    .w11 { animation: windowBlink 3.2s ease-in-out 1.8s infinite; }
+    .w12 { animation: windowBlink 3.2s ease-in-out 2.7s infinite; }
+    .w13 { animation: windowBlink 3.2s ease-in-out 0.5s infinite; }
+    .w14 { animation: windowBlink 3.2s ease-in-out 2.1s infinite; }
+    .dot1 { animation: windowGlow 2.5s ease-in-out 0s infinite; }
+    .dot2 { animation: windowGlow 2.5s ease-in-out 1.2s infinite; }
+
     .hero h1 {
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: clamp(2.5rem, 8vw, 3.5rem);
@@ -705,22 +734,22 @@
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
               <rect x="6" y="16" width="24" height="40" rx="3" fill="#1B7A6E"/>
               <rect x="34" y="4" width="24" height="52" rx="3" fill="#145C53"/>
-              <rect x="12" y="22" width="5" height="5" rx="1" fill="white"/>
-              <rect x="20" y="22" width="5" height="5" rx="1" fill="white"/>
-              <rect x="12" y="31" width="5" height="5" rx="1" fill="white"/>
-              <rect x="20" y="31" width="5" height="5" rx="1" fill="white"/>
-              <rect x="12" y="40" width="5" height="5" rx="1" fill="white"/>
-              <rect x="20" y="40" width="5" height="5" rx="1" fill="white"/>
-              <rect x="40" y="10" width="5" height="5" rx="1" fill="white"/>
-              <rect x="48" y="10" width="5" height="5" rx="1" fill="white"/>
-              <rect x="40" y="19" width="5" height="5" rx="1" fill="white"/>
-              <rect x="48" y="19" width="5" height="5" rx="1" fill="white"/>
-              <rect x="40" y="28" width="5" height="5" rx="1" fill="white"/>
-              <rect x="48" y="28" width="5" height="5" rx="1" fill="white"/>
-              <rect x="40" y="37" width="5" height="5" rx="1" fill="white"/>
-              <rect x="48" y="37" width="5" height="5" rx="1" fill="white"/>
-              <circle cx="18" cy="52" r="4" fill="#F5A623"/>
-              <circle cx="46" cy="52" r="4" fill="#F5A623"/>
+              <rect class="w1" x="12" y="22" width="5" height="5" rx="1" fill="white"/>
+              <rect class="w2" x="20" y="22" width="5" height="5" rx="1" fill="white"/>
+              <rect class="w3" x="12" y="31" width="5" height="5" rx="1" fill="white"/>
+              <rect class="w4" x="20" y="31" width="5" height="5" rx="1" fill="white"/>
+              <rect class="w5" x="12" y="40" width="5" height="5" rx="1" fill="white"/>
+              <rect class="w6" x="20" y="40" width="5" height="5" rx="1" fill="white"/>
+              <rect class="w7" x="40" y="10" width="5" height="5" rx="1" fill="white"/>
+              <rect class="w8" x="48" y="10" width="5" height="5" rx="1" fill="white"/>
+              <rect class="w9" x="40" y="19" width="5" height="5" rx="1" fill="white"/>
+              <rect class="w10" x="48" y="19" width="5" height="5" rx="1" fill="white"/>
+              <rect class="w11" x="40" y="28" width="5" height="5" rx="1" fill="white"/>
+              <rect class="w12" x="48" y="28" width="5" height="5" rx="1" fill="white"/>
+              <rect class="w13" x="40" y="37" width="5" height="5" rx="1" fill="white"/>
+              <rect class="w14" x="48" y="37" width="5" height="5" rx="1" fill="white"/>
+              <circle class="dot1" cx="18" cy="52" r="4" fill="#F5A623"/>
+              <circle class="dot2" cx="46" cy="52" r="4" fill="#F5A623"/>
             </svg>
           </div>
         </div>
@@ -731,12 +760,12 @@
         <p class="hero-desc">
           Da diarista à manutenção de elevadores, o CondoDaily conecta você a profissionais prontos pra te atender na hora que precisar.
         </p>
-        <div class="hero-badge">☝️ Em um clique</div>
+        <div class="hero-badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 15l-2 5L9 9l11 4-5 2z"/><path d="M22 22l-5-5"/></svg> Em um clique</div>
         <p class="hero-closing">A solução para seu condomínio.</p>
 
         <!-- Highlight card — urgency scenario -->
         <div class="highlight">
-          <div class="highlight-icon">&#9889;</div>
+          <div class="highlight-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFBA3B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
           <div class="highlight-body">
             <h3>Segunda-feira, 7h da manhã</h3>
             <p>Zelador ligou doente. Às 7h15 você já tem um profissional confirmado pelo app. Isso é CondoDaily.</p>
@@ -798,7 +827,7 @@
         <p class="scenarios-label">Situações reais, resolvidas</p>
 
         <div class="scenario">
-          <div class="scenario-emoji prob">&#128557;</div>
+          <div class="scenario-emoji prob"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D99A1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
           <div class="scenario-text">
             <strong>O funcionário faltou sem avisar</strong>
             <span>Abra o app, encontre um substituto em minutos. <em>Problema resolvido antes das 8h.</em></span>
@@ -806,7 +835,7 @@
         </div>
 
         <div class="scenario">
-          <div class="scenario-emoji prob">&#127881;</div>
+          <div class="scenario-emoji prob"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D99A1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/></svg></div>
           <div class="scenario-text">
             <strong>Festa no salão neste sábado</strong>
             <span>Precisa de limpeza pré e pós-evento? <em>Profissionais disponíveis no fim de semana.</em></span>
@@ -814,7 +843,7 @@
         </div>
 
         <div class="scenario">
-          <div class="scenario-emoji sol">&#128176;</div>
+          <div class="scenario-emoji sol"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1B7A6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
           <div class="scenario-text">
             <strong>Profissional quer mais diárias</strong>
             <span>Sem depender de WhatsApp ou indicação. <em>O app traz os clientes até você.</em></span>
@@ -822,7 +851,7 @@
         </div>
 
         <div class="scenario">
-          <div class="scenario-emoji sol">&#128200;</div>
+          <div class="scenario-emoji sol"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1B7A6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
           <div class="scenario-text">
             <strong>Reputação que abre portas</strong>
             <span>Cada serviço bem feito aumenta sua nota. <em>Mais estrelas = mais diárias.</em></span>
