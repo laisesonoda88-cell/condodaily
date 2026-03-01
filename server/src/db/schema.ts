@@ -9,6 +9,7 @@ import {
   decimal,
   pgEnum,
   real,
+  serial,
 } from 'drizzle-orm/pg-core';
 
 // Enums
@@ -448,5 +449,40 @@ export const webhookEvents = pgTable('webhook_events', {
   raw_payload: text('raw_payload').notNull(),
   processed: boolean('processed').default(false).notNull(),
   error_message: text('error_message'),
+  created_at: timestamp('created_at').defaultNow().notNull(),
+});
+
+// ─── Lead Types & Sources (Pré-lançamento) ──────────────
+export const leadTypeEnum = pgEnum('lead_type', [
+  'SINDICO',
+  'PROFISSIONAL',
+  'MORADOR',
+  'OUTRO',
+]);
+
+export const leadSourceEnum = pgEnum('lead_source', [
+  'LANDING_PAGE',
+  'REFERRAL',
+  'QUIZ',
+  'CTA_CONDOMINIO',
+  'CTA_PROFISSIONAL',
+]);
+
+// ─── Early Leads (Cadastros pré-lançamento) ──────────────
+export const earlyLeads = pgTable('early_leads', {
+  id: serial('id').primaryKey(),
+  name: varchar('name', { length: 255 }).notNull(),
+  email: varchar('email', { length: 255 }).notNull(),
+  phone: varchar('phone', { length: 20 }),
+  type: leadTypeEnum('type').notNull(),
+  source: leadSourceEnum('source').default('LANDING_PAGE').notNull(),
+  referral_name: varchar('referral_name', { length: 255 }),
+  referral_email: varchar('referral_email', { length: 255 }),
+  quiz_score: integer('quiz_score'),
+  email_sent: boolean('email_sent').default(false).notNull(),
+  referral_email_sent: boolean('referral_email_sent').default(false).notNull(),
+  utm_source: varchar('utm_source', { length: 100 }),
+  utm_medium: varchar('utm_medium', { length: 100 }),
+  utm_campaign: varchar('utm_campaign', { length: 100 }),
   created_at: timestamp('created_at').defaultNow().notNull(),
 });
