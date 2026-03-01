@@ -6,12 +6,15 @@
   <title>CondoDaily — Serviços para Condomínios</title>
   <meta name="description" content="CondoDaily conecta condomínios a profissionais de manutenção qualificados. Limpeza, jardinagem, manutenção elétrica e mais.">
   <meta name="theme-color" content="#1B7A6E">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏢</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect x='8' y='24' width='21' height='36' rx='3' fill='%231B7A6E'/><rect x='35' y='12' width='21' height='48' rx='3' fill='%23145C53'/><circle cx='18.5' cy='54' r='4.5' fill='%23F5A623'/><circle cx='45.5' cy='54' r='4.5' fill='%23F5A623'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #1B7A6E 0%, #0d4f46 100%);
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(160deg, #1B7A6E 0%, #0E453E 100%);
       min-height: 100vh;
       display: flex;
       align-items: center;
@@ -21,50 +24,112 @@
     .container {
       text-align: center;
       padding: 2rem;
-      max-width: 480px;
+      max-width: 520px;
     }
-    .logo { font-size: 4rem; margin-bottom: 1rem; }
-    h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem; }
-    .tagline { font-size: 1.1rem; opacity: 0.85; margin-bottom: 2rem; }
+    .logo-icon {
+      margin: 0 auto 1.5rem;
+      width: 96px;
+      height: 96px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(10px);
+    }
+    .logo-icon svg { width: 64px; height: 64px; }
+    .wordmark {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      margin-bottom: 0.75rem;
+    }
+    .wordmark .daily { color: #F5A623; }
+    .tagline {
+      font-size: 1.15rem;
+      opacity: 0.85;
+      margin-bottom: 2.5rem;
+      line-height: 1.6;
+    }
     .badges { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
     .badge {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      background: rgba(255,255,255,0.15);
-      padding: 0.75rem 1.5rem;
-      border-radius: 12px;
+      background: rgba(255,255,255,0.12);
+      padding: 0.85rem 1.8rem;
+      border-radius: 14px;
       text-decoration: none;
       color: #fff;
       font-weight: 600;
-      transition: background 0.2s;
+      font-size: 1rem;
+      transition: all 0.2s ease;
+      border: 1px solid rgba(255,255,255,0.15);
     }
-    .badge:hover { background: rgba(255,255,255,0.25); }
-    .badge img { height: 24px; }
+    .badge:hover {
+      background: rgba(255,255,255,0.22);
+      transform: translateY(-2px);
+    }
+    .badge-icon { font-size: 1.3rem; }
+    .coming-soon {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.5rem 1.2rem;
+      background: rgba(245,166,35,0.2);
+      border: 1px solid rgba(245,166,35,0.3);
+      border-radius: 20px;
+      font-size: 0.85rem;
+      color: #F5A623;
+      font-weight: 500;
+    }
     .footer {
       margin-top: 3rem;
       font-size: 0.85rem;
-      opacity: 0.6;
+      opacity: 0.5;
     }
-    .footer a { color: #fff; }
+    .footer a { color: #fff; text-decoration: none; }
+    .footer a:hover { opacity: 0.8; text-decoration: underline; }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="logo">🏢</div>
-    <h1>CondoDaily</h1>
-    <p class="tagline">Conectando condomínios a profissionais de manutenção qualificados.</p>
+    <div class="logo-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+        <rect x="8" y="16" width="21" height="36" rx="3" fill="white"/>
+        <rect x="35" y="4" width="21" height="48" rx="3" fill="rgba(255,255,255,0.7)"/>
+        <rect x="14" y="22" width="4.5" height="4.5" rx="0.8" fill="#1B7A6E"/>
+        <rect x="21" y="22" width="4.5" height="4.5" rx="0.8" fill="#1B7A6E"/>
+        <rect x="14" y="31" width="4.5" height="4.5" rx="0.8" fill="#1B7A6E"/>
+        <rect x="21" y="31" width="4.5" height="4.5" rx="0.8" fill="#1B7A6E"/>
+        <rect x="14" y="40" width="4.5" height="4.5" rx="0.8" fill="#1B7A6E"/>
+        <rect x="21" y="40" width="4.5" height="4.5" rx="0.8" fill="#1B7A6E"/>
+        <rect x="41" y="10" width="4.5" height="4.5" rx="0.8" fill="#145C53"/>
+        <rect x="48" y="10" width="4.5" height="4.5" rx="0.8" fill="#145C53"/>
+        <rect x="41" y="19" width="4.5" height="4.5" rx="0.8" fill="#145C53"/>
+        <rect x="48" y="19" width="4.5" height="4.5" rx="0.8" fill="#145C53"/>
+        <rect x="41" y="28" width="4.5" height="4.5" rx="0.8" fill="#145C53"/>
+        <rect x="48" y="28" width="4.5" height="4.5" rx="0.8" fill="#145C53"/>
+        <rect x="41" y="37" width="4.5" height="4.5" rx="0.8" fill="#145C53"/>
+        <rect x="48" y="37" width="4.5" height="4.5" rx="0.8" fill="#145C53"/>
+        <circle cx="18.5" cy="48" r="4" fill="#F5A623"/>
+        <circle cx="45.5" cy="48" r="4" fill="#F5A623"/>
+      </svg>
+    </div>
+    <h1 class="wordmark">Condo<span class="daily">Daily</span></h1>
+    <p class="tagline">A diária certa, na hora certa.</p>
     <div class="badges">
-      <a class="badge" href="https://apps.apple.com/app/condodaily/idXXXXXXXXXX" id="ios-badge">
-        🍎 App Store
+      <a class="badge" href="#">
+        <span class="badge-icon"></span> App Store
       </a>
-      <a class="badge" href="https://play.google.com/store/apps/details?id=br.com.condodaily.app" id="android-badge">
-        ▶️ Google Play
+      <a class="badge" href="#">
+        <span class="badge-icon"></span> Google Play
       </a>
     </div>
+    <span class="coming-soon">Em breve nas lojas</span>
     <div class="footer">
       <p>&copy; 2026 CondoDaily. Todos os direitos reservados.</p>
-      <p><a href="/privacy">Privacidade</a> · <a href="/terms">Termos de Uso</a></p>
+      <p><a href="/privacy">Privacidade</a> &middot; <a href="/terms">Termos de Uso</a></p>
     </div>
   </div>
 </body>
