@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CondoDaily — A diária certa, na hora certa</title>
-  <meta name="description" content="CondoDaily conecta condomínios a profissionais de manutenção qualificados. Limpeza, jardinagem, manutenção elétrica e mais.">
+  <meta name="description" content="CondoDaily conecta condomínios a profissionais de manutenção qualificados. Limpeza, jardinagem, manutenção elétrica e mais. Prepare seu condomínio para 2026.">
   <meta name="theme-color" content="#1B7A6E">
   <meta property="og:title" content="CondoDaily — A diária certa, na hora certa">
   <meta property="og:description" content="Marketplace de serviços para condomínios. Conecte-se a profissionais qualificados.">
@@ -13,30 +13,37 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect x='8' y='24' width='21' height='36' rx='3' fill='%231B7A6E'/><rect x='35' y='12' width='21' height='48' rx='3' fill='%23145C53'/><circle cx='18.5' cy='54' r='4.5' fill='%23F5A623'/><circle cx='45.5' cy='54' r='4.5' fill='%23F5A623'/></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #1B7A6E;
-      --primary-dark: #145C53;
-      --primary-deeper: #0E453E;
-      --primary-light: #E8F5F2;
-      --primary-subtle: #F2FAF8;
-      --secondary: #F5A623;
-      --secondary-dark: #D4890A;
-      --secondary-light: #FFF4E0;
+      /* ══ VERDE · OURO · AZUL · ESTRELAS ══
+         Paleta completa do Brasil — neuromarketing Copa 2026 */
+      --verde: #1B7A6E;
+      --verde-dark: #145C53;
+      --verde-deep: #0E453E;
+      --verde-light: #E8F5F2;
+      --verde-subtle: #F2FAF8;
+      --ouro: #F5A623;
+      --ouro-warm: #E8A020;
+      --ouro-bright: #FFC233;
+      --ouro-light: #FFF7E6;
+      --ouro-glow: rgba(245, 166, 35, 0.15);
+      --azul: #1C3D6E;
+      --azul-bright: #2B5BA0;
+      --azul-light: #E8EEF6;
+      --azul-glow: rgba(28, 61, 110, 0.12);
       --dark: #1A2B3C;
       --dark-muted: #2D3E4F;
       --text: #4A5C6D;
       --text-light: #7A8D9E;
       --surface: #FFFFFF;
-      --bg: #F6F9F8;
+      --bg: #FAFCFB;
       --radius-sm: 12px;
       --radius-md: 18px;
       --radius-lg: 28px;
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -49,29 +56,146 @@
       -moz-osx-font-smoothing: grayscale;
     }
 
-    /* ═══ ANIMATED BACKGROUND PATTERN ═══ */
-    .bg-pattern {
+    /* ═══ VERDE-OURO-AZUL ATMOSPHERE ═══ */
+    .bg-atmosphere {
       position: fixed;
       inset: 0;
       z-index: 0;
       pointer-events: none;
-      opacity: 0.035;
-      background-image:
-        linear-gradient(var(--primary) 1px, transparent 1px),
-        linear-gradient(90deg, var(--primary) 1px, transparent 1px);
-      background-size: 48px 48px;
-      mask-image: radial-gradient(ellipse at 50% 30%, black 20%, transparent 70%);
-      -webkit-mask-image: radial-gradient(ellipse at 50% 30%, black 20%, transparent 70%);
     }
+
+    .bg-atmosphere::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(27,122,110,0.06) 0%, transparent 70%);
+    }
+
+    .bg-atmosphere::after {
+      content: '';
+      position: absolute;
+      top: 10%;
+      left: -15%;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245,166,35,0.04) 0%, transparent 65%);
+      animation: floatOrb 20s ease-in-out infinite;
+    }
+
+    /* Terceiro orb — azul sutil */
+    .bg-azul-orb {
+      position: fixed;
+      bottom: 5%;
+      right: -8%;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(28,61,110,0.04) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+      animation: floatOrb 25s ease-in-out 5s infinite reverse;
+    }
+
+    /* Subtle diamond pattern */
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.022;
+      background-image:
+        linear-gradient(45deg, var(--verde) 1px, transparent 1px),
+        linear-gradient(-45deg, var(--verde) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(ellipse at 50% 25%, black 15%, transparent 65%);
+      -webkit-mask-image: radial-gradient(ellipse at 50% 25%, black 15%, transparent 65%);
+    }
+
+    /* ═══ FLOATING STARS — background decoration ═══ */
+    .bg-stars {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .bg-star {
+      position: absolute;
+      color: var(--ouro-bright);
+      font-size: 10px;
+      opacity: 0;
+      animation: starFloat 12s ease-in-out infinite;
+    }
+
+    .bg-star:nth-child(1) { top: 15%; left: 8%; animation-delay: 0s; }
+    .bg-star:nth-child(2) { top: 25%; right: 12%; animation-delay: 2s; font-size: 8px; }
+    .bg-star:nth-child(3) { top: 55%; left: 5%; animation-delay: 4s; font-size: 7px; }
+    .bg-star:nth-child(4) { top: 70%; right: 8%; animation-delay: 6s; }
+    .bg-star:nth-child(5) { top: 40%; right: 5%; animation-delay: 8s; font-size: 6px; }
+    .bg-star:nth-child(6) { top: 85%; left: 15%; animation-delay: 3s; font-size: 8px; }
+    .bg-star:nth-child(7) { top: 10%; right: 25%; animation-delay: 7s; font-size: 6px; }
 
     /* ═══ LAYOUT ═══ */
     .page { position: relative; z-index: 1; }
+    .container { max-width: 580px; margin: 0 auto; padding: 0 24px; }
 
-    .container {
-      max-width: 560px;
-      margin: 0 auto;
-      padding: 0 24px;
+    /* ═══ TOP BANNER — Céu azul com estrelas ═══ */
+    .season-banner {
+      background: linear-gradient(135deg, var(--azul) 0%, var(--azul-bright) 50%, #3468B2 100%);
+      padding: 11px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      animation: fadeDown 0.5s ease-out both;
     }
+
+    /* Estrelas no banner */
+    .season-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(1px 1px at 10% 30%, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 25% 60%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1.5px 1.5px at 40% 20%, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 55% 70%, rgba(255,255,255,0.3), transparent),
+        radial-gradient(1.5px 1.5px at 70% 40%, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 85% 25%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1px 1px at 92% 65%, rgba(255,255,255,0.3), transparent);
+      animation: twinkleStars 4s ease-in-out infinite;
+    }
+
+    .season-banner-text {
+      position: relative;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.95);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .season-banner-text .gold {
+      color: var(--ouro-bright);
+      font-weight: 800;
+    }
+
+    .season-banner-star {
+      display: inline-block;
+      color: var(--ouro-bright);
+      margin: 0 6px;
+      font-size: 0.65rem;
+      animation: twinkle 2s ease-in-out infinite;
+    }
+
+    .season-banner-star:nth-child(2) { animation-delay: 0.5s; }
+    .season-banner-star:nth-child(6) { animation-delay: 1s; }
 
     /* ═══ NAV ═══ */
     .nav {
@@ -79,7 +203,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      animation: fadeDown 0.6s ease-out both;
+      animation: fadeDown 0.6s ease-out 0.1s both;
     }
 
     .nav-logo {
@@ -89,101 +213,212 @@
       text-decoration: none;
     }
 
-    .nav-logo svg { width: 32px; height: 32px; }
+    .nav-logo svg { width: 34px; height: 34px; }
 
     .nav-wordmark {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       font-weight: 800;
       letter-spacing: -0.8px;
       color: var(--dark);
     }
-    .nav-wordmark span { color: var(--secondary); }
+    .nav-wordmark span { color: var(--ouro); }
 
     /* ═══ HERO ═══ */
     .hero {
-      padding: 48px 0 0;
+      padding: 36px 0 0;
       text-align: center;
     }
 
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 14px;
-      background: var(--secondary-light);
-      border: 1px solid rgba(245, 166, 35, 0.2);
-      border-radius: 100px;
-      font-size: 0.78rem;
-      font-weight: 500;
-      color: var(--secondary-dark);
-      margin-bottom: 28px;
-      animation: fadeUp 0.6s ease-out 0.1s both;
-    }
-
-    .hero-badge-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--secondary);
-      animation: pulse 2s ease-in-out infinite;
-    }
-
     .hero-logo {
-      width: 88px;
-      height: 88px;
-      margin: 0 auto 32px;
+      width: 96px;
+      height: 96px;
+      margin: 0 auto 28px;
       position: relative;
       animation: fadeUp 0.6s ease-out 0.2s both;
     }
 
+    /* Gold-azul rotating glow */
     .hero-logo::before {
       content: '';
       position: absolute;
-      inset: -12px;
+      inset: -14px;
+      border-radius: 32px;
+      background: conic-gradient(
+        from 0deg,
+        var(--ouro-glow),
+        var(--azul-glow),
+        rgba(27,122,110,0.1),
+        var(--ouro-glow),
+        var(--azul-glow),
+        rgba(27,122,110,0.1),
+        var(--ouro-glow)
+      );
+      animation: rotateGlow 10s linear infinite;
+      z-index: -1;
+    }
+
+    .hero-logo::after {
+      content: '';
+      position: absolute;
+      inset: -8px;
       border-radius: 30px;
-      background: linear-gradient(135deg, var(--primary-light), var(--secondary-light));
-      opacity: 0.5;
+      background: var(--bg);
       z-index: -1;
     }
 
     .hero-logo-inner {
-      width: 88px;
-      height: 88px;
+      width: 96px;
+      height: 96px;
       background: var(--surface);
-      border-radius: 24px;
+      border-radius: 26px;
       display: flex;
       align-items: center;
       justify-content: center;
       box-shadow:
         0 1px 3px rgba(26,43,60,0.04),
-        0 8px 24px rgba(27,122,110,0.08);
+        0 8px 32px rgba(27,122,110,0.1),
+        0 0 0 1px rgba(27,122,110,0.06);
+      position: relative;
+      z-index: 1;
     }
 
-    .hero-logo-inner svg { width: 52px; height: 52px; }
+    .hero-logo-inner svg { width: 56px; height: 56px; }
 
     .hero h1 {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: clamp(2.4rem, 7vw, 3.4rem);
+      font-size: clamp(2.6rem, 8vw, 3.6rem);
       font-weight: 800;
-      letter-spacing: -2px;
-      line-height: 1.05;
+      letter-spacing: -2.5px;
+      line-height: 1.02;
       color: var(--dark);
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       animation: fadeUp 0.6s ease-out 0.3s both;
     }
 
-    .hero h1 .accent { color: var(--secondary); }
+    .hero h1 .accent {
+      color: var(--ouro);
+      position: relative;
+      display: inline-block;
+    }
+
+    /* Gold shimmer */
+    .hero h1 .accent::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -10%;
+      width: 120%;
+      height: 100%;
+      background: linear-gradient(
+        105deg,
+        transparent 30%,
+        rgba(255,194,51,0.2) 45%,
+        rgba(255,194,51,0.35) 50%,
+        rgba(255,194,51,0.2) 55%,
+        transparent 70%
+      );
+      animation: shimmer 4s ease-in-out infinite;
+      pointer-events: none;
+    }
 
     .hero-tagline {
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: clamp(1.05rem, 3vw, 1.2rem);
-      font-weight: 400;
+      font-weight: 500;
       font-style: italic;
       color: var(--text-light);
       letter-spacing: -0.2px;
-      margin-bottom: 40px;
+      margin-bottom: 12px;
       animation: fadeUp 0.6s ease-out 0.4s both;
+    }
+
+    .hero-sub {
+      font-size: 0.88rem;
+      color: var(--text);
+      line-height: 1.6;
+      max-width: 420px;
+      margin: 0 auto 36px;
+      animation: fadeUp 0.6s ease-out 0.45s both;
+    }
+
+    .hero-sub strong { color: var(--verde); font-weight: 700; }
+
+    /* ═══ SEASON CTA — Copa 2026 Card (Azul + Estrelas) ═══ */
+    .season-cta {
+      margin-bottom: 40px;
+      padding: 26px 28px;
+      background: linear-gradient(135deg, var(--azul) 0%, var(--azul-bright) 60%, #3468B2 100%);
+      border-radius: var(--radius-md);
+      position: relative;
+      overflow: hidden;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      animation: fadeUp 0.5s ease-out 0.5s both;
+    }
+
+    /* Estrelas dentro do card */
+    .season-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(1.5px 1.5px at 15% 25%, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 80% 20%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1px 1px at 65% 75%, rgba(255,255,255,0.3), transparent),
+        radial-gradient(2px 2px at 90% 50%, rgba(255,255,255,0.35), transparent),
+        radial-gradient(1px 1px at 35% 80%, rgba(255,255,255,0.25), transparent);
+      animation: twinkleStars 5s ease-in-out infinite;
+    }
+
+    .season-cta::after {
+      content: '';
+      position: absolute;
+      top: -40%;
+      right: -15%;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245,166,35,0.12) 0%, transparent 70%);
+    }
+
+    .season-cta-icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 16px;
+      background: rgba(255,194,51,0.15);
+      border: 1px solid rgba(255,194,51,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.7rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .season-cta-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .season-cta-content h3 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 5px;
+      letter-spacing: -0.3px;
+    }
+
+    .season-cta-content h3 .gold { color: var(--ouro-bright); }
+
+    .season-cta-content p {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.5;
     }
 
     /* ═══ FEATURES ═══ */
@@ -191,69 +426,129 @@
       display: flex;
       flex-direction: column;
       gap: 14px;
-      margin-bottom: 48px;
+      margin-bottom: 44px;
     }
 
     .feature {
       display: flex;
       align-items: center;
       gap: 18px;
-      padding: 20px 22px;
+      padding: 22px 24px;
       background: var(--surface);
       border-radius: var(--radius-md);
       border: 1px solid rgba(27, 122, 110, 0.06);
       box-shadow: 0 1px 4px rgba(26,43,60,0.03);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
       text-align: left;
     }
 
-    .feature:nth-child(1) { animation: fadeUp 0.5s ease-out 0.5s both; }
-    .feature:nth-child(2) { animation: fadeUp 0.5s ease-out 0.6s both; }
-    .feature:nth-child(3) { animation: fadeUp 0.5s ease-out 0.7s both; }
+    .feature:nth-child(1) { animation: fadeUp 0.5s ease-out 0.55s both; }
+    .feature:nth-child(2) { animation: fadeUp 0.5s ease-out 0.65s both; }
+    .feature:nth-child(3) { animation: fadeUp 0.5s ease-out 0.75s both; }
 
     .feature:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 20px rgba(27,122,110,0.08);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(27,122,110,0.1);
+      border-color: rgba(27,122,110,0.12);
     }
 
     .feature-icon {
-      width: 50px;
-      height: 50px;
-      border-radius: 14px;
+      width: 52px;
+      height: 52px;
+      border-radius: 15px;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
     }
 
-    .feature-icon.teal {
-      background: var(--primary-light);
-    }
-
-    .feature-icon.amber {
-      background: var(--secondary-light);
-    }
+    .feature-icon.verde { background: linear-gradient(135deg, var(--verde-light), #D4EDE9); }
+    .feature-icon.ouro { background: linear-gradient(135deg, var(--ouro-light), #FFE8C2); }
+    .feature-icon.azul { background: linear-gradient(135deg, var(--azul-light), #D0DAE8); }
 
     .feature-text h3 {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.95rem;
+      font-size: 0.98rem;
       font-weight: 700;
       color: var(--dark);
-      margin-bottom: 3px;
+      margin-bottom: 4px;
       letter-spacing: -0.3px;
     }
 
     .feature-text p {
-      font-size: 0.83rem;
+      font-size: 0.84rem;
       color: var(--text-light);
-      line-height: 1.45;
+      line-height: 1.5;
+    }
+
+    /* ═══ STATS — 5 Estrelas Social Proof ═══ */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 44px;
+      animation: fadeUp 0.5s ease-out 0.8s both;
+    }
+
+    .stat {
+      text-align: center;
+      padding: 20px 8px;
+      background: var(--surface);
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(27,122,110,0.06);
+      transition: transform 0.3s ease;
+    }
+
+    .stat:hover { transform: translateY(-2px); }
+
+    .stat-number {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+      background: linear-gradient(135deg, var(--verde), var(--verde-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-number.ouro-num {
+      background: linear-gradient(135deg, var(--ouro-warm), var(--ouro));
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .stat-number.azul-num {
+      background: linear-gradient(135deg, var(--azul), var(--azul-bright));
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .stat-stars {
+      display: flex;
+      justify-content: center;
+      gap: 2px;
+      margin-bottom: 4px;
+    }
+
+    .stat-stars svg {
+      width: 12px;
+      height: 12px;
+      fill: var(--ouro);
+    }
+
+    .stat-label {
+      font-size: 0.72rem;
+      color: var(--text-light);
+      margin-top: 4px;
+      font-weight: 500;
     }
 
     /* ═══ CTA SECTION ═══ */
     .cta {
-      padding: 40px 0;
+      padding: 28px 0;
       text-align: center;
-      animation: fadeUp 0.5s ease-out 0.8s both;
+      animation: fadeUp 0.5s ease-out 0.85s both;
     }
 
     .cta-label {
@@ -314,55 +609,37 @@
     }
 
     .store-btn-outline:hover {
-      border-color: var(--primary);
-      background: var(--primary-subtle);
+      border-color: var(--verde);
+      background: var(--verde-subtle);
       transform: translateY(-2px);
       box-shadow: 0 8px 24px rgba(27,122,110,0.1);
     }
 
-    .store-btn-icon {
-      display: flex;
-      align-items: center;
-    }
-
+    .store-btn-icon { display: flex; align-items: center; }
     .store-btn-icon svg { width: 22px; height: 22px; }
 
-    .store-btn-text {
-      text-align: left;
-      line-height: 1.2;
-    }
-
-    .store-btn-text small {
-      display: block;
-      font-size: 0.65rem;
-      font-weight: 500;
-      opacity: 0.7;
-    }
-
-    .store-btn-text strong {
-      font-size: 0.95rem;
-      font-weight: 700;
-      letter-spacing: -0.3px;
-    }
+    .store-btn-text { text-align: left; line-height: 1.2; }
+    .store-btn-text small { display: block; font-size: 0.65rem; font-weight: 500; opacity: 0.7; }
+    .store-btn-text strong { font-size: 0.95rem; font-weight: 700; letter-spacing: -0.3px; }
 
     .coming-tag {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      margin-top: 20px;
-      padding: 8px 18px;
+      gap: 8px;
+      margin-top: 18px;
+      padding: 8px 20px;
       border-radius: 100px;
-      background: linear-gradient(135deg, var(--primary-light), var(--primary-subtle));
-      border: 1px solid rgba(27, 122, 110, 0.1);
+      background: linear-gradient(135deg, var(--ouro-light), #FFF0D4);
+      border: 1px solid rgba(245, 166, 35, 0.15);
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 0.82rem;
       font-weight: 600;
-      color: var(--primary);
+      color: var(--ouro-warm);
     }
 
-    /* ═══ TRUST STRIP ═══ */
+    /* ═══ TRUST STRIP — with azul accents ═══ */
     .trust {
-      padding: 36px 0;
+      padding: 32px 0;
       text-align: center;
       animation: fadeUp 0.5s ease-out 0.9s both;
     }
@@ -370,7 +647,7 @@
     .trust-items {
       display: flex;
       justify-content: center;
-      gap: 32px;
+      gap: 28px;
       flex-wrap: wrap;
     }
 
@@ -386,15 +663,20 @@
     .trust-item svg {
       width: 18px;
       height: 18px;
-      color: var(--primary);
     }
 
-    /* ═══ DIVIDER ═══ */
+    .trust-item svg.icon-verde { color: var(--verde); }
+    .trust-item svg.icon-azul { color: var(--azul-bright); }
+    .trust-item svg.icon-ouro { color: var(--ouro); }
+
+    /* ═══ DIVIDER — verde-ouro-azul gradient ═══ */
     .divider {
-      height: 1px;
-      max-width: 120px;
+      height: 2px;
+      max-width: 100px;
       margin: 0 auto;
-      background: linear-gradient(90deg, transparent, rgba(27,122,110,0.15), transparent);
+      background: linear-gradient(90deg, var(--verde), var(--ouro), var(--azul-bright));
+      border-radius: 2px;
+      opacity: 0.35;
     }
 
     /* ═══ FOOTER ═══ */
@@ -437,7 +719,7 @@
       transition: color 0.2s ease;
     }
 
-    .footer-links a:hover { color: var(--primary); }
+    .footer-links a:hover { color: var(--verde); }
 
     .footer-copy {
       font-size: 0.75rem;
@@ -447,7 +729,7 @@
 
     /* ═══ ANIMATIONS ═══ */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
+      from { opacity: 0; transform: translateY(18px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
@@ -456,29 +738,57 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.85); }
+    @keyframes shimmer {
+      0%, 100% { transform: translateX(-80%); opacity: 0; }
+      40%, 60% { transform: translateX(80%); opacity: 1; }
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    @keyframes twinkleStars {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    @keyframes rotateGlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes floatOrb {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(30px, -20px); }
+    }
+
+    @keyframes starFloat {
+      0%, 100% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+      20% { opacity: 0.15; }
+      50% { opacity: 0.25; transform: scale(1) rotate(180deg); }
+      80% { opacity: 0.15; }
     }
 
     /* ═══ RESPONSIVE ═══ */
     @media (min-width: 768px) {
-      .hero { padding-top: 64px; }
-      .hero-logo { width: 100px; height: 100px; margin-bottom: 40px; }
-      .hero-logo-inner { width: 100px; height: 100px; border-radius: 28px; }
-      .hero-logo-inner svg { width: 60px; height: 60px; }
+      .hero { padding-top: 48px; }
+      .hero-logo { width: 108px; height: 108px; margin-bottom: 36px; }
+      .hero-logo-inner { width: 108px; height: 108px; border-radius: 30px; }
+      .hero-logo-inner svg { width: 64px; height: 64px; }
       .features { gap: 16px; }
-      .feature { padding: 24px 26px; }
+      .feature { padding: 26px 28px; }
       .store-buttons { gap: 14px; }
       .trust-items { gap: 48px; }
+      .stats { gap: 16px; }
+      .season-cta { padding: 28px 32px; }
     }
 
     @media (min-width: 1024px) {
-      .container { max-width: 620px; }
-      .hero { padding-top: 80px; }
+      .container { max-width: 640px; }
+      .hero { padding-top: 64px; }
     }
 
-    /* ═══ REDUCED MOTION ═══ */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -488,8 +798,32 @@
   </style>
 </head>
 <body>
-  <!-- Subtle grid pattern -->
-  <div class="bg-pattern" aria-hidden="true"></div>
+  <!-- Atmosphere -->
+  <div class="bg-atmosphere" aria-hidden="true"></div>
+  <div class="bg-azul-orb" aria-hidden="true"></div>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <!-- Floating stars -->
+  <div class="bg-stars" aria-hidden="true">
+    <span class="bg-star">&#9733;</span>
+    <span class="bg-star">&#9733;</span>
+    <span class="bg-star">&#9733;</span>
+    <span class="bg-star">&#9733;</span>
+    <span class="bg-star">&#9733;</span>
+    <span class="bg-star">&#9733;</span>
+    <span class="bg-star">&#9733;</span>
+  </div>
+
+  <!-- Season Banner — Azul com estrelas -->
+  <div class="season-banner">
+    <p class="season-banner-text">
+      <span class="season-banner-star">&#9733;</span>
+      <span class="season-banner-star">&#9733;</span>
+      Temporada <span class="gold">2026</span> — Seu condomínio pronto para o ano do Brasil
+      <span class="season-banner-star">&#9733;</span>
+      <span class="season-banner-star">&#9733;</span>
+    </p>
+  </div>
 
   <div class="page">
     <div class="container">
@@ -519,11 +853,6 @@
 
       <!-- Hero -->
       <section class="hero">
-        <div class="hero-badge">
-          <span class="hero-badge-dot"></span>
-          Marketplace de serviços condominiais
-        </div>
-
         <div class="hero-logo">
           <div class="hero-logo-inner">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
@@ -551,12 +880,24 @@
 
         <h1>Condo<span class="accent">Daily</span></h1>
         <p class="hero-tagline">A diária certa, na hora certa.</p>
+        <p class="hero-sub">
+          O marketplace que conecta <strong>condomínios</strong> a profissionais de manutenção qualificados. Limpeza, jardinagem, portaria e muito mais.
+        </p>
+
+        <!-- Copa Season CTA — Céu azul com estrelas -->
+        <div class="season-cta">
+          <div class="season-cta-icon">&#127941;</div>
+          <div class="season-cta-content">
+            <h3>Temporada <span class="gold">2026</span> chegando &#9733;</h3>
+            <p>Prepare seu condomínio para o maior evento do ano. Áreas comuns impecáveis, manutenção em dia.</p>
+          </div>
+        </div>
 
         <!-- Features -->
         <div class="features">
           <div class="feature">
-            <div class="feature-icon teal">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <div class="feature-icon verde">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
                 <rect x="3" y="7" width="8" height="13" rx="2" fill="#1B7A6E"/>
                 <rect x="13" y="3" width="8" height="17" rx="2" fill="#145C53"/>
                 <rect x="5" y="9.5" width="2" height="2" rx="0.4" fill="white"/>
@@ -564,43 +905,65 @@
                 <rect x="15" y="5.5" width="2" height="2" rx="0.4" fill="white"/>
                 <rect x="15" y="9" width="2" height="2" rx="0.4" fill="white"/>
                 <rect x="15" y="12.5" width="2" height="2" rx="0.4" fill="white"/>
-                <rect x="19" y="5.5" width="2" height="2" rx="0.4" fill="white" opacity="0.6"/>
-                <rect x="19" y="9" width="2" height="2" rx="0.4" fill="white" opacity="0.6"/>
+                <rect x="19" y="5.5" width="2" height="2" rx="0.4" fill="white" opacity="0.5"/>
+                <rect x="19" y="9" width="2" height="2" rx="0.4" fill="white" opacity="0.5"/>
               </svg>
             </div>
             <div class="feature-text">
               <h3>Para Condomínios</h3>
-              <p>Encontre profissionais qualificados para serviços avulsos</p>
+              <p>Encontre profissionais qualificados para serviços avulsos — de limpeza a manutenção elétrica</p>
             </div>
           </div>
 
           <div class="feature">
-            <div class="feature-icon amber">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <div class="feature-icon ouro">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
                 <circle cx="12" cy="8" r="4" fill="#F5A623"/>
                 <path d="M4 20c0-3.3 3.6-6 8-6s8 2.7 8 6" stroke="#F5A623" stroke-width="2" stroke-linecap="round" fill="none"/>
-                <circle cx="19" cy="8" r="2.5" fill="#F5A623" opacity="0.35"/>
+                <circle cx="19" cy="8" r="2.5" fill="#F5A623" opacity="0.3"/>
               </svg>
             </div>
             <div class="feature-text">
               <h3>Para Profissionais</h3>
-              <p>Encontre diárias com segurança e pagamento garantido</p>
+              <p>Encontre diárias com segurança, pagamento garantido e reputação verificada</p>
             </div>
           </div>
 
           <div class="feature">
-            <div class="feature-icon teal">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" fill="#E8F5F2"/>
-                <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" stroke="#1B7A6E" stroke-width="1.5"/>
-                <path d="M8 12.5l2.5 2.5L16 9.5" stroke="#1B7A6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <div class="feature-icon azul">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2l2.4 2.2H18v3.6L20 10l-2 2.2v3.6h-3.6L12 18l-2.4-2.2H6v-3.6L4 10l2-2.2V4.2h3.6L12 2z" fill="#E8EEF6" stroke="#1C3D6E" stroke-width="1.2"/>
+                <path d="M8.5 10.2l2.2 2.2L15.5 8" stroke="#1C3D6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </div>
             <div class="feature-text">
               <h3>Seguro Incluso</h3>
-              <p>Cobertura durante todo o serviço via check-in/check-out</p>
+              <p>Cobertura durante todo o serviço via check-in/check-out digital</p>
             </div>
           </div>
+        </div>
+      </section>
+
+      <!-- Stats — 5 Estrelas -->
+      <section class="stats">
+        <div class="stat">
+          <div class="stat-number">15+</div>
+          <div class="stat-label">Categorias de serviço</div>
+        </div>
+        <div class="stat">
+          <div class="stat-stars">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <div class="stat-number ouro-num">100%</div>
+          <div class="stat-label">Pagamento seguro</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number azul-num">24h</div>
+          <div class="stat-label">Agendamento rápido</div>
         </div>
       </section>
 
@@ -640,24 +1003,25 @@
         </div>
       </section>
 
-      <!-- Trust -->
+      <!-- Trust — verde, azul, ouro icons -->
       <section class="trust">
         <div class="trust-items">
           <div class="trust-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <svg class="icon-azul" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             Pagamento seguro
           </div>
           <div class="trust-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <svg class="icon-verde" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             Profissionais verificados
           </div>
           <div class="trust-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <svg class="icon-ouro" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
             Dados protegidos (LGPD)
           </div>
         </div>
       </section>
 
+      <!-- Divider — verde → ouro → azul -->
       <div class="divider"></div>
 
       <!-- Footer -->
