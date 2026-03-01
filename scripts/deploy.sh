@@ -7,8 +7,8 @@
 #   bash scripts/deploy.sh
 #
 # O que faz:
-#   1. Copia o código para o servidor via rsync
-#   2. SSHa no servidor e roda docker compose
+#   1. Faz git push local
+#   2. SSHa no servidor, faz git pull, rebuild e deploy
 # ═══════════════════════════════════════════════════════════
 
 set -euo pipefail
@@ -17,71 +17,65 @@ set -euo pipefail
 SERVER_IP="77.42.80.190"
 SERVER_USER="root"
 SERVER_DIR="/opt/condodaily"
-PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+REPO_URL="https://github.com/laisesonoda88-cell/condodaily.git"
 
 echo "════════════════════════════════════════════"
 echo "  CondoDaily — Deploy para Produção"
 echo "════════════════════════════════════════════"
 echo ""
-echo "📍 Projeto local: $PROJECT_DIR"
-echo "🖥  Servidor: $SERVER_USER@$SERVER_IP:$SERVER_DIR"
-echo ""
 
-# ─── 1. Verificar .env no servidor ───────────────────────
-echo "🔍 [1/3] Verificando .env no servidor..."
-if ! ssh "$SERVER_USER@$SERVER_IP" "test -f $SERVER_DIR/.env"; then
-    echo ""
-    echo "⚠  Arquivo .env NÃO encontrado no servidor!"
-    echo "   Copiando template para o servidor..."
-    scp "$PROJECT_DIR/deploy/.env.production" "$SERVER_USER@$SERVER_IP:$SERVER_DIR/.env"
-    echo ""
-    echo "❗ IMPORTANTE: Você precisa editar o .env no servidor ANTES de continuar:"
-    echo "   ssh $SERVER_USER@$SERVER_IP"
-    echo "   nano $SERVER_DIR/.env"
-    echo ""
-    echo "   Preencha todas as variáveis (DB_PASSWORD, JWT_SECRET, etc.)"
-    echo "   Depois rode este script novamente."
-    echo ""
+# ─── 1. Push local ────────────────────────────────────────
+echo "📤 [1/3] Verificando se há commits para enviar..."
+if git status --porcelain | grep -q .; then
+    echo "   ⚠ Há alterações não commitadas. Commite antes de fazer deploy."
+    git status --short
     exit 1
 fi
-echo "   ✅ .env encontrado"
+git push origin main 2>/dev/null && echo "   ✅ Push feito" || echo "   ✅ Já está atualizado"
 
-# ─── 2. Sincronizar código ───────────────────────────────
+# ─── 2. Clone/Pull no servidor ───────────────────────────
 echo ""
-echo "📦 [2/3] Sincronizando código com o servidor..."
-rsync -avz --delete \
-    --exclude 'node_modules' \
-    --exclude '.git' \
-    --exclude '.env' \
-    --exclude '.env.local' \
-    --exclude '*.pdf' \
-    --exclude '*.png' \
-    --exclude '*.dmg' \
-    --exclude '*.rtf' \
-    --exclude '*.html' \
-    --exclude 'Docker.dmg' \
-    --exclude '.claude/' \
-    --exclude 'server/uploads/' \
-    --exclude 'server/dist/' \
-    --exclude 'packages/shared/dist/' \
-    --exclude 'apps/' \
-    --exclude 'condodaily-brand*.html' \
-    --exclude '*.pdf' \
-    --include 'deploy/www/***' \
-    "$PROJECT_DIR/" "$SERVER_USER@$SERVER_IP:$SERVER_DIR/"
+echo "📦 [2/3] Atualizando código no servidor..."
+ssh "$SERVER_USER@$SERVER_IP" bash -s <<REMOTE_PULL
+    if [ ! -d "$SERVER_DIR/.git" ]; then
+        echo "   📥 Primeira vez: clonando repositório..."
+        rm -rf "$SERVER_DIR"
+        git clone "$REPO_URL" "$SERVER_DIR"
+    else
+        echo "   📥 Atualizando repositório..."
+        cd "$SERVER_DIR"
+        git fetch origin
+        git reset --hard origin/main
+    fi
+REMOTE_PULL
+echo "   ✅ Código atualizado no servidor"
 
-echo "   ✅ Código sincronizado"
-
-# ─── 3. Build e deploy ───────────────────────────────────
+# ─── 3. Verificar .env e Build ────────────────────────────
 echo ""
-echo "🚀 [3/3] Fazendo build e deploy no servidor..."
-ssh "$SERVER_USER@$SERVER_IP" bash -s << 'REMOTE_SCRIPT'
+echo "🚀 [3/3] Build e deploy..."
+ssh "$SERVER_USER@$SERVER_IP" bash -s <<'REMOTE_BUILD'
     cd /opt/condodaily
+
+    # Verificar .env
+    if [ ! -f .env ]; then
+        echo ""
+        echo "   ⚠  Arquivo .env NÃO encontrado!"
+        echo "   Copiando template..."
+        cp deploy/.env.production .env
+        echo ""
+        echo "   ❗ EDITE o .env antes de continuar:"
+        echo "      nano /opt/condodaily/.env"
+        echo ""
+        echo "   Depois rode: bash scripts/deploy.sh"
+        exit 1
+    fi
+
+    echo "   ✅ .env encontrado"
 
     echo "   🐳 Parando containers antigos..."
     docker compose down 2>/dev/null || true
 
-    echo "   🔨 Construindo imagens..."
+    echo "   🔨 Construindo imagens (pode levar 2-3 min)..."
     docker compose up -d --build
 
     echo ""
@@ -93,8 +87,12 @@ ssh "$SERVER_USER@$SERVER_IP" bash -s << 'REMOTE_SCRIPT'
 
     echo ""
     echo "   🏥 Health check:"
-    curl -sf http://localhost:3001/api/health 2>/dev/null && echo "" || echo "   ⚠ API ainda iniciando... aguarde 30s e teste novamente"
-REMOTE_SCRIPT
+    curl -sf http://localhost:3001/api/health 2>/dev/null && echo "" || echo "   ⚠ API ainda iniciando... aguarde 30s e teste"
+
+    echo ""
+    echo "   🧹 Limpando imagens antigas..."
+    docker image prune -f 2>/dev/null || true
+REMOTE_BUILD
 
 echo ""
 echo "════════════════════════════════════════════"
