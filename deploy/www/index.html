@@ -3,134 +3,235 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CondoDaily — Serviços para Condomínios</title>
+  <title>CondoDaily — A diária certa, na hora certa</title>
   <meta name="description" content="CondoDaily conecta condomínios a profissionais de manutenção qualificados. Limpeza, jardinagem, manutenção elétrica e mais.">
   <meta name="theme-color" content="#1B7A6E">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect x='8' y='24' width='21' height='36' rx='3' fill='%231B7A6E'/><rect x='35' y='12' width='21' height='48' rx='3' fill='%23145C53'/><circle cx='18.5' cy='54' r='4.5' fill='%23F5A623'/><circle cx='45.5' cy='54' r='4.5' fill='%23F5A623'/></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: linear-gradient(160deg, #1B7A6E 0%, #0E453E 100%);
+      background: #F8FAFA;
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
+      color: #1A2B3C;
     }
-    .container {
+
+    /* ── Hero section (matches app welcome screen) ── */
+    .hero {
+      background: #fff;
+      padding: 3rem 1.5rem 2.5rem;
       text-align: center;
-      padding: 2rem;
-      max-width: 520px;
+      border-bottom-left-radius: 32px;
+      border-bottom-right-radius: 32px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.04);
     }
-    .logo-icon {
-      margin: 0 auto 1.5rem;
-      width: 96px;
-      height: 96px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 24px;
+    .logo-row {
       display: flex;
       align-items: center;
       justify-content: center;
-      backdrop-filter: blur(10px);
+      gap: 12px;
+      margin-bottom: 0.75rem;
     }
-    .logo-icon svg { width: 64px; height: 64px; }
+    .logo-row svg { width: 56px; height: 56px; }
     .wordmark {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 2.8rem;
+      font-size: 2.2rem;
       font-weight: 800;
       letter-spacing: -1.5px;
-      margin-bottom: 0.75rem;
+      color: #1A2B3C;
     }
     .wordmark .daily { color: #F5A623; }
     .tagline {
-      font-size: 1.15rem;
-      opacity: 0.85;
-      margin-bottom: 2.5rem;
-      line-height: 1.6;
+      font-size: 1.05rem;
+      color: #6B7B8D;
+      margin-bottom: 2rem;
     }
-    .badges { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-    .badge {
-      display: inline-flex;
+
+    /* ── Feature cards (matches app) ── */
+    .features {
+      max-width: 420px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 0 0.5rem;
+    }
+    .feature-card {
+      display: flex;
       align-items: center;
-      gap: 0.5rem;
-      background: rgba(255,255,255,0.12);
-      padding: 0.85rem 1.8rem;
+      gap: 16px;
+      background: #F8FAFA;
+      border-radius: 16px;
+      padding: 1rem 1.25rem;
+      text-align: left;
+    }
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+    .feature-icon.green { background: #E8F5F2; }
+    .feature-icon.orange { background: #FFF4E0; }
+    .feature-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #1A2B3C;
+      margin-bottom: 2px;
+    }
+    .feature-desc {
+      font-size: 0.82rem;
+      color: #6B7B8D;
+      line-height: 1.4;
+    }
+
+    /* ── CTA buttons ── */
+    .cta-section {
+      max-width: 420px;
+      margin: 2rem auto 0;
+      padding: 0 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 1rem;
       border-radius: 14px;
       text-decoration: none;
-      color: #fff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 600;
       font-size: 1rem;
       transition: all 0.2s ease;
-      border: 1px solid rgba(255,255,255,0.15);
+      cursor: pointer;
+      border: none;
     }
-    .badge:hover {
-      background: rgba(255,255,255,0.22);
-      transform: translateY(-2px);
+    .btn-primary {
+      background: #1B7A6E;
+      color: #fff;
     }
-    .badge-icon { font-size: 1.3rem; }
+    .btn-primary:hover { background: #145C53; }
+    .btn-outline {
+      background: #fff;
+      color: #1B7A6E;
+      border: 2px solid #1B7A6E;
+    }
+    .btn-outline:hover { background: #E8F5F2; }
+    .btn-icon { font-size: 1.2rem; }
+
     .coming-soon {
-      display: inline-block;
-      margin-top: 1.5rem;
-      padding: 0.5rem 1.2rem;
-      background: rgba(245,166,35,0.2);
-      border: 1px solid rgba(245,166,35,0.3);
-      border-radius: 20px;
+      text-align: center;
+      margin-top: 1rem;
       font-size: 0.85rem;
       color: #F5A623;
       font-weight: 500;
     }
+
+    /* ── Footer ── */
     .footer {
-      margin-top: 3rem;
-      font-size: 0.85rem;
-      opacity: 0.5;
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.82rem;
+      color: #9BA8B5;
     }
-    .footer a { color: #fff; text-decoration: none; }
-    .footer a:hover { opacity: 0.8; text-decoration: underline; }
+    .footer a { color: #1B7A6E; text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+
+    /* ── Desktop: wider layout ── */
+    @media (min-width: 768px) {
+      .hero { padding: 4rem 2rem 3rem; }
+      .logo-row svg { width: 72px; height: 72px; }
+      .wordmark { font-size: 2.8rem; }
+      .tagline { font-size: 1.15rem; }
+      .features, .cta-section { max-width: 480px; }
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="logo-icon">
+  <div class="hero">
+    <!-- Logo row (same as app) -->
+    <div class="logo-row">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-        <rect x="8" y="16" width="21" height="36" rx="3" fill="white"/>
-        <rect x="35" y="4" width="21" height="48" rx="3" fill="rgba(255,255,255,0.7)"/>
-        <rect x="14" y="22" width="4.5" height="4.5" rx="0.8" fill="#1B7A6E"/>
-        <rect x="21" y="22" width="4.5" height="4.5" rx="0.8" fill="#1B7A6E"/>
-        <rect x="14" y="31" width="4.5" height="4.5" rx="0.8" fill="#1B7A6E"/>
-        <rect x="21" y="31" width="4.5" height="4.5" rx="0.8" fill="#1B7A6E"/>
-        <rect x="14" y="40" width="4.5" height="4.5" rx="0.8" fill="#1B7A6E"/>
-        <rect x="21" y="40" width="4.5" height="4.5" rx="0.8" fill="#1B7A6E"/>
-        <rect x="41" y="10" width="4.5" height="4.5" rx="0.8" fill="#145C53"/>
-        <rect x="48" y="10" width="4.5" height="4.5" rx="0.8" fill="#145C53"/>
-        <rect x="41" y="19" width="4.5" height="4.5" rx="0.8" fill="#145C53"/>
-        <rect x="48" y="19" width="4.5" height="4.5" rx="0.8" fill="#145C53"/>
-        <rect x="41" y="28" width="4.5" height="4.5" rx="0.8" fill="#145C53"/>
-        <rect x="48" y="28" width="4.5" height="4.5" rx="0.8" fill="#145C53"/>
-        <rect x="41" y="37" width="4.5" height="4.5" rx="0.8" fill="#145C53"/>
-        <rect x="48" y="37" width="4.5" height="4.5" rx="0.8" fill="#145C53"/>
-        <circle cx="18.5" cy="48" r="4" fill="#F5A623"/>
-        <circle cx="45.5" cy="48" r="4" fill="#F5A623"/>
+        <rect x="6" y="16" width="24" height="40" rx="3" fill="#1B7A6E"/>
+        <rect x="34" y="4" width="24" height="52" rx="3" fill="#145C53"/>
+        <rect x="12" y="22" width="5" height="5" rx="1" fill="white"/>
+        <rect x="20" y="22" width="5" height="5" rx="1" fill="white"/>
+        <rect x="12" y="31" width="5" height="5" rx="1" fill="white"/>
+        <rect x="20" y="31" width="5" height="5" rx="1" fill="white"/>
+        <rect x="12" y="40" width="5" height="5" rx="1" fill="white"/>
+        <rect x="20" y="40" width="5" height="5" rx="1" fill="white"/>
+        <rect x="40" y="10" width="5" height="5" rx="1" fill="white"/>
+        <rect x="48" y="10" width="5" height="5" rx="1" fill="white"/>
+        <rect x="40" y="19" width="5" height="5" rx="1" fill="white"/>
+        <rect x="48" y="19" width="5" height="5" rx="1" fill="white"/>
+        <rect x="40" y="28" width="5" height="5" rx="1" fill="white"/>
+        <rect x="48" y="28" width="5" height="5" rx="1" fill="white"/>
+        <rect x="40" y="37" width="5" height="5" rx="1" fill="white"/>
+        <rect x="48" y="37" width="5" height="5" rx="1" fill="white"/>
+        <circle cx="18" cy="52" r="4" fill="#F5A623"/>
+        <circle cx="46" cy="52" r="4" fill="#F5A623"/>
       </svg>
+      <h1 class="wordmark">Condo<span class="daily">Daily</span></h1>
     </div>
-    <h1 class="wordmark">Condo<span class="daily">Daily</span></h1>
     <p class="tagline">A diária certa, na hora certa.</p>
-    <div class="badges">
-      <a class="badge" href="#">
-        <span class="badge-icon"></span> App Store
+
+    <!-- Feature cards (same as app welcome screen) -->
+    <div class="features">
+      <div class="feature-card">
+        <div class="feature-icon green">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="8" width="8" height="12" rx="1.5" fill="#1B7A6E"/><rect x="13" y="4" width="8" height="16" rx="1.5" fill="#145C53"/><rect x="5" y="10" width="2" height="2" rx="0.3" fill="white"/><rect x="15" y="6" width="2" height="2" rx="0.3" fill="white"/><rect x="15" y="10" width="2" height="2" rx="0.3" fill="white"/></svg>
+        </div>
+        <div>
+          <div class="feature-title">Para Condomínios</div>
+          <div class="feature-desc">Encontre profissionais qualificados para serviços avulsos</div>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon orange">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 12c2.5 0 4.5-2 4.5-4.5S14.5 3 12 3 7.5 5 7.5 7.5 9.5 12 12 12zm0 2c-3 0-9 1.5-9 4.5V21h18v-2.5c0-3-6-4.5-9-4.5z" fill="#F5A623"/></svg>
+        </div>
+        <div>
+          <div class="feature-title">Para Profissionais</div>
+          <div class="feature-desc">Encontre diárias com segurança e pagamento garantido</div>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon green">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-5-5 1.41-1.41L11 14.17l7.59-7.59L20 8l-9 9z" fill="#1B7A6E"/></svg>
+        </div>
+        <div>
+          <div class="feature-title">Seguro Incluso</div>
+          <div class="feature-desc">Cobertura durante todo o serviço via check-in/check-out</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA buttons -->
+    <div class="cta-section">
+      <a class="btn btn-primary" href="#">
+        <span class="btn-icon"></span> App Store
       </a>
-      <a class="badge" href="#">
-        <span class="badge-icon"></span> Google Play
+      <a class="btn btn-outline" href="#">
+        <span class="btn-icon"></span> Google Play
       </a>
     </div>
-    <span class="coming-soon">Em breve nas lojas</span>
-    <div class="footer">
-      <p>&copy; 2026 CondoDaily. Todos os direitos reservados.</p>
-      <p><a href="/privacy">Privacidade</a> &middot; <a href="/terms">Termos de Uso</a></p>
-    </div>
+    <p class="coming-soon">Em breve nas lojas</p>
+  </div>
+
+  <div class="footer">
+    <p>&copy; 2026 CondoDaily. Todos os direitos reservados.</p>
+    <p><a href="/privacy">Privacidade</a> &middot; <a href="/terms">Termos de Uso</a></p>
   </div>
 </body>
 </html>
