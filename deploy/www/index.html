@@ -494,6 +494,99 @@
       margin-top: 8px; text-align: center;
     }
 
+    /* ═══ QUIZ ═══ */
+    .quiz-separator {
+      display: flex; align-items: center; gap: 12px;
+      margin: 20px 0 16px;
+    }
+    .quiz-separator::before, .quiz-separator::after {
+      content: ''; flex: 1; height: 1px;
+      background: rgba(245,166,35,0.15);
+    }
+    .quiz-separator span {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.7rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1.2px;
+      color: var(--ouro-warm); white-space: nowrap;
+    }
+
+    .quiz-intro {
+      font-size: 0.84rem; color: var(--text);
+      line-height: 1.6; margin-bottom: 16px;
+    }
+    .quiz-intro strong { color: var(--ouro-warm); }
+
+    .quiz-step { display: none; }
+    .quiz-step.active { display: block; }
+
+    .quiz-question {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.88rem; font-weight: 700;
+      color: var(--dark); margin-bottom: 12px;
+    }
+
+    .quiz-options { display: flex; flex-direction: column; gap: 8px; }
+
+    .quiz-opt {
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px 16px;
+      border-radius: var(--r-sm);
+      border: 1.5px solid rgba(245,166,35,0.12);
+      background: var(--ouro-light);
+      cursor: pointer;
+      font-size: 0.82rem; color: var(--dark);
+      transition: all 0.2s ease;
+    }
+    .quiz-opt:hover {
+      border-color: var(--ouro);
+      background: rgba(245,166,35,0.12);
+      transform: translateX(4px);
+    }
+    .quiz-opt svg {
+      width: 18px; height: 18px; flex-shrink: 0;
+      color: var(--ouro); opacity: 0.5;
+    }
+    .quiz-opt:hover svg { opacity: 1; }
+
+    .quiz-progress {
+      display: flex; gap: 6px; margin-bottom: 14px;
+    }
+    .quiz-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(245,166,35,0.2);
+      transition: background 0.3s ease;
+    }
+    .quiz-dot.filled { background: var(--ouro); }
+
+    .quiz-result {
+      padding: 18px; border-radius: var(--r-sm);
+      text-align: center;
+    }
+    .quiz-result.ready {
+      background: linear-gradient(135deg, rgba(27,122,110,0.08), rgba(27,122,110,0.03));
+      border: 1px solid rgba(27,122,110,0.12);
+    }
+    .quiz-result.grow {
+      background: linear-gradient(135deg, rgba(245,166,35,0.08), rgba(245,166,35,0.03));
+      border: 1px solid rgba(245,166,35,0.12);
+    }
+    .quiz-result-icon { font-size: 2rem; margin-bottom: 8px; }
+    .quiz-result h4 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1rem; font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .quiz-result.ready h4 { color: var(--verde); }
+    .quiz-result.grow h4 { color: var(--ouro-warm); }
+    .quiz-result p {
+      font-size: 0.82rem; color: var(--text);
+      line-height: 1.5; margin-bottom: 14px;
+    }
+    .quiz-market {
+      font-size: 0.75rem; color: var(--text-light);
+      margin-top: 10px; font-style: italic;
+    }
+
     /* ═══ PROBLEM-SOLUTION SCENARIOS ═══ */
     .scenarios {
       margin-bottom: 42px;
@@ -687,6 +780,98 @@
     .trust-item svg.c-v { color: var(--verde); }
     .trust-item svg.c-i { color: var(--indigo); }
     .trust-item svg.c-o { color: var(--ouro); }
+
+    /* ═══ REFERRAL ═══ */
+    .referral { margin-bottom: 42px; }
+
+    .referral-card {
+      padding: 28px 24px;
+      border-radius: var(--r-md);
+      background: linear-gradient(135deg, var(--verde-deep) 0%, var(--verde-dark) 100%);
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+
+    .referral-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(1.5px 1.5px at 20% 35%, rgba(255,255,255,0.15), transparent),
+        radial-gradient(1px 1px at 70% 25%, rgba(255,255,255,0.1), transparent),
+        radial-gradient(1.2px 1.2px at 85% 60%, rgba(255,255,255,0.12), transparent);
+    }
+
+    .referral-icon {
+      width: 56px; height: 56px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 14px;
+      position: relative; z-index: 1;
+    }
+
+    .referral-card h3 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.15rem; font-weight: 800;
+      color: white; margin-bottom: 8px;
+      position: relative; z-index: 1;
+    }
+
+    .referral-card > p {
+      font-size: 0.84rem; color: rgba(255,255,255,0.7);
+      line-height: 1.6; margin-bottom: 20px;
+      max-width: 380px; margin-left: auto; margin-right: auto;
+      position: relative; z-index: 1;
+    }
+
+    .referral-card > p strong { color: var(--ouro-bright); }
+
+    .referral-form {
+      display: flex; flex-direction: column; gap: 10px;
+      max-width: 340px; margin: 0 auto;
+      position: relative; z-index: 1;
+    }
+
+    .ref-input {
+      padding: 12px 16px;
+      border-radius: var(--r-sm);
+      border: 1.5px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.08);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      color: white;
+      outline: none;
+      transition: border-color 0.2s ease;
+      -webkit-appearance: none;
+    }
+
+    .ref-input::placeholder { color: rgba(255,255,255,0.4); }
+    .ref-input:focus { border-color: var(--ouro); }
+
+    .ref-input option { color: var(--dark); background: white; }
+
+    .referral-form .feat-cta {
+      margin-top: 4px;
+      background: var(--ouro); color: white;
+    }
+    .referral-form .feat-cta:hover {
+      background: var(--ouro-warm);
+    }
+
+    .referral-success {
+      position: relative; z-index: 1;
+      padding: 20px;
+    }
+    .referral-success h4 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.05rem; font-weight: 700;
+      color: var(--ouro-bright); margin: 10px 0 6px;
+    }
+    .referral-success p {
+      font-size: 0.82rem; color: rgba(255,255,255,0.65);
+      line-height: 1.5;
+    }
 
     /* ═══ DIVIDER ═══ */
     .sep {
@@ -955,7 +1140,42 @@
                       <span><strong>Simples de usar:</strong> Aceite diárias, faça check-in no local, conclua e receba. Sem burocracia.</span>
                     </li>
                   </ul>
-                  <a href="#cadastro" class="feat-cta cta-ouro">Cadastre-se como profissional</a>
+                  <!-- QUIZ -->
+                  <div class="quiz-separator"><span>Teste seu preparo</span></div>
+                  <p class="quiz-intro">O mercado de serviços para condomínios <strong>cresce a cada dia</strong>. Descubra se você está pronto pra atender ou se vale se especializar nessa área.</p>
+
+                  <div id="quiz">
+                    <div class="quiz-step active" data-step="1">
+                      <div class="quiz-progress"><div class="quiz-dot filled"></div><div class="quiz-dot"></div><div class="quiz-dot"></div></div>
+                      <p class="quiz-question">Você tem experiência com serviços em condomínios?</p>
+                      <div class="quiz-options">
+                        <div class="quiz-opt" onclick="quizNext(2,2)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Sim, trabalho regularmente</div>
+                        <div class="quiz-opt" onclick="quizNext(2,1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Já fiz alguns serviços</div>
+                        <div class="quiz-opt" onclick="quizNext(2,0)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Ainda não, mas quero começar</div>
+                      </div>
+                    </div>
+                    <div class="quiz-step" data-step="2">
+                      <div class="quiz-progress"><div class="quiz-dot filled"></div><div class="quiz-dot filled"></div><div class="quiz-dot"></div></div>
+                      <p class="quiz-question">Você tem MEI ou outro registro como prestador?</p>
+                      <div class="quiz-options">
+                        <div class="quiz-opt" onclick="quizNext(3,2)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Sim, tenho MEI ativo</div>
+                        <div class="quiz-opt" onclick="quizNext(3,1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Estou em processo de abrir</div>
+                        <div class="quiz-opt" onclick="quizNext(3,0)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Não tenho ainda</div>
+                      </div>
+                    </div>
+                    <div class="quiz-step" data-step="3">
+                      <div class="quiz-progress"><div class="quiz-dot filled"></div><div class="quiz-dot filled"></div><div class="quiz-dot filled"></div></div>
+                      <p class="quiz-question">Tem disponibilidade para finais de semana e feriados?</p>
+                      <div class="quiz-options">
+                        <div class="quiz-opt" onclick="quizFinish(2)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Sim, total flexibilidade</div>
+                        <div class="quiz-opt" onclick="quizFinish(1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Alguns fins de semana sim</div>
+                        <div class="quiz-opt" onclick="quizFinish(0)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Só dias úteis por enquanto</div>
+                      </div>
+                    </div>
+                    <div class="quiz-step" data-step="result" id="quiz-result"></div>
+                  </div>
+
+                  <a href="#cadastro" class="feat-cta cta-ouro" style="margin-top:16px">Cadastre-se como profissional</a>
                   <p class="feat-cta-sub">Primeiros cadastrados ganham destaque no lançamento</p>
                 </div>
               </div>
@@ -1083,6 +1303,35 @@
         </div>
       </section>
 
+      <!-- REFERRAL / INDIQUE -->
+      <section class="referral">
+        <div class="referral-card">
+          <div class="referral-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+          </div>
+          <h3>Indique e ganhe</h3>
+          <p>Conhece um síndico ou profissional que precisa do CondoDaily? Indique e ambos ganham <strong>bônus no lançamento</strong>.</p>
+          <div class="referral-form" id="referral-form">
+            <input type="text" id="ref-name" placeholder="Seu nome" class="ref-input">
+            <input type="email" id="ref-email" placeholder="Seu e-mail" class="ref-input">
+            <select id="ref-type" class="ref-input">
+              <option value="">Eu sou...</option>
+              <option value="sindico">Síndico / Administrador</option>
+              <option value="profissional">Profissional / Diarista</option>
+              <option value="morador">Morador</option>
+              <option value="outro">Outro</option>
+            </select>
+            <input type="text" id="ref-indica" placeholder="Nome ou e-mail de quem você indica (opcional)" class="ref-input">
+            <button type="button" class="feat-cta cta-verde" onclick="submitReferral()">Quero participar</button>
+          </div>
+          <div class="referral-success" id="referral-success" style="display:none">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1B7A6E" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <h4>Cadastro recebido!</h4>
+            <p>Vamos te avisar assim que o app estiver disponível. Quanto mais indicar, maior seu bônus.</p>
+          </div>
+        </div>
+      </section>
+
       <div class="sep"></div>
 
       <footer class="foot">
@@ -1104,5 +1353,64 @@
 
     </div>
   </div>
+  <script>
+    // Quiz logic
+    let quizScore = 0;
+
+    function quizNext(nextStep, points) {
+      quizScore += points;
+      document.querySelector('.quiz-step.active').classList.remove('active');
+      document.querySelector('[data-step="' + nextStep + '"]').classList.add('active');
+    }
+
+    function quizFinish(points) {
+      quizScore += points;
+      const isReady = quizScore >= 4;
+      const resultEl = document.getElementById('quiz-result');
+
+      if (isReady) {
+        resultEl.innerHTML = '<div class="quiz-result ready">' +
+          '<div class="quiz-result-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#1B7A6E" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>' +
+          '<h4>Pronto pra atender!</h4>' +
+          '<p>Você tem o perfil ideal pra trabalhar com condomínios pelo CondoDaily. Cadastre-se e saia na frente.</p>' +
+          '<p class="quiz-market">O mercado condominial movimenta R$ 165 bilhões/ano no Brasil e só cresce.</p></div>';
+      } else {
+        resultEl.innerHTML = '<div class="quiz-result grow">' +
+          '<div class="quiz-result-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#D99A1E" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>' +
+          '<h4>Hora de se especializar!</h4>' +
+          '<p>O mercado de condomínios é enorme e está em expansão. Cadastre-se agora — vamos te ajudar a se preparar e começar a atender.</p>' +
+          '<p class="quiz-market">Mais de 420 mil condomínios no Brasil precisam de profissionais qualificados.</p></div>';
+      }
+
+      document.querySelector('.quiz-step.active').classList.remove('active');
+      resultEl.classList.add('active');
+    }
+
+    // Referral form — saves to localStorage for now, will connect to API later
+    function submitReferral() {
+      const name = document.getElementById('ref-name').value.trim();
+      const email = document.getElementById('ref-email').value.trim();
+      const type = document.getElementById('ref-type').value;
+      const indica = document.getElementById('ref-indica').value.trim();
+
+      if (!name || !email) {
+        alert('Preencha seu nome e e-mail para participar.');
+        return;
+      }
+
+      // Store locally
+      const leads = JSON.parse(localStorage.getItem('condodaily_leads') || '[]');
+      leads.push({
+        name, email, type, indica,
+        date: new Date().toISOString(),
+        source: 'landing_page'
+      });
+      localStorage.setItem('condodaily_leads', JSON.stringify(leads));
+
+      // Show success
+      document.getElementById('referral-form').style.display = 'none';
+      document.getElementById('referral-success').style.display = 'block';
+    }
+  </script>
 </body>
 </html>
