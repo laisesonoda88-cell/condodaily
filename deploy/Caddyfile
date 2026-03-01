@@ -47,8 +47,8 @@ condodaily.com.br, www.condodaily.com.br {
 	# Landing page (static files)
 	handle {
 		root * /srv/www
+		try_files {path} {path}/index.html {path}/ /index.html
 		file_server
-		try_files {path} /index.html
 	}
 
 	# Security headers
