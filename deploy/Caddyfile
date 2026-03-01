@@ -44,6 +44,11 @@ condodaily.com.br, www.condodaily.com.br {
 		header Content-Type "application/json"
 	}
 
+	# API routes → proxy to Fastify backend
+	handle /api/* {
+		reverse_proxy server:3001
+	}
+
 	# Landing page (static files)
 	handle {
 		root * /srv/www
