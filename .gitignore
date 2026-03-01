@@ -1,0 +1,60 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build
+dist/
+build/
+.expo/
+*.tsbuildinfo
+
+# Environment (templates OK, filled values NEVER)
+.env
+.env.local
+.env.production.local
+# NOTE: deploy/.env.production is a TEMPLATE (safe to commit)
+# NOTE: apps/mobile/.env.production is a TEMPLATE (safe to commit)
+
+# Store credentials (NEVER commit)
+apps/mobile/google-services-key.json
+
+# Uploads (user data)
+server/uploads/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Turbo
+.turbo/
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Testing
+coverage/
+
+# Expo
+apps/mobile/ios/
+apps/mobile/android/
+
+# Personal/temp files in root (Laise's PDFs, screenshots, etc.)
+*.pdf
+*.dmg
+*.rtf
+*.png
+Senha*
+condodaily-brand*.html
+
+# Claude memory (personal)
+.claude/

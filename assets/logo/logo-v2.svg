@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 80" fill="none">
+  <!-- Icon: Two buildings + orange dots -->
+  <g transform="translate(0, 0)">
+    <rect x="8" y="24" width="21" height="36" rx="3" fill="#1B7A6E"/>
+    <rect x="35" y="12" width="21" height="48" rx="3" fill="#145C53"/>
+    <!-- Windows building 1 -->
+    <rect x="14" y="30" width="4.5" height="4.5" rx="0.8" fill="white"/>
+    <rect x="21" y="30" width="4.5" height="4.5" rx="0.8" fill="white"/>
+    <rect x="14" y="39" width="4.5" height="4.5" rx="0.8" fill="white"/>
+    <rect x="21" y="39" width="4.5" height="4.5" rx="0.8" fill="white"/>
+    <!-- Windows building 2 -->
+    <rect x="41" y="18" width="4.5" height="4.5" rx="0.8" fill="white"/>
+    <rect x="48" y="18" width="4.5" height="4.5" rx="0.8" fill="white"/>
+    <rect x="41" y="27" width="4.5" height="4.5" rx="0.8" fill="white"/>
+    <rect x="48" y="27" width="4.5" height="4.5" rx="0.8" fill="white"/>
+    <rect x="41" y="36" width="4.5" height="4.5" rx="0.8" fill="white"/>
+    <rect x="48" y="36" width="4.5" height="4.5" rx="0.8" fill="white"/>
+    <!-- Orange dots (people/services) -->
+    <circle cx="18.5" cy="54" r="4.5" fill="#F5A623"/>
+    <circle cx="45.5" cy="54" r="4.5" fill="#F5A623"/>
+  </g>
+  <!-- Wordmark -->
+  <text x="72" y="52" font-family="'Plus Jakarta Sans', 'Helvetica Neue', Arial, sans-serif" font-size="36" font-weight="800" letter-spacing="-1.5">
+    <tspan fill="#1A2B3C">Condo</tspan><tspan fill="#F5A623">Daily</tspan>
+  </text>
+</svg>

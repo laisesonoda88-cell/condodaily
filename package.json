@@ -1,0 +1,37 @@
+{
+  "name": "condodaily",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "server"
+  ],
+  "scripts": {
+    "dev:mobile": "npm run dev --workspace=apps/mobile",
+    "dev:server": "npm run dev --workspace=server",
+    "dev": "npx turbo run dev",
+    "build": "npx turbo run build",
+    "lint": "npx turbo run lint",
+    "clean": "npx turbo run clean",
+    "db:generate": "npm run db:generate --workspace=server",
+    "db:migrate": "npm run db:migrate --workspace=server",
+    "db:studio": "npm run db:studio --workspace=server",
+    "db:seed": "npm run db:seed --workspace=server",
+    "typecheck": "npx turbo run typecheck",
+    "setup": "./scripts/setup.sh"
+  },
+  "overrides": {
+    "react": "$react",
+    "react-dom": "$react-dom",
+    "react-native-svg": "$react-native-svg"
+  },
+  "dependencies": {
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-native-svg": "15.12.1"
+  },
+  "devDependencies": {
+    "turbo": "^2.4.0"
+  }
+}

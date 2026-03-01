@@ -1,0 +1,77 @@
+# CondoDaily — Docker Compose (Production)
+# ════════════════════════════════════════════
+# Uso:
+#   cp deploy/.env.production .env    (preencher as variáveis)
+#   docker compose up -d --build
+#   docker compose logs -f
+#
+# Serviços:
+#   caddy  — reverse proxy + SSL automático (Let's Encrypt)
+#   server — API Fastify (Node.js)
+#   db     — PostgreSQL 16
+
+services:
+  # ─── Caddy (SSL + Reverse Proxy) ──────────────────────
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - '80:80'      # HTTP (redirect → HTTPS)
+      - '443:443'    # HTTPS
+      - '443:443/udp' # HTTP/3 (QUIC)
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./deploy/www:/srv/www:ro          # Landing page
+      - caddy_data:/data                   # SSL certificates
+      - caddy_config:/config               # Caddy config
+    depends_on:
+      server:
+        condition: service_healthy
+
+  # ─── API Server (Fastify) ─────────────────────────────
+  server:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    expose:
+      - '3001'  # Internal only — Caddy handles external traffic
+    environment:
+      NODE_ENV: production
+      PORT: 3001
+      DATABASE_URL: postgresql://postgres:${DB_PASSWORD}@db:5432/condodaily
+      JWT_SECRET: ${JWT_SECRET}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY}
+      MP_ACCESS_TOKEN: ${MP_ACCESS_TOKEN}
+      MP_PUBLIC_KEY: ${MP_PUBLIC_KEY}
+      MP_WEBHOOK_SECRET: ${MP_WEBHOOK_SECRET}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+    volumes:
+      - uploads:/app/server/uploads
+
+  # ─── PostgreSQL ───────────────────────────────────────
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: condodaily
+    expose:
+      - '5432'  # Internal only
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:
+  uploads:
+  caddy_data:
+  caddy_config:

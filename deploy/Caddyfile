@@ -1,0 +1,65 @@
+# CondoDaily — Caddy Reverse Proxy
+# SSL automático (Let's Encrypt) — zero configuração de certificados
+#
+# Domínios atendidos:
+#   api.condodaily.com.br   → API Backend (Fastify)
+#   condodaily.com.br       → Landing page + deep links (.well-known)
+
+# ═══════════════════════════════════════════════════════════
+# API: api.condodaily.com.br → Fastify (porta 3001)
+# ═══════════════════════════════════════════════════════════
+api.condodaily.com.br {
+	# Proxy all requests to the Fastify server
+	reverse_proxy server:3001
+
+	# Security headers (supplement Fastify's helmet)
+	header {
+		X-Robots-Tag "noindex, nofollow"
+		-Server
+	}
+
+	# Logging
+	log {
+		output file /data/logs/api-access.log {
+			roll_size 10mb
+			roll_keep 5
+		}
+	}
+}
+
+# ═══════════════════════════════════════════════════════════
+# Main domain: condodaily.com.br
+# Serves: deep links (.well-known) + landing page
+# ═══════════════════════════════════════════════════════════
+condodaily.com.br, www.condodaily.com.br {
+	# Deep links: Apple AASA + Android assetlinks
+	# These MUST be served from the main domain for mobile OS to verify
+	handle /.well-known/apple-app-site-association {
+		reverse_proxy server:3001
+		header Content-Type "application/json"
+	}
+
+	handle /.well-known/assetlinks.json {
+		reverse_proxy server:3001
+		header Content-Type "application/json"
+	}
+
+	# Landing page (static files)
+	handle {
+		root * /srv/www
+		file_server
+		try_files {path} /index.html
+	}
+
+	# Security headers
+	header {
+		-Server
+	}
+
+	log {
+		output file /data/logs/web-access.log {
+			roll_size 10mb
+			roll_keep 5
+		}
+	}
+}

@@ -1,0 +1,115 @@
+{
+  "expo": {
+    "name": "CondoDaily",
+    "slug": "condodaily",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "scheme": "condodaily",
+    "splash": {
+      "image": "./assets/logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#1B7A6E"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "br.com.condodaily.app",
+      "buildNumber": "1",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "O CondoDaily precisa da sua localização para realizar check-in e check-out nos serviços e encontrar profissionais próximos.",
+        "NSLocationAlwaysUsageDescription": "O CondoDaily usa sua localização para validar check-in/check-out durante os serviços contratados.",
+        "NSCameraUsageDescription": "O CondoDaily usa a câmera para capturar fotos de perfil e documentos.",
+        "NSPhotoLibraryUsageDescription": "O CondoDaily acessa suas fotos para selecionar imagens de perfil.",
+        "CFBundleAllowMixedLocalizations": true,
+        "CFBundleDevelopmentRegion": "pt-BR"
+      },
+      "config": {
+        "usesNonExemptEncryption": false
+      },
+      "associatedDomains": [
+        "applinks:condodaily.com.br"
+      ],
+      "privacyManifests": {
+        "NSPrivacyAccessedAPITypes": [
+          {
+            "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryUserDefaults",
+            "NSPrivacyAccessedAPITypeReasons": [
+              "CA92.1"
+            ]
+          }
+        ]
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#1B7A6E"
+      },
+      "edgeToEdgeEnabled": true,
+      "package": "br.com.condodaily.app",
+      "versionCode": 1,
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "RECEIVE_BOOT_COMPLETED",
+        "VIBRATE"
+      ],
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "autoVerify": true,
+          "data": [
+            {
+              "scheme": "https",
+              "host": "condodaily.com.br",
+              "pathPrefix": "/"
+            }
+          ],
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
+        }
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "O CondoDaily precisa da sua localização para realizar check-in e check-out nos serviços."
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "color": "#1B7A6E",
+          "sounds": []
+        }
+      ],
+      "expo-font",
+      "@react-native-community/datetimepicker"
+    ],
+    "owner": "condodaily",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/e31b6e62-0637-449a-9a2a-d20aa8d7c1bd"
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "e31b6e62-0637-449a-9a2a-d20aa8d7c1bd"
+      }
+    }
+  }
+}
