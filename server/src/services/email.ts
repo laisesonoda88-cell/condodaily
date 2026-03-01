@@ -85,9 +85,20 @@ function baseTemplate(content: string): string {
 </html>`;
 }
 
-function sindicoTemplate(name: string): string {
+function vipBadge(position?: number | null): string {
+  if (!position) return '';
+  return `
+    <div style="background:linear-gradient(135deg,#1B7A6E,#145C53);border-radius:12px;padding:20px;text-align:center;margin:0 0 20px">
+      <p style="color:rgba(255,255,255,0.8);font-size:12px;margin:0 0 4px;text-transform:uppercase;letter-spacing:1px">Sua posicao na fila VIP</p>
+      <p style="color:#F5A623;font-size:36px;font-weight:800;margin:0">#${position}</p>
+      <p style="color:rgba(255,255,255,0.7);font-size:11px;margin:4px 0 0">Quanto mais indicacoes, mais voce sobe!</p>
+    </div>`;
+}
+
+function sindicoTemplate(name: string, vipPosition?: number | null): string {
   return baseTemplate(`
     <h2 style="color:#1A2B3C;font-size:20px;margin:0 0 16px">Bem-vindo, ${name}!</h2>
+    ${vipBadge(vipPosition)}
     <p style="color:#444;font-size:15px;line-height:1.6;margin:0 0 16px">
       Seu condominio esta na <strong style="color:#1B7A6E">lista VIP</strong> do CondoDaily.
       Voce sera um dos primeiros a ter acesso ao app quando lancarmos.
@@ -110,7 +121,7 @@ function sindicoTemplate(name: string): string {
   `);
 }
 
-function profissionalTemplate(name: string, quizScore?: number | null): string {
+function profissionalTemplate(name: string, quizScore?: number | null, vipPosition?: number | null): string {
   const quizBlock = quizScore != null ? `
     <div style="background:${quizScore >= 4 ? '#F0FAF8' : '#FFF8EB'};border-left:4px solid ${quizScore >= 4 ? '#1B7A6E' : '#F5A623'};padding:16px;border-radius:0 8px 8px 0;margin:20px 0">
       <p style="color:${quizScore >= 4 ? '#1B7A6E' : '#F5A623'};font-size:14px;margin:0;font-weight:600">
@@ -125,6 +136,7 @@ function profissionalTemplate(name: string, quizScore?: number | null): string {
 
   return baseTemplate(`
     <h2 style="color:#1A2B3C;font-size:20px;margin:0 0 16px">Cadastro confirmado, ${name}!</h2>
+    ${vipBadge(vipPosition)}
     <p style="color:#444;font-size:15px;line-height:1.6;margin:0 0 16px">
       Voce e um dos primeiros profissionais do <strong style="color:#F5A623">CondoDaily</strong>.
       Isso te da vantagem quando o app lancar.
@@ -221,15 +233,16 @@ export async function sendLeadConfirmation(lead: {
   email: string;
   type: string;
   quiz_score?: number | null;
+  vip_position?: number | null;
 }): Promise<void> {
   const templates: Record<string, { subject: string; html: string }> = {
     SINDICO: {
-      subject: `Bem-vindo ao CondoDaily, ${lead.name}!`,
-      html: sindicoTemplate(lead.name),
+      subject: `Bem-vindo ao CondoDaily, ${lead.name}! Voce e o #${lead.vip_position} na fila VIP`,
+      html: sindicoTemplate(lead.name, lead.vip_position),
     },
     PROFISSIONAL: {
-      subject: `Cadastro confirmado, ${lead.name}!`,
-      html: profissionalTemplate(lead.name, lead.quiz_score),
+      subject: `Cadastro confirmado, ${lead.name}! Posicao #${lead.vip_position} na fila VIP`,
+      html: profissionalTemplate(lead.name, lead.quiz_score, lead.vip_position),
     },
     MORADOR: {
       subject: `Voce esta na lista, ${lead.name}!`,
@@ -247,6 +260,59 @@ export async function sendLeadConfirmation(lead: {
   if (sent) {
     await db.update(earlyLeads).set({ email_sent: true }).where(eq(earlyLeads.id, lead.id));
   }
+}
+
+// ─── Launch Notification Email ──────────────────────────
+
+function launchTemplate(name: string, type: string, vipPosition?: number | null): string {
+  const isProf = type === 'PROFISSIONAL';
+  return baseTemplate(`
+    <div style="background:linear-gradient(135deg,#1B7A6E,#0E453E);border-radius:12px;padding:24px;text-align:center;margin:0 0 24px">
+      <p style="color:#F5A623;font-size:14px;margin:0 0 4px;text-transform:uppercase;letter-spacing:2px;font-weight:700">O dia chegou!</p>
+      <h2 style="color:white;font-size:24px;margin:8px 0;font-weight:800">O CondoDaily esta no ar! 🚀</h2>
+      ${vipPosition ? `<p style="color:rgba(255,255,255,0.8);font-size:13px;margin:8px 0 0">Voce foi o <strong style="color:#F5A623">#${vipPosition}</strong> na nossa lista VIP</p>` : ''}
+    </div>
+    <p style="color:#444;font-size:15px;line-height:1.6;margin:0 0 16px">
+      Ola <strong>${name}</strong>! Como um dos primeiros cadastrados, voce tem <strong style="color:#1B7A6E">acesso prioritario</strong> ao app.
+    </p>
+    <div style="background:#F0FAF8;border-left:4px solid #1B7A6E;padding:16px;border-radius:0 8px 8px 0;margin:20px 0">
+      <p style="color:#1B7A6E;font-size:14px;margin:0;font-weight:600">Seus beneficios VIP:</p>
+      <ul style="color:#444;font-size:14px;line-height:1.8;margin:8px 0 0;padding-left:18px">
+        ${isProf ? `
+          <li><strong>Perfil destacado</strong> nos resultados de busca</li>
+          <li><strong>Sem taxa</strong> nos primeiros 3 servicos</li>
+          <li><strong>Badge "Pioneiro"</strong> no seu perfil</li>
+        ` : `
+          <li><strong>Primeiro mes sem taxa</strong> de plataforma</li>
+          <li><strong>Prioridade</strong> no suporte</li>
+          <li><strong>Badge "Pioneiro"</strong> no seu condominio</li>
+        `}
+      </ul>
+    </div>
+    <div style="text-align:center;margin-top:24px">
+      <a href="https://condodaily.com.br/download" style="display:inline-block;background:linear-gradient(135deg,#1B7A6E,#145C53);color:white;padding:16px 40px;border-radius:12px;font-size:16px;font-weight:700;text-decoration:none;box-shadow:0 4px 12px rgba(27,122,110,0.3)">Baixar o App Agora</a>
+    </div>
+    <p style="color:#999;font-size:12px;text-align:center;margin:16px 0 0">
+      Disponivel para iOS e Android
+    </p>
+  `);
+}
+
+export async function sendLaunchEmail(lead: {
+  id: number;
+  name: string;
+  email: string;
+  type: string;
+  vip_position?: number | null;
+}): Promise<boolean> {
+  const subject = `🚀 ${lead.name}, o CondoDaily esta no ar! Acesse agora como VIP #${lead.vip_position || ''}`;
+  const html = launchTemplate(lead.name, lead.type, lead.vip_position);
+  const sent = await sendEmail(lead.email, subject, html);
+
+  if (sent) {
+    await db.update(earlyLeads).set({ launch_email_sent: true }).where(eq(earlyLeads.id, lead.id));
+  }
+  return sent;
 }
 
 export async function sendReferralNotification(lead: {

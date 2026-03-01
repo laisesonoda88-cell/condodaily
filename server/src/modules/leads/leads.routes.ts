@@ -11,7 +11,7 @@ import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
 import { db } from '../../db/index.js';
 import { earlyLeads } from '../../db/schema.js';
 import { eq, desc, sql, count, and, gte, ilike, or } from 'drizzle-orm';
-import { sendLeadConfirmation, sendReferralNotification } from '../../services/email.js';
+import { sendLeadConfirmation, sendReferralNotification, sendLaunchEmail } from '../../services/email.js';
 
 // ─── Admin Auth Middleware ───────────────────────────────
 
@@ -99,6 +99,10 @@ export async function leadRoutes(app: FastifyInstance) {
       });
     }
 
+    // Get next VIP position
+    const [{ maxPos }] = await db.select({ maxPos: sql<number>`COALESCE(MAX(${earlyLeads.vip_position}), 0)` }).from(earlyLeads);
+    const vipPosition = Number(maxPos) + 1;
+
     // Save to DB
     const [lead] = await db.insert(earlyLeads).values({
       name,
@@ -109,13 +113,23 @@ export async function leadRoutes(app: FastifyInstance) {
       referral_name: referralName || undefined,
       referral_email: referralEmail || undefined,
       quiz_score: quizScore,
+      vip_position: vipPosition,
       utm_source: utmSource || undefined,
       utm_medium: utmMedium || undefined,
       utm_campaign: utmCampaign || undefined,
     }).returning();
 
+    // If this lead was referred by someone, increment their referral_count
+    if (referralEmail && isValidEmail(referralEmail)) {
+      // Find the referrer by their email (the person who filled the form IS the referrer)
+      await db.execute(sql`
+        UPDATE early_leads SET referral_count = referral_count + 1
+        WHERE email = ${email} AND referral_email IS NOT NULL
+      `);
+    }
+
     // Send emails async (don't block the response)
-    sendLeadConfirmation(lead).catch(err =>
+    sendLeadConfirmation({ ...lead, vip_position: vipPosition }).catch(err =>
       app.log.error({ err, leadId: lead.id }, 'Failed to send lead confirmation email')
     );
 
@@ -128,6 +142,7 @@ export async function leadRoutes(app: FastifyInstance) {
     return reply.send({
       success: true,
       message: 'Cadastro realizado! Vamos te avisar quando o app lancar.',
+      vip_position: vipPosition,
     });
   });
 
@@ -249,6 +264,56 @@ export async function leadRoutes(app: FastifyInstance) {
         byType: byType.map(t => ({ type: t.type, count: Number(t.count) })),
         bySource: bySource.map(s => ({ source: s.source, count: Number(s.count) })),
       },
+    });
+  });
+
+  // ══════════════════════════════════════════════════════
+  // POST /api/leads/launch — Admin: envia emails de lançamento
+  // ══════════════════════════════════════════════════════
+
+  app.post('/launch', {
+    preHandler: [adminAuth],
+  }, async (request: FastifyRequest, reply: FastifyReply) => {
+    const body = request.body as Record<string, any> || {};
+    const batchSize = Math.min(50, Number(body.batch_size) || 20); // Resend free = 100/dia
+
+    // Get leads that haven't received launch email yet, ordered by VIP position
+    const leads = await db.select()
+      .from(earlyLeads)
+      .where(eq(earlyLeads.launch_email_sent, false))
+      .orderBy(earlyLeads.vip_position)
+      .limit(batchSize);
+
+    if (leads.length === 0) {
+      return reply.send({ success: true, message: 'Todos os leads ja receberam o email de lancamento!', sent: 0 });
+    }
+
+    let sent = 0;
+    let failed = 0;
+
+    for (const lead of leads) {
+      try {
+        const ok = await sendLaunchEmail(lead);
+        if (ok) sent++;
+        else failed++;
+        // Small delay to avoid rate limiting (100ms between emails)
+        await new Promise(r => setTimeout(r, 100));
+      } catch {
+        failed++;
+      }
+    }
+
+    // Count remaining
+    const [{ remaining }] = await db.select({ remaining: count() })
+      .from(earlyLeads)
+      .where(eq(earlyLeads.launch_email_sent, false));
+
+    return reply.send({
+      success: true,
+      message: `Emails de lancamento enviados: ${sent}/${leads.length}`,
+      sent,
+      failed,
+      remaining: Number(remaining),
     });
   });
 

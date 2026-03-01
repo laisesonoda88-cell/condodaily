@@ -481,6 +481,10 @@ export const earlyLeads = pgTable('early_leads', {
   quiz_score: integer('quiz_score'),
   email_sent: boolean('email_sent').default(false).notNull(),
   referral_email_sent: boolean('referral_email_sent').default(false).notNull(),
+  // VIP Priority System
+  referral_count: integer('referral_count').default(0).notNull(),
+  vip_position: integer('vip_position'),  // posição na fila VIP (auto-set)
+  launch_email_sent: boolean('launch_email_sent').default(false).notNull(),
   utm_source: varchar('utm_source', { length: 100 }),
   utm_medium: varchar('utm_medium', { length: 100 }),
   utm_campaign: varchar('utm_campaign', { length: 100 }),
