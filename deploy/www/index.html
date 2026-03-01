@@ -348,6 +348,69 @@
       font-size: 0.83rem; color: var(--text-light); line-height: 1.5;
     }
 
+    /* ═══ PROBLEM-SOLUTION SCENARIOS ═══ */
+    .scenarios {
+      margin-bottom: 42px;
+    }
+
+    .scenarios-label {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.72rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1.8px;
+      color: var(--text-light);
+      margin-bottom: 16px;
+      text-align: center;
+      animation: fadeUp 0.5s ease-out 0.78s both;
+    }
+
+    .scenario {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 16px 20px;
+      border-radius: var(--r-sm);
+      background: var(--surface);
+      border: 1px solid rgba(27,122,110,0.05);
+      margin-bottom: 10px;
+      text-align: left;
+      transition: transform 0.3s ease;
+    }
+
+    .scenario:hover { transform: translateX(4px); }
+
+    .scenario:nth-child(2) { animation: fadeUp 0.4s ease-out 0.82s both; }
+    .scenario:nth-child(3) { animation: fadeUp 0.4s ease-out 0.88s both; }
+    .scenario:nth-child(4) { animation: fadeUp 0.4s ease-out 0.94s both; }
+    .scenario:nth-child(5) { animation: fadeUp 0.4s ease-out 1.0s both; }
+
+    .scenario-emoji {
+      font-size: 1.3rem; flex-shrink: 0;
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 10px;
+    }
+
+    .scenario-emoji.prob { background: rgba(245,166,35,0.1); }
+    .scenario-emoji.sol { background: rgba(27,122,110,0.08); }
+
+    .scenario-text {
+      font-size: 0.84rem; line-height: 1.5;
+    }
+
+    .scenario-text strong {
+      display: block;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.82rem; font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 2px;
+    }
+
+    .scenario-text span {
+      color: var(--text-light);
+    }
+
+    .scenario-text span em {
+      font-style: normal; color: var(--verde); font-weight: 600;
+    }
+
     /* ═══ STATS ═══ */
     .stats {
       display: grid; grid-template-columns: repeat(3, 1fr);
@@ -578,9 +641,8 @@
   <div class="atm-indigo" aria-hidden="true"></div>
   <div class="grid-bg" aria-hidden="true"></div>
 
-  <!-- Top strip — clean, no literal stars -->
   <div class="topstrip">
-    <p>Seu condomínio impecável em <span class="hl">2026</span></p>
+    <p>O profissional certo, na hora que você precisa</p>
   </div>
 
   <div class="page">
@@ -637,15 +699,15 @@
         <h1>Condo<span class="gold">Daily</span></h1>
         <p class="hero-tag">A diária certa, na hora certa.</p>
         <p class="hero-desc">
-          O marketplace que conecta <strong>condomínios</strong> a profissionais de manutenção qualificados. Limpeza, jardinagem, portaria e muito mais.
+          Funcionário faltou? Limpeza urgente no salão de festas? Precisa de porteiro no fim de semana? <strong>Resolva em minutos</strong> — não em dias.
         </p>
 
-        <!-- Highlight card — indigo with subtle luminous dots -->
+        <!-- Highlight card — urgency scenario -->
         <div class="highlight">
-          <div class="highlight-icon">&#127939;</div>
+          <div class="highlight-icon">&#9889;</div>
           <div class="highlight-body">
-            <h3>Condomínio pronto para <span class="hl">2026</span></h3>
-            <p>Áreas comuns impecáveis, manutenção em dia, profissionais a um toque.</p>
+            <h3>Segunda-feira, 7h da manhã</h3>
+            <p>Zelador ligou doente. Às 7h15 você já tem um profissional confirmado pelo app. Isso é CondoDaily.</p>
           </div>
         </div>
 
@@ -666,7 +728,7 @@
             </div>
             <div>
               <h3>Para Condomínios</h3>
-              <p>Encontre profissionais qualificados para serviços avulsos — de limpeza a manutenção elétrica</p>
+              <p>Chega de ficar na mão. Profissional qualificado disponível quando o seu faltar — inclusive fim de semana e feriado.</p>
             </div>
           </div>
 
@@ -680,7 +742,7 @@
             </div>
             <div>
               <h3>Para Profissionais</h3>
-              <p>Encontre diárias com segurança, pagamento garantido e reputação verificada</p>
+              <p>Chega de depender de indicação. Diárias todos os dias, pagamento garantido pelo app e sua reputação cresce a cada serviço.</p>
             </div>
           </div>
 
@@ -693,8 +755,45 @@
             </div>
             <div>
               <h3>Seguro Incluso</h3>
-              <p>Cobertura durante todo o serviço via check-in/check-out digital</p>
+              <p>Ambos protegidos. Check-in digital, cobertura durante todo o serviço e multa automática por no-show.</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Real scenarios — problem → solution -->
+      <section class="scenarios">
+        <p class="scenarios-label">Situações reais, resolvidas</p>
+
+        <div class="scenario">
+          <div class="scenario-emoji prob">&#128557;</div>
+          <div class="scenario-text">
+            <strong>O funcionário faltou sem avisar</strong>
+            <span>Abra o app, encontre um substituto em minutos. <em>Problema resolvido antes das 8h.</em></span>
+          </div>
+        </div>
+
+        <div class="scenario">
+          <div class="scenario-emoji prob">&#127881;</div>
+          <div class="scenario-text">
+            <strong>Festa no salão neste sábado</strong>
+            <span>Precisa de limpeza pré e pós-evento? <em>Profissionais disponíveis no fim de semana.</em></span>
+          </div>
+        </div>
+
+        <div class="scenario">
+          <div class="scenario-emoji sol">&#128176;</div>
+          <div class="scenario-text">
+            <strong>Profissional quer mais diárias</strong>
+            <span>Sem depender de WhatsApp ou indicação. <em>O app traz os clientes até você.</em></span>
+          </div>
+        </div>
+
+        <div class="scenario">
+          <div class="scenario-emoji sol">&#128200;</div>
+          <div class="scenario-text">
+            <strong>Reputação que abre portas</strong>
+            <span>Cada serviço bem feito aumenta sua nota. <em>Mais estrelas = mais diárias.</em></span>
           </div>
         </div>
       </section>
