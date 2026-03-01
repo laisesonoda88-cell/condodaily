@@ -378,6 +378,8 @@
     .feat:nth-child(2) { animation: fadeUp 0.5s ease-out 0.63s both; }
     .feat:nth-child(3) { animation: fadeUp 0.5s ease-out 0.71s both; }
 
+    .feat { cursor: pointer; }
+
     .feat:hover {
       transform: translateY(-3px);
       box-shadow: 0 8px 28px rgba(27,122,110,0.1);
@@ -389,11 +391,17 @@
       border-radius: 14px;
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
+      align-self: flex-start;
+      margin-top: 2px;
     }
 
     .feat-ic.v { background: linear-gradient(135deg, var(--verde-light), #D4EDE9); }
     .feat-ic.o { background: linear-gradient(135deg, var(--ouro-light), #FFE8C2); }
     .feat-ic.i { background: linear-gradient(135deg, var(--indigo-light), #D5DAE6); }
+
+    .feat-header {
+      display: flex; align-items: center; justify-content: space-between;
+    }
 
     .feat h3 {
       font-family: 'Plus Jakarta Sans', sans-serif;
@@ -404,6 +412,86 @@
 
     .feat p {
       font-size: 0.83rem; color: var(--text-light); line-height: 1.5;
+    }
+
+    .feat-arrow {
+      width: 20px; height: 20px;
+      color: var(--text-light);
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .feat.open .feat-arrow { transform: rotate(180deg); }
+
+    /* Expandable detail panel */
+    .feat-detail {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, opacity 0.3s ease;
+      opacity: 0;
+    }
+
+    .feat.open .feat-detail {
+      max-height: 600px;
+      opacity: 1;
+    }
+
+    .feat-detail-inner {
+      padding-top: 16px;
+      margin-top: 14px;
+      border-top: 1px solid rgba(27,122,110,0.08);
+    }
+
+    .feat-problems {
+      list-style: none; padding: 0; margin: 0 0 16px;
+    }
+
+    .feat-problems li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 0.82rem; color: var(--text);
+      line-height: 1.5; padding: 6px 0;
+    }
+
+    .feat-problems li svg {
+      width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px;
+    }
+
+    .feat-problems li .prob-icon { color: var(--ouro-warm); }
+    .feat-problems li .sol-icon { color: var(--verde); }
+
+    .feat-cta {
+      display: block; width: 100%;
+      padding: 14px 20px;
+      border: none; border-radius: var(--r-sm);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.85rem; font-weight: 700;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .feat-cta.cta-verde {
+      background: var(--verde); color: white;
+    }
+    .feat-cta.cta-verde:hover {
+      background: var(--verde-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(27,122,110,0.25);
+    }
+
+    .feat-cta.cta-ouro {
+      background: var(--ouro); color: white;
+    }
+    .feat-cta.cta-ouro:hover {
+      background: var(--ouro-warm);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(245,166,35,0.3);
+    }
+
+    .feat-cta-sub {
+      font-size: 0.72rem; color: var(--text-light);
+      margin-top: 8px; text-align: center;
     }
 
     /* ═══ PROBLEM-SOLUTION SCENARIOS ═══ */
@@ -773,7 +861,9 @@
         </div>
 
         <div class="features">
-          <div class="feat">
+
+          <!-- PARA CONDOMÍNIOS -->
+          <div class="feat" onclick="this.classList.toggle('open')">
             <div class="feat-ic v">
               <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
                 <rect x="3" y="7" width="8" height="13" rx="2" fill="#1B7A6E"/>
@@ -783,17 +873,49 @@
                 <rect x="15" y="5.5" width="2" height="2" rx="0.4" fill="white"/>
                 <rect x="15" y="9" width="2" height="2" rx="0.4" fill="white"/>
                 <rect x="15" y="12.5" width="2" height="2" rx="0.4" fill="white"/>
-                <rect x="19" y="5.5" width="2" height="2" rx="0.4" fill="white" opacity="0.5"/>
-                <rect x="19" y="9" width="2" height="2" rx="0.4" fill="white" opacity="0.5"/>
               </svg>
             </div>
-            <div>
-              <h3>Para Condomínios</h3>
-              <p>Chega de ficar na mão. Profissional qualificado disponível quando o seu faltar — inclusive fim de semana e feriado.</p>
+            <div style="flex:1">
+              <div class="feat-header">
+                <div>
+                  <h3>Para Condomínios</h3>
+                  <p>Chega de ficar na mão. Toque pra ver como funciona.</p>
+                </div>
+                <svg class="feat-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+              </div>
+              <div class="feat-detail">
+                <div class="feat-detail-inner">
+                  <ul class="feat-problems">
+                    <li>
+                      <svg class="prob-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                      <span><strong>Passivo trabalhista:</strong> CLT gera encargos, processos e risco. Com diárias pelo app, sem vínculo empregatício.</span>
+                    </li>
+                    <li>
+                      <svg class="prob-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                      <span><strong>Funcionário faltou:</strong> Substituto confirmado pelo app em minutos, não em dias.</span>
+                    </li>
+                    <li>
+                      <svg class="prob-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                      <span><strong>Fim de semana sem cobertura:</strong> Profissionais disponíveis sábado, domingo e feriado.</span>
+                    </li>
+                    <li>
+                      <svg class="sol-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                      <span><strong>Todos verificados:</strong> Profissionais com documentação, avaliações reais e seguro incluso.</span>
+                    </li>
+                    <li>
+                      <svg class="sol-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                      <span><strong>Serviços completos:</strong> Limpeza, jardinagem, portaria, elétrica, elevadores, piscina e mais.</span>
+                    </li>
+                  </ul>
+                  <a href="#cadastro" class="feat-cta cta-verde">Cadastre seu condomínio</a>
+                  <p class="feat-cta-sub">Garanta prioridade no lançamento + bônus exclusivo</p>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="feat">
+          <!-- PARA PROFISSIONAIS -->
+          <div class="feat" onclick="this.classList.toggle('open')">
             <div class="feat-ic o">
               <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
                 <circle cx="12" cy="8" r="4" fill="#F5A623"/>
@@ -801,12 +923,46 @@
                 <circle cx="19" cy="8" r="2.5" fill="#F5A623" opacity="0.3"/>
               </svg>
             </div>
-            <div>
-              <h3>Para Profissionais</h3>
-              <p>Chega de depender de indicação. Diárias todos os dias, pagamento garantido pelo app e sua reputação cresce a cada serviço.</p>
+            <div style="flex:1">
+              <div class="feat-header">
+                <div>
+                  <h3>Para Profissionais</h3>
+                  <p>Chega de depender de indicação. Toque pra ver como funciona.</p>
+                </div>
+                <svg class="feat-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+              </div>
+              <div class="feat-detail">
+                <div class="feat-detail-inner">
+                  <ul class="feat-problems">
+                    <li>
+                      <svg class="sol-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                      <span><strong>Você define seu preço:</strong> Coloque seu valor por hora. Sem intermediário decidindo quanto você ganha.</span>
+                    </li>
+                    <li>
+                      <svg class="sol-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                      <span><strong>Receba na hora:</strong> Concluiu o serviço e fez checkout? Pagamento cai na sua conta. Sem esperar síndico pagar.</span>
+                    </li>
+                    <li>
+                      <svg class="sol-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                      <span><strong>Você avalia o condomínio:</strong> Via de mão dupla. Condomínios ruins perdem profissionais bons.</span>
+                    </li>
+                    <li>
+                      <svg class="prob-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                      <span><strong>Chega de WhatsApp:</strong> Sem depender de grupo, indicação ou boca a boca. O app traz os clientes.</span>
+                    </li>
+                    <li>
+                      <svg class="sol-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                      <span><strong>Simples de usar:</strong> Aceite diárias, faça check-in no local, conclua e receba. Sem burocracia.</span>
+                    </li>
+                  </ul>
+                  <a href="#cadastro" class="feat-cta cta-ouro">Cadastre-se como profissional</a>
+                  <p class="feat-cta-sub">Primeiros cadastrados ganham destaque no lançamento</p>
+                </div>
+              </div>
             </div>
           </div>
 
+          <!-- SEGURO INCLUSO -->
           <div class="feat">
             <div class="feat-ic i">
               <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
@@ -819,6 +975,7 @@
               <p>Ambos protegidos. Check-in digital, cobertura durante todo o serviço e multa automática por no-show.</p>
             </div>
           </div>
+
         </div>
       </section>
 
