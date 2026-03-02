@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Slot, useRouter, useSegments } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { View, ActivityIndicator } from 'react-native';
+import * as Linking from 'expo-linking';
 import { useAuthStore } from '../stores/authStore';
 import * as SplashScreen from 'expo-splash-screen';
 import {
@@ -76,6 +77,29 @@ export default function RootLayout() {
   }, []);
 
   useProtectedRoute(isAuthenticated, isLoading || !ready, user?.role);
+
+  // ─── Deep Link Handler (MP OAuth callback) ─────────
+  useEffect(() => {
+    const handleUrl = (event: { url: string }) => {
+      const url = event.url;
+      if (url.startsWith('condodaily://mp-oauth-success')) {
+        router.replace('/(profissional)/payment-setup?mp_connected=true');
+      } else if (url.startsWith('condodaily://mp-oauth-error')) {
+        const params = new URL(url.replace('condodaily://', 'https://x.com/')).searchParams;
+        const reason = params.get('reason') || 'unknown';
+        router.replace(`/(profissional)/payment-setup?mp_error=${reason}`);
+      }
+    };
+
+    const subscription = Linking.addEventListener('url', handleUrl);
+
+    // Check cold start deep link
+    Linking.getInitialURL().then((url) => {
+      if (url) handleUrl({ url });
+    });
+
+    return () => subscription.remove();
+  }, []);
 
   if (!ready && !fontsLoaded) {
     return (

@@ -400,7 +400,11 @@ export const professionalPaymentInfo = pgTable('professional_payment_info', {
   pix_key: varchar('pix_key', { length: 255 }),
   mp_user_id: varchar('mp_user_id', { length: 100 }),
   mp_access_token: varchar('mp_access_token', { length: 500 }), // L6: encrypt/decrypt via services/crypto.ts
+  mp_refresh_token: varchar('mp_refresh_token', { length: 500 }), // encrypted
   mp_connected: boolean('mp_connected').default(false).notNull(),
+  mp_token_expires_at: timestamp('mp_token_expires_at'),
+  mp_connected_at: timestamp('mp_connected_at'),
+  mp_email: varchar('mp_email', { length: 255 }),
   bank_name: varchar('bank_name', { length: 100 }),
   bank_agency: varchar('bank_agency', { length: 20 }),
   bank_account: varchar('bank_account', { length: 30 }),

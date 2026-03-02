@@ -70,4 +70,26 @@ export const paymentService = {
     const { data } = await api.get('/professionals/payouts');
     return data;
   },
+
+  // ─── Mercado Pago OAuth ─────────────────────────────
+
+  getMpAuthUrl: async () => {
+    const { data } = await api.get('/mp/oauth/auth-url');
+    return data;
+  },
+
+  getMpConnectionStatus: async () => {
+    const { data } = await api.get('/mp/oauth/status');
+    return data;
+  },
+
+  disconnectMp: async () => {
+    const { data } = await api.post('/mp/oauth/disconnect');
+    return data;
+  },
+
+  refreshMpToken: async () => {
+    const { data } = await api.post('/mp/oauth/refresh-token');
+    return data;
+  },
 };

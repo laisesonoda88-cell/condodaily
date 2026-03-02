@@ -20,6 +20,7 @@ import { webhookRoutes } from './modules/payments/webhook.routes.js';
 import { professionalRoutes } from './modules/users/professionals.routes.js';
 import { penaltyRoutes } from './modules/penalties/penalties.routes.js';
 import { leadRoutes } from './modules/leads/leads.routes.js';
+import { mpOAuthRoutes } from './modules/payments/mercadopago-oauth.routes.js';
 
 // ─── Startup Env Validation ──────────────────────────────
 const isProduction = process.env.NODE_ENV === 'production';
@@ -133,6 +134,7 @@ await app.register(webhookRoutes, { prefix: '/api/webhooks/mercadopago' });
 await app.register(professionalRoutes, { prefix: '/api/professionals' });
 await app.register(penaltyRoutes, { prefix: '/api/penalties' });
 await app.register(leadRoutes, { prefix: '/api/leads' });
+await app.register(mpOAuthRoutes, { prefix: '/api/mp/oauth' });
 
 // Start server
 const PORT = Number(process.env.PORT) || 3001;

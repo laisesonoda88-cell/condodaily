@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import {
   View,
   Text,
@@ -6,10 +6,12 @@ import {
   ScrollView,
   TouchableOpacity,
   Alert,
+  ActivityIndicator,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useRouter } from 'expo-router';
+import { useRouter, useLocalSearchParams, useFocusEffect } from 'expo-router';
 import { Feather, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import * as WebBrowser from 'expo-web-browser';
 import { Button, Input } from '../../components';
 import { paymentService } from '../../services/payments';
 import { COLORS, FONTS, SPACING, RADIUS, SHADOWS } from '../../constants/theme';
@@ -26,16 +28,57 @@ const PIX_KEY_OPTIONS: { type: PixKeyType; label: string; icon: string }[] = [
 
 export default function PaymentSetupScreen() {
   const router = useRouter();
+  const params = useLocalSearchParams<{ mp_connected?: string; mp_error?: string }>();
+
+  // Loading
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+
+  // PIX state
   const [pixKeyType, setPixKeyType] = useState<PixKeyType>('CPF');
   const [pixKey, setPixKey] = useState('');
   const [isVerified, setIsVerified] = useState(false);
   const [hasExisting, setHasExisting] = useState(false);
 
+  // MP OAuth state
+  const [mpConnected, setMpConnected] = useState(false);
+  const [mpEmail, setMpEmail] = useState<string | null>(null);
+  const [mpLoading, setMpLoading] = useState(false);
+  const [disconnecting, setDisconnecting] = useState(false);
+
+  // ─── Load Data ──────────────────────────────────────
+
   useEffect(() => {
-    loadPaymentInfo();
+    loadAll();
   }, []);
+
+  // Handle OAuth deep link params
+  useEffect(() => {
+    if (params.mp_connected === 'true') {
+      Alert.alert('Sucesso! 🎉', 'Sua conta Mercado Pago foi conectada com sucesso!');
+      loadMpStatus();
+    } else if (params.mp_error) {
+      const messages: Record<string, string> = {
+        denied: 'Autorização negada. Tente novamente.',
+        invalid_state: 'Sessão expirada. Tente novamente.',
+        exchange_failed: 'Erro na conexão. Tente novamente.',
+        missing_params: 'Parâmetros inválidos. Tente novamente.',
+      };
+      Alert.alert('Erro', messages[params.mp_error] || 'Erro desconhecido. Tente novamente.');
+    }
+  }, [params.mp_connected, params.mp_error]);
+
+  // Reload on focus (after OAuth return)
+  useFocusEffect(
+    useCallback(() => {
+      loadMpStatus();
+    }, [])
+  );
+
+  const loadAll = async () => {
+    await Promise.all([loadPaymentInfo(), loadMpStatus()]);
+    setLoading(false);
+  };
 
   const loadPaymentInfo = async () => {
     try {
@@ -47,8 +90,67 @@ export default function PaymentSetupScreen() {
         setHasExisting(true);
       }
     } catch {}
-    setLoading(false);
   };
+
+  const loadMpStatus = async () => {
+    try {
+      const result = await paymentService.getMpConnectionStatus();
+      if (result.data) {
+        setMpConnected(result.data.connected);
+        setMpEmail(result.data.email);
+      }
+    } catch {}
+  };
+
+  // ─── MP OAuth Handlers ──────────────────────────────
+
+  const handleConnectMp = async () => {
+    setMpLoading(true);
+    try {
+      const result = await paymentService.getMpAuthUrl();
+      if (result.data?.auth_url) {
+        await WebBrowser.openAuthSessionAsync(
+          result.data.auth_url,
+          'condodaily://mp-oauth-success',
+        );
+        // Reload status after browser closes
+        await loadMpStatus();
+      }
+    } catch (error: any) {
+      Alert.alert('Erro', 'Não foi possível iniciar a conexão com o Mercado Pago');
+    } finally {
+      setMpLoading(false);
+    }
+  };
+
+  const handleDisconnectMp = () => {
+    Alert.alert(
+      'Desconectar Mercado Pago',
+      'Tem certeza? Você pode reconectar a qualquer momento.',
+      [
+        { text: 'Cancelar', style: 'cancel' },
+        {
+          text: 'Desconectar',
+          style: 'destructive',
+          onPress: async () => {
+            setDisconnecting(true);
+            try {
+              await paymentService.disconnectMp();
+              setMpConnected(false);
+              setMpEmail(null);
+              Alert.alert('Pronto', 'Conta Mercado Pago desconectada.');
+            } catch {
+              Alert.alert('Erro', 'Falha ao desconectar. Tente novamente.');
+            } finally {
+              setDisconnecting(false);
+            }
+          },
+        },
+      ],
+    );
+  };
+
+  // ─── PIX Handlers ───────────────────────────────────
 
   const handleSave = async () => {
     if (!pixKey.trim()) {
@@ -81,10 +183,13 @@ export default function PaymentSetupScreen() {
     }
   };
 
+  // ─── Render ─────────────────────────────────────────
+
   if (loading) {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color={COLORS.primary} />
           <Text style={styles.loadingText}>Carregando...</Text>
         </View>
       </SafeAreaView>
@@ -104,15 +209,64 @@ export default function PaymentSetupScreen() {
           Configure como você deseja receber seus pagamentos
         </Text>
 
-        {/* Info Card */}
-        <View style={styles.infoCard}>
-          <MaterialCommunityIcons name="information-outline" size={20} color={COLORS.info} />
-          <Text style={styles.infoText}>
-            Após a conclusão e confirmação do serviço por ambas as partes, o pagamento será transferido automaticamente via PIX para a chave cadastrada.
-          </Text>
+        {/* ═══ Mercado Pago Section ═══ */}
+        <View style={styles.mpSection}>
+          <View style={styles.mpHeader}>
+            <View style={styles.mpLogoRow}>
+              <MaterialCommunityIcons name="cash-multiple" size={24} color="#009EE3" />
+              <Text style={styles.mpTitle}>Mercado Pago</Text>
+            </View>
+            <Text style={styles.mpRecommended}>Recomendado</Text>
+          </View>
+
+          {mpConnected ? (
+            <>
+              <View style={styles.mpConnectedBadge}>
+                <Ionicons name="checkmark-circle" size={20} color={COLORS.success} />
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.mpConnectedText}>Conta conectada</Text>
+                  {mpEmail && <Text style={styles.mpEmail}>{mpEmail}</Text>}
+                </View>
+              </View>
+              <Text style={styles.mpBenefit}>
+                💰 Seu saldo rende automaticamente 105% do CDI no Mercado Pago!
+              </Text>
+              <TouchableOpacity
+                onPress={handleDisconnectMp}
+                disabled={disconnecting}
+                style={styles.mpDisconnectButton}
+              >
+                {disconnecting ? (
+                  <ActivityIndicator size="small" color={COLORS.error} />
+                ) : (
+                  <Text style={styles.mpDisconnectText}>Desconectar</Text>
+                )}
+              </TouchableOpacity>
+            </>
+          ) : (
+            <>
+              <Text style={styles.mpDescription}>
+                Conecte sua conta para receber pagamentos automaticamente. Seu dinheiro rende 105% do CDI enquanto não saca!
+              </Text>
+              <Button
+                title={mpLoading ? 'Conectando...' : 'Conectar Mercado Pago'}
+                onPress={handleConnectMp}
+                loading={mpLoading}
+                size="lg"
+                style={styles.mpConnectButton}
+              />
+            </>
+          )}
         </View>
 
-        {/* PIX Key Type Selection */}
+        {/* ═══ Divider ═══ */}
+        <View style={styles.divider}>
+          <View style={styles.dividerLine} />
+          <Text style={styles.dividerText}>ou configure PIX direto</Text>
+          <View style={styles.dividerLine} />
+        </View>
+
+        {/* ═══ PIX Section ═══ */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Tipo de chave PIX</Text>
           <View style={styles.keyTypesContainer}>
@@ -172,11 +326,12 @@ export default function PaymentSetupScreen() {
         )}
 
         <Button
-          title={hasExisting ? 'Atualizar dados' : 'Salvar dados'}
+          title={hasExisting ? 'Atualizar dados PIX' : 'Salvar dados PIX'}
           onPress={handleSave}
           loading={saving}
           disabled={!pixKey.trim()}
           size="lg"
+          variant="outline"
           style={styles.saveButton}
         />
       </ScrollView>
@@ -187,18 +342,104 @@ export default function PaymentSetupScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: COLORS.background },
   scroll: { paddingHorizontal: SPACING.lg, paddingBottom: SPACING.xxl },
-  loadingContainer: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+  loadingContainer: { flex: 1, justifyContent: 'center', alignItems: 'center', gap: SPACING.sm },
   loadingText: { fontFamily: FONTS.regular, fontSize: FONTS.sizes.md, color: COLORS.textSecondary },
   backButton: { paddingVertical: SPACING.md, flexDirection: 'row', alignItems: 'center', gap: 4 },
   backText: { fontSize: FONTS.sizes.md, color: COLORS.primary, fontFamily: FONTS.medium },
   title: { fontSize: FONTS.sizes.xxl, fontFamily: FONTS.heading, color: COLORS.textPrimary },
   subtitle: { fontSize: FONTS.sizes.md, fontFamily: FONTS.regular, color: COLORS.textSecondary, marginBottom: SPACING.lg },
-  infoCard: {
-    flexDirection: 'row', backgroundColor: '#E3F2FD', padding: SPACING.md,
-    borderRadius: RADIUS.md, gap: SPACING.sm, marginBottom: SPACING.lg,
-    alignItems: 'flex-start',
+
+  // ─── MP Section ─────────────────────────────────────
+  mpSection: {
+    backgroundColor: COLORS.card,
+    borderRadius: RADIUS.lg,
+    padding: SPACING.lg,
+    borderWidth: 2,
+    borderColor: '#009EE3',
+    marginBottom: SPACING.lg,
+    ...SHADOWS.sm,
   },
-  infoText: { flex: 1, fontSize: FONTS.sizes.sm, fontFamily: FONTS.regular, color: COLORS.gray700, lineHeight: 20 },
+  mpHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: SPACING.md,
+  },
+  mpLogoRow: { flexDirection: 'row', alignItems: 'center', gap: SPACING.sm },
+  mpTitle: { fontSize: FONTS.sizes.lg, fontFamily: FONTS.heading, color: COLORS.textPrimary },
+  mpRecommended: {
+    fontSize: FONTS.sizes.xs,
+    fontFamily: FONTS.semibold,
+    color: '#009EE3',
+    backgroundColor: '#E3F2FD',
+    paddingHorizontal: SPACING.sm,
+    paddingVertical: 2,
+    borderRadius: RADIUS.sm,
+    overflow: 'hidden',
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+  },
+  mpDescription: {
+    fontSize: FONTS.sizes.sm,
+    fontFamily: FONTS.regular,
+    color: COLORS.textSecondary,
+    lineHeight: 20,
+    marginBottom: SPACING.md,
+  },
+  mpConnectButton: { width: '100%' },
+  mpConnectedBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: SPACING.sm,
+    backgroundColor: '#E8F5E9',
+    padding: SPACING.md,
+    borderRadius: RADIUS.md,
+    marginBottom: SPACING.sm,
+  },
+  mpConnectedText: {
+    fontSize: FONTS.sizes.md,
+    fontFamily: FONTS.semibold,
+    color: COLORS.success,
+  },
+  mpEmail: {
+    fontSize: FONTS.sizes.sm,
+    fontFamily: FONTS.regular,
+    color: COLORS.textSecondary,
+    marginTop: 2,
+  },
+  mpBenefit: {
+    fontSize: FONTS.sizes.sm,
+    fontFamily: FONTS.regular,
+    color: COLORS.textSecondary,
+    marginBottom: SPACING.md,
+    lineHeight: 20,
+  },
+  mpDisconnectButton: {
+    alignSelf: 'flex-start',
+    paddingVertical: SPACING.xs,
+    paddingHorizontal: SPACING.md,
+  },
+  mpDisconnectText: {
+    fontSize: FONTS.sizes.sm,
+    fontFamily: FONTS.medium,
+    color: COLORS.error,
+  },
+
+  // ─── Divider ────────────────────────────────────────
+  divider: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: SPACING.lg,
+    gap: SPACING.sm,
+  },
+  dividerLine: { flex: 1, height: 1, backgroundColor: COLORS.border },
+  dividerText: {
+    fontSize: FONTS.sizes.sm,
+    fontFamily: FONTS.regular,
+    color: COLORS.textSecondary,
+  },
+
+  // ─── PIX Section ────────────────────────────────────
   section: { marginBottom: SPACING.lg },
   sectionTitle: { fontSize: FONTS.sizes.md, fontFamily: FONTS.heading, color: COLORS.textPrimary, marginBottom: SPACING.sm },
   keyTypesContainer: { flexDirection: 'row', flexWrap: 'wrap', gap: SPACING.sm },
