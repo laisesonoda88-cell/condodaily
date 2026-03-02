@@ -58,6 +58,7 @@ condodaily-brand*.html
 
 # Allow app assets (icons, splash, etc.)
 !apps/mobile/assets/*.png
+!apps/mobile/assets/icons/*.png
 !assets/logo/*.png
 
 # Claude memory (personal)
