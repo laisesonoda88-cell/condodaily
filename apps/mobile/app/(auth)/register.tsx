@@ -34,6 +34,8 @@ export default function RegisterScreen() {
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [termsAccepted, setTermsAccepted] = useState(false);
+  const [lgpdAiConsent, setLgpdAiConsent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -60,6 +62,8 @@ export default function RegisterScreen() {
     if (phone.replace(/\D/g, '').length < 10) newErrors.phone = 'Telefone invalido';
     if (password.length < 6) newErrors.password = 'Minimo 6 caracteres';
     if (password !== confirmPassword) newErrors.confirmPassword = 'Senhas nao conferem';
+    if (!termsAccepted) newErrors.terms = 'Voce deve aceitar os Termos de Uso';
+    if (!lgpdAiConsent) newErrors.lgpd = 'Voce deve consentir com o processamento de dados';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -77,6 +81,9 @@ export default function RegisterScreen() {
         document_type: documentType,
         phone: phone.replace(/\D/g, ''),
         role,
+        terms_accepted: true,
+        terms_version: '1.0',
+        lgpd_ai_consent: true,
       });
       router.replace({
         pathname: '/(auth)/verify-email',
@@ -281,23 +288,52 @@ export default function RegisterScreen() {
               error={errors.confirmPassword}
             />
 
-            <Text style={styles.termsText}>
-              Ao criar sua conta, você concorda com nossos{' '}
-              <Text
-                style={styles.termsLink}
-                onPress={() => router.push('/(auth)/terms')}
-              >
-                Termos de Uso
+            {/* Checkbox 1: Termos de Uso (obrigatório) */}
+            <TouchableOpacity
+              style={styles.checkboxRow}
+              onPress={() => setTermsAccepted(!termsAccepted)}
+              activeOpacity={0.7}
+            >
+              <View style={[styles.checkbox, termsAccepted && styles.checkboxChecked]}>
+                {termsAccepted && (
+                  <MaterialCommunityIcons name="check" size={14} color="#fff" />
+                )}
+              </View>
+              <Text style={styles.checkboxText}>
+                Li e aceito os{' '}
+                <Text
+                  style={styles.termsLink}
+                  onPress={() => router.push('/(auth)/terms')}
+                >
+                  Termos de Uso
+                </Text>
+                {' '}e a{' '}
+                <Text
+                  style={styles.termsLink}
+                  onPress={() => router.push('/(auth)/privacy')}
+                >
+                  Política de Privacidade
+                </Text>
               </Text>
-              {' '}e{' '}
-              <Text
-                style={styles.termsLink}
-                onPress={() => router.push('/(auth)/privacy')}
-              >
-                Política de Privacidade
+            </TouchableOpacity>
+            {errors.terms && <Text style={styles.errorText}>{errors.terms}</Text>}
+
+            {/* Checkbox 2: Consentimento LGPD para IA (obrigatório) */}
+            <TouchableOpacity
+              style={styles.checkboxRow}
+              onPress={() => setLgpdAiConsent(!lgpdAiConsent)}
+              activeOpacity={0.7}
+            >
+              <View style={[styles.checkbox, lgpdAiConsent && styles.checkboxChecked]}>
+                {lgpdAiConsent && (
+                  <MaterialCommunityIcons name="check" size={14} color="#fff" />
+                )}
+              </View>
+              <Text style={styles.checkboxText}>
+                Consinto com o processamento de documentos por sistemas automatizados de IA para validação cadastral, conforme a LGPD
               </Text>
-              .
-            </Text>
+            </TouchableOpacity>
+            {errors.lgpd && <Text style={styles.errorText}>{errors.lgpd}</Text>}
 
             <Button
               title="Criar Conta"
@@ -427,18 +463,46 @@ const styles = StyleSheet.create({
   form: {
     gap: SPACING.xs,
   },
-  termsText: {
+  checkboxRow: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: SPACING.sm,
+    marginTop: SPACING.md,
+    paddingRight: SPACING.md,
+  },
+  checkbox: {
+    width: 22,
+    height: 22,
+    borderRadius: 4,
+    borderWidth: 2,
+    borderColor: COLORS.border,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 1,
+    flexShrink: 0,
+  },
+  checkboxChecked: {
+    backgroundColor: COLORS.primary,
+    borderColor: COLORS.primary,
+  },
+  checkboxText: {
     fontSize: FONTS.sizes.xs,
     color: COLORS.textSecondary,
-    textAlign: 'center',
     lineHeight: 18,
-    marginTop: SPACING.md,
     fontFamily: FONTS.regular,
+    flex: 1,
   },
   termsLink: {
     color: COLORS.primary,
     fontFamily: FONTS.semibold,
     textDecorationLine: 'underline' as const,
+  },
+  errorText: {
+    fontSize: FONTS.sizes.xs,
+    color: '#E53E3E',
+    marginLeft: 30,
+    marginTop: 2,
+    fontFamily: FONTS.regular,
   },
   registerButton: {
     width: '100%',

@@ -14,6 +14,9 @@ export const authService = {
     phone: string;
     role: 'CONTRATANTE' | 'PROFISSIONAL';
     document_type?: 'CPF' | 'CNPJ';
+    terms_accepted?: boolean;
+    terms_version?: string;
+    lgpd_ai_consent?: boolean;
   }) => {
     const { data } = await api.post('/auth/register', payload);
     return data;

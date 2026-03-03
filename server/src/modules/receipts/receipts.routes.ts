@@ -6,7 +6,7 @@ import { generateContratanteReceipt, generateProfissionalReceipt } from '../../s
 
 export async function receiptRoutes(app: FastifyInstance) {
   // GET /api/receipts/:bookingId
-  // Gera PDF de comprovante baseado no papel do usuário
+  // Gera PDF de resumo do serviço baseado no papel do usuário
   app.get('/:bookingId', { preHandler: [app.authenticate] }, async (request, reply) => {
     const { id: userId } = request.user as { id: string };
     const { bookingId } = request.params as { bookingId: string };
@@ -50,11 +50,11 @@ export async function receiptRoutes(app: FastifyInstance) {
       return reply.status(403).send({ success: false, error: 'Acesso negado' });
     }
 
-    // Só gerar comprovante para bookings concluídos ou com pagamento
+    // Só gerar resumo para bookings concluídos ou com pagamento
     if (booking.status !== 'COMPLETED' && booking.payment_status === 'UNPAID') {
       return reply.status(400).send({
         success: false,
-        error: 'Comprovante disponível apenas após pagamento ou conclusão do serviço',
+        error: 'Resumo disponível apenas após pagamento ou conclusão do serviço',
       });
     }
 
@@ -118,14 +118,14 @@ export async function receiptRoutes(app: FastifyInstance) {
       condo_uf: condo?.uf || '',
     };
 
-    // Gerar PDF baseado no papel do usuário
+    // Gerar PDF de resumo baseado no papel do usuário
     const pdfStream = isContratante
       ? generateContratanteReceipt(receiptData)
       : generateProfissionalReceipt(receiptData);
 
     const filename = isContratante
-      ? `comprovante-pagamento-${booking.scheduled_date}.pdf`
-      : `comprovante-recebimento-${booking.scheduled_date}.pdf`;
+      ? `resumo-servico-${booking.scheduled_date}.pdf`
+      : `resumo-servico-prestado-${booking.scheduled_date}.pdf`;
 
     reply
       .header('Content-Type', 'application/pdf')

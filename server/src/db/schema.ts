@@ -109,6 +109,10 @@ export const users = pgTable('users', {
   // Password reset
   password_reset_code: varchar('password_reset_code', { length: 6 }),
   password_reset_expires: timestamp('password_reset_expires'),
+  // Aceite obrigatório (briefing §4)
+  terms_accepted_at: timestamp('terms_accepted_at'),          // data/hora do aceite dos Termos de Uso
+  terms_version: varchar('terms_version', { length: 20 }),    // versão aceita (ex: "1.0")
+  lgpd_ai_consent_at: timestamp('lgpd_ai_consent_at'),       // consentimento LGPD para processamento IA
   created_at: timestamp('created_at').defaultNow().notNull(),
   updated_at: timestamp('updated_at').defaultNow().notNull(),
 });

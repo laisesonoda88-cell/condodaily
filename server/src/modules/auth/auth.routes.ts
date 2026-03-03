@@ -30,6 +30,9 @@ const registerSchema = z.object({
   cpf: z.string().min(11, 'CPF invalido'),
   phone: z.string().min(10, 'Telefone invalido'),
   role: z.enum(['CONTRATANTE', 'PROFISSIONAL']),
+  terms_accepted: z.boolean().refine((v) => v === true, { message: 'Aceite dos Termos de Uso é obrigatório' }),
+  terms_version: z.string().default('1.0'),
+  lgpd_ai_consent: z.boolean().refine((v) => v === true, { message: 'Consentimento LGPD é obrigatório' }),
 });
 
 const loginSchema = z.object({
@@ -82,8 +85,9 @@ export async function authRoutes(app: FastifyInstance) {
       });
     }
 
-    const { email, password, full_name, cpf, phone, role } = parsed.data;
+    const { email, password, full_name, cpf, phone, role, terms_version } = parsed.data;
     const documentType = (request.body as any)?.document_type || 'CPF';
+    const now = new Date();
 
     // Validar CPF/CNPJ com dígitos verificadores
     if (documentType === 'CNPJ') {
@@ -141,6 +145,9 @@ export async function authRoutes(app: FastifyInstance) {
         role,
         email_verification_code: verificationCode,
         email_verification_expires: verificationExpires,
+        terms_accepted_at: now,
+        terms_version,
+        lgpd_ai_consent_at: now,
       })
       .returning({
         id: users.id,
