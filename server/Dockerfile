@@ -7,6 +7,8 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 COPY server/package.json ./server/
 COPY packages/shared/package.json ./packages/shared/
+# Mobile package.json needed so npm ci can resolve the full lock file
+COPY apps/mobile/package.json ./apps/mobile/
 
 # Install ALL deps (need devDeps for tsc)
 RUN npm ci --workspace=server --workspace=packages/shared
@@ -42,6 +44,8 @@ COPY package.json package-lock.json ./
 COPY server/package.json ./server/
 # Use production package.json for shared (points to dist/)
 COPY --from=builder /app/packages/shared/package.prod.json ./packages/shared/package.json
+# Mobile package.json needed so npm ci can resolve the full lock file
+COPY apps/mobile/package.json ./apps/mobile/
 
 # Install production deps only
 RUN npm ci --workspace=server --workspace=packages/shared --omit=dev
