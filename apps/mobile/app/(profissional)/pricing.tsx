@@ -15,17 +15,22 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Ionicons, Feather, MaterialCommunityIcons } from '@expo/vector-icons';
 import { COLORS, FONTS, SPACING, RADIUS, SHADOWS } from '../../constants/theme';
+import { CityBackground } from '../../components/CityBackground';
 import { professionalService } from '../../services/professionals';
 
 export default function PricingScreen() {
   const router = useRouter();
   const [hourlyRate, setHourlyRate] = useState('');
   const [serviceRadius, setServiceRadius] = useState('15');
+  const [horarioInicio, setHorarioInicio] = useState('08:00');
+  const [horarioFim, setHorarioFim] = useState('17:00');
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [hasChanges, setHasChanges] = useState(false);
   const [initialRate, setInitialRate] = useState('');
   const [initialRadius, setInitialRadius] = useState('15');
+  const [initialInicio, setInitialInicio] = useState('08:00');
+  const [initialFim, setInitialFim] = useState('17:00');
 
   useEffect(() => {
     loadProfile();
@@ -42,11 +47,17 @@ export default function PricingScreen() {
         const radius = profile.professional_profile.service_radius_km
           ? String(profile.professional_profile.service_radius_km)
           : '15';
+        const inicio = profile.professional_profile.horario_inicio || '08:00';
+        const fim = profile.professional_profile.horario_fim || '17:00';
 
         setHourlyRate(rate);
         setServiceRadius(radius);
+        setHorarioInicio(inicio);
+        setHorarioFim(fim);
         setInitialRate(rate);
         setInitialRadius(radius);
+        setInitialInicio(inicio);
+        setInitialFim(fim);
       }
     } catch {
       // Silently fail - use defaults
@@ -55,8 +66,13 @@ export default function PricingScreen() {
     }
   };
 
-  const checkChanges = (rate: string, radius: string) => {
-    setHasChanges(rate !== initialRate || radius !== initialRadius);
+  const checkChanges = (rate: string, radius: string, inicio?: string, fim?: string) => {
+    setHasChanges(
+      rate !== initialRate ||
+      radius !== initialRadius ||
+      (inicio ?? horarioInicio) !== initialInicio ||
+      (fim ?? horarioFim) !== initialFim
+    );
   };
 
   const handleRateChange = (value: string) => {
@@ -94,9 +110,11 @@ export default function PricingScreen() {
 
     setSaving(true);
     try {
-      await professionalService.updatePricing(rate, radius);
+      await professionalService.updatePricing(rate, radius, horarioInicio, horarioFim);
       setInitialRate(hourlyRate);
       setInitialRadius(serviceRadius);
+      setInitialInicio(horarioInicio);
+      setInitialFim(horarioFim);
       setHasChanges(false);
       Alert.alert('Sucesso', 'Sua precificação foi atualizada!', [
         { text: 'OK', onPress: () => router.back() },
@@ -126,6 +144,7 @@ export default function PricingScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <CityBackground variant="sunset" opacity={0.12} heightFraction={0.3} position="bottom" />
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
@@ -193,6 +212,91 @@ export default function PricingScreen() {
               </Text>
             </View>
           )}
+
+          {/* Working Hours Section */}
+          <View style={styles.section}>
+            <View style={styles.sectionHeader}>
+              <Feather name="clock" size={22} color={COLORS.primary} />
+              <Text style={styles.sectionTitle}>Horario de Atendimento</Text>
+            </View>
+            <Text style={styles.sectionDescription}>
+              Defina o horario em que voce esta disponivel para trabalhar. Os contratantes verao esses horarios ao agendar.
+            </Text>
+
+            <View style={styles.hoursRow}>
+              <View style={styles.hourField}>
+                <Text style={styles.hourLabel}>Inicio</Text>
+                <View style={styles.hourInputRow}>
+                  <TextInput
+                    style={styles.hourInput}
+                    value={horarioInicio}
+                    onChangeText={(v) => {
+                      const digits = v.replace(/\D/g, '').slice(0, 4);
+                      const formatted = digits.length <= 2 ? digits : `${digits.slice(0, 2)}:${digits.slice(2)}`;
+                      setHorarioInicio(formatted);
+                      checkChanges(hourlyRate, serviceRadius, formatted, undefined);
+                    }}
+                    placeholder="08:00"
+                    placeholderTextColor={COLORS.placeholder}
+                    keyboardType="number-pad"
+                    maxLength={5}
+                  />
+                </View>
+              </View>
+              <Feather name="arrow-right" size={18} color={COLORS.textMuted} style={{ marginTop: 28 }} />
+              <View style={styles.hourField}>
+                <Text style={styles.hourLabel}>Termino</Text>
+                <View style={styles.hourInputRow}>
+                  <TextInput
+                    style={styles.hourInput}
+                    value={horarioFim}
+                    onChangeText={(v) => {
+                      const digits = v.replace(/\D/g, '').slice(0, 4);
+                      const formatted = digits.length <= 2 ? digits : `${digits.slice(0, 2)}:${digits.slice(2)}`;
+                      setHorarioFim(formatted);
+                      checkChanges(hourlyRate, serviceRadius, undefined, formatted);
+                    }}
+                    placeholder="17:00"
+                    placeholderTextColor={COLORS.placeholder}
+                    keyboardType="number-pad"
+                    maxLength={5}
+                  />
+                </View>
+              </View>
+            </View>
+
+            {/* Quick select common schedules */}
+            <View style={styles.quickSelectRow}>
+              {[
+                { label: '8h-17h', inicio: '08:00', fim: '17:00' },
+                { label: '7h-16h', inicio: '07:00', fim: '16:00' },
+                { label: '9h-18h', inicio: '09:00', fim: '18:00' },
+                { label: '6h-14h', inicio: '06:00', fim: '14:00' },
+              ].map((opt) => (
+                <TouchableOpacity
+                  key={opt.label}
+                  style={[
+                    styles.quickSelectButton,
+                    horarioInicio === opt.inicio && horarioFim === opt.fim && styles.quickSelectButtonActive,
+                  ]}
+                  onPress={() => {
+                    setHorarioInicio(opt.inicio);
+                    setHorarioFim(opt.fim);
+                    checkChanges(hourlyRate, serviceRadius, opt.inicio, opt.fim);
+                  }}
+                >
+                  <Text
+                    style={[
+                      styles.quickSelectText,
+                      horarioInicio === opt.inicio && horarioFim === opt.fim && styles.quickSelectTextActive,
+                    ]}
+                  >
+                    {opt.label}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </View>
 
           {/* Service Radius Section */}
           <View style={styles.section}>
@@ -421,6 +525,36 @@ const styles = StyleSheet.create({
     color: COLORS.textSecondary,
     marginTop: SPACING.md,
     fontStyle: 'italic',
+  },
+  hoursRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: SPACING.md,
+    marginBottom: SPACING.md,
+  },
+  hourField: { flex: 1 },
+  hourLabel: {
+    fontFamily: FONTS.semibold,
+    fontSize: FONTS.sizes.sm,
+    color: COLORS.textPrimary,
+    marginBottom: SPACING.xs,
+  },
+  hourInputRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: COLORS.background,
+    borderRadius: RADIUS.md,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    paddingHorizontal: SPACING.md,
+  },
+  hourInput: {
+    flex: 1,
+    fontFamily: FONTS.bold,
+    fontSize: FONTS.sizes.xl,
+    color: COLORS.textPrimary,
+    paddingVertical: SPACING.md,
+    textAlign: 'center',
   },
   radiusContainer: {
     gap: SPACING.md,

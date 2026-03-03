@@ -5,6 +5,7 @@ import { MaterialCommunityIcons, Ionicons, Feather } from '@expo/vector-icons';
 import { useAuthStore } from '../../stores/authStore';
 import { useCondoStore } from '../../stores/condoStore';
 import { COLORS, FONTS, SPACING, RADIUS, SHADOWS } from '../../constants/theme';
+import { CityBackground } from '../../components/CityBackground';
 
 const CATEGORIES = [
   { icon: 'broom', name: 'Limpeza Geral', slug: 'limpeza-geral', color: COLORS.primary },
@@ -30,6 +31,7 @@ export default function ContratanteHome() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <CityBackground variant="day" opacity={0.12} heightFraction={0.3} position="bottom" />
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Header */}
         <View style={styles.header}>

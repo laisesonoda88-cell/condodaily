@@ -14,6 +14,7 @@ import { Button } from '../../components';
 import { api } from '../../services/api';
 import { professionalService } from '../../services/professionals';
 import { COLORS, FONTS, SPACING, RADIUS, SHADOWS } from '../../constants/theme';
+import { CityBackground } from '../../components/CityBackground';
 
 interface ProfessionalProfile {
   id: string;
@@ -104,7 +105,8 @@ export default function ProfessionalProfileScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <CityBackground variant="day" opacity={0.12} heightFraction={0.3} position="bottom" />
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: SPACING.xl }}>
         {/* Back button */}
         <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
           <Feather name="arrow-left" size={20} color={COLORS.primary} />

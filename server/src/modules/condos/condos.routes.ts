@@ -108,7 +108,9 @@ export async function condoRoutes(app: FastifyInstance) {
     const cleanCnpj = cnpj.replace(/\D/g, '');
 
     try {
-      const response = await fetch(`https://brasilapi.com.br/api/cnpj/v1/${cleanCnpj}`);
+      const response = await fetch(`https://brasilapi.com.br/api/cnpj/v1/${cleanCnpj}`, {
+        headers: { 'User-Agent': 'CondoDaily/1.0' },
+      });
       if (!response.ok) {
         return reply.status(404).send({
           success: false,

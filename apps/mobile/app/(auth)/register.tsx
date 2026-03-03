@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
   ScrollView,
   Alert,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -15,6 +17,7 @@ import { useAuthStore } from '../../stores/authStore';
 import { CityBackground } from '../../components/CityBackground';
 import { COLORS, FONTS, SPACING, RADIUS } from '../../constants/theme';
 import { authService } from '../../services/auth';
+import { validateCPF, validateCNPJ, formatCPF, formatCNPJ, formatPhone as fmtPhone } from '@condodaily/shared';
 
 type UserRole = 'CONTRATANTE' | 'PROFISSIONAL';
 
@@ -34,44 +37,26 @@ export default function RegisterScreen() {
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const formatCpf = (value: string) => {
-    const digits = value.replace(/\D/g, '').slice(0, 11);
-    if (digits.length <= 3) return digits;
-    if (digits.length <= 6) return `${digits.slice(0, 3)}.${digits.slice(3)}`;
-    if (digits.length <= 9)
-      return `${digits.slice(0, 3)}.${digits.slice(3, 6)}.${digits.slice(6)}`;
-    return `${digits.slice(0, 3)}.${digits.slice(3, 6)}.${digits.slice(6, 9)}-${digits.slice(9)}`;
-  };
-
-  const formatCnpj = (value: string) => {
-    const digits = value.replace(/\D/g, '').slice(0, 14);
-    if (digits.length <= 2) return digits;
-    if (digits.length <= 5) return `${digits.slice(0, 2)}.${digits.slice(2)}`;
-    if (digits.length <= 8)
-      return `${digits.slice(0, 2)}.${digits.slice(2, 5)}.${digits.slice(5)}`;
-    if (digits.length <= 12)
-      return `${digits.slice(0, 2)}.${digits.slice(2, 5)}.${digits.slice(5, 8)}/${digits.slice(8)}`;
-    return `${digits.slice(0, 2)}.${digits.slice(2, 5)}.${digits.slice(5, 8)}/${digits.slice(8, 12)}-${digits.slice(12)}`;
-  };
-
   const formatDocument = (value: string) => {
-    return documentType === 'CPF' ? formatCpf(value) : formatCnpj(value);
+    return documentType === 'CPF' ? formatCPF(value) : formatCNPJ(value);
   };
 
-  const formatPhone = (value: string) => {
-    const digits = value.replace(/\D/g, '').slice(0, 11);
-    if (digits.length <= 2) return `(${digits}`;
-    if (digits.length <= 7) return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
-    return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
-  };
+  const formatPhone = (value: string) => fmtPhone(value);
 
   const validate = () => {
     const newErrors: Record<string, string> = {};
-    if (!fullName.trim()) newErrors.fullName = 'Nome e obrigatorio';
-    if (!email.includes('@')) newErrors.email = 'Email invalido';
-    const docDigits = document.replace(/\D/g, '').length;
-    if (documentType === 'CPF' && docDigits !== 11) newErrors.document = 'CPF invalido';
-    if (documentType === 'CNPJ' && docDigits !== 14) newErrors.document = 'CNPJ invalido';
+    if (!fullName.trim() || fullName.trim().split(' ').length < 2)
+      newErrors.fullName = 'Informe nome e sobrenome';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
+      newErrors.email = 'Email invalido';
+
+    // Validação algorítmica de CPF/CNPJ (dígitos verificadores)
+    if (documentType === 'CPF') {
+      if (!validateCPF(document)) newErrors.document = 'CPF invalido';
+    } else {
+      if (!validateCNPJ(document)) newErrors.document = 'CNPJ invalido';
+    }
+
     if (phone.replace(/\D/g, '').length < 10) newErrors.phone = 'Telefone invalido';
     if (password.length < 6) newErrors.password = 'Minimo 6 caracteres';
     if (password !== confirmPassword) newErrors.confirmPassword = 'Senhas nao conferem';
@@ -173,10 +158,13 @@ export default function RegisterScreen() {
   return (
     <SafeAreaView style={styles.container}>
         <CityBackground variant="day" opacity={0.12} heightFraction={0.3} position="bottom" />
+        <KeyboardAvoidingView
+          style={{ flex: 1 }}
+          behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        >
         <ScrollView
           contentContainerStyle={styles.scrollContent}
           keyboardShouldPersistTaps="handled"
-          automaticallyAdjustKeyboardInsets
           showsVerticalScrollIndicator={false}
         >
           <TouchableOpacity onPress={() => setStep(1)} style={styles.backButton}>
@@ -327,6 +315,7 @@ export default function RegisterScreen() {
             </TouchableOpacity>
           </View>
         </ScrollView>
+        </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }

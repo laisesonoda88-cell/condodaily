@@ -21,6 +21,10 @@ import { professionalRoutes } from './modules/users/professionals.routes.js';
 import { penaltyRoutes } from './modules/penalties/penalties.routes.js';
 import { leadRoutes } from './modules/leads/leads.routes.js';
 import { mpOAuthRoutes } from './modules/payments/mercadopago-oauth.routes.js';
+import { chatRoutes } from './modules/chat/chat.routes.js';
+import { documentRoutes } from './modules/documents/documents.routes.js';
+import { receiptRoutes } from './modules/receipts/receipts.routes.js';
+import { notificationRoutes } from './modules/notifications/notifications.routes.js';
 
 // ─── Startup Env Validation ──────────────────────────────
 const isProduction = process.env.NODE_ENV === 'production';
@@ -42,6 +46,14 @@ if (isProduction && (!process.env.MP_ACCESS_TOKEN || process.env.MP_ACCESS_TOKEN
 
 if (isProduction && !process.env.MP_WEBHOOK_SECRET) {
   console.warn('⚠ AVISO: MP_WEBHOOK_SECRET não configurado — webhooks Mercado Pago não serão verificados');
+}
+
+if (!process.env.ANTHROPIC_API_KEY) {
+  console.warn('⚠ AVISO: ANTHROPIC_API_KEY não configurado — análise de documentos de condomínio ficará indisponível');
+}
+
+if (isProduction && (!process.env.MP_CLIENT_ID || !process.env.MP_CLIENT_SECRET)) {
+  console.warn('⚠ AVISO: MP_CLIENT_ID/MP_CLIENT_SECRET não configurados — OAuth do Mercado Pago ficará indisponível');
 }
 
 // ─── Logger ──────────────────────────────────────────────
@@ -105,11 +117,18 @@ app.decorate('authenticate', async function (request: any, reply: any) {
   }
 });
 
-// Static files: .well-known (deep links), uploads
+// Static files: .well-known (deep links)
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 await app.register(fastifyStatic, {
   root: path.join(__dirname, 'public'),
   prefix: '/',
+  decorateReply: false,
+});
+
+// Uploads (avatars, documents, etc.)
+await app.register(fastifyStatic, {
+  root: path.join(process.cwd(), 'uploads'),
+  prefix: '/uploads/',
   decorateReply: false,
 });
 
@@ -134,7 +153,11 @@ await app.register(webhookRoutes, { prefix: '/api/webhooks/mercadopago' });
 await app.register(professionalRoutes, { prefix: '/api/professionals' });
 await app.register(penaltyRoutes, { prefix: '/api/penalties' });
 await app.register(leadRoutes, { prefix: '/api/leads' });
+await app.register(chatRoutes, { prefix: '/api/chat' });
+await app.register(documentRoutes, { prefix: '/api/documents' });
+await app.register(receiptRoutes, { prefix: '/api/receipts' });
 await app.register(mpOAuthRoutes, { prefix: '/api/mp/oauth' });
+await app.register(notificationRoutes, { prefix: '/api/notifications' });
 
 // Start server
 const PORT = Number(process.env.PORT) || 3001;

@@ -14,6 +14,7 @@ import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 import { Button } from '../../components';
 import { api } from '../../services/api';
 import { COLORS, FONTS, SPACING, RADIUS, SHADOWS } from '../../constants/theme';
+import { CityBackground } from '../../components/CityBackground';
 
 interface Question {
   id: string;
@@ -120,6 +121,7 @@ export default function QuizScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <CityBackground variant="sunset" opacity={0.12} heightFraction={0.3} position="bottom" />
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
         <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
           <Feather name="arrow-left" size={20} color={COLORS.secondary} />

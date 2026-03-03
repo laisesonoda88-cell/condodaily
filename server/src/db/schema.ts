@@ -218,6 +218,15 @@ export const professionalProfiles = pgTable('professional_profiles', {
   // Disponibilidade especial
   disponivel_fim_semana: boolean('disponivel_fim_semana').default(false).notNull(),
   disponivel_feriados: boolean('disponivel_feriados').default(false).notNull(),
+  // Verificação de documentos
+  doc_status: varchar('doc_status', { length: 20 }).default('PENDENTE').notNull(), // PENDENTE, EM_ANALISE, APROVADO, REJEITADO
+  doc_rg_url: text('doc_rg_url'),
+  doc_cpf_url: text('doc_cpf_url'),
+  doc_comprovante_url: text('doc_comprovante_url'),
+  doc_selfie_url: text('doc_selfie_url'),
+  doc_submitted_at: timestamp('doc_submitted_at'),
+  doc_reviewed_at: timestamp('doc_reviewed_at'),
+  doc_rejection_reason: text('doc_rejection_reason'),
   // Sistema de multas e bloqueio
   penalty_count: integer('penalty_count').default(0).notNull(), // faltas/cancelamentos total
   pending_penalty_amount: decimal('pending_penalty_amount', { precision: 10, scale: 2 }).default('0').notNull(),
@@ -465,6 +474,36 @@ export const webhookEvents = pgTable('webhook_events', {
   created_at: timestamp('created_at').defaultNow().notNull(),
 });
 
+// ─── Chat Conversations ──────────────────────────────────
+export const chatConversations = pgTable('chat_conversations', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  booking_id: uuid('booking_id')
+    .references(() => bookings.id)
+    .notNull(),
+  contratante_id: uuid('contratante_id')
+    .references(() => users.id)
+    .notNull(),
+  profissional_id: uuid('profissional_id')
+    .references(() => users.id)
+    .notNull(),
+  last_message_at: timestamp('last_message_at'),
+  created_at: timestamp('created_at').defaultNow().notNull(),
+});
+
+// ─── Chat Messages ──────────────────────────────────────
+export const chatMessages = pgTable('chat_messages', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  conversation_id: uuid('conversation_id')
+    .references(() => chatConversations.id, { onDelete: 'cascade' })
+    .notNull(),
+  sender_id: uuid('sender_id')
+    .references(() => users.id)
+    .notNull(),
+  content: text('content').notNull(),
+  read_at: timestamp('read_at'),
+  created_at: timestamp('created_at').defaultNow().notNull(),
+});
+
 // ─── Lead Types & Sources (Pré-lançamento) ──────────────
 export const leadTypeEnum = pgEnum('lead_type', [
   'SINDICO',
@@ -501,5 +540,18 @@ export const earlyLeads = pgTable('early_leads', {
   utm_source: varchar('utm_source', { length: 100 }),
   utm_medium: varchar('utm_medium', { length: 100 }),
   utm_campaign: varchar('utm_campaign', { length: 100 }),
+  created_at: timestamp('created_at').defaultNow().notNull(),
+});
+
+// ─── Notifications ──────────────────────────────────────
+// Types: BOOKING_NEW, BOOKING_ACCEPTED, BOOKING_CANCELLED, PAYMENT_RECEIVED, CHAT_MESSAGE, GENERAL
+export const notifications = pgTable('notifications', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  user_id: uuid('user_id').references(() => users.id).notNull(),
+  title: varchar('title', { length: 200 }).notNull(),
+  body: text('body').notNull(),
+  type: varchar('type', { length: 50 }).notNull().default('GENERAL'),
+  data_json: text('data_json'),
+  read_at: timestamp('read_at'),
   created_at: timestamp('created_at').defaultNow().notNull(),
 });

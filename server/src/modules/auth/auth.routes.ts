@@ -6,6 +6,7 @@ import { db } from '../../db/index.js';
 import { users, professionalProfiles, usedRefreshTokens } from '../../db/schema.js';
 import { sendVerificationEmail, sendPasswordResetEmail } from '../../services/email.js';
 import { z } from 'zod';
+import { validateCPF, validateCNPJ } from '@condodaily/shared';
 
 /** Hash a refresh token for safe storage */
 function hashToken(token: string): string {
@@ -82,6 +83,18 @@ export async function authRoutes(app: FastifyInstance) {
     }
 
     const { email, password, full_name, cpf, phone, role } = parsed.data;
+    const documentType = (request.body as any)?.document_type || 'CPF';
+
+    // Validar CPF/CNPJ com dígitos verificadores
+    if (documentType === 'CNPJ') {
+      if (!validateCNPJ(cpf)) {
+        return reply.status(400).send({ success: false, error: 'CNPJ inválido (dígitos verificadores não conferem)' });
+      }
+    } else {
+      if (!validateCPF(cpf)) {
+        return reply.status(400).send({ success: false, error: 'CPF inválido (dígitos verificadores não conferem)' });
+      }
+    }
 
     // Check if user exists
     const existing = await db

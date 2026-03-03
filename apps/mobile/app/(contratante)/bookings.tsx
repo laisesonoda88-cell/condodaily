@@ -14,6 +14,7 @@ import { MaterialCommunityIcons, Ionicons, Feather } from '@expo/vector-icons';
 import { bookingService } from '../../services/bookings';
 import { useCondoStore } from '../../stores/condoStore';
 import { COLORS, FONTS, SPACING, RADIUS, SHADOWS } from '../../constants/theme';
+import { CityBackground } from '../../components/CityBackground';
 
 const STATUS_MAP: Record<string, { label: string; color: string; bg: string; iconName: string }> = {
   PENDING: { label: 'Aguardando', color: '#F5A623', bg: '#FFF8E7', iconName: 'clock-outline' },
@@ -142,6 +143,7 @@ export default function BookingsScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <CityBackground variant="day" opacity={0.12} heightFraction={0.3} position="bottom" />
       <View style={styles.header}>
         <Text style={styles.title}>Meus Servicos</Text>
         {activeCount > 0 && (

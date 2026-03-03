@@ -6,6 +6,9 @@ import { View, ActivityIndicator } from 'react-native';
 import * as Linking from 'expo-linking';
 import { useAuthStore } from '../stores/authStore';
 import * as SplashScreen from 'expo-splash-screen';
+import { AnimatedSplash } from '../components/AnimatedSplash';
+import { ErrorBoundary } from '../components/ErrorBoundary';
+import { useNotifications } from '../hooks/useNotifications';
 import {
   useFonts,
   PlusJakartaSans_600SemiBold,
@@ -45,6 +48,8 @@ function useProtectedRoute(isAuthenticated: boolean, isLoading: boolean, userRol
 export default function RootLayout() {
   const { isAuthenticated, isLoading, user, loadUser } = useAuthStore();
   const [ready, setReady] = useState(false);
+  const [splashDone, setSplashDone] = useState(false);
+  const router = useRouter();
 
   const [fontsLoaded] = useFonts({
     PlusJakartaSans_600SemiBold,
@@ -61,13 +66,14 @@ export default function RootLayout() {
   }, []);
 
   useEffect(() => {
-    if (!isLoading && (fontsLoaded || ready)) {
+    if (!isLoading && fontsLoaded) {
       setReady(true);
+      // Hide native splash immediately — our animated one takes over
       SplashScreen.hideAsync().catch(() => {});
     }
   }, [isLoading, fontsLoaded]);
 
-  // Force ready after 3s
+  // Force ready after 3s (fallback)
   useEffect(() => {
     const t = setTimeout(() => {
       setReady(true);
@@ -76,7 +82,10 @@ export default function RootLayout() {
     return () => clearTimeout(t);
   }, []);
 
-  useProtectedRoute(isAuthenticated, isLoading || !ready, user?.role);
+  useProtectedRoute(isAuthenticated, isLoading || !splashDone, user?.role);
+
+  // Register push notifications & set up listeners
+  useNotifications();
 
   // ─── Deep Link Handler (MP OAuth callback) ─────────
   useEffect(() => {
@@ -101,18 +110,27 @@ export default function RootLayout() {
     return () => subscription.remove();
   }, []);
 
-  if (!ready && !fontsLoaded) {
+  // Show animated splash while loading OR while animation plays
+  if (!ready || !splashDone) {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#1B7A6E' }}>
-        <ActivityIndicator size="large" color="#FFFFFF" />
+      <View style={{ flex: 1, backgroundColor: '#1B7A6E' }}>
+        {fontsLoaded ? (
+          <AnimatedSplash onFinish={() => setSplashDone(true)} />
+        ) : (
+          <ActivityIndicator
+            size="large"
+            color="#FFFFFF"
+            style={{ flex: 1, justifyContent: 'center' }}
+          />
+        )}
       </View>
     );
   }
 
   return (
-    <>
+    <ErrorBoundary>
       <StatusBar style="dark" />
       <Slot />
-    </>
+    </ErrorBoundary>
   );
 }

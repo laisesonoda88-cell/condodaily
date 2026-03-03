@@ -16,6 +16,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { condoService } from '../../services/condos';
 import { useCondoStore } from '../../stores/condoStore';
 import { COLORS, FONTS, SPACING, RADIUS, SHADOWS } from '../../constants/theme';
+import { CityBackground } from '../../components/CityBackground';
 
 interface ServiceRecommendation {
   category_id: string;
@@ -143,6 +144,7 @@ export default function CondoRecommendationsScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <CityBackground variant="day" opacity={0.12} heightFraction={0.3} position="bottom" />
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
         {/* Header */}
         <View style={styles.header}>

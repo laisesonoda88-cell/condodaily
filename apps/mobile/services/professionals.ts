@@ -26,11 +26,11 @@ export const professionalService = {
     return data;
   },
 
-  updatePricing: async (hourly_rate: number, service_radius_km: number) => {
-    const { data } = await api.put('/professionals/pricing', {
-      hourly_rate,
-      service_radius_km,
-    });
+  updatePricing: async (hourly_rate: number, service_radius_km: number, horario_inicio?: string, horario_fim?: string) => {
+    const payload: Record<string, any> = { hourly_rate, service_radius_km };
+    if (horario_inicio) payload.horario_inicio = horario_inicio;
+    if (horario_fim) payload.horario_fim = horario_fim;
+    const { data } = await api.put('/professionals/pricing', payload);
     return data;
   },
 

@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import { useCondoStore, type Condo } from '../../stores/condoStore';
 import { COLORS, FONTS, SPACING, RADIUS, SHADOWS } from '../../constants/theme';
+import { CityBackground } from '../../components/CityBackground';
 
 function PorteBadge({ porte }: { porte: string }) {
   const label = porte === 'P' ? 'Pequeno' : porte === 'M' ? 'Médio' : 'Grande';
@@ -72,6 +73,7 @@ export default function SelectCondo() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <CityBackground variant="day" opacity={0.12} heightFraction={0.3} position="bottom" />
       <View style={styles.header}>
         <MaterialCommunityIcons name="office-building-cog" size={32} color={COLORS.primary} />
         <Text style={styles.title}>Selecione o Condomínio</Text>
@@ -94,18 +96,15 @@ export default function SelectCondo() {
           </TouchableOpacity>
         </View>
       ) : (
-        <>
-          <FlatList
-            data={condos}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <CondoCard condo={item} onSelect={() => handleSelect(item)} />
-            )}
-            contentContainerStyle={styles.list}
-            showsVerticalScrollIndicator={false}
-          />
-
-          <View style={styles.footer}>
+        <FlatList
+          data={condos}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <CondoCard condo={item} onSelect={() => handleSelect(item)} />
+          )}
+          contentContainerStyle={styles.list}
+          showsVerticalScrollIndicator={false}
+          ListFooterComponent={
             <TouchableOpacity
               style={styles.addCondoButton}
               onPress={() => router.push('/(contratante)/condo-setup')}
@@ -113,8 +112,8 @@ export default function SelectCondo() {
               <Ionicons name="add-circle-outline" size={20} color={COLORS.primary} />
               <Text style={styles.addCondoText}>Adicionar Condomínio</Text>
             </TouchableOpacity>
-          </View>
-        </>
+          }
+        />
       )}
     </SafeAreaView>
   );
@@ -144,7 +143,7 @@ const styles = StyleSheet.create({
     marginTop: SPACING.xs,
   },
 
-  list: { paddingHorizontal: SPACING.lg, paddingBottom: SPACING.lg },
+  list: { paddingHorizontal: SPACING.lg, paddingBottom: SPACING.xl },
 
   card: {
     flexDirection: 'row',
@@ -193,11 +192,8 @@ const styles = StyleSheet.create({
   },
   addButtonText: { fontSize: FONTS.sizes.md, fontFamily: FONTS.bold, color: COLORS.white },
 
-  footer: {
-    paddingHorizontal: SPACING.lg,
-    paddingBottom: SPACING.lg,
-  },
   addCondoButton: {
+    marginTop: SPACING.sm,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',

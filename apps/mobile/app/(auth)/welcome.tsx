@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 import { Button } from '../../components';
 import { LogoV2 } from '../../components/LogoV2';
+import { CityBackground } from '../../components/CityBackground';
 import { COLORS, FONTS, SPACING, RADIUS, SHADOWS } from '../../constants/theme';
 
 export default function WelcomeScreen() {
@@ -11,6 +12,9 @@ export default function WelcomeScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
+      {/* Subtle city skyline at the bottom */}
+      <CityBackground variant="day" opacity={0.15} heightFraction={0.3} position="bottom" />
+
       <ScrollView
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}

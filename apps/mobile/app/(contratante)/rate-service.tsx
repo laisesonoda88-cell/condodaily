@@ -13,6 +13,7 @@ import { Ionicons, Feather } from '@expo/vector-icons';
 import { Button } from '../../components';
 import { api } from '../../services/api';
 import { COLORS, FONTS, SPACING, RADIUS, SHADOWS } from '../../constants/theme';
+import { CityBackground } from '../../components/CityBackground';
 
 export default function RateServiceScreen() {
   const router = useRouter();
@@ -51,6 +52,7 @@ export default function RateServiceScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <CityBackground variant="day" opacity={0.12} heightFraction={0.3} position="bottom" />
       <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
         <Feather name="arrow-left" size={20} color={COLORS.primary} />
         <Text style={styles.backText}>Voltar</Text>

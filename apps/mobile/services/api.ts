@@ -1,9 +1,15 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const API_URL = __DEV__
+// Base URL for API calls (with /api prefix)
+export const API_URL = __DEV__
   ? 'http://localhost:3001/api'
   : 'https://api.condodaily.com.br/api';
+
+// Server root URL (without /api) — use for avatar URLs, static files, etc.
+export const SERVER_URL = __DEV__
+  ? 'http://localhost:3001'
+  : 'https://api.condodaily.com.br';
 
 export const api = axios.create({
   baseURL: API_URL,

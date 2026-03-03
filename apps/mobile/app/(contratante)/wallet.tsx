@@ -10,6 +10,7 @@ import { Button } from '../../components';
 import { walletService } from '../../services/wallet';
 import { useCondoStore } from '../../stores/condoStore';
 import { COLORS, FONTS, SPACING, RADIUS, SHADOWS } from '../../constants/theme';
+import { CityBackground } from '../../components/CityBackground';
 
 const TX_TYPE_MAP: Record<string, { label: string; iconName: string; color: string; sign: string }> = {
   DEPOSIT: { label: 'Deposito', iconName: 'cash-plus', color: COLORS.success, sign: '+' },
@@ -82,6 +83,7 @@ export default function WalletScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <CityBackground variant="day" opacity={0.12} heightFraction={0.3} position="bottom" />
       <FlatList data={transactions} keyExtractor={(item) => item.id} showsVerticalScrollIndicator={false}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={() => loadData(true)} colors={[COLORS.primary]} tintColor={COLORS.primary} />}
         ListHeaderComponent={<>

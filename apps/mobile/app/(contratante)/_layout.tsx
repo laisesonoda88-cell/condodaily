@@ -85,6 +85,15 @@ export default function ContratanteLayout() {
         }}
       />
       <Tabs.Screen
+        name="conversations"
+        options={{
+          title: 'Chat',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="chatbubbles-outline" size={24} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="profile"
         options={{
           title: 'Perfil',
@@ -93,6 +102,7 @@ export default function ContratanteLayout() {
           ),
         }}
       />
+      <Tabs.Screen name="chat" options={{ href: null }} />
       <Tabs.Screen name="select-condo" options={{ href: null }} />
       <Tabs.Screen name="condo-setup" options={{ href: null }} />
       <Tabs.Screen name="professional-profile" options={{ href: null }} />
@@ -100,7 +110,10 @@ export default function ContratanteLayout() {
       <Tabs.Screen name="booking-details" options={{ href: null }} />
       <Tabs.Screen name="rate-service" options={{ href: null }} />
       <Tabs.Screen name="checkout" options={{ href: null }} />
-      <Tabs.Screen name="dev-status" options={{ href: null }} />
+      <Tabs.Screen name="notifications" options={{ href: null }} />
+      <Tabs.Screen name="delete-account" options={{ href: null }} />
+      <Tabs.Screen name="help" options={{ href: null }} />
+      <Tabs.Screen name="condo-recommendations" options={{ href: null }} />
     </Tabs>
   );
 }

@@ -2,12 +2,14 @@ import { ScrollView, Text, StyleSheet, TouchableOpacity, View } from 'react-nati
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { COLORS, FONTS, SPACING } from '../../constants/theme';
+import { CityBackground } from '../../components/CityBackground';
 
 export default function TermsScreen() {
   const router = useRouter();
 
   return (
     <SafeAreaView style={styles.container}>
+      <CityBackground variant="day" opacity={0.12} heightFraction={0.3} position="bottom" />
       <TouchableOpacity onPress={() => router.back()} style={styles.back}>
         <Text style={styles.backText}>← Voltar</Text>
       </TouchableOpacity>

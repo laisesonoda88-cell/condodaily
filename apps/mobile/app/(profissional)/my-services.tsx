@@ -13,6 +13,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Feather, Ionicons } from '@expo/vector-icons';
 import { COLORS, FONTS, SPACING, RADIUS, SHADOWS } from '../../constants/theme';
+import { CityBackground } from '../../components/CityBackground';
 import { professionalService } from '../../services/professionals';
 
 interface Category {
@@ -151,6 +152,7 @@ export default function MyServicesScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <CityBackground variant="sunset" opacity={0.12} heightFraction={0.3} position="bottom" />
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
@@ -160,54 +162,56 @@ export default function MyServicesScreen() {
         <View style={{ width: 40 }} />
       </View>
 
-      <Text style={styles.subtitle}>
-        Selecione os serviços que você oferece. Os contratantes verão seus serviços ao buscar profissionais.
-      </Text>
-
-      {/* Selected count */}
-      <View style={styles.countBadge}>
-        <Feather name="check-circle" size={16} color={COLORS.primary} />
-        <Text style={styles.countText}>
-          {selectedIds.size} {selectedIds.size === 1 ? 'serviço selecionado' : 'serviços selecionados'}
-        </Text>
-      </View>
-
-      {/* Disponibilidade especial */}
-      <View style={styles.availabilitySection}>
-        <Text style={styles.availabilityTitle}>Disponibilidade Especial</Text>
-        <View style={styles.toggleRow}>
-          <View style={{ flex: 1 }}>
-            <Text style={styles.toggleLabel}>Finais de semana</Text>
-            <Text style={styles.toggleDesc}>Sabados e domingos</Text>
-          </View>
-          <Switch
-            value={disponivelFimSemana}
-            onValueChange={(v) => { setDisponivelFimSemana(v); setHasChanges(true); }}
-            trackColor={{ false: COLORS.border, true: COLORS.primaryLight }}
-            thumbColor={disponivelFimSemana ? COLORS.primary : COLORS.textMuted}
-          />
-        </View>
-        <View style={styles.toggleRow}>
-          <View style={{ flex: 1 }}>
-            <Text style={styles.toggleLabel}>Feriados</Text>
-            <Text style={styles.toggleDesc}>Feriados nacionais e locais</Text>
-          </View>
-          <Switch
-            value={disponivelFeriados}
-            onValueChange={(v) => { setDisponivelFeriados(v); setHasChanges(true); }}
-            trackColor={{ false: COLORS.border, true: COLORS.primaryLight }}
-            thumbColor={disponivelFeriados ? COLORS.primary : COLORS.textMuted}
-          />
-        </View>
-      </View>
-
-      {/* Categories Grid */}
+      {/* Scrollable content */}
       <ScrollView
         style={styles.scrollView}
-        contentContainerStyle={styles.grid}
+        contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        {categories.map((category) => {
+        <Text style={styles.subtitle}>
+          Selecione os serviços que você oferece. Os contratantes verão seus serviços ao buscar profissionais.
+        </Text>
+
+        {/* Selected count */}
+        <View style={styles.countBadge}>
+          <Feather name="check-circle" size={16} color={COLORS.primary} />
+          <Text style={styles.countText}>
+            {selectedIds.size} {selectedIds.size === 1 ? 'serviço selecionado' : 'serviços selecionados'}
+          </Text>
+        </View>
+
+        {/* Disponibilidade especial */}
+        <View style={styles.availabilitySection}>
+          <Text style={styles.availabilityTitle}>Disponibilidade Especial</Text>
+          <View style={styles.toggleRow}>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.toggleLabel}>Finais de semana</Text>
+              <Text style={styles.toggleDesc}>Sabados e domingos</Text>
+            </View>
+            <Switch
+              value={disponivelFimSemana}
+              onValueChange={(v) => { setDisponivelFimSemana(v); setHasChanges(true); }}
+              trackColor={{ false: COLORS.border, true: COLORS.primaryLight }}
+              thumbColor={disponivelFimSemana ? COLORS.primary : COLORS.textMuted}
+            />
+          </View>
+          <View style={styles.toggleRow}>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.toggleLabel}>Feriados</Text>
+              <Text style={styles.toggleDesc}>Feriados nacionais e locais</Text>
+            </View>
+            <Switch
+              value={disponivelFeriados}
+              onValueChange={(v) => { setDisponivelFeriados(v); setHasChanges(true); }}
+              trackColor={{ false: COLORS.border, true: COLORS.primaryLight }}
+              thumbColor={disponivelFeriados ? COLORS.primary : COLORS.textMuted}
+            />
+          </View>
+        </View>
+
+        {/* Categories Grid */}
+        <View style={styles.grid}>
+          {categories.map((category) => {
           const isSelected = selectedIds.has(category.id);
           const isCertified = certifiedIds.has(category.id);
           const featherIcon = ICON_MAP[category.icon] || 'briefcase';
@@ -254,6 +258,7 @@ export default function MyServicesScreen() {
             </TouchableOpacity>
           );
         })}
+        </View>
       </ScrollView>
 
       {/* Save Button */}
@@ -319,7 +324,6 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.regular,
     fontSize: FONTS.sizes.sm,
     color: COLORS.textSecondary,
-    paddingHorizontal: SPACING.lg,
     marginBottom: SPACING.md,
     lineHeight: 20,
   },
@@ -327,7 +331,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: SPACING.xs,
-    marginHorizontal: SPACING.lg,
     marginBottom: SPACING.md,
     backgroundColor: COLORS.primaryLight,
     paddingVertical: SPACING.sm,
@@ -343,12 +346,15 @@ const styles = StyleSheet.create({
   scrollView: {
     flex: 1,
   },
+  scrollContent: {
+    paddingHorizontal: SPACING.lg,
+    paddingBottom: SPACING.md,
+  },
   grid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    paddingHorizontal: SPACING.lg,
     gap: SPACING.sm,
-    paddingBottom: SPACING.lg,
+    paddingBottom: SPACING.sm,
   },
   categoryCard: {
     width: '47.5%',
@@ -434,7 +440,6 @@ const styles = StyleSheet.create({
     color: COLORS.white,
   },
   availabilitySection: {
-    marginHorizontal: SPACING.lg,
     marginBottom: SPACING.md,
     backgroundColor: COLORS.card,
     borderRadius: RADIUS.md,

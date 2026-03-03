@@ -17,9 +17,13 @@ const quizSchema = z.object({
   answers: z.record(z.string()),
 });
 
+const timeRegex = /^([01]\d|2[0-3]):[0-5]\d$/;
+
 const updatePricingSchema = z.object({
   hourly_rate: z.number().positive(),
   service_radius_km: z.number().int().min(1).max(50),
+  horario_inicio: z.string().regex(timeRegex, 'Formato HH:MM').optional(),
+  horario_fim: z.string().regex(timeRegex, 'Formato HH:MM').optional(),
 });
 
 const updateAvailabilitySchema = z.object({
@@ -149,12 +153,16 @@ export async function professionalRoutes(app: FastifyInstance) {
       return reply.status(400).send({ success: false, error: 'Dados invalidos' });
     }
 
+    const updateData: Record<string, any> = {
+      hourly_rate: String(parsed.data.hourly_rate),
+      service_radius_km: parsed.data.service_radius_km,
+    };
+    if (parsed.data.horario_inicio) updateData.horario_inicio = parsed.data.horario_inicio;
+    if (parsed.data.horario_fim) updateData.horario_fim = parsed.data.horario_fim;
+
     const [updated] = await db
       .update(professionalProfiles)
-      .set({
-        hourly_rate: String(parsed.data.hourly_rate),
-        service_radius_km: parsed.data.service_radius_km,
-      })
+      .set(updateData)
       .where(eq(professionalProfiles.user_id, userId))
       .returning();
 
@@ -406,6 +414,8 @@ export async function professionalRoutes(app: FastifyInstance) {
         quiz_approved: professionalProfiles.quiz_approved,
         disponivel_fim_semana: professionalProfiles.disponivel_fim_semana,
         disponivel_feriados: professionalProfiles.disponivel_feriados,
+        horario_inicio: professionalProfiles.horario_inicio,
+        horario_fim: professionalProfiles.horario_fim,
       })
       .from(professionalProfiles)
       .innerJoin(users, eq(users.id, professionalProfiles.user_id))
@@ -471,6 +481,10 @@ export async function professionalRoutes(app: FastifyInstance) {
         total_services: professionalProfiles.total_services,
         fibonacci_level: professionalProfiles.fibonacci_level,
         quiz_approved: professionalProfiles.quiz_approved,
+        horario_inicio: professionalProfiles.horario_inicio,
+        horario_fim: professionalProfiles.horario_fim,
+        disponivel_fim_semana: professionalProfiles.disponivel_fim_semana,
+        disponivel_feriados: professionalProfiles.disponivel_feriados,
       })
       .from(professionalProfiles)
       .innerJoin(users, eq(users.id, professionalProfiles.user_id))

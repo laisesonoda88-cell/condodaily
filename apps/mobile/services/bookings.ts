@@ -1,4 +1,7 @@
-import { api } from './api';
+import { Paths, File } from 'expo-file-system';
+import * as Sharing from 'expo-sharing';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { api, API_URL } from './api';
 
 export const bookingService = {
   create: async (payload: {
@@ -53,5 +56,31 @@ export const bookingService = {
   cancel: async (id: string) => {
     const { data } = await api.post(`/bookings/${id}/cancel`);
     return data;
+  },
+
+  downloadReceipt: async (bookingId: string): Promise<void> => {
+    const token = await AsyncStorage.getItem('@condodaily:token');
+    const file = new File(Paths.cache, `comprovante-${bookingId.slice(0, 8)}.pdf`);
+
+    await File.downloadFileAsync(
+      `${API_URL}/receipts/${bookingId}`,
+      file,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const canShare = await Sharing.isAvailableAsync();
+    if (canShare) {
+      await Sharing.shareAsync(file.uri, {
+        mimeType: 'application/pdf',
+        dialogTitle: 'Comprovante de Serviço',
+        UTI: 'com.adobe.pdf',
+      });
+    } else {
+      throw new Error('Compartilhamento não disponível neste dispositivo');
+    }
   },
 };

@@ -16,11 +16,16 @@ import { PixQRCode } from '../../components/PixQRCode';
 import { CardTokenizer } from '../../components/CardTokenizer';
 import { bookingService } from '../../services/bookings';
 import { COLORS, FONTS, SPACING, RADIUS, SHADOWS } from '../../constants/theme';
+import { CityBackground } from '../../components/CityBackground';
 
 type PaymentMethod = 'PIX' | 'CREDIT_CARD' | 'BOLETO' | 'WALLET';
 type Step = 'select' | 'processing' | 'pix' | 'card' | 'boleto' | 'success';
 
 const MP_PUBLIC_KEY = process.env.EXPO_PUBLIC_MP_PUBLIC_KEY || '';
+
+if (__DEV__ && !MP_PUBLIC_KEY) {
+  console.warn('[Checkout] EXPO_PUBLIC_MP_PUBLIC_KEY não configurado — pagamento com cartão não funcionará');
+}
 
 export default function CheckoutScreen() {
   const router = useRouter();
@@ -165,6 +170,7 @@ export default function CheckoutScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <CityBackground variant="day" opacity={0.12} heightFraction={0.3} position="bottom" />
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
         <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
           <Feather name="arrow-left" size={20} color={COLORS.primary} />

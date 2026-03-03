@@ -15,6 +15,7 @@ import * as WebBrowser from 'expo-web-browser';
 import { Button, Input } from '../../components';
 import { paymentService } from '../../services/payments';
 import { COLORS, FONTS, SPACING, RADIUS, SHADOWS } from '../../constants/theme';
+import { CityBackground } from '../../components/CityBackground';
 
 type PixKeyType = 'CPF' | 'CNPJ' | 'EMAIL' | 'PHONE' | 'RANDOM';
 
@@ -198,6 +199,7 @@ export default function PaymentSetupScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <CityBackground variant="sunset" opacity={0.12} heightFraction={0.3} position="bottom" />
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
         <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
           <Feather name="arrow-left" size={20} color={COLORS.primary} />

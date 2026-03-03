@@ -14,7 +14,9 @@ import { MaterialCommunityIcons, Feather, Ionicons } from '@expo/vector-icons';
 import { Button } from '../../components';
 import { bookingService } from '../../services/bookings';
 import { paymentService } from '../../services/payments';
+import { chatService } from '../../services/chat';
 import { COLORS, FONTS, SPACING, RADIUS, SHADOWS } from '../../constants/theme';
+import { CityBackground } from '../../components/CityBackground';
 
 const STATUS_MAP: Record<string, { label: string; color: string; bg: string }> = {
   PENDING: { label: 'Nova Solicitação', color: COLORS.secondary, bg: COLORS.secondaryLight },
@@ -31,6 +33,7 @@ export default function ProfBookingDetailsScreen() {
   const [loading, setLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState(false);
   const [confirming, setConfirming] = useState(false);
+  const [downloading, setDownloading] = useState(false);
 
   useEffect(() => {
     loadBooking();
@@ -157,6 +160,33 @@ export default function ProfBookingDetailsScreen() {
     );
   };
 
+  const handleDownloadReceipt = async () => {
+    setDownloading(true);
+    try {
+      await bookingService.downloadReceipt(id!);
+    } catch (error: any) {
+      Alert.alert('Erro', error.message || 'Não foi possível baixar o comprovante');
+    } finally {
+      setDownloading(false);
+    }
+  };
+
+  const canDownloadReceipt =
+    booking?.status === 'COMPLETED' ||
+    (booking?.payment_status && booking.payment_status !== 'UNPAID');
+
+  const handleOpenChat = async () => {
+    try {
+      const conversation = await chatService.createConversation(id!);
+      router.push({
+        pathname: '/(profissional)/chat',
+        params: { conversationId: conversation.id, name: booking?.contratante_name || 'Contratante' },
+      });
+    } catch (error: any) {
+      Alert.alert('Erro', error.response?.data?.error || 'Não foi possível abrir o chat');
+    }
+  };
+
   if (loading) {
     return (
       <SafeAreaView style={styles.container}>
@@ -173,6 +203,7 @@ export default function ProfBookingDetailsScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <CityBackground variant="sunset" opacity={0.12} heightFraction={0.3} position="bottom" />
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
         <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
           <Feather name="arrow-left" size={20} color={COLORS.secondary} />
@@ -198,6 +229,14 @@ export default function ProfBookingDetailsScreen() {
             R$ {Number(booking.net_professional_amount || 0).toFixed(2)}
           </Text>
         </View>
+
+        {/* Chat Button */}
+        {booking.status !== 'CANCELLED' && (
+          <TouchableOpacity style={styles.chatButton} onPress={handleOpenChat}>
+            <Ionicons name="chatbubble-ellipses-outline" size={18} color={COLORS.secondary} />
+            <Text style={styles.chatButtonText}>Conversar com Contratante</Text>
+          </TouchableOpacity>
+        )}
 
         {/* Details */}
         <View style={styles.card}>
@@ -451,6 +490,24 @@ export default function ProfBookingDetailsScreen() {
             </Text>
           </View>
         )}
+
+        {/* Download Receipt */}
+        {canDownloadReceipt && (
+          <TouchableOpacity
+            style={styles.receiptButton}
+            onPress={handleDownloadReceipt}
+            disabled={downloading}
+          >
+            {downloading ? (
+              <ActivityIndicator size="small" color={COLORS.secondary} />
+            ) : (
+              <Ionicons name="document-text-outline" size={20} color={COLORS.secondary} />
+            )}
+            <Text style={styles.receiptButtonText}>
+              {downloading ? 'Gerando...' : 'Baixar Comprovante de Recebimento'}
+            </Text>
+          </TouchableOpacity>
+        )}
       </ScrollView>
     </SafeAreaView>
   );
@@ -557,4 +614,38 @@ const styles = StyleSheet.create({
 
   actionsRow: { flexDirection: 'row', gap: SPACING.sm, marginTop: SPACING.sm },
   fullBtn: { width: '100%', marginTop: SPACING.sm },
+  receiptButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: SPACING.sm,
+    paddingVertical: SPACING.md,
+    marginTop: SPACING.xs,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    borderRadius: RADIUS.md,
+    backgroundColor: COLORS.card,
+  },
+  receiptButtonText: {
+    fontSize: FONTS.sizes.sm,
+    fontFamily: FONTS.semibold,
+    color: COLORS.secondary,
+  },
+  chatButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: SPACING.sm,
+    paddingVertical: SPACING.sm,
+    marginBottom: SPACING.md,
+    borderWidth: 1,
+    borderColor: COLORS.secondary,
+    borderRadius: RADIUS.md,
+    backgroundColor: COLORS.secondaryLight,
+  },
+  chatButtonText: {
+    fontSize: FONTS.sizes.sm,
+    fontFamily: FONTS.semibold,
+    color: COLORS.secondary,
+  },
 });

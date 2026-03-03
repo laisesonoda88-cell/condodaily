@@ -10,15 +10,17 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter, useLocalSearchParams } from 'expo-router';
-import { MaterialCommunityIcons, Ionicons, Feather } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 import { COLORS, FONTS, SPACING, RADIUS } from '../../constants/theme';
+import {
+  CONTRATANTE_ILLUSTRATIONS,
+  PROFISSIONAL_ILLUSTRATIONS,
+} from '../../components/OnboardingIllustrations';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 interface OnboardingSlide {
   id: string;
-  iconName: string;
-  iconFamily: 'mci' | 'ion' | 'feather';
   title: string;
   description: string;
   bgColor: string;
@@ -27,8 +29,6 @@ interface OnboardingSlide {
 const CONTRATANTE_SLIDES: OnboardingSlide[] = [
   {
     id: '1',
-    iconName: 'office-building',
-    iconFamily: 'mci',
     title: 'Bem-vindo ao CondoDaily!',
     description:
       'A plataforma que conecta seu condomínio aos melhores profissionais autônomos para diárias de limpeza, manutenção e muito mais.',
@@ -36,8 +36,6 @@ const CONTRATANTE_SLIDES: OnboardingSlide[] = [
   },
   {
     id: '2',
-    iconName: 'clipboard-text-outline',
-    iconFamily: 'mci',
     title: 'Cadastre seu Condomínio',
     description:
       'Comece cadastrando seu condomínio com o CNPJ. Nosso sistema busca automaticamente os dados e cria sua CondoWallet para gerenciar pagamentos.',
@@ -45,8 +43,6 @@ const CONTRATANTE_SLIDES: OnboardingSlide[] = [
   },
   {
     id: '3',
-    iconName: 'cash',
-    iconFamily: 'mci',
     title: 'Deposite na CondoWallet',
     description:
       'Faça depósitos via PIX na CondoWallet. O saldo é usado para pagar as diárias. É rápido, seguro e transparente.',
@@ -54,8 +50,6 @@ const CONTRATANTE_SLIDES: OnboardingSlide[] = [
   },
   {
     id: '4',
-    iconName: 'search',
-    iconFamily: 'feather',
     title: 'Busque Profissionais',
     description:
       'Pesquise profissionais por categoria (limpeza, elétrica, pintura...). Veja avaliações, preços e perfil completo antes de contratar.',
@@ -63,8 +57,6 @@ const CONTRATANTE_SLIDES: OnboardingSlide[] = [
   },
   {
     id: '5',
-    iconName: 'calendar-outline',
-    iconFamily: 'ion',
     title: 'Agende a Diária',
     description:
       'Escolha data, horário e o valor/hora. O sistema calcula automaticamente o total, incluindo taxa da plataforma (5%) e seguro (R$ 5).',
@@ -72,8 +64,6 @@ const CONTRATANTE_SLIDES: OnboardingSlide[] = [
   },
   {
     id: '6',
-    iconName: 'shield-check',
-    iconFamily: 'mci',
     title: 'Seguro Automático',
     description:
       'Quando o profissional faz check-in, o seguro é ativado automaticamente. No check-out, é desativado. Você e o profissional ficam protegidos!',
@@ -81,8 +71,6 @@ const CONTRATANTE_SLIDES: OnboardingSlide[] = [
   },
   {
     id: '7',
-    iconName: 'star',
-    iconFamily: 'ion',
     title: 'Avalie o Serviço',
     description:
       'Após a conclusão, avalie o profissional com estrelas e comentários. Isso ajuda outros condomínios a encontrar os melhores profissionais!',
@@ -93,8 +81,6 @@ const CONTRATANTE_SLIDES: OnboardingSlide[] = [
 const PROFISSIONAL_SLIDES: OnboardingSlide[] = [
   {
     id: '1',
-    iconName: 'hard-hat',
-    iconFamily: 'mci',
     title: 'Bem-vindo ao CondoDaily!',
     description:
       'A plataforma onde você encontra diárias de trabalho em condomínios. Limpeza, manutenção, elétrica, pintura e muito mais!',
@@ -102,8 +88,6 @@ const PROFISSIONAL_SLIDES: OnboardingSlide[] = [
   },
   {
     id: '2',
-    iconName: 'edit',
-    iconFamily: 'feather',
     title: 'Complete o Quiz de Ética',
     description:
       'Antes de receber diárias, complete o quiz de ética profissional. São 5 perguntas e você precisa acertar 80%. É rápido e simples!',
@@ -111,8 +95,6 @@ const PROFISSIONAL_SLIDES: OnboardingSlide[] = [
   },
   {
     id: '3',
-    iconName: 'cog-outline',
-    iconFamily: 'mci',
     title: 'Configure seu Perfil',
     description:
       'Defina suas categorias de serviço, valor/hora e raio de atendimento. Um perfil completo atrai mais contratantes!',
@@ -120,8 +102,6 @@ const PROFISSIONAL_SLIDES: OnboardingSlide[] = [
   },
   {
     id: '4',
-    iconName: 'notifications-outline',
-    iconFamily: 'ion',
     title: 'Receba Solicitações',
     description:
       'Quando um condomínio agendar uma diária com você, receberá uma notificação. Aceite ou recuse — você tem total liberdade!',
@@ -129,8 +109,6 @@ const PROFISSIONAL_SLIDES: OnboardingSlide[] = [
   },
   {
     id: '5',
-    iconName: 'map-pin',
-    iconFamily: 'feather',
     title: 'Check-in e Check-out',
     description:
       'Ao chegar no local, faça o check-in. O seguro é ativado automaticamente. Ao finalizar, faça o check-out e o pagamento é processado.',
@@ -138,8 +116,6 @@ const PROFISSIONAL_SLIDES: OnboardingSlide[] = [
   },
   {
     id: '6',
-    iconName: 'cash-multiple',
-    iconFamily: 'mci',
     title: 'Receba seus Ganhos',
     description:
       'Você recebe 95% do valor bruto da diária. A plataforma retém apenas 5% + R$ 5 de seguro (pago pelo condomínio). Transparência total!',
@@ -147,8 +123,6 @@ const PROFISSIONAL_SLIDES: OnboardingSlide[] = [
   },
   {
     id: '7',
-    iconName: 'trophy-outline',
-    iconFamily: 'mci',
     title: 'Cresça na Plataforma',
     description:
       'Quanto mais diárias concluídas e melhores avaliações, mais visibilidade você terá. Suba de nível e conquiste mais oportunidades!',
@@ -165,6 +139,7 @@ export default function OnboardingScreen() {
 
   const isContratante = role !== 'PROFISSIONAL';
   const slides = isContratante ? CONTRATANTE_SLIDES : PROFISSIONAL_SLIDES;
+  const illustrations = isContratante ? CONTRATANTE_ILLUSTRATIONS : PROFISSIONAL_ILLUSTRATIONS;
   const isLast = currentIndex === slides.length - 1;
 
   const handleNext = () => {
@@ -187,17 +162,23 @@ export default function OnboardingScreen() {
 
   const viewabilityConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
 
-  const renderSlide = ({ item }: { item: OnboardingSlide }) => (
-    <View style={[styles.slide, { width: SCREEN_WIDTH, backgroundColor: item.bgColor }]}>
-      <View style={styles.emojiContainer}>
-        {item.iconFamily === 'mci' && <MaterialCommunityIcons name={item.iconName as any} size={56} color={COLORS.white} />}
-        {item.iconFamily === 'ion' && <Ionicons name={item.iconName as any} size={56} color={COLORS.white} />}
-        {item.iconFamily === 'feather' && <Feather name={item.iconName as any} size={56} color={COLORS.white} />}
+  const renderSlide = ({ item, index }: { item: OnboardingSlide; index: number }) => {
+    const IllustrationComponent = illustrations[index];
+    return (
+      <View style={[styles.slide, { width: SCREEN_WIDTH, backgroundColor: item.bgColor }]}>
+        {/* SVG Illustration */}
+        <View style={styles.illustrationContainer}>
+          {IllustrationComponent && <IllustrationComponent />}
+        </View>
+
+        {/* Text content */}
+        <View style={styles.textContainer}>
+          <Text style={styles.slideTitle}>{item.title}</Text>
+          <Text style={styles.slideDescription}>{item.description}</Text>
+        </View>
       </View>
-      <Text style={styles.slideTitle}>{item.title}</Text>
-      <Text style={styles.slideDescription}>{item.description}</Text>
-    </View>
-  );
+    );
+  };
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: slides[currentIndex].bgColor }]}>
@@ -283,32 +264,40 @@ const styles = StyleSheet.create({
 
   slide: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: SPACING.xl,
+    paddingHorizontal: SPACING.lg,
+    paddingTop: SPACING.lg,
   },
-  emojiContainer: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
-    backgroundColor: 'rgba(255,255,255,0.15)',
-    justifyContent: 'center',
+  illustrationContainer: {
     alignItems: 'center',
+    justifyContent: 'center',
     marginBottom: SPACING.xl,
+    // Subtle shadow behind the illustration card
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.15,
+    shadowRadius: 12,
+    elevation: 6,
+  },
+  textContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    paddingHorizontal: SPACING.sm,
   },
   slideTitle: {
     fontSize: FONTS.sizes.xxl,
     fontFamily: FONTS.heading,
     color: COLORS.white,
     textAlign: 'center',
-    marginBottom: SPACING.md,
+    marginBottom: SPACING.sm,
   },
   slideDescription: {
     fontSize: FONTS.sizes.md,
     color: 'rgba(255,255,255,0.85)',
     textAlign: 'center',
     lineHeight: 24,
-    paddingHorizontal: SPACING.sm,
+    paddingHorizontal: SPACING.xs,
     fontFamily: FONTS.regular,
   },
 
@@ -316,7 +305,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: SPACING.lg,
+    paddingVertical: SPACING.md,
     gap: 6,
   },
   dot: {

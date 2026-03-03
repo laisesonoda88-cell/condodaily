@@ -5,6 +5,7 @@ import { useFocusEffect } from 'expo-router';
 import { MaterialCommunityIcons, Ionicons, Feather } from '@expo/vector-icons';
 import { walletService } from '../../services/wallet';
 import { COLORS, FONTS, SPACING, RADIUS, SHADOWS } from '../../constants/theme';
+import { CityBackground } from '../../components/CityBackground';
 
 export default function EarningsScreen() {
   const [earningsData, setEarningsData] = useState<any>(null);
@@ -32,6 +33,7 @@ export default function EarningsScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <CityBackground variant="sunset" opacity={0.12} heightFraction={0.3} position="bottom" />
       <FlatList data={data.history} keyExtractor={(item) => item.id} showsVerticalScrollIndicator={false}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={() => loadData(true)} colors={[COLORS.secondary]} tintColor={COLORS.secondary} />}
         ListHeaderComponent={<>
