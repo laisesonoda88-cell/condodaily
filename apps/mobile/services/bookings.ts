@@ -60,7 +60,7 @@ export const bookingService = {
 
   downloadReceipt: async (bookingId: string): Promise<void> => {
     const token = await AsyncStorage.getItem('@condodaily:token');
-    const file = new File(Paths.cache, `comprovante-${bookingId.slice(0, 8)}.pdf`);
+    const file = new File(Paths.cache, `resumo-servico-${bookingId.slice(0, 8)}.pdf`);
 
     await File.downloadFileAsync(
       `${API_URL}/receipts/${bookingId}`,
@@ -76,7 +76,7 @@ export const bookingService = {
     if (canShare) {
       await Sharing.shareAsync(file.uri, {
         mimeType: 'application/pdf',
-        dialogTitle: 'Comprovante de Serviço',
+        dialogTitle: 'Resumo do Serviço',
         UTI: 'com.adobe.pdf',
       });
     } else {

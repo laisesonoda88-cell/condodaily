@@ -75,7 +75,7 @@ export function generateContratanteReceipt(data: ReceiptData): PassThrough {
   doc.fontSize(22).fillColor(PRIMARY).text('CondoDaily', { align: 'center' });
   doc.fontSize(10).fillColor(GRAY).text('Plataforma de Serviços para Condomínios', { align: 'center' });
   doc.moveDown(0.3);
-  doc.fontSize(14).fillColor(DARK).text('COMPROVANTE DE PAGAMENTO', { align: 'center' });
+  doc.fontSize(14).fillColor(DARK).text('RESUMO DO SERVIÇO', { align: 'center' });
 
   // Divider
   doc.moveDown(0.5);
@@ -151,10 +151,10 @@ export function generateContratanteReceipt(data: ReceiptData): PassThrough {
   doc.text('────────────────────────────────────────────────────────────────────', { align: 'center' });
   doc.moveDown(0.3);
   doc.text(
-    'Este comprovante refere-se a serviço autônomo intermediado pela plataforma CondoDaily (condodaily.com.br). ' +
+    'Este documento é apenas um resumo informativo da transação realizada na plataforma CondoDaily (condodaily.com.br). ' +
+    'NÃO possui valor fiscal. O comprovante oficial de pagamento é emitido pelo Mercado Pago. ' +
     'A CondoDaily atua exclusivamente como intermediadora tecnológica, não configurando vínculo empregatício ' +
-    'entre as partes. O prestador de serviço é responsável por suas obrigações fiscais e tributárias. ' +
-    'Documento válido para prestação de contas do condomínio.',
+    'entre as partes. O prestador de serviço é responsável por suas obrigações fiscais e tributárias.',
     { align: 'center', lineGap: 2 },
   );
 
@@ -178,7 +178,7 @@ export function generateProfissionalReceipt(data: ReceiptData): PassThrough {
   doc.fontSize(22).fillColor(ORANGE).text('CondoDaily', { align: 'center' });
   doc.fontSize(10).fillColor(GRAY).text('Plataforma de Serviços para Condomínios', { align: 'center' });
   doc.moveDown(0.3);
-  doc.fontSize(14).fillColor(DARK).text('COMPROVANTE DE RECEBIMENTO', { align: 'center' });
+  doc.fontSize(14).fillColor(DARK).text('RESUMO DO SERVIÇO PRESTADO', { align: 'center' });
 
   // Divider
   doc.moveDown(0.5);
@@ -251,10 +251,10 @@ export function generateProfissionalReceipt(data: ReceiptData): PassThrough {
   doc.text('────────────────────────────────────────────────────────────────────', { align: 'center' });
   doc.moveDown(0.3);
   doc.text(
-    'Este comprovante refere-se a pagamento por serviço autônomo intermediado pela plataforma CondoDaily (condodaily.com.br). ' +
+    'Este documento é apenas um resumo informativo da transação realizada na plataforma CondoDaily (condodaily.com.br). ' +
+    'NÃO possui valor fiscal. O comprovante oficial de pagamento é emitido pelo Mercado Pago. ' +
     'A CondoDaily atua exclusivamente como intermediadora tecnológica, não configurando vínculo empregatício. ' +
-    'O profissional é responsável por suas obrigações fiscais e tributárias (MEI, Carnê-Leão, etc). ' +
-    'Guarde este documento para sua declaração de renda.',
+    'O profissional é responsável por suas obrigações fiscais e tributárias (MEI, Carnê-Leão, etc).',
     { align: 'center', lineGap: 2 },
   );
 

@@ -504,7 +504,7 @@ export default function ProfBookingDetailsScreen() {
               <Ionicons name="document-text-outline" size={20} color={COLORS.secondary} />
             )}
             <Text style={styles.receiptButtonText}>
-              {downloading ? 'Gerando...' : 'Baixar Comprovante de Recebimento'}
+              {downloading ? 'Gerando...' : 'Baixar Resumo do Serviço'}
             </Text>
           </TouchableOpacity>
         )}

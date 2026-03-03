@@ -314,7 +314,7 @@ export default function BookingDetailsScreen() {
               <Ionicons name="document-text-outline" size={20} color={COLORS.primary} />
             )}
             <Text style={styles.receiptButtonText}>
-              {downloading ? 'Gerando...' : 'Baixar Comprovante de Pagamento'}
+              {downloading ? 'Gerando...' : 'Baixar Resumo do Serviço'}
             </Text>
           </TouchableOpacity>
         )}
