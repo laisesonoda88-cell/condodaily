@@ -225,6 +225,59 @@ function referralTemplate(referrerName: string, referredName?: string): string {
   `);
 }
 
+// ─── Auth Email Templates ───────────────────────────────
+
+export async function sendVerificationEmail(
+  email: string,
+  name: string,
+  code: string
+): Promise<boolean> {
+  const subject = 'Confirme seu email - CondoDaily';
+  const html = baseTemplate(`
+    <h2 style="color:#1A2B3C;font-size:20px;margin:0 0 16px">Confirme seu email, ${name}!</h2>
+    <p style="color:#444;font-size:15px;line-height:1.6;margin:0 0 20px">
+      Use o codigo abaixo para verificar sua conta no <strong style="color:#1B7A6E">CondoDaily</strong>:
+    </p>
+    <div style="background:#F0FAF8;border-radius:12px;padding:24px;text-align:center;margin:0 0 20px">
+      <p style="color:#999;font-size:12px;margin:0 0 8px;text-transform:uppercase;letter-spacing:1px">Seu codigo de verificacao</p>
+      <p style="color:#1B7A6E;font-size:36px;font-weight:800;letter-spacing:8px;margin:0">${code}</p>
+    </div>
+    <div style="background:#FFF8EB;border-left:4px solid #F5A623;padding:12px 16px;border-radius:0 8px 8px 0;margin:0 0 20px">
+      <p style="color:#666;font-size:13px;margin:0">
+        Este codigo expira em <strong>15 minutos</strong>. Se voce nao solicitou, ignore este email.
+      </p>
+    </div>
+  `);
+
+  return sendEmail(email, subject, html);
+}
+
+export async function sendPasswordResetEmail(
+  email: string,
+  name: string,
+  code: string
+): Promise<boolean> {
+  const subject = 'Recuperacao de senha - CondoDaily';
+  const html = baseTemplate(`
+    <h2 style="color:#1A2B3C;font-size:20px;margin:0 0 16px">Recuperacao de senha</h2>
+    <p style="color:#444;font-size:15px;line-height:1.6;margin:0 0 20px">
+      Ola <strong>${name}</strong>, recebemos uma solicitacao para redefinir sua senha no <strong style="color:#1B7A6E">CondoDaily</strong>.
+    </p>
+    <div style="background:#F0FAF8;border-radius:12px;padding:24px;text-align:center;margin:0 0 20px">
+      <p style="color:#999;font-size:12px;margin:0 0 8px;text-transform:uppercase;letter-spacing:1px">Codigo de recuperacao</p>
+      <p style="color:#1B7A6E;font-size:36px;font-weight:800;letter-spacing:8px;margin:0">${code}</p>
+    </div>
+    <div style="background:#FFF8EB;border-left:4px solid #F5A623;padding:12px 16px;border-radius:0 8px 8px 0;margin:0 0 20px">
+      <p style="color:#666;font-size:13px;margin:0">
+        <strong>Atencao:</strong> este codigo expira em <strong>15 minutos</strong>.
+        Se voce nao solicitou a recuperacao de senha, ignore este email — sua conta esta segura.
+      </p>
+    </div>
+  `);
+
+  return sendEmail(email, subject, html);
+}
+
 // ─── Public API ─────────────────────────────────────────
 
 export async function sendLeadConfirmation(lead: {

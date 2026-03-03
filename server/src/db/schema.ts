@@ -103,6 +103,12 @@ export const users = pgTable('users', {
   is_active: boolean('is_active').default(true).notNull(),
   is_verified: boolean('is_verified').default(false).notNull(),
   push_token: varchar('push_token', { length: 255 }),
+  // Email verification
+  email_verification_code: varchar('email_verification_code', { length: 6 }),
+  email_verification_expires: timestamp('email_verification_expires'),
+  // Password reset
+  password_reset_code: varchar('password_reset_code', { length: 6 }),
+  password_reset_expires: timestamp('password_reset_expires'),
   created_at: timestamp('created_at').defaultNow().notNull(),
   updated_at: timestamp('updated_at').defaultNow().notNull(),
 });
@@ -206,6 +212,9 @@ export const professionalProfiles = pgTable('professional_profiles', {
   fibonacci_level: integer('fibonacci_level').default(0).notNull(),
   quiz_approved: boolean('quiz_approved').default(false).notNull(),
   quiz_approved_at: timestamp('quiz_approved_at'),
+  // Horário de atendimento
+  horario_inicio: varchar('horario_inicio', { length: 5 }).default('08:00'),
+  horario_fim: varchar('horario_fim', { length: 5 }).default('17:00'),
   // Disponibilidade especial
   disponivel_fim_semana: boolean('disponivel_fim_semana').default(false).notNull(),
   disponivel_feriados: boolean('disponivel_feriados').default(false).notNull(),

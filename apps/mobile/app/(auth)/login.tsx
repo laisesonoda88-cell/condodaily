@@ -13,6 +13,7 @@ import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button, Input } from '../../components';
 import { useAuthStore } from '../../stores/authStore';
+import { CityBackground } from '../../components/CityBackground';
 import { COLORS, FONTS, SPACING, RADIUS } from '../../constants/theme';
 
 export default function LoginScreen() {
@@ -52,6 +53,7 @@ export default function LoginScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <CityBackground variant="day" opacity={0.12} heightFraction={0.3} position="bottom" />
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.flex}
@@ -92,7 +94,7 @@ export default function LoginScreen() {
               error={errors.password}
             />
 
-            <TouchableOpacity style={styles.forgotPassword}>
+            <TouchableOpacity style={styles.forgotPassword} onPress={() => router.push('/(auth)/forgot-password')}>
               <Text style={styles.forgotText}>Esqueceu a senha?</Text>
             </TouchableOpacity>
 

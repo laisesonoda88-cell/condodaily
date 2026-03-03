@@ -12,7 +12,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Button, Input } from '../../components';
 import { useAuthStore } from '../../stores/authStore';
+import { CityBackground } from '../../components/CityBackground';
 import { COLORS, FONTS, SPACING, RADIUS } from '../../constants/theme';
+import { authService } from '../../services/auth';
 
 type UserRole = 'CONTRATANTE' | 'PROFISSIONAL';
 
@@ -82,7 +84,7 @@ export default function RegisterScreen() {
 
     setLoading(true);
     try {
-      await register({
+      await authService.register({
         email: email.trim().toLowerCase(),
         password,
         full_name: fullName.trim(),
@@ -90,6 +92,10 @@ export default function RegisterScreen() {
         document_type: documentType,
         phone: phone.replace(/\D/g, ''),
         role,
+      });
+      router.replace({
+        pathname: '/(auth)/verify-email',
+        params: { email: email.trim().toLowerCase() },
       });
     } catch (error: any) {
       const message =
@@ -103,6 +109,7 @@ export default function RegisterScreen() {
   if (step === 1) {
     return (
       <SafeAreaView style={styles.container}>
+        <CityBackground variant="day" opacity={0.12} heightFraction={0.3} position="bottom" />
         <View style={styles.content}>
           <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
             <Text style={styles.backText}>← Voltar</Text>
@@ -165,6 +172,7 @@ export default function RegisterScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
+        <CityBackground variant="day" opacity={0.12} heightFraction={0.3} position="bottom" />
         <ScrollView
           contentContainerStyle={styles.scrollContent}
           keyboardShouldPersistTaps="handled"

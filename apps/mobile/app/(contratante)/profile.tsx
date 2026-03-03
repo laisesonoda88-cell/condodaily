@@ -5,6 +5,7 @@ import { MaterialCommunityIcons, Ionicons, Feather } from '@expo/vector-icons';
 import { useAuthStore } from '../../stores/authStore';
 import { Button } from '../../components';
 import { COLORS, FONTS, SPACING, RADIUS, SHADOWS } from '../../constants/theme';
+import { CityBackground } from '../../components/CityBackground';
 
 export default function ProfileScreen() {
   const { user, logout } = useAuthStore();
@@ -19,6 +20,7 @@ export default function ProfileScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <CityBackground variant="day" opacity={0.12} heightFraction={0.3} position="bottom" />
       <View style={styles.header}>
         <Text style={styles.title}>Meu Perfil</Text>
       </View>
@@ -61,16 +63,6 @@ export default function ProfileScreen() {
           </TouchableOpacity>
         ))}
       </View>
-
-      {/* Dev Status */}
-      <TouchableOpacity
-        style={styles.devStatusBtn}
-        onPress={() => router.push('/(contratante)/dev-status')}
-      >
-        <MaterialCommunityIcons name="rocket-launch-outline" size={20} color={COLORS.white} />
-        <Text style={styles.devStatusText}>Status do MVP</Text>
-        <Feather name="chevron-right" size={16} color={COLORS.white} />
-      </TouchableOpacity>
 
       <View style={styles.logoutSection}>
         <Button
@@ -136,13 +128,6 @@ const styles = StyleSheet.create({
   },
   menuIcon: { width: 28, alignItems: 'center' as const, marginRight: SPACING.sm },
   menuLabel: { flex: 1, fontSize: FONTS.sizes.md, color: COLORS.textPrimary, fontFamily: FONTS.regular },
-  devStatusBtn: {
-    flexDirection: 'row', alignItems: 'center', gap: SPACING.sm,
-    marginHorizontal: SPACING.lg, marginTop: SPACING.lg,
-    backgroundColor: COLORS.primary, borderRadius: RADIUS.md,
-    paddingVertical: SPACING.md, paddingHorizontal: SPACING.md,
-  },
-  devStatusText: { flex: 1, color: COLORS.white, fontSize: FONTS.sizes.sm, fontFamily: FONTS.semibold },
   logoutSection: { marginTop: 'auto', paddingHorizontal: SPACING.lg, paddingBottom: SPACING.xl },
   logoutButton: { width: '100%', borderColor: COLORS.error },
 });
