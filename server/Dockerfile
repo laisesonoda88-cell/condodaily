@@ -11,7 +11,7 @@ COPY packages/shared/package.json ./packages/shared/
 COPY apps/mobile/package.json ./apps/mobile/
 
 # Install ALL deps (need devDeps for tsc)
-RUN npm ci --workspace=server --workspace=packages/shared
+RUN npm ci --workspace=server --workspace=packages/shared --legacy-peer-deps
 
 # Copy source
 COPY packages/shared/ ./packages/shared/
@@ -48,7 +48,7 @@ COPY --from=builder /app/packages/shared/package.prod.json ./packages/shared/pac
 COPY apps/mobile/package.json ./apps/mobile/
 
 # Install production deps only
-RUN npm ci --workspace=server --workspace=packages/shared --omit=dev
+RUN npm ci --workspace=server --workspace=packages/shared --legacy-peer-deps --omit=dev
 
 # Copy built artifacts
 COPY --from=builder /app/server/dist ./server/dist
