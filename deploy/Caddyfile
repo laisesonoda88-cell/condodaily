@@ -54,6 +54,15 @@ condodaily.com.br, www.condodaily.com.br {
 		root * /srv/www
 		try_files {path} {path}/index.html {path}/ /index.html
 		file_server
+
+		# HTML: never cache (always get fresh version)
+		@html path *.html /
+		header @html Cache-Control "no-cache, no-store, must-revalidate"
+		header @html Pragma "no-cache"
+
+		# Images/assets: cache 1 day
+		@assets path *.png *.jpg *.svg *.ico *.webp *.woff2
+		header @assets Cache-Control "public, max-age=86400"
 	}
 
 	# Security headers
