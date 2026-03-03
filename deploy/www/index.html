@@ -599,7 +599,6 @@
       color: var(--text-light);
       margin-bottom: 16px;
       text-align: center;
-      animation: fadeUp 0.5s ease-out 0.78s both;
     }
 
     .scenario {
@@ -615,10 +614,7 @@
 
     .scenario:hover { transform: translateX(4px); }
 
-    .scenario:nth-child(2) { animation: fadeUp 0.4s ease-out 0.82s both; }
-    .scenario:nth-child(3) { animation: fadeUp 0.4s ease-out 0.88s both; }
-    .scenario:nth-child(4) { animation: fadeUp 0.4s ease-out 0.94s both; }
-    .scenario:nth-child(5) { animation: fadeUp 0.4s ease-out 1.0s both; }
+    /* Staggered reveal handled by .stagger class + IntersectionObserver */
 
     .scenario-emoji {
       font-size: 1.3rem; flex-shrink: 0;
@@ -654,7 +650,6 @@
     .stats {
       display: grid; grid-template-columns: repeat(3, 1fr);
       gap: 12px; margin-bottom: 42px;
-      animation: fadeUp 0.5s ease-out 0.78s both;
     }
 
     .stat {
@@ -699,7 +694,6 @@
     /* ═══ CTA ═══ */
     .cta {
       padding: 24px 0 32px; text-align: center;
-      animation: fadeUp 0.5s ease-out 0.84s both;
     }
 
     .cta-label {
@@ -766,7 +760,6 @@
     /* ═══ TRUST ═══ */
     .trust {
       padding: 30px 0; text-align: center;
-      animation: fadeUp 0.5s ease-out 0.9s both;
     }
 
     .trust-row { display: flex; justify-content: center; gap: 28px; flex-wrap: wrap; }
@@ -883,7 +876,6 @@
     /* ═══ FOOTER ═══ */
     .foot {
       padding: 30px 0 40px; text-align: center;
-      animation: fadeUp 0.5s ease-out 1s both;
     }
 
     .foot-logo {
@@ -938,6 +930,80 @@
       0%, 100% { opacity: 1; }
       50% { opacity: 0.5; }
     }
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.85); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    @keyframes countUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ═══ SCROLL REVEAL ═══ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.88);
+      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal-scale.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+    /* Stagger delays for children */
+    .stagger > *:nth-child(1) { transition-delay: 0s; }
+    .stagger > *:nth-child(2) { transition-delay: 0.1s; }
+    .stagger > *:nth-child(3) { transition-delay: 0.2s; }
+    .stagger > *:nth-child(4) { transition-delay: 0.3s; }
+    .stagger > *:nth-child(5) { transition-delay: 0.4s; }
+
+    /* Animated stat counter glow */
+    .stat.counted .stat-val {
+      animation: countUp 0.5s ease-out both;
+    }
+    .stat:nth-child(2).counted .stat-val { animation-delay: 0.15s; }
+    .stat:nth-child(3).counted .stat-val { animation-delay: 0.3s; }
+
+    /* Parallax atmosphere */
+    .atm, .atm-indigo { transition: transform 0.1s linear; }
 
     /* ═══ RESPONSIVE ═══ */
     @media (min-width: 768px) {
@@ -1210,7 +1276,7 @@
       </section>
 
       <!-- Real scenarios — problem → solution -->
-      <section class="scenarios">
+      <section class="scenarios reveal stagger">
         <p class="scenarios-label">Situações reais, resolvidas</p>
 
         <div class="scenario">
@@ -1246,22 +1312,22 @@
         </div>
       </section>
 
-      <section class="stats">
+      <section class="stats reveal-scale" id="stats-section">
         <div class="stat">
-          <div class="stat-val v">15+</div>
+          <div class="stat-val v" data-target="15" data-suffix="+">0</div>
           <small>Categorias de serviço</small>
         </div>
         <div class="stat">
-          <div class="stat-val o">100%</div>
+          <div class="stat-val o" data-target="100" data-suffix="%">0</div>
           <small>Pagamento seguro</small>
         </div>
         <div class="stat">
-          <div class="stat-val i">24h</div>
+          <div class="stat-val i" data-target="24" data-suffix="h">0</div>
           <small>Agendamento rápido</small>
         </div>
       </section>
 
-      <section class="cta">
+      <section class="cta reveal">
         <p class="cta-label">Baixe o aplicativo</p>
         <div class="stores">
           <a class="store-btn sb-dark" href="#" aria-label="App Store">
@@ -1296,7 +1362,7 @@
         </div>
       </section>
 
-      <section class="trust">
+      <section class="trust reveal">
         <div class="trust-row">
           <div class="trust-item">
             <svg class="c-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -1314,7 +1380,7 @@
       </section>
 
       <!-- REFERRAL / INDIQUE -->
-      <section class="referral" id="cadastro">
+      <section class="referral reveal-scale" id="cadastro">
         <div class="referral-card">
           <div class="referral-icon">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
@@ -1344,7 +1410,7 @@
 
       <div class="sep"></div>
 
-      <footer class="foot">
+      <footer class="foot reveal">
         <a href="/" class="foot-logo">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
             <rect x="6" y="16" width="24" height="40" rx="3" fill="#1B7A6E"/>
@@ -1364,6 +1430,114 @@
     </div>
   </div>
   <script>
+    // ─── Scroll Reveal (IntersectionObserver) ─────
+    (function() {
+      var revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+      if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              // For stagger containers, also reveal children
+              if (entry.target.classList.contains('stagger')) {
+                var children = entry.target.children;
+                for (var i = 0; i < children.length; i++) {
+                  (function(child, idx) {
+                    setTimeout(function() {
+                      child.style.opacity = '1';
+                      child.style.transform = 'translateY(0) translateX(0)';
+                    }, idx * 120);
+                  })(children[i], i);
+                }
+              }
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+        revealEls.forEach(function(el) { observer.observe(el); });
+      } else {
+        // Fallback: show everything
+        revealEls.forEach(function(el) { el.classList.add('visible'); });
+      }
+    })();
+
+    // ─── Animated Counter for Stats ───────────────
+    (function() {
+      var statsSection = document.getElementById('stats-section');
+      if (!statsSection) return;
+      var counted = false;
+
+      function animateCounters() {
+        if (counted) return;
+        counted = true;
+        var vals = statsSection.querySelectorAll('.stat-val');
+        vals.forEach(function(el) {
+          var target = parseInt(el.getAttribute('data-target')) || 0;
+          var suffix = el.getAttribute('data-suffix') || '';
+          var duration = 1200;
+          var start = 0;
+          var startTime = null;
+
+          function step(timestamp) {
+            if (!startTime) startTime = timestamp;
+            var progress = Math.min((timestamp - startTime) / duration, 1);
+            // Ease out cubic
+            var eased = 1 - Math.pow(1 - progress, 3);
+            var current = Math.round(start + (target - start) * eased);
+            el.textContent = current + suffix;
+            if (progress < 1) requestAnimationFrame(step);
+          }
+          requestAnimationFrame(step);
+        });
+        // Add counted class for additional CSS animation
+        var stats = statsSection.querySelectorAll('.stat');
+        stats.forEach(function(s) { s.classList.add('counted'); });
+      }
+
+      var statsObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            animateCounters();
+            statsObs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.3 });
+      statsObs.observe(statsSection);
+    })();
+
+    // ─── Subtle Parallax on Atmosphere Orbs ───────
+    (function() {
+      var atm = document.querySelector('.atm');
+      var atmIndigo = document.querySelector('.atm-indigo');
+      var ticking = false;
+
+      window.addEventListener('scroll', function() {
+        if (!ticking) {
+          requestAnimationFrame(function() {
+            var scrollY = window.pageYOffset;
+            if (atm) atm.style.transform = 'translateY(' + (scrollY * 0.04) + 'px)';
+            if (atmIndigo) atmIndigo.style.transform = 'translateY(' + (-scrollY * 0.06) + 'px)';
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
+    })();
+
+    // ─── Stagger children initial state ───────────
+    (function() {
+      var staggerEls = document.querySelectorAll('.stagger');
+      staggerEls.forEach(function(parent) {
+        var children = parent.children;
+        for (var i = 0; i < children.length; i++) {
+          children[i].style.opacity = '0';
+          children[i].style.transform = 'translateY(20px)';
+          children[i].style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
+        }
+      });
+    })();
+
     // ─── Config ───────────────────────────────────
     var API_URL = window.location.hostname === 'localhost'
       ? 'http://localhost:3001/api/leads'
