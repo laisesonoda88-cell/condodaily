@@ -61,5 +61,11 @@ condodaily-brand*.html
 !apps/mobile/assets/icons/*.png
 !assets/logo/*.png
 
+# Heavy assets (not needed for builds)
+Logos e icones/
+demo/
+clientes.csv
+/app.json
+
 # Claude memory (personal)
 .claude/

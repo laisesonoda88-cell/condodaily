@@ -1,0 +1,50 @@
+# Dependencies (installed fresh on EAS cloud)
+node_modules/
+
+# Server source (not needed for mobile build — keep package.json for workspace resolution)
+server/src/
+server/dist/
+server/Dockerfile
+server/tsconfig.json
+deploy/
+
+# Heavy asset directories
+Logos e icones/
+demo/
+assets/
+
+# Build/cache
+.expo/
+dist/
+build/
+.turbo/
+*.tsbuildinfo
+
+# Git/CI
+.git/
+.github/
+
+# IDE
+.vscode/
+.idea/
+
+# Docs
+docs/
+*.docx
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Personal/temp files at root only
+.claude/
+/clientes.csv
+/app.json
+/Senha*
+scripts/
+/*.pdf
+/*.dmg
+/*.rtf
+/*.mp4
+/*.html
+/Simulator*

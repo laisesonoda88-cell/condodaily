@@ -1,0 +1,23 @@
+# Server (não precisa no build mobile)
+server/
+deploy/
+
+# Assets pesados (logos, demos, screenshots)
+Logos e icones/
+demo/
+assets/logo/
+clientes.csv
+
+# Git
+.git/
+
+# CI
+.github/
+
+# Docs
+docs/
+*.md
+
+# IDE
+.vscode/
+.idea/
