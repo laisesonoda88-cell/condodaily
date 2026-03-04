@@ -6,12 +6,17 @@ server/src/
 server/dist/
 server/Dockerfile
 server/tsconfig.json
+server/.env
+server/.env.example
+server/.dockerignore
+server/drizzle.config.ts
+server/uploads/
 deploy/
 
-# Heavy asset directories
-Logos e icones/
-demo/
-assets/
+# Heavy asset directories (root-level only — DO NOT exclude apps/mobile/assets/)
+/Logos e icones/
+/demo/
+/assets/
 
 # Build/cache
 .expo/
