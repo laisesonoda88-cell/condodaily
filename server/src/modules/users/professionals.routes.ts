@@ -333,11 +333,20 @@ export async function professionalRoutes(app: FastifyInstance) {
       return reply.status(403).send({ success: false, error: 'Apenas profissionais' });
     }
 
+    // Get professional profile first (professional_id references profile.id, not user.id)
+    const [myProfile] = await db
+      .select({ id: professionalProfiles.id })
+      .from(professionalProfiles)
+      .where(eq(professionalProfiles.user_id, userId))
+      .limit(1);
+
     // Get professional's categories
-    const myServices = await db
-      .select({ category_id: professionalServices.category_id })
-      .from(professionalServices)
-      .where(eq(professionalServices.professional_id, userId));
+    const myServices = myProfile
+      ? await db
+          .select({ category_id: professionalServices.category_id })
+          .from(professionalServices)
+          .where(eq(professionalServices.professional_id, myProfile.id))
+      : [];
 
     const myCategoryIds = myServices.map(s => s.category_id);
 
