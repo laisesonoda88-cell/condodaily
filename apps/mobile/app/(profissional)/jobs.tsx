@@ -127,6 +127,49 @@ export default function JobsScreen() {
           <Text style={styles.cardDate}>{formatDate(item.scheduled_date)}</Text>
         </View>
 
+        {/* Urgency badges for PENDING */}
+        {item.status === 'PENDING' && (() => {
+          const scheduledDate = new Date(item.scheduled_date + 'T00:00:00');
+          const today = new Date();
+          today.setHours(0, 0, 0, 0);
+          const diffDays = Math.ceil((scheduledDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+          const isWeekend = scheduledDate.getDay() === 0 || scheduledDate.getDay() === 6;
+          return (
+            <View style={styles.urgencyRow}>
+              {diffDays <= 0 && (
+                <View style={[styles.urgencyBadge, { backgroundColor: '#FDE8E8' }]}>
+                  <MaterialCommunityIcons name="alert" size={12} color="#E74C3C" />
+                  <Text style={[styles.urgencyText, { color: '#E74C3C' }]}>Urgente - Hoje</Text>
+                </View>
+              )}
+              {diffDays === 1 && (
+                <View style={[styles.urgencyBadge, { backgroundColor: '#FFF3E0' }]}>
+                  <MaterialCommunityIcons name="clock-fast" size={12} color="#E67E22" />
+                  <Text style={[styles.urgencyText, { color: '#E67E22' }]}>Amanh{'\u00e3'}</Text>
+                </View>
+              )}
+              {diffDays >= 2 && diffDays <= 3 && (
+                <View style={[styles.urgencyBadge, { backgroundColor: '#FFF8E7' }]}>
+                  <MaterialCommunityIcons name="calendar-clock" size={12} color="#D99A1E" />
+                  <Text style={[styles.urgencyText, { color: '#D99A1E' }]}>Em {diffDays} dias</Text>
+                </View>
+              )}
+              {isWeekend && (
+                <View style={[styles.urgencyBadge, { backgroundColor: '#EDE7F6' }]}>
+                  <MaterialCommunityIcons name="calendar-weekend" size={12} color="#5E35B1" />
+                  <Text style={[styles.urgencyText, { color: '#5E35B1' }]}>Fim de semana</Text>
+                </View>
+              )}
+              {Number(item.net_professional_amount || 0) >= 200 && (
+                <View style={[styles.urgencyBadge, { backgroundColor: '#E8F5E9' }]}>
+                  <MaterialCommunityIcons name="trending-up" size={12} color="#2E7D32" />
+                  <Text style={[styles.urgencyText, { color: '#2E7D32' }]}>Alto valor</Text>
+                </View>
+              )}
+            </View>
+          );
+        })()}
+
         <View style={styles.cardBody}>
           <View style={styles.cardRow}>
             <Ionicons name="time-outline" size={16} color={COLORS.textSecondary} />
@@ -142,7 +185,7 @@ export default function JobsScreen() {
           <View style={styles.cardRow}>
             <MaterialCommunityIcons name="cash-check" size={16} color={COLORS.success} />
             <Text style={[styles.cardRowText, { fontFamily: FONTS.bold, color: COLORS.success }]}>
-              Voce recebe: R$ {Number(item.net_professional_amount || 0).toFixed(2)}
+              Voc{'\u00ea'} recebe: R$ {Number(item.net_professional_amount || 0).toFixed(2)}
             </Text>
           </View>
           {item.notes && (
@@ -261,6 +304,12 @@ const styles = StyleSheet.create({
   listContainer: { paddingHorizontal: SPACING.lg, paddingBottom: SPACING.xxl },
   card: { backgroundColor: COLORS.card, borderRadius: RADIUS.md, padding: SPACING.md, marginBottom: SPACING.sm, ...SHADOWS.sm },
   cardHighlight: { borderLeftWidth: 4, borderLeftColor: COLORS.secondary },
+  urgencyRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginBottom: SPACING.sm },
+  urgencyBadge: {
+    flexDirection: 'row', alignItems: 'center', gap: 4,
+    paddingHorizontal: 8, paddingVertical: 3, borderRadius: RADIUS.full,
+  },
+  urgencyText: { fontSize: 11, fontFamily: FONTS.semibold },
   cardHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: SPACING.sm },
   statusBadge: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: SPACING.sm, paddingVertical: SPACING.xs, borderRadius: RADIUS.full, gap: 4 },
   statusLabel: { fontSize: FONTS.sizes.xs, fontFamily: FONTS.bold },

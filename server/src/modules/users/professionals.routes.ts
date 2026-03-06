@@ -1,7 +1,7 @@
 import { FastifyInstance } from 'fastify';
-import { eq, and, ilike, asc, desc, sql, inArray, count } from 'drizzle-orm';
+import { eq, and, ne, gte, ilike, asc, desc, sql, inArray, count } from 'drizzle-orm';
 import { db } from '../../db/index.js';
-import { professionalProfiles, professionalServices, serviceCategories, users, professionalPaymentInfo, payouts, bookings, payments } from '../../db/schema.js';
+import { professionalProfiles, professionalServices, serviceCategories, users, professionalPaymentInfo, payouts, bookings, payments, condos, reviews } from '../../db/schema.js';
 import { z } from 'zod';
 
 // Quiz questions about posture and ethics in condominiums
@@ -325,6 +325,132 @@ export async function professionalRoutes(app: FastifyInstance) {
     });
   });
 
+  // GET /api/professionals/opportunities — demand proof for professionals
+  app.get('/opportunities', { preHandler: [app.authenticate] }, async (request, reply) => {
+    const { id: userId, role } = request.user as { id: string; role: string };
+
+    if (role !== 'PROFISSIONAL') {
+      return reply.status(403).send({ success: false, error: 'Apenas profissionais' });
+    }
+
+    // Get professional's categories
+    const myServices = await db
+      .select({ category_id: professionalServices.category_id })
+      .from(professionalServices)
+      .where(eq(professionalServices.professional_id, userId));
+
+    const myCategoryIds = myServices.map(s => s.category_id);
+
+    // Count available bookings (PENDING) in my categories
+    let availableBookings = 0;
+    if (myCategoryIds.length > 0) {
+      const [result] = await db
+        .select({ count: count() })
+        .from(bookings)
+        .where(and(
+          eq(bookings.status, 'PENDING'),
+          inArray(bookings.category_id, myCategoryIds),
+          ne(bookings.contratante_id, userId)
+        ));
+      availableBookings = Number(result?.count || 0);
+    }
+
+    // Count active síndicos (users with role CONTRATANTE who have condos)
+    const [sindicosResult] = await db
+      .select({ count: sql<string>`COUNT(DISTINCT ${condos.user_id})` })
+      .from(condos);
+
+    // Average earnings of professionals with at least 1 service
+    const [avgEarningsResult] = await db
+      .select({
+        avg: sql<string>`COALESCE(AVG(sub.total), 0)`,
+      })
+      .from(
+        sql`(
+          SELECT SUM(${payments.amount}) as total
+          FROM ${payments}
+          INNER JOIN ${bookings} ON ${bookings.id} = ${payments.booking_id}
+          WHERE ${payments.status} = 'APPROVED'
+          GROUP BY ${bookings.profissional_id}
+          HAVING SUM(${payments.amount}) > 0
+        ) sub`
+      );
+
+    // Count total completed bookings in last 30 days (platform activity)
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+    const [recentActivity] = await db
+      .select({ count: count() })
+      .from(bookings)
+      .where(and(
+        eq(bookings.status, 'COMPLETED'),
+        gte(bookings.created_at, thirtyDaysAgo)
+      ));
+
+    // Count active professionals (for context)
+    const [activePros] = await db
+      .select({ count: count() })
+      .from(professionalProfiles)
+      .where(eq(professionalProfiles.quiz_approved, true));
+
+    // Platform average rating
+    const [avgRatingResult] = await db
+      .select({ avg: sql<string>`COALESCE(AVG(${professionalProfiles.avg_rating}), 0)` })
+      .from(professionalProfiles)
+      .where(and(
+        eq(professionalProfiles.quiz_approved, true),
+        sql`${professionalProfiles.avg_rating} > 0`
+      ));
+
+    // Count urgent bookings (today) and weekend bookings
+    let urgentToday = 0;
+    let weekendBookings = 0;
+    if (myCategoryIds.length > 0) {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const tomorrow = new Date(today);
+      tomorrow.setDate(tomorrow.getDate() + 1);
+
+      const [urgentResult] = await db
+        .select({ count: count() })
+        .from(bookings)
+        .where(and(
+          eq(bookings.status, 'PENDING'),
+          inArray(bookings.category_id, myCategoryIds),
+          ne(bookings.contratante_id, userId),
+          sql`${bookings.scheduled_date}::date >= ${today.toISOString().slice(0, 10)}`,
+          sql`${bookings.scheduled_date}::date < ${tomorrow.toISOString().slice(0, 10)}`
+        ));
+      urgentToday = Number(urgentResult?.count || 0);
+
+      // Weekend bookings (Saturday=6, Sunday=0)
+      const [weekendResult] = await db
+        .select({ count: count() })
+        .from(bookings)
+        .where(and(
+          eq(bookings.status, 'PENDING'),
+          inArray(bookings.category_id, myCategoryIds),
+          ne(bookings.contratante_id, userId),
+          sql`EXTRACT(DOW FROM ${bookings.scheduled_date}) IN (0, 6)`
+        ));
+      weekendBookings = Number(weekendResult?.count || 0);
+    }
+
+    return reply.send({
+      success: true,
+      data: {
+        available_bookings: availableBookings,
+        active_sindicos: Number(sindicosResult?.count || 0),
+        avg_monthly_earnings: parseFloat(avgEarningsResult?.avg || '0'),
+        completed_last_30_days: Number(recentActivity?.count || 0),
+        active_professionals: Number(activePros?.count || 0),
+        platform_avg_rating: parseFloat(parseFloat(avgRatingResult?.avg || '0').toFixed(1)),
+        urgent_today: urgentToday,
+        weekend_bookings: weekendBookings,
+      },
+    });
+  });
+
   // GET /api/professionals/search
   app.get('/search', async (request, reply) => {
     const { q, category, sort, page, limit, weekend } = request.query as {
@@ -446,9 +572,37 @@ export async function professionalRoutes(app: FastifyInstance) {
         servicesMap.set(svc.professional_id, list);
       }
 
+      // Fetch latest review for each professional
+      const userIds = results.map((r) => r.user_id);
+      const latestReviews = await db
+        .select({
+          reviewed_id: reviews.reviewed_id,
+          rating: reviews.rating,
+          comment: reviews.comment,
+          reviewer_name: users.full_name,
+          created_at: reviews.created_at,
+        })
+        .from(reviews)
+        .innerJoin(users, eq(users.id, reviews.reviewer_id))
+        .where(inArray(reviews.reviewed_id, userIds))
+        .orderBy(desc(reviews.created_at));
+
+      // Keep only the most recent review per professional
+      const reviewsMap = new Map<string, { rating: number; comment: string | null; reviewer_name: string }>();
+      for (const rev of latestReviews) {
+        if (!reviewsMap.has(rev.reviewed_id)) {
+          reviewsMap.set(rev.reviewed_id, {
+            rating: rev.rating,
+            comment: rev.comment,
+            reviewer_name: rev.reviewer_name,
+          });
+        }
+      }
+
       const enriched = results.map((r) => ({
         ...r,
         services: servicesMap.get(r.id) || [],
+        latest_review: reviewsMap.get(r.user_id) || null,
       }));
 
       return reply.send({ success: true, data: enriched, total, page: pageNum, limit: limitNum });

@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter, useLocalSearchParams } from 'expo-router';
-import { Ionicons, Feather } from '@expo/vector-icons';
+import { Ionicons, Feather, MaterialCommunityIcons } from '@expo/vector-icons';
 import { professionalService } from '../../services/professionals';
 import { COLORS, FONTS, SPACING, RADIUS, SHADOWS } from '../../constants/theme';
 import { CityBackground } from '../../components/CityBackground';
@@ -21,6 +21,12 @@ interface ProfessionalService {
   name: string;
   slug: string;
   icon: string;
+}
+
+interface LatestReview {
+  rating: number;
+  comment: string | null;
+  reviewer_name: string;
 }
 
 interface Professional {
@@ -34,7 +40,10 @@ interface Professional {
   total_services: number;
   service_radius_km: number;
   quiz_approved: boolean;
+  disponivel_fim_semana?: boolean;
+  disponivel_feriados?: boolean;
   services: ProfessionalService[];
+  latest_review?: LatestReview | null;
 }
 
 interface Category {
@@ -174,6 +183,41 @@ export default function SearchScreen() {
         </View>
       </View>
 
+      {/* Availability + Badges */}
+      <View style={styles.badgeRow}>
+        {/* Disponível hoje — always show for quiz-approved */}
+        {item.quiz_approved && (
+          <View style={[styles.badge, { backgroundColor: '#E8F5E9' }]}>
+            <View style={styles.availDot} />
+            <Text style={[styles.badgeText, { color: '#2E7D32' }]}>Dispon{'\u00ed'}vel</Text>
+          </View>
+        )}
+        {item.avg_rating >= 4.8 && item.total_services >= 10 && (
+          <View style={[styles.badge, { backgroundColor: '#FFF8E7' }]}>
+            <MaterialCommunityIcons name="trophy" size={12} color="#D99A1E" />
+            <Text style={[styles.badgeText, { color: '#D99A1E' }]}>Top Avaliado</Text>
+          </View>
+        )}
+        {item.total_services >= 50 && (
+          <View style={[styles.badge, { backgroundColor: COLORS.primarySubtle }]}>
+            <MaterialCommunityIcons name="check-decagram" size={12} color={COLORS.primary} />
+            <Text style={[styles.badgeText, { color: COLORS.primary }]}>Experiente</Text>
+          </View>
+        )}
+        {item.total_services === 0 && (
+          <View style={[styles.badge, { backgroundColor: '#E8F5E9' }]}>
+            <MaterialCommunityIcons name="new-box" size={12} color="#2E7D32" />
+            <Text style={[styles.badgeText, { color: '#2E7D32' }]}>Novo</Text>
+          </View>
+        )}
+        {item.disponivel_fim_semana && (
+          <View style={[styles.badge, { backgroundColor: '#EDE7F6' }]}>
+            <MaterialCommunityIcons name="calendar-weekend" size={12} color="#5E35B1" />
+            <Text style={[styles.badgeText, { color: '#5E35B1' }]}>Fim de semana</Text>
+          </View>
+        )}
+      </View>
+
       {/* Service tags */}
       {item.services && item.services.length > 0 && (
         <View style={styles.serviceTags}>
@@ -190,6 +234,19 @@ export default function SearchScreen() {
         </View>
       )}
 
+      {/* Latest review */}
+      {item.latest_review && (
+        <View style={styles.latestReview}>
+          <Ionicons name="star" size={12} color={COLORS.secondary} />
+          <Text style={styles.latestReviewText} numberOfLines={1}>
+            {item.latest_review.rating}{'\u2B50'} - {item.latest_review.comment || 'Excelente trabalho!'}
+          </Text>
+          <Text style={styles.latestReviewAuthor}>
+            {item.latest_review.reviewer_name?.split(' ')[0]}
+          </Text>
+        </View>
+      )}
+
       <View style={styles.cardDetails}>
         <View style={styles.detailItem}>
           <Text style={styles.detailLabel}>Valor/hora</Text>
@@ -198,7 +255,7 @@ export default function SearchScreen() {
           </Text>
         </View>
         <View style={styles.detailItem}>
-          <Text style={styles.detailLabel}>Servicos</Text>
+          <Text style={styles.detailLabel}>Servi{'\u00e7'}os</Text>
           <Text style={styles.detailValue}>{item.total_services}</Text>
         </View>
         <View style={styles.detailItem}>
@@ -206,6 +263,22 @@ export default function SearchScreen() {
           <Text style={styles.detailValue}>{item.service_radius_km} km</Text>
         </View>
       </View>
+
+      {/* CTA Button — prominent green */}
+      <TouchableOpacity
+        style={styles.cardCta}
+        onPress={() =>
+          router.push({
+            pathname: '/(contratante)/professional-profile',
+            params: { id: item.user_id, name: item.full_name },
+          })
+        }
+        activeOpacity={0.7}
+      >
+        <Feather name="user-check" size={18} color={COLORS.white} />
+        <Text style={styles.cardCtaText}>Contratar Agora</Text>
+        <Feather name="arrow-right" size={16} color={COLORS.white} />
+      </TouchableOpacity>
     </TouchableOpacity>
   );
 
@@ -430,6 +503,13 @@ const styles = StyleSheet.create({
   ratingRow: { flexDirection: 'row', alignItems: 'center', gap: 4 },
   ratingText: { fontSize: FONTS.sizes.sm, fontFamily: FONTS.semibold },
 
+  badgeRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginBottom: SPACING.sm },
+  badge: {
+    flexDirection: 'row', alignItems: 'center', gap: 4,
+    paddingHorizontal: 8, paddingVertical: 3, borderRadius: RADIUS.full,
+  },
+  badgeText: { fontSize: 11, fontFamily: FONTS.semibold },
+
   serviceTags: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginBottom: SPACING.sm },
   serviceTag: {
     paddingVertical: 3,
@@ -439,6 +519,18 @@ const styles = StyleSheet.create({
   },
   serviceTagText: { fontSize: 11, color: COLORS.primary, fontFamily: FONTS.medium },
 
+  latestReview: {
+    flexDirection: 'row', alignItems: 'center', gap: 4,
+    backgroundColor: '#FFF8E7', borderRadius: RADIUS.sm,
+    paddingHorizontal: 8, paddingVertical: 4, marginBottom: SPACING.sm,
+  },
+  latestReviewText: {
+    flex: 1, fontSize: 11, fontFamily: FONTS.regular, color: COLORS.textSecondary, lineHeight: 16,
+  },
+  latestReviewAuthor: {
+    fontSize: 11, fontFamily: FONTS.semibold, color: COLORS.textMuted,
+  },
+
   cardDetails: {
     flexDirection: 'row', justifyContent: 'space-between',
     borderTopWidth: 1, borderTopColor: COLORS.border, paddingTop: SPACING.sm,
@@ -446,6 +538,19 @@ const styles = StyleSheet.create({
   detailItem: { alignItems: 'center' },
   detailLabel: { fontSize: FONTS.sizes.xs, color: COLORS.textMuted, fontFamily: FONTS.regular },
   detailValue: { fontSize: FONTS.sizes.sm, fontFamily: FONTS.semibold, color: COLORS.textPrimary, marginTop: 2 },
+
+  cardCta: {
+    flexDirection: 'row', alignItems: 'center', justifyContent: 'center',
+    gap: 8, backgroundColor: COLORS.primary, borderRadius: RADIUS.md,
+    paddingVertical: 12, marginTop: SPACING.sm,
+  },
+  cardCtaText: {
+    fontSize: FONTS.sizes.sm, fontFamily: FONTS.bold, color: COLORS.white,
+  },
+
+  availDot: {
+    width: 7, height: 7, borderRadius: 4, backgroundColor: '#2E7D32',
+  },
 
   footerLoader: { paddingVertical: SPACING.lg, alignItems: 'center' },
 

@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CondoDaily — A diária certa, na hora certa</title>
-  <meta name="description" content="CondoDaily conecta condomínios a profissionais de manutenção qualificados. Limpeza, jardinagem, manutenção elétrica e mais.">
+  <meta name="description" content="CondoDaily conecta condomínios a profissionais e empresas de manutenção verificados em Curitiba. Limpeza, jardinagem, elevadores, seguros e mais — sem vínculo trabalhista.">
   <meta name="theme-color" content="#1B7A6E">
   <meta property="og:title" content="CondoDaily — A diária certa, na hora certa">
-  <meta property="og:description" content="Marketplace de serviços para condomínios. Conecte-se a profissionais qualificados.">
+  <meta property="og:description" content="Marketplace de serviços para condomínios. Profissionais e empresas verificados em Curitiba.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://condodaily.com.br">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
@@ -16,35 +16,103 @@
   <meta property="og:image" content="https://condodaily.com.br/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="CondoDaily">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CondoDaily — A diária certa, na hora certa">
+  <meta name="twitter:description" content="Marketplace de serviços para condomínios. Profissionais e empresas verificados em Curitiba.">
+  <meta name="twitter:image" content="https://condodaily.com.br/og-image.png">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="CondoDaily">
+  <meta name="geo.region" content="BR-PR">
+  <meta name="geo.placename" content="Curitiba">
+  <link rel="canonical" href="https://condodaily.com.br">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "CondoDaily",
+    "url": "https://condodaily.com.br",
+    "description": "Marketplace que conecta condomínios a profissionais e empresas de manutenção verificados em Curitiba. Limpeza, jardinagem, elevadores, seguros e mais.",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "iOS, Android",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "BRL",
+      "description": "Cadastro gratuito para condomínios e profissionais"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Curitiba",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "Paraná"
+      }
+    },
+    "provider": {
+      "@type": "Organization",
+      "name": "CondoDaily",
+      "url": "https://condodaily.com.br",
+      "logo": "https://condodaily.com.br/favicon-192.png"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Diárias pelo CondoDaily geram vínculo empregatício?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Não. Diárias avulsas contratadas pela plataforma não configuram vínculo CLT. O profissional atua de forma autônoma, define seu próprio preço e horário."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Como funciona o seguro incluso?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Toda diária contratada inclui uma taxa de R$ 5 que cobre o seguro durante a prestação do serviço. O seguro protege tanto o condomínio quanto o profissional."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Em quais cidades o CondoDaily está disponível?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Atualmente operamos em Curitiba e região metropolitana. Estamos planejando a expansão para outras capitais do Sul e Sudeste."
+        }
+      }
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* Brand system — verde, ouro, índigo
-         Palette reads as "premium tech" but unconsciously
-         maps to the same hues saturating culture in 2026 */
       --verde: #1B7A6E;
       --verde-dark: #145C53;
       --verde-deep: #0E453E;
       --verde-light: #EAF6F3;
-      --verde-subtle: #F4FAF8;
       --ouro: #F5A623;
-      --ouro-warm: #D99A1E;
-      --ouro-bright: #FFBA3B;
+      --ouro-dark: #D99A1E;
       --ouro-light: #FFF8EC;
-      --ouro-glow: rgba(245,166,35,0.12);
       --indigo: #2A3F6B;
+      --indigo-dark: #1E2F50;
       --indigo-light: #EDF0F7;
-      --indigo-glow: rgba(42,63,107,0.08);
       --dark: #1A2B3C;
-      --dark-muted: #2D3E4F;
       --text: #4A5C6D;
       --text-light: #7A8D9E;
       --surface: #FFFFFF;
       --bg: #FAFCFB;
-      --r-sm: 12px;
-      --r-md: 18px;
+      --border: #E8ECF0;
+      --r: 12px;
+      --r-lg: 20px;
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -59,1767 +127,1829 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ═══ ATMOSPHERE — three colour orbs, never touching ═══ */
-    .atm { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
-
-    .atm::before {
-      content: '';
-      position: absolute;
-      top: -18%; right: -8%;
-      width: 560px; height: 560px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(27,122,110,0.055) 0%, transparent 68%);
-    }
-
-    .atm::after {
-      content: '';
-      position: absolute;
-      top: 30%; left: -12%;
-      width: 440px; height: 440px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(245,166,35,0.04) 0%, transparent 65%);
-      animation: drift 22s ease-in-out infinite;
-    }
-
-    .atm-indigo {
-      position: fixed;
-      bottom: -5%; right: -6%;
-      width: 380px; height: 380px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(42,63,107,0.035) 0%, transparent 65%);
-      z-index: 0; pointer-events: none;
-      animation: drift 28s ease-in-out 6s infinite reverse;
-    }
-
-    /* Soft diamond grid — reads as "geometric pattern", not flag */
-    .grid-bg {
-      position: fixed; inset: 0; z-index: 0; pointer-events: none;
-      opacity: 0.018;
-      background-image:
-        linear-gradient(45deg, var(--verde) 1px, transparent 1px),
-        linear-gradient(-45deg, var(--verde) 1px, transparent 1px);
-      background-size: 44px 44px;
-      mask-image: radial-gradient(ellipse at 50% 20%, black 10%, transparent 60%);
-      -webkit-mask-image: radial-gradient(ellipse at 50% 20%, black 10%, transparent 60%);
-    }
-
-    /* ═══ LAYOUT ═══ */
-    .page { position: relative; z-index: 1; }
-    .wrap { max-width: 580px; margin: 0 auto; padding: 0 24px; }
-
-    /* ═══ TOP STRIP — indigo, clean, no stars ═══ */
-    .topstrip {
-      background: linear-gradient(135deg, var(--indigo) 0%, #3B5998 100%);
-      padding: 10px 20px;
-      text-align: center;
-      animation: fadeDown 0.5s ease-out both;
-    }
-
-    .topstrip p {
+    h1, h2, h3, h4 {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.73rem;
-      font-weight: 600;
-      color: rgba(255,255,255,0.92);
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
     }
 
-    .topstrip .hl { color: var(--ouro-bright); font-weight: 800; }
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
 
     /* ═══ NAV ═══ */
     .nav {
-      padding: 20px 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.3s;
+    }
+    .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--dark);
+    }
+    .nav-brand svg { width: 36px; height: 36px; }
+    .nav-brand span {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: -0.5px;
+    }
+    .nav-brand span em {
+      font-style: normal;
+      color: var(--verde);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--verde); }
+    .nav-cta {
+      background: var(--verde);
+      color: white !important;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600 !important;
+      transition: background 0.2s, transform 0.2s !important;
+    }
+    .nav-cta:hover {
+      background: var(--verde-dark) !important;
+      transform: translateY(-1px);
+    }
+    .nav-mobile-btn {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+    .nav-mobile-btn span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--dark);
+      margin: 5px 0;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    /* ═══ HERO ═══ */
+    .hero {
+      padding: 120px 0 80px;
+      background: linear-gradient(168deg, #FAFCFB 0%, var(--verde-light) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      right: -80px;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(27,122,110,0.06) 0%, transparent 70%);
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -60px;
+      left: -40px;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245,166,35,0.05) 0%, transparent 70%);
+    }
+    .hero-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--ouro-light);
+      border: 1px solid rgba(245,166,35,0.2);
+      padding: 6px 16px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ouro-dark);
+      margin-bottom: 24px;
+    }
+    .hero-badge svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      color: var(--dark);
+      margin-bottom: 20px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--verde);
+    }
+    .hero-sub {
+      font-size: 18px;
+      line-height: 1.65;
+      color: var(--text);
+      margin-bottom: 32px;
+      max-width: 480px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
+    .btn-primary {
+      background: var(--verde);
+      color: white;
+    }
+    .btn-primary:hover {
+      background: var(--verde-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(27,122,110,0.25);
+    }
+    .btn-outline {
+      background: white;
+      color: var(--verde);
+      border: 2px solid var(--verde);
+    }
+    .btn-outline:hover {
+      background: var(--verde-light);
+      transform: translateY(-2px);
+    }
+
+    /* Hero right — trust metrics */
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .hero-card {
+      background: white;
+      border-radius: var(--r-lg);
+      padding: 28px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+    }
+    .hero-card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .hero-card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      animation: fadeDown 0.6s ease-out 0.1s both;
     }
-
-    .nav a {
-      display: flex; align-items: center; gap: 10px;
-      text-decoration: none;
-    }
-
-    .nav svg { width: 34px; height: 34px; }
-
-    .nav-wm {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 1.3rem; font-weight: 800;
-      letter-spacing: -0.8px; color: var(--dark);
-    }
-    .nav-wm span { color: var(--ouro); }
-
-    /* ═══ HERO ═══ */
-    .hero { padding: 36px 0 0; text-align: center; }
-
-    .hero-mark {
-      width: 120px; height: 120px;
-      margin: 0 auto 28px;
-      position: relative;
-      animation: fadeUp 0.6s ease-out 0.2s both;
-    }
-
-    /* Rotating halo: verde→ouro→indigo — feels "brand", not "flag" */
-    .hero-mark::before {
-      content: '';
-      position: absolute; inset: -14px;
-      border-radius: 32px;
-      background: conic-gradient(
-        from 45deg,
-        var(--ouro-glow),
-        var(--indigo-glow),
-        rgba(27,122,110,0.08),
-        var(--ouro-glow),
-        var(--indigo-glow),
-        rgba(27,122,110,0.08)
-      );
-      animation: spin 12s linear infinite;
-      z-index: -1;
-    }
-
-    .hero-mark::after {
-      content: '';
-      position: absolute; inset: -8px;
-      border-radius: 30px;
-      background: var(--bg);
-      z-index: -1;
-    }
-
-    .hero-mark-inner {
-      width: 120px; height: 120px;
-      background: var(--surface);
-      border-radius: 30px;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow:
-        0 1px 3px rgba(26,43,60,0.04),
-        0 8px 28px rgba(27,122,110,0.09),
-        0 0 0 1px rgba(27,122,110,0.05);
-      position: relative; z-index: 1;
-    }
-
-    .hero-mark-inner svg { width: 80px; height: 80px; }
-
-    /* Window blink animation — each window lights up at different times */
-    @keyframes windowBlink {
-      0%, 100% { opacity: 1; fill: white; }
-      40% { opacity: 0.3; fill: rgba(255,255,255,0.25); }
-      60% { opacity: 0.3; fill: rgba(255,255,255,0.25); }
-    }
-
-    @keyframes windowGlow {
-      0%, 100% { opacity: 1; fill: #F5A623; }
-      50% { opacity: 0.5; fill: #FFBA3B; }
-    }
-
-    .w1 { animation: windowBlink 3.2s ease-in-out 0s infinite; }
-    .w2 { animation: windowBlink 3.2s ease-in-out 0.4s infinite; }
-    .w3 { animation: windowBlink 3.2s ease-in-out 1.1s infinite; }
-    .w4 { animation: windowBlink 3.2s ease-in-out 1.6s infinite; }
-    .w5 { animation: windowBlink 3.2s ease-in-out 0.7s infinite; }
-    .w6 { animation: windowBlink 3.2s ease-in-out 2.0s infinite; }
-    .w7 { animation: windowBlink 3.2s ease-in-out 0.2s infinite; }
-    .w8 { animation: windowBlink 3.2s ease-in-out 1.3s infinite; }
-    .w9 { animation: windowBlink 3.2s ease-in-out 2.4s infinite; }
-    .w10 { animation: windowBlink 3.2s ease-in-out 0.9s infinite; }
-    .w11 { animation: windowBlink 3.2s ease-in-out 1.8s infinite; }
-    .w12 { animation: windowBlink 3.2s ease-in-out 2.7s infinite; }
-    .w13 { animation: windowBlink 3.2s ease-in-out 0.5s infinite; }
-    .w14 { animation: windowBlink 3.2s ease-in-out 2.1s infinite; }
-    .dot1 { animation: windowGlow 2.5s ease-in-out 0s infinite; }
-    .dot2 { animation: windowGlow 2.5s ease-in-out 1.2s infinite; }
-
-    .hero h1 {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: clamp(2.5rem, 8vw, 3.5rem);
-      font-weight: 800;
-      letter-spacing: -2.5px;
-      line-height: 1.02;
-      color: var(--dark);
-      margin-bottom: 14px;
-      animation: fadeUp 0.6s ease-out 0.3s both;
-    }
-
-    .hero h1 .gold {
-      color: var(--ouro);
-      position: relative;
-      display: inline-block;
-    }
-
-    .hero h1 .gold::after {
-      content: '';
-      position: absolute; top: 0; left: -10%;
-      width: 120%; height: 100%;
-      background: linear-gradient(105deg, transparent 30%, rgba(255,186,59,0.18) 47%, rgba(255,186,59,0.28) 50%, rgba(255,186,59,0.18) 53%, transparent 70%);
-      animation: gleam 5s ease-in-out infinite;
-      pointer-events: none;
-    }
-
-    .hero-tag {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: clamp(1.02rem, 3vw, 1.18rem);
-      font-weight: 500; font-style: italic;
-      color: var(--text-light);
-      letter-spacing: -0.2px;
-      margin-bottom: 28px;
-      animation: fadeUp 0.6s ease-out 0.4s both;
-    }
-
-    .hero-problem {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: clamp(1.15rem, 3.5vw, 1.35rem);
+    .hero-card-icon.verde { background: var(--verde-light); }
+    .hero-card-icon.ouro { background: var(--ouro-light); }
+    .hero-card-header h3 {
+      font-size: 16px;
       font-weight: 700;
       color: var(--dark);
-      margin-bottom: 12px;
-      animation: fadeUp 0.5s ease-out 0.45s both;
     }
-
-    .hero-desc {
-      font-size: 0.92rem; color: var(--text);
-      line-height: 1.7; max-width: 440px;
-      margin: 0 auto 16px;
-      animation: fadeUp 0.5s ease-out 0.5s both;
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
     }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center; gap: 6px;
-      padding: 8px 20px;
-      border-radius: 100px;
-      background: var(--verde-light);
-      border: 1px solid rgba(27,122,110,0.1);
+    .hero-stat {
+      text-align: center;
+    }
+    .hero-stat-val {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.85rem; font-weight: 700;
+      font-size: 28px;
+      font-weight: 800;
       color: var(--verde);
-      margin-bottom: 10px;
-      animation: fadeUp 0.5s ease-out 0.55s both;
+      line-height: 1;
     }
-
-    .hero-closing {
-      font-size: 0.84rem;
+    .hero-stat-label {
+      font-size: 12px;
       color: var(--text-light);
+      margin-top: 4px;
+      line-height: 1.3;
+    }
+    .hero-checklist {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .hero-check {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--text);
+    }
+    .hero-check svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      color: var(--verde);
+    }
+
+    /* ═══ GEO BADGE ═══ */
+    .geo-badge {
+      text-align: center;
+      padding: 16px 0;
+      background: var(--indigo);
+      color: rgba(255,255,255,0.85);
+      font-size: 14px;
       font-weight: 500;
-      margin-bottom: 38px;
-      animation: fadeUp 0.5s ease-out 0.6s both;
     }
+    .geo-badge strong { color: white; }
 
-    /* ═══ ANIMATED CITY SCENE ═══ */
-    .city-scene {
-      position: relative;
-      width: 100%;
-      height: 220px;
-      margin: 10px 0 32px;
-      border-radius: var(--r-md);
-      overflow: hidden;
-      background: linear-gradient(180deg, #87CEEB 0%, #B4E0FA 50%, #81C784 85%, #66BB6A 100%);
-      animation: fadeUp 0.8s ease-out 0.65s both;
+    /* ═══ SECTION STYLES ═══ */
+    .section {
+      padding: 80px 0;
     }
-
-    /* Sky gradient cycles day→sunset→night→day */
-    .city-scene::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(180deg, #1a2550 0%, #2C3E6B 40%, #1B3A4B 70%, #2E4A30 100%);
-      animation: dayNight 12s ease-in-out infinite;
-      z-index: 0;
-    }
-
-    @keyframes dayNight {
-      0%, 100% { opacity: 0; }
-      40% { opacity: 0; }
-      55% { opacity: 1; }
-      85% { opacity: 1; }
-      95% { opacity: 0; }
-    }
-
-    /* Sun */
-    .city-sun {
-      position: absolute;
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      background: #FFD54F;
-      box-shadow: 0 0 20px rgba(255,213,79,0.6), 0 0 60px rgba(255,213,79,0.2);
-      top: 20px; right: 60px;
-      z-index: 1;
-      animation: sunPath 12s ease-in-out infinite;
-    }
-
-    @keyframes sunPath {
-      0% { top: 20px; right: 60px; opacity: 1; }
-      40% { top: 30px; right: 40px; opacity: 1; }
-      55% { top: 100px; right: 20px; opacity: 0; }
-      85% { top: 100px; right: 20px; opacity: 0; }
-      95% { top: 24px; right: 55px; opacity: 0.5; }
-      100% { top: 20px; right: 60px; opacity: 1; }
-    }
-
-    /* Moon */
-    .city-moon {
-      position: absolute;
-      width: 28px; height: 28px;
-      border-radius: 50%;
-      background: #E8E8E8;
-      box-shadow: inset -6px 2px 0 #BDBDBD, 0 0 15px rgba(255,255,255,0.3);
-      top: 18px; left: 50px;
-      z-index: 1;
-      opacity: 0;
-      animation: moonPath 12s ease-in-out infinite;
-    }
-
-    @keyframes moonPath {
-      0%, 40% { opacity: 0; top: 60px; }
-      55% { opacity: 1; top: 18px; }
-      85% { opacity: 1; top: 18px; }
-      95% { opacity: 0; top: 60px; }
-      100% { opacity: 0; }
-    }
-
-    /* Stars */
-    .city-stars {
-      position: absolute; top: 0; left: 0; right: 0; height: 100px;
-      z-index: 1; pointer-events: none;
-    }
-    .city-star {
-      position: absolute;
-      width: 3px; height: 3px;
+    .section-alt {
       background: white;
-      border-radius: 50%;
-      opacity: 0;
-      animation: starTwinkle 12s ease-in-out infinite;
     }
-    .city-star:nth-child(1) { top: 12px; left: 15%; animation-delay: 0.2s; }
-    .city-star:nth-child(2) { top: 30px; left: 30%; animation-delay: 0.8s; }
-    .city-star:nth-child(3) { top: 8px; left: 50%; animation-delay: 0.4s; }
-    .city-star:nth-child(4) { top: 25px; left: 70%; animation-delay: 1s; }
-    .city-star:nth-child(5) { top: 15px; left: 85%; animation-delay: 0.6s; }
-    .city-star:nth-child(6) { top: 40px; left: 42%; animation-delay: 1.2s; }
-    .city-star:nth-child(7) { top: 18px; left: 22%; animation-delay: 0.3s; }
-    .city-star:nth-child(8) { top: 35px; left: 62%; animation-delay: 0.9s; }
-
-    @keyframes starTwinkle {
-      0%, 40% { opacity: 0; }
-      55% { opacity: 0.9; }
-      65% { opacity: 0.3; }
-      75% { opacity: 0.8; }
-      85% { opacity: 0.9; }
-      95% { opacity: 0; }
-      100% { opacity: 0; }
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
     }
-
-    /* Clouds */
-    .city-cloud {
-      position: absolute;
-      z-index: 2;
-      opacity: 0.7;
+    .section-label {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--verde);
+      margin-bottom: 12px;
     }
-    .city-cloud svg { filter: drop-shadow(0 1px 2px rgba(0,0,0,0.05)); }
-    .city-cloud:nth-child(1) { top: 22px; animation: cloudDrift1 18s linear infinite; }
-    .city-cloud:nth-child(2) { top: 44px; animation: cloudDrift2 24s linear infinite; }
-
-    @keyframes cloudDrift1 {
-      0% { left: -80px; }
-      100% { left: calc(100% + 80px); }
+    .section-title {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: var(--dark);
+      margin-bottom: 16px;
     }
-    @keyframes cloudDrift2 {
-      0% { left: calc(100% + 60px); }
-      100% { left: -60px; }
+    .section-desc {
+      font-size: 17px;
+      color: var(--text);
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.6;
     }
 
-    /* Ground */
-    .city-ground {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 50px;
-      background: linear-gradient(180deg, #81C784 0%, #66BB6A 100%);
-      z-index: 3;
+    /* ═══ SOCIAL PROOF BAR ═══ */
+    .social-proof {
+      padding: 48px 0;
+      background: white;
+      border-bottom: 1px solid var(--border);
     }
-    .city-ground::before {
-      content: '';
-      position: absolute;
-      top: 8px; left: 10%; right: 10%;
-      height: 6px; border-radius: 3px;
-      background: #E0E0E0;
-      opacity: 0.5;
+    .proof-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      text-align: center;
     }
-
-    /* Night ground overlay */
-    .city-ground::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: #2E4A30;
-      animation: dayNight 12s ease-in-out infinite;
+    .proof-item {
+      padding: 8px 0;
     }
-
-    /* Buildings */
-    .city-buildings {
-      position: absolute;
-      bottom: 42px; left: 0; right: 0;
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      gap: 6px;
-      z-index: 4;
-      padding: 0 20px;
-    }
-
-    .city-bld {
-      border-radius: 4px 4px 0 0;
-      position: relative;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 3px;
-      padding: 6px 4px 4px;
-      animation: buildingRise 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-    }
-
-    .city-bld:nth-child(1) { width: 44px; height: 80px; background: #B0BEC5; animation-delay: 0.8s; }
-    .city-bld:nth-child(2) { width: 52px; height: 110px; background: #90A4AE; animation-delay: 0.95s; }
-    .city-bld:nth-child(3) { width: 48px; height: 130px; background: var(--verde); animation-delay: 1.1s; }
-    .city-bld:nth-child(4) { width: 56px; height: 100px; background: #78909C; animation-delay: 1.25s; }
-    .city-bld:nth-child(5) { width: 42px; height: 90px; background: var(--verde-dark); animation-delay: 1.4s; }
-
-    @keyframes buildingRise {
-      0% { transform: translateY(100%) scaleY(0); opacity: 0; }
-      100% { transform: translateY(0) scaleY(1); opacity: 1; }
-    }
-
-    /* Windows on buildings */
-    .city-win {
-      width: 7px; height: 6px;
-      border-radius: 1px;
-      background: rgba(255,255,255,0.45);
-      transition: background 0.5s ease;
-    }
-
-    /* Night windows glow */
-    .city-win.lit {
-      animation: windowLight 12s ease-in-out infinite;
-    }
-
-    @keyframes windowLight {
-      0%, 45% { background: rgba(255,255,255,0.45); box-shadow: none; }
-      55% { background: #FFE082; box-shadow: 0 0 4px rgba(255,224,130,0.5); }
-      85% { background: #FFE082; box-shadow: 0 0 4px rgba(255,224,130,0.5); }
-      95% { background: rgba(255,255,255,0.45); box-shadow: none; }
-      100% { background: rgba(255,255,255,0.45); }
-    }
-
-    /* Animated characters */
-    .city-people {
-      position: absolute;
-      bottom: 42px; left: 0; right: 0;
-      z-index: 5;
-      pointer-events: none;
-    }
-
-    .city-person {
-      position: absolute;
-      bottom: 6px;
-      animation: personEnter 0.6s ease-out both;
-    }
-    .city-person:nth-child(1) { left: 12%; animation-delay: 1.6s; }
-    .city-person:nth-child(2) { left: 50%; animation-delay: 1.8s; transform: translateX(-50%); }
-    .city-person:nth-child(3) { right: 12%; animation-delay: 2.0s; }
-
-    @keyframes personEnter {
-      0% { opacity: 0; transform: translateY(20px) scale(0.5); }
-      100% { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
-    /* Broom sweep animation */
-    .person-broom {
-      transform-origin: bottom center;
-      animation: sweep 1.5s ease-in-out infinite;
-    }
-    @keyframes sweep {
-      0%, 100% { transform: rotate(-12deg); }
-      50% { transform: rotate(12deg); }
-    }
-
-    /* Mop bob animation */
-    .person-mop {
-      animation: mopBob 1.2s ease-in-out infinite;
-    }
-    @keyframes mopBob {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-3px); }
-    }
-
-    /* Gardener spray animation */
-    .person-spray {
-      animation: sprayPulse 2s ease-in-out infinite;
-    }
-    @keyframes sprayPulse {
-      0%, 100% { opacity: 0; transform: scale(0.3); }
-      30% { opacity: 0.6; transform: scale(1); }
-      60% { opacity: 0; transform: scale(1.3) translateX(6px); }
-    }
-
-    /* Trees */
-    .city-tree {
-      position: absolute;
-      bottom: 44px;
-      z-index: 5;
-      animation: treePop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-    }
-    .city-tree:nth-child(1) { left: 6%; animation-delay: 1.3s; }
-    .city-tree:nth-child(2) { right: 6%; animation-delay: 1.5s; }
-
-    @keyframes treePop {
-      0% { transform: scale(0); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
-    /* Sparkles */
-    .city-sparkle {
-      position: absolute;
-      z-index: 6;
-      animation: sparklePulse 2.5s ease-in-out infinite;
-    }
-    .city-sparkle:nth-child(1) { top: 55px; left: 25%; animation-delay: 2.2s; }
-    .city-sparkle:nth-child(2) { top: 40px; right: 30%; animation-delay: 2.8s; }
-    .city-sparkle:nth-child(3) { top: 70px; left: 60%; animation-delay: 3.4s; }
-
-    @keyframes sparklePulse {
-      0%, 100% { opacity: 0; transform: scale(0.3) rotate(0deg); }
-      50% { opacity: 1; transform: scale(1) rotate(180deg); }
-    }
-
-    /* ═══ HIGHLIGHT CARD — indigo with subtle luminous dots ═══ */
-    .highlight {
-      margin-bottom: 38px;
-      padding: 24px 26px;
-      background: linear-gradient(135deg, var(--indigo) 0%, #344E80 100%);
-      border-radius: var(--r-md);
-      position: relative; overflow: hidden;
-      display: flex; align-items: center; gap: 18px;
-      text-align: left;
-      animation: fadeUp 0.5s ease-out 0.5s both;
-    }
-
-    /* Tiny luminous dots — abstract, not stars */
-    .highlight::before {
-      content: '';
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(1.2px 1.2px at 12% 28%, rgba(255,255,255,0.3), transparent),
-        radial-gradient(1px 1px at 78% 22%, rgba(255,255,255,0.2), transparent),
-        radial-gradient(1.5px 1.5px at 88% 55%, rgba(255,255,255,0.25), transparent),
-        radial-gradient(1px 1px at 32% 72%, rgba(255,255,255,0.15), transparent);
-      animation: softPulse 6s ease-in-out infinite;
-    }
-
-    .highlight::after {
-      content: '';
-      position: absolute;
-      top: -40%; right: -12%;
-      width: 200px; height: 200px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(245,166,35,0.1) 0%, transparent 70%);
-    }
-
-    .highlight-icon {
-      width: 54px; height: 54px;
-      border-radius: 15px;
-      background: rgba(255,186,59,0.12);
-      border: 1px solid rgba(255,186,59,0.18);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; font-size: 1.5rem;
-      position: relative; z-index: 1;
-    }
-
-    .highlight-body { position: relative; z-index: 1; }
-
-    .highlight-body h3 {
+    .proof-val {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.98rem; font-weight: 700;
-      color: #FFFFFF; margin-bottom: 4px;
-      letter-spacing: -0.2px;
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--verde);
+      line-height: 1;
+    }
+    .proof-val.ouro { color: var(--ouro-dark); }
+    .proof-val.indigo { color: var(--indigo); }
+    .proof-label {
+      font-size: 14px;
+      color: var(--text);
+      margin-top: 6px;
+      line-height: 1.4;
     }
 
-    .highlight-body h3 .hl { color: var(--ouro-bright); }
+    /* ═══ URGENCY BANNER ═══ */
+    .urgency {
+      padding: 32px 0;
+      background: linear-gradient(135deg, var(--verde-deep) 0%, var(--verde-dark) 100%);
+      color: white;
+      text-align: center;
+    }
+    .urgency-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .urgency-text {
+      font-size: 16px;
+      font-weight: 500;
+    }
+    .urgency-text strong {
+      font-weight: 700;
+      color: var(--ouro);
+    }
+    .urgency-counter {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .urgency-bar-wrap {
+      width: 200px;
+      height: 8px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+    .urgency-bar {
+      height: 100%;
+      background: var(--ouro);
+      border-radius: 100px;
+      transition: width 1s ease-out;
+    }
+    .urgency-count {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ouro);
+      white-space: nowrap;
+    }
 
-    .highlight-body p {
-      font-size: 0.82rem;
-      color: rgba(255,255,255,0.65);
+    @media (max-width: 900px) {
+      .proof-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    }
+    @media (max-width: 640px) {
+      .proof-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .proof-val { font-size: 28px; }
+      .urgency-inner { flex-direction: column; gap: 16px; }
+      .urgency-bar-wrap { width: 160px; }
+    }
+
+    /* ═══ COMO FUNCIONA — 3 steps ═══ */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    .step {
+      text-align: center;
+      padding: 32px 24px;
+      position: relative;
+    }
+    .step-num {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--verde);
+      color: white;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+    .step h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--dark);
+    }
+    .step p {
+      font-size: 15px;
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .step-connector {
+      position: absolute;
+      top: 56px;
+      right: -16px;
+      width: 32px;
+      height: 2px;
+      background: var(--border);
+    }
+
+    /* ═══ PARA CONDOMÍNIOS / PROFISSIONAIS ═══ */
+    .benefits {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .benefits-content { }
+    .benefits-content .section-label { text-align: left; }
+    .benefits-content h2 {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--dark);
+      margin-bottom: 12px;
+    }
+    .benefits-content > p {
+      font-size: 16px;
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+    .benefit-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .benefit-item {
+      display: flex;
+      gap: 16px;
+      align-items: start;
+    }
+    .benefit-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .benefit-icon.verde { background: var(--verde-light); }
+    .benefit-icon.ouro { background: var(--ouro-light); }
+    .benefit-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+    .benefit-item h4 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+    .benefit-item p {
+      font-size: 14px;
+      color: var(--text);
       line-height: 1.5;
     }
 
-    /* ═══ FEATURES ═══ */
-    .features {
-      display: flex; flex-direction: column;
-      gap: 14px; margin-bottom: 42px;
+    /* Benefits visual card */
+    .benefits-visual {
+      background: white;
+      border-radius: var(--r-lg);
+      border: 1px solid var(--border);
+      overflow: hidden;
     }
-
-    .feat {
-      display: flex; align-items: center; gap: 18px;
-      padding: 22px 24px;
-      background: var(--surface);
-      border-radius: var(--r-md);
-      border: 1px solid rgba(27,122,110,0.06);
-      box-shadow: 0 1px 4px rgba(26,43,60,0.03);
-      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-      text-align: left;
+    .bv-header {
+      padding: 24px 28px;
+      border-bottom: 1px solid var(--border);
     }
-
-    .feat:nth-child(1) { animation: fadeUp 0.5s ease-out 0.55s both; }
-    .feat:nth-child(2) { animation: fadeUp 0.5s ease-out 0.63s both; }
-    .feat:nth-child(3) { animation: fadeUp 0.5s ease-out 0.71s both; }
-
-    .feat { cursor: pointer; }
-
-    .feat:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 28px rgba(27,122,110,0.1);
-      border-color: rgba(27,122,110,0.12);
+    .bv-header h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--dark);
     }
-
-    .feat-ic {
-      width: 50px; height: 50px;
-      border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-      align-self: flex-start;
-      margin-top: 2px;
-    }
-
-    .feat-ic.v { background: linear-gradient(135deg, var(--verde-light), #D4EDE9); }
-    .feat-ic.o { background: linear-gradient(135deg, var(--ouro-light), #FFE8C2); }
-    .feat-ic.i { background: linear-gradient(135deg, var(--indigo-light), #D5DAE6); }
-
-    .feat-header {
-      display: flex; align-items: center; justify-content: space-between;
-    }
-
-    .feat h3 {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.96rem; font-weight: 700;
-      color: var(--dark); margin-bottom: 3px;
-      letter-spacing: -0.3px;
-    }
-
-    .feat p {
-      font-size: 0.83rem; color: var(--text-light); line-height: 1.5;
-    }
-
-    .feat-arrow {
-      width: 20px; height: 20px;
+    .bv-header p {
+      font-size: 13px;
       color: var(--text-light);
-      transition: transform 0.3s ease;
+      margin-top: 4px;
+    }
+    .bv-items {
+      padding: 8px 0;
+    }
+    .bv-item {
+      padding: 16px 28px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .bv-item:last-child { border-bottom: none; }
+    .bv-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
       flex-shrink: 0;
     }
+    .bv-dot.green { background: var(--verde); }
+    .bv-dot.gold { background: var(--ouro); }
+    .bv-dot.blue { background: var(--indigo); }
+    .bv-item span {
+      font-size: 14px;
+      color: var(--text);
+    }
+    .bv-item strong {
+      color: var(--dark);
+      font-weight: 600;
+    }
 
-    .feat.open .feat-arrow { transform: rotate(180deg); }
+    /* ═══ TRUST / SEGURANÇA ═══ */
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .trust-card {
+      text-align: center;
+      padding: 32px 20px;
+      background: white;
+      border-radius: var(--r-lg);
+      border: 1px solid var(--border);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .trust-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+    }
+    .trust-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+    .trust-icon.verde { background: var(--verde-light); }
+    .trust-icon.ouro { background: var(--ouro-light); }
+    .trust-icon.indigo { background: var(--indigo-light); }
+    .trust-icon svg {
+      width: 24px;
+      height: 24px;
+    }
+    .trust-card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+    .trust-card p {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.5;
+    }
 
-    /* Expandable detail panel */
-    .feat-detail {
+    /* ═══ PRICING TRANSPARENCY ═══ */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .pricing-card {
+      background: white;
+      border-radius: var(--r-lg);
+      border: 1px solid var(--border);
+      padding: 36px 32px;
+    }
+    .pricing-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+    .pricing-card > p {
+      font-size: 14px;
+      color: var(--text);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    .pricing-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .pricing-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text);
+    }
+    .pricing-list li svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      color: var(--verde);
+    }
+
+    /* ═══ FAQ ═══ */
+    .faq-list {
+      max-width: 720px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .faq-item {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      overflow: hidden;
+    }
+    .faq-q {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      cursor: pointer;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--dark);
+      background: none;
+      border: none;
+      width: 100%;
+      text-align: left;
+      transition: color 0.2s;
+    }
+    .faq-q:hover { color: var(--verde); }
+    .faq-q svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      color: var(--text-light);
+      transition: transform 0.3s;
+    }
+    .faq-item.open .faq-q svg { transform: rotate(180deg); }
+    .faq-a {
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.4s ease, opacity 0.3s ease;
-      opacity: 0;
+      transition: max-height 0.3s ease-out;
+    }
+    .faq-a-inner {
+      padding: 0 24px 20px;
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.65;
+    }
+    .faq-item.open .faq-a {
+      max-height: 300px;
     }
 
-    .feat.open .feat-detail {
-      max-height: 600px;
-      opacity: 1;
+    /* ═══ FORM ═══ */
+    .form-section {
+      padding: 80px 0;
+      background: var(--indigo);
+      position: relative;
+      overflow: hidden;
+    }
+    .form-section::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(27,122,110,0.1) 0%, transparent 70%);
+    }
+    .form-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .form-text h2 {
+      font-size: 36px;
+      font-weight: 800;
+      color: white;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+    }
+    .form-text p {
+      font-size: 16px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.65;
+      margin-bottom: 32px;
+    }
+    .form-trust-items {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .form-trust-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.85);
+    }
+    .form-trust-item svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      color: var(--ouro);
     }
 
-    .feat-detail-inner {
-      padding-top: 16px;
-      margin-top: 14px;
-      border-top: 1px solid rgba(27,122,110,0.08);
+    .form-card {
+      background: white;
+      border-radius: var(--r-lg);
+      padding: 36px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
     }
-
-    .feat-problems {
-      list-style: none; padding: 0; margin: 0 0 16px;
+    .form-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 4px;
     }
-
-    .feat-problems li {
-      display: flex; align-items: flex-start; gap: 10px;
-      font-size: 0.82rem; color: var(--text);
-      line-height: 1.5; padding: 6px 0;
+    .form-card > p {
+      font-size: 14px;
+      color: var(--text-light);
+      margin-bottom: 24px;
     }
-
-    .feat-problems li svg {
-      width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px;
+    .form-group {
+      margin-bottom: 16px;
     }
-
-    .feat-problems li .prob-icon { color: var(--ouro-warm); }
-    .feat-problems li .sol-icon { color: var(--verde); }
-
-    .feat-cta {
-      display: block; width: 100%;
-      padding: 14px 20px;
-      border: none; border-radius: var(--r-sm);
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.85rem; font-weight: 700;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-decoration: none;
-    }
-
-    .feat-cta.cta-verde {
-      background: var(--verde); color: white;
-    }
-    .feat-cta.cta-verde:hover {
-      background: var(--verde-dark);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 16px rgba(27,122,110,0.25);
-    }
-
-    .feat-cta.cta-ouro {
-      background: var(--ouro); color: white;
-    }
-    .feat-cta.cta-ouro:hover {
-      background: var(--ouro-warm);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 16px rgba(245,166,35,0.3);
-    }
-
-    .feat-cta-sub {
-      font-size: 0.72rem; color: var(--text-light);
-      margin-top: 8px; text-align: center;
-    }
-
-    /* ═══ QUIZ ═══ */
-    .quiz-separator {
-      display: flex; align-items: center; gap: 12px;
-      margin: 20px 0 16px;
-    }
-    .quiz-separator::before, .quiz-separator::after {
-      content: ''; flex: 1; height: 1px;
-      background: rgba(245,166,35,0.15);
-    }
-    .quiz-separator span {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.7rem; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 1.2px;
-      color: var(--ouro-warm); white-space: nowrap;
-    }
-
-    .quiz-intro {
-      font-size: 0.84rem; color: var(--text);
-      line-height: 1.6; margin-bottom: 16px;
-    }
-    .quiz-intro strong { color: var(--ouro-warm); }
-
-    .quiz-step { display: none; }
-    .quiz-step.active { display: block; }
-
-    .quiz-question {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.88rem; font-weight: 700;
-      color: var(--dark); margin-bottom: 12px;
-    }
-
-    .quiz-options { display: flex; flex-direction: column; gap: 8px; }
-
-    .quiz-opt {
-      display: flex; align-items: center; gap: 10px;
-      padding: 12px 16px;
-      border-radius: var(--r-sm);
-      border: 1.5px solid rgba(245,166,35,0.12);
-      background: var(--ouro-light);
-      cursor: pointer;
-      font-size: 0.82rem; color: var(--dark);
-      transition: all 0.2s ease;
-    }
-    .quiz-opt:hover {
-      border-color: var(--ouro);
-      background: rgba(245,166,35,0.12);
-      transform: translateX(4px);
-    }
-    .quiz-opt svg {
-      width: 18px; height: 18px; flex-shrink: 0;
-      color: var(--ouro); opacity: 0.5;
-    }
-    .quiz-opt:hover svg { opacity: 1; }
-
-    .quiz-progress {
-      display: flex; gap: 6px; margin-bottom: 14px;
-    }
-    .quiz-dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: rgba(245,166,35,0.2);
-      transition: background 0.3s ease;
-    }
-    .quiz-dot.filled { background: var(--ouro); }
-
-    .quiz-result {
-      padding: 18px; border-radius: var(--r-sm);
-      text-align: center;
-    }
-    .quiz-result.ready {
-      background: linear-gradient(135deg, rgba(27,122,110,0.08), rgba(27,122,110,0.03));
-      border: 1px solid rgba(27,122,110,0.12);
-    }
-    .quiz-result.grow {
-      background: linear-gradient(135deg, rgba(245,166,35,0.08), rgba(245,166,35,0.03));
-      border: 1px solid rgba(245,166,35,0.12);
-    }
-    .quiz-result-icon { font-size: 2rem; margin-bottom: 8px; }
-    .quiz-result h4 {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 1rem; font-weight: 700;
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--dark);
       margin-bottom: 6px;
     }
-    .quiz-result.ready h4 { color: var(--verde); }
-    .quiz-result.grow h4 { color: var(--ouro-warm); }
-    .quiz-result p {
-      font-size: 0.82rem; color: var(--text);
-      line-height: 1.5; margin-bottom: 14px;
-    }
-    .quiz-market {
-      font-size: 0.75rem; color: var(--text-light);
-      margin-top: 10px; font-style: italic;
-    }
-
-    /* ═══ PROBLEM-SOLUTION SCENARIOS ═══ */
-    .scenarios {
-      margin-bottom: 42px;
-    }
-
-    .scenarios-label {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.72rem; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 1.8px;
-      color: var(--text-light);
-      margin-bottom: 16px;
-      text-align: center;
-    }
-
-    .scenario {
-      display: flex; align-items: flex-start; gap: 14px;
-      padding: 16px 20px;
-      border-radius: var(--r-sm);
-      background: var(--surface);
-      border: 1px solid rgba(27,122,110,0.05);
-      margin-bottom: 10px;
-      text-align: left;
-      transition: transform 0.3s ease;
-    }
-
-    .scenario:hover { transform: translateX(4px); }
-
-    /* Staggered reveal handled by .stagger class + IntersectionObserver */
-
-    .scenario-emoji {
-      font-size: 1.3rem; flex-shrink: 0;
-      width: 36px; height: 36px;
-      display: flex; align-items: center; justify-content: center;
-      border-radius: 10px;
-    }
-
-    .scenario-emoji.prob { background: rgba(245,166,35,0.1); }
-    .scenario-emoji.sol { background: rgba(27,122,110,0.08); }
-
-    .scenario-text {
-      font-size: 0.84rem; line-height: 1.5;
-    }
-
-    .scenario-text strong {
-      display: block;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.82rem; font-weight: 700;
-      color: var(--dark);
-      margin-bottom: 2px;
-    }
-
-    .scenario-text span {
-      color: var(--text-light);
-    }
-
-    .scenario-text span em {
-      font-style: normal; color: var(--verde); font-weight: 600;
-    }
-
-    /* ═══ STATS ═══ */
-    .stats {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 12px; margin-bottom: 42px;
-    }
-
-    .stat {
-      text-align: center; padding: 20px 8px;
-      background: var(--surface);
-      border-radius: var(--r-sm);
-      border: 1px solid rgba(27,122,110,0.06);
-      transition: transform 0.3s ease;
-    }
-
-    .stat:hover { transform: translateY(-2px); }
-
-    .stat-val {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 1.5rem; font-weight: 800;
-      letter-spacing: -1px;
-    }
-
-    .stat-val.v {
-      background: linear-gradient(135deg, var(--verde), var(--verde-dark));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .stat-val.o {
-      background: linear-gradient(135deg, var(--ouro-warm), var(--ouro));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .stat-val.i {
-      background: linear-gradient(135deg, var(--indigo), #3B5998);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .stat small {
-      display: block; font-size: 0.72rem;
-      color: var(--text-light); margin-top: 4px; font-weight: 500;
-    }
-
-    /* ═══ CTA ═══ */
-    .cta {
-      padding: 24px 0 32px; text-align: center;
-    }
-
-    .cta-label {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.76rem; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 1.5px;
-      color: var(--text-light); margin-bottom: 18px;
-    }
-
-    .stores { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-
-    .store-btn {
-      display: inline-flex; align-items: center; gap: 12px;
-      padding: 14px 26px; border-radius: var(--r-sm);
-      text-decoration: none;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      transition: all 0.3s ease; cursor: pointer;
-      border: none; position: relative; overflow: hidden;
-    }
-
-    .store-btn::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 50%);
-      pointer-events: none;
-    }
-
-    .sb-dark { background: var(--dark); color: #fff; }
-    .sb-dark:hover {
-      background: var(--dark-muted);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(26,43,60,0.2);
-    }
-
-    .sb-outline {
-      background: var(--surface); color: var(--dark);
-      border: 1.5px solid rgba(26,43,60,0.12);
-    }
-    .sb-outline:hover {
-      border-color: var(--verde);
-      background: var(--verde-subtle);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(27,122,110,0.1);
-    }
-
-    .sb-ic { display: flex; align-items: center; }
-    .sb-ic svg { width: 22px; height: 22px; }
-
-    .sb-txt { text-align: left; line-height: 1.2; }
-    .sb-txt small { display: block; font-size: 0.65rem; font-weight: 500; opacity: 0.7; }
-    .sb-txt strong { font-size: 0.95rem; font-weight: 700; letter-spacing: -0.3px; }
-
-    .soon {
-      display: inline-flex; align-items: center; gap: 7px;
-      margin-top: 16px; padding: 7px 18px;
-      border-radius: 100px;
-      background: var(--ouro-light);
-      border: 1px solid rgba(245,166,35,0.12);
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.8rem; font-weight: 600;
-      color: var(--ouro-warm);
-    }
-
-    /* ═══ TRUST ═══ */
-    .trust {
-      padding: 30px 0; text-align: center;
-    }
-
-    .trust-row { display: flex; justify-content: center; gap: 28px; flex-wrap: wrap; }
-
-    .trust-item {
-      display: flex; align-items: center; gap: 7px;
-      font-size: 0.8rem; color: var(--text-light); font-weight: 500;
-    }
-
-    .trust-item svg { width: 17px; height: 17px; }
-    .trust-item svg.c-v { color: var(--verde); }
-    .trust-item svg.c-i { color: var(--indigo); }
-    .trust-item svg.c-o { color: var(--ouro); }
-
-    /* ═══ REFERRAL ═══ */
-    .referral { margin-bottom: 42px; }
-
-    .referral-card {
-      padding: 28px 24px;
-      border-radius: var(--r-md);
-      background: linear-gradient(135deg, var(--verde-deep) 0%, var(--verde-dark) 100%);
-      text-align: center;
-      position: relative; overflow: hidden;
-    }
-
-    .referral-card::before {
-      content: '';
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(1.5px 1.5px at 20% 35%, rgba(255,255,255,0.15), transparent),
-        radial-gradient(1px 1px at 70% 25%, rgba(255,255,255,0.1), transparent),
-        radial-gradient(1.2px 1.2px at 85% 60%, rgba(255,255,255,0.12), transparent);
-    }
-
-    .referral-icon {
-      width: 56px; height: 56px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.15);
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 14px;
-      position: relative; z-index: 1;
-    }
-
-    .referral-card h3 {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 1.15rem; font-weight: 800;
-      color: white; margin-bottom: 8px;
-      position: relative; z-index: 1;
-    }
-
-    .referral-card > p {
-      font-size: 0.84rem; color: rgba(255,255,255,0.7);
-      line-height: 1.6; margin-bottom: 20px;
-      max-width: 380px; margin-left: auto; margin-right: auto;
-      position: relative; z-index: 1;
-    }
-
-    .referral-card > p strong { color: var(--ouro-bright); }
-
-    .referral-form {
-      display: flex; flex-direction: column; gap: 10px;
-      max-width: 340px; margin: 0 auto;
-      position: relative; z-index: 1;
-    }
-
-    .ref-input {
+    .form-group input,
+    .form-group select {
+      width: 100%;
       padding: 12px 16px;
-      border-radius: var(--r-sm);
-      border: 1.5px solid rgba(255,255,255,0.15);
-      background: rgba(255,255,255,0.08);
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
       font-family: 'DM Sans', sans-serif;
-      font-size: 0.85rem;
-      color: white;
+      font-size: 15px;
+      color: var(--dark);
+      background: var(--bg);
       outline: none;
-      transition: border-color 0.2s ease;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      appearance: none;
       -webkit-appearance: none;
     }
-
-    .ref-input::placeholder { color: rgba(255,255,255,0.4); }
-    .ref-input:focus { border-color: var(--ouro); }
-
-    .ref-input option { color: var(--dark); background: white; }
-
-    .referral-form .feat-cta {
-      margin-top: 4px;
-      background: var(--ouro); color: white;
+    .form-group select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%237A8D9E' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 40px;
     }
-    .referral-form .feat-cta:hover {
-      background: var(--ouro-warm);
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: var(--verde);
+      box-shadow: 0 0 0 3px rgba(27,122,110,0.1);
     }
-
-    .referral-success {
-      position: relative; z-index: 1;
-      padding: 20px;
+    .form-group input::placeholder {
+      color: var(--text-light);
     }
-    .referral-success h4 {
+    .form-submit {
+      width: 100%;
+      padding: 14px 24px;
+      background: var(--verde);
+      color: white;
+      border: none;
+      border-radius: 10px;
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 1.05rem; font-weight: 700;
-      color: var(--ouro-bright); margin: 10px 0 6px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      margin-top: 8px;
     }
-    .referral-success p {
-      font-size: 0.82rem; color: rgba(255,255,255,0.65);
+    .form-submit:hover {
+      background: var(--verde-dark);
+      transform: translateY(-1px);
+    }
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 24px 0;
+    }
+    .form-success svg {
+      width: 56px;
+      height: 56px;
+      color: var(--verde);
+      margin-bottom: 16px;
+    }
+    .form-success h4 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+    .form-success p {
+      font-size: 14px;
+      color: var(--text);
       line-height: 1.5;
-    }
-
-    /* ═══ DIVIDER ═══ */
-    .sep {
-      height: 2px; max-width: 80px; margin: 0 auto;
-      background: linear-gradient(90deg, var(--verde), var(--ouro), var(--indigo));
-      border-radius: 2px; opacity: 0.25;
     }
 
     /* ═══ FOOTER ═══ */
-    .foot {
-      padding: 30px 0 40px; text-align: center;
+    .footer {
+      padding: 48px 0 32px;
+      background: white;
+      border-top: 1px solid var(--border);
     }
-
-    .foot-logo {
-      display: flex; align-items: center; justify-content: center;
-      gap: 8px; margin-bottom: 14px; text-decoration: none;
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
     }
-
-    .foot-logo svg { width: 22px; height: 22px; opacity: 0.35; }
-
-    .foot-logo span {
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--dark);
+    }
+    .footer-brand svg { width: 32px; height: 32px; }
+    .footer-brand span {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.88rem; font-weight: 700;
-      color: var(--text-light); letter-spacing: -0.5px;
+      font-weight: 700;
+      font-size: 18px;
     }
-
-    .foot-links {
-      display: flex; justify-content: center;
-      gap: 24px; margin-bottom: 14px;
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
     }
-
-    .foot-links a {
-      font-size: 0.8rem; color: var(--text-light);
-      text-decoration: none; transition: color 0.2s ease;
+    .footer-links a {
+      font-size: 14px;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.2s;
     }
-
-    .foot-links a:hover { color: var(--verde); }
-
-    .foot small { font-size: 0.73rem; color: var(--text-light); opacity: 0.55; }
-
-    /* ═══ KEYFRAMES ═══ */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(18px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-12px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes gleam {
-      0%, 100% { transform: translateX(-80%); opacity: 0; }
-      40%, 60% { transform: translateX(80%); opacity: 1; }
-    }
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-    @keyframes drift {
-      0%, 100% { transform: translate(0, 0); }
-      50% { transform: translate(25px, -18px); }
-    }
-    @keyframes softPulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-    @keyframes slideInLeft {
-      from { opacity: 0; transform: translateX(-40px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-    @keyframes slideInRight {
-      from { opacity: 0; transform: translateX(40px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-    @keyframes scaleIn {
-      from { opacity: 0; transform: scale(0.85); }
-      to { opacity: 1; transform: scale(1); }
-    }
-    @keyframes countUp {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
+    .footer-links a:hover { color: var(--verde); }
+    .footer-copy {
+      width: 100%;
+      text-align: center;
+      margin-top: 16px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--text-light);
     }
 
     /* ═══ SCROLL REVEAL ═══ */
     .reveal {
       opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-                  transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      transform: translateY(24px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
     }
     .reveal.visible {
       opacity: 1;
       transform: translateY(0);
     }
-    .reveal-left {
-      opacity: 0;
-      transform: translateX(-40px);
-      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-                  transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    .reveal-left.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    .reveal-right {
-      opacity: 0;
-      transform: translateX(40px);
-      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-                  transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    .reveal-right.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    .reveal-scale {
-      opacity: 0;
-      transform: scale(0.88);
-      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-                  transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    .reveal-scale.visible {
-      opacity: 1;
-      transform: scale(1);
-    }
-    /* Stagger delays for children */
-    .stagger > *:nth-child(1) { transition-delay: 0s; }
-    .stagger > *:nth-child(2) { transition-delay: 0.1s; }
-    .stagger > *:nth-child(3) { transition-delay: 0.2s; }
-    .stagger > *:nth-child(4) { transition-delay: 0.3s; }
-    .stagger > *:nth-child(5) { transition-delay: 0.4s; }
-
-    /* Animated stat counter glow */
-    .stat.counted .stat-val {
-      animation: countUp 0.5s ease-out both;
-    }
-    .stat:nth-child(2).counted .stat-val { animation-delay: 0.15s; }
-    .stat:nth-child(3).counted .stat-val { animation-delay: 0.3s; }
-
-    /* Parallax atmosphere */
-    .atm, .atm-indigo { transition: transform 0.1s linear; }
 
     /* ═══ RESPONSIVE ═══ */
-    @media (min-width: 768px) {
-      .hero { padding-top: 48px; }
-      .hero-mark { width: 140px; height: 140px; margin-bottom: 34px; }
-      .hero-mark-inner { width: 140px; height: 140px; border-radius: 34px; }
-      .hero-mark-inner svg { width: 92px; height: 92px; }
-      .features { gap: 16px; }
-      .feat { padding: 26px 28px; }
-      .stores { gap: 14px; }
-      .trust-row { gap: 44px; }
-      .stats { gap: 16px; }
-      .highlight { padding: 28px 30px; }
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero h1 { font-size: 36px; }
+      .benefits { grid-template-columns: 1fr; gap: 40px; }
+      .trust-grid { grid-template-columns: repeat(2, 1fr); }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .form-inner { grid-template-columns: 1fr; gap: 40px; }
+      .steps { grid-template-columns: 1fr; gap: 16px; }
+      .step-connector { display: none; }
     }
 
-    @media (min-width: 1024px) {
-      .wrap { max-width: 640px; }
-      .hero { padding-top: 64px; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
+    @media (max-width: 640px) {
+      .hero { padding: 100px 0 60px; }
+      .hero h1 { font-size: 30px; letter-spacing: -1px; }
+      .hero-sub { font-size: 16px; }
+      .hero-stats { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+      .hero-stat-val { font-size: 22px; }
+      .section { padding: 60px 0; }
+      .section-title { font-size: 28px; }
+      .trust-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .nav-mobile-btn { display: block; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 24px;
+        border-bottom: 1px solid var(--border);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
       }
+      .form-text h2 { font-size: 28px; }
+      .form-card { padding: 28px 20px; }
+      .footer-inner { flex-direction: column; text-align: center; }
+      .btn { padding: 12px 20px; font-size: 14px; }
+    }
+    /* ═══ WHATSAPP FLOATING BUTTON ═══ */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+    }
+    .whatsapp-tooltip {
+      background: var(--dark);
+      color: white;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+      opacity: 0;
+      transform: translateY(8px);
+      animation: tooltipFadeIn 0.5s ease-out 2s forwards;
+      position: relative;
+    }
+    .whatsapp-tooltip::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      right: 24px;
+      width: 12px;
+      height: 12px;
+      background: var(--dark);
+      transform: rotate(45deg);
+      border-radius: 2px;
+    }
+    .whatsapp-tooltip .close-tooltip {
+      display: inline-block;
+      margin-left: 8px;
+      cursor: pointer;
+      opacity: 0.6;
+      font-size: 14px;
+    }
+    .whatsapp-tooltip .close-tooltip:hover { opacity: 1; }
+    @keyframes tooltipFadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .whatsapp-btn {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #25D366;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      animation: whatsappPulse 2s ease-in-out infinite;
+    }
+    .whatsapp-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 28px rgba(37,211,102,0.5);
+    }
+    .whatsapp-btn svg { width: 32px; height: 32px; }
+    @keyframes whatsappPulse {
+      0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); }
+      50% { box-shadow: 0 4px 28px rgba(37,211,102,0.6), 0 0 0 8px rgba(37,211,102,0.1); }
+    }
+    @media (max-width: 640px) {
+      .whatsapp-float { bottom: 20px; right: 16px; }
+      .whatsapp-btn { width: 54px; height: 54px; }
+      .whatsapp-btn svg { width: 28px; height: 28px; }
+    }
+
+    /* ═══ INLINE CTA (after hero) ═══ */
+    .inline-cta {
+      padding: 0;
+      position: relative;
+      z-index: 2;
+      margin-top: -40px;
+    }
+    .inline-cta-card {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .inline-cta-inner {
+      background: white;
+      border-radius: var(--r-lg);
+      padding: 32px 36px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .inline-cta-text {
+      flex: 1;
+      min-width: 0;
+    }
+    .inline-cta-text h3 {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 6px;
+    }
+    .inline-cta-text p {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .inline-cta-form {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .inline-cta-form input {
+      padding: 12px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: var(--dark);
+      background: var(--bg);
+      outline: none;
+      width: 200px;
+      transition: border-color 0.2s;
+    }
+    .inline-cta-form input:focus {
+      border-color: var(--verde);
+      box-shadow: 0 0 0 3px rgba(27,122,110,0.1);
+    }
+    .inline-cta-form input::placeholder { color: var(--text-light); }
+    .inline-cta-form button {
+      padding: 12px 24px;
+      background: var(--verde);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      white-space: nowrap;
+    }
+    .inline-cta-form button:hover {
+      background: var(--verde-dark);
+      transform: translateY(-1px);
+    }
+    .inline-cta-success {
+      display: none;
+      color: var(--verde);
+      font-weight: 600;
+      font-size: 14px;
+      align-items: center;
+      gap: 8px;
+    }
+    .inline-cta-success svg { width: 20px; height: 20px; flex-shrink: 0; }
+    @media (max-width: 900px) {
+      .inline-cta-inner { flex-direction: column; gap: 20px; text-align: center; }
+      .inline-cta-form { width: 100%; flex-direction: column; }
+      .inline-cta-form input { width: 100%; }
+      .inline-cta-form button { width: 100%; }
+    }
+
+    /* ═══ EXIT-INTENT POPUP ═══ */
+    .exit-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(26,43,60,0.65);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+    }
+    .exit-overlay.active {
+      display: flex;
+      animation: fadeIn 0.3s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .exit-popup {
+      background: white;
+      border-radius: var(--r-lg);
+      max-width: 480px;
+      width: 100%;
+      padding: 40px 36px;
+      position: relative;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.2);
+      animation: popupSlide 0.4s ease-out;
+    }
+    @keyframes popupSlide {
+      from { transform: translateY(20px) scale(0.95); opacity: 0; }
+      to { transform: translateY(0) scale(1); opacity: 1; }
+    }
+    .exit-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: none;
+      background: var(--bg);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .exit-close:hover { background: var(--border); }
+    .exit-close svg { width: 16px; height: 16px; color: var(--text); }
+    .exit-emoji {
+      font-size: 48px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    .exit-popup h3 {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--dark);
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    .exit-popup > p {
+      font-size: 15px;
+      color: var(--text);
+      text-align: center;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+    .exit-form { display: flex; flex-direction: column; gap: 12px; }
+    .exit-form input, .exit-form select {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      color: var(--dark);
+      background: var(--bg);
+      outline: none;
+      transition: border-color 0.2s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .exit-form select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%237A8D9E' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 40px;
+    }
+    .exit-form input:focus, .exit-form select:focus {
+      border-color: var(--verde);
+      box-shadow: 0 0 0 3px rgba(27,122,110,0.1);
+    }
+    .exit-form input::placeholder { color: var(--text-light); }
+    .exit-form button {
+      width: 100%;
+      padding: 14px 24px;
+      background: var(--verde);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .exit-form button:hover { background: var(--verde-dark); }
+    .exit-form-note {
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-light);
+    }
+    .exit-success {
+      display: none;
+      text-align: center;
+      padding: 16px 0;
+    }
+    .exit-success svg {
+      width: 56px;
+      height: 56px;
+      color: var(--verde);
+      margin-bottom: 12px;
+    }
+    .exit-success h4 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+    .exit-success p {
+      font-size: 14px;
+      color: var(--text);
+    }
+    @media (max-width: 640px) {
+      .exit-popup { padding: 32px 24px; }
+      .exit-popup h3 { font-size: 20px; }
     }
   </style>
 </head>
 <body>
 
-  <div class="atm" aria-hidden="true"></div>
-  <div class="atm-indigo" aria-hidden="true"></div>
-  <div class="grid-bg" aria-hidden="true"></div>
+  <!-- NAV -->
+  <nav class="nav" id="main-nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+          <rect x="4" y="18" width="24" height="38" rx="5" fill="#3A9E8F"/>
+          <rect x="10" y="24" width="5" height="4.5" rx="1.2" fill="white"/>
+          <rect x="18" y="24" width="5" height="4.5" rx="1.2" fill="white"/>
+          <rect x="10" y="32" width="5" height="4.5" rx="1.2" fill="white"/>
+          <rect x="18" y="32" width="5" height="4.5" rx="1.2" fill="white"/>
+          <rect x="10" y="40" width="5" height="4.5" rx="1.2" fill="white"/>
+          <rect x="18" y="40" width="5" height="4.5" rx="1.2" fill="white"/>
+          <circle cx="16" cy="51" r="3.5" fill="#F5A623"/>
+          <rect x="32" y="6" width="28" height="50" rx="5" fill="#1B7A6E"/>
+          <rect x="38" y="12" width="5" height="4.5" rx="1.2" fill="white"/>
+          <rect x="46" y="12" width="5" height="4.5" rx="1.2" fill="white"/>
+          <rect x="38" y="20" width="5" height="4.5" rx="1.2" fill="white"/>
+          <rect x="46" y="20" width="5" height="4.5" rx="1.2" fill="white"/>
+          <rect x="38" y="28" width="5" height="4.5" rx="1.2" fill="white"/>
+          <rect x="46" y="28" width="5" height="4.5" rx="1.2" fill="white"/>
+          <circle cx="46" cy="51" r="3.5" fill="#F5A623"/>
+        </svg>
+        <span>Condo<em>Daily</em></span>
+      </a>
+      <div class="nav-links" id="nav-links">
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#condominios">Para Condomínios</a>
+        <a href="#profissionais">Para Profissionais</a>
+        <a href="#faq">FAQ</a>
+        <a href="#cadastro" class="nav-cta">Cadastre-se</a>
+      </div>
+      <button class="nav-mobile-btn" id="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
 
-  <div class="topstrip">
-    <p>O profissional certo, na hora que você precisa</p>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 10-16 0c0 3 2.7 7 8 11.7z"/></svg>
+          Operando em Curitiba e Região
+        </div>
+        <h1>A diária certa,<br>na <em>hora certa</em>.</h1>
+        <p class="hero-sub">Marketplace que conecta condomínios a profissionais e empresas de manutenção verificados. Sem vínculo trabalhista, com seguro incluso e pagamento garantido.</p>
+        <div class="hero-actions">
+          <a href="#cadastro" class="btn btn-primary">Quero conhecer</a>
+          <a href="#como-funciona" class="btn btn-outline">Como funciona</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-card">
+          <div class="hero-card-header">
+            <div class="hero-card-icon verde">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1B7A6E" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+            </div>
+            <h3>Plataforma em crescimento</h3>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <div class="hero-stat-val">13+</div>
+              <div class="hero-stat-label">Categorias de serviço</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-val">24h</div>
+              <div class="hero-stat-label">Verificação de perfil</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-val">100%</div>
+              <div class="hero-stat-label">Pagamento seguro</div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-header">
+            <div class="hero-card-icon ouro">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D99A1E" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3>Sua segurança garantida</h3>
+          </div>
+          <div class="hero-checklist">
+            <div class="hero-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Profissionais com documentação verificada
+            </div>
+            <div class="hero-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Seguro durante toda a prestação
+            </div>
+            <div class="hero-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Pagamento via PIX ou cartão pelo app
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INLINE CTA -->
+  <div class="inline-cta">
+    <div class="inline-cta-card">
+      <div class="inline-cta-inner">
+        <div class="inline-cta-text">
+          <h3>Garanta seu acesso antecipado</h3>
+          <p>Cadastre seu e-mail e seja um dos primeiros a usar o CondoDaily quando lançar.</p>
+        </div>
+        <form class="inline-cta-form" id="inline-cta-form" onsubmit="submitInlineCta(event)">
+          <input type="email" id="inline-email" placeholder="seu@email.com" required>
+          <button type="submit" id="inline-btn">Cadastrar</button>
+        </form>
+        <div class="inline-cta-success" id="inline-success">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span>Pronto! Vamos te avisar.</span>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="page">
-    <div class="wrap">
+  <!-- GEO -->
+  <div class="geo-badge">Atualmente operando em <strong>Curitiba e região metropolitana</strong>. Quer trazer o CondoDaily para sua cidade? <a href="#cadastro" style="color:var(--ouro);text-decoration:underline;font-weight:600">Fale conosco</a></div>
 
-      <nav class="nav">
-        <a href="/">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-            <rect x="4" y="18" width="24" height="38" rx="5" fill="#3A9E8F"/>
-            <rect x="10" y="24" width="5" height="4.5" rx="1.2" fill="white"/>
-            <rect x="18" y="24" width="5" height="4.5" rx="1.2" fill="white"/>
-            <rect x="10" y="32" width="5" height="4.5" rx="1.2" fill="white"/>
-            <rect x="18" y="32" width="5" height="4.5" rx="1.2" fill="white"/>
-            <rect x="10" y="40" width="5" height="4.5" rx="1.2" fill="white"/>
-            <rect x="18" y="40" width="5" height="4.5" rx="1.2" fill="white"/>
-            <circle cx="16" cy="51" r="3.5" fill="#F5A623"/>
-            <rect x="32" y="6" width="28" height="50" rx="5" fill="#1B7A6E"/>
-            <rect x="38" y="12" width="5" height="4.5" rx="1.2" fill="white"/>
-            <rect x="46" y="12" width="5" height="4.5" rx="1.2" fill="white"/>
-            <rect x="38" y="20" width="5" height="4.5" rx="1.2" fill="white"/>
-            <rect x="46" y="20" width="5" height="4.5" rx="1.2" fill="white"/>
-            <rect x="38" y="28" width="5" height="4.5" rx="1.2" fill="white"/>
-            <rect x="46" y="28" width="5" height="4.5" rx="1.2" fill="white"/>
-            <circle cx="46" cy="51" r="3.5" fill="#F5A623"/>
-          </svg>
-          <span class="nav-wm">Condo<span>Daily</span></span>
-        </a>
-      </nav>
-
-      <section class="hero">
-        <div class="hero-mark">
-          <div class="hero-mark-inner">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-              <!-- Prédio menor (esquerda) — verde claro -->
-              <rect x="4" y="18" width="24" height="38" rx="5" fill="#3A9E8F"/>
-              <rect class="w1" x="10" y="24" width="5" height="4.5" rx="1.2" fill="white"/>
-              <rect class="w2" x="18" y="24" width="5" height="4.5" rx="1.2" fill="white"/>
-              <rect class="w3" x="10" y="32" width="5" height="4.5" rx="1.2" fill="white"/>
-              <rect class="w4" x="18" y="32" width="5" height="4.5" rx="1.2" fill="white"/>
-              <rect class="w5" x="10" y="40" width="5" height="4.5" rx="1.2" fill="white"/>
-              <rect class="w6" x="18" y="40" width="5" height="4.5" rx="1.2" fill="white"/>
-              <circle class="dot1" cx="16" cy="51" r="3.5" fill="#F5A623"/>
-              <!-- Prédio maior (direita) — verde escuro -->
-              <rect x="32" y="6" width="28" height="50" rx="5" fill="#1B7A6E"/>
-              <rect class="w7" x="38" y="12" width="5" height="4.5" rx="1.2" fill="white"/>
-              <rect class="w8" x="48" y="12" width="5" height="4.5" rx="1.2" fill="white"/>
-              <rect class="w9" x="38" y="20" width="5" height="4.5" rx="1.2" fill="white"/>
-              <rect class="w10" x="48" y="20" width="5" height="4.5" rx="1.2" fill="white"/>
-              <rect class="w11" x="38" y="28" width="5" height="4.5" rx="1.2" fill="white"/>
-              <rect class="w12" x="48" y="28" width="5" height="4.5" rx="1.2" fill="white"/>
-              <rect class="w13" x="38" y="36" width="5" height="4.5" rx="1.2" fill="white"/>
-              <rect class="w14" x="48" y="36" width="5" height="4.5" rx="1.2" fill="white"/>
-              <circle class="dot2" cx="48" cy="51" r="3.5" fill="#F5A623"/>
-            </svg>
-          </div>
+  <!-- SOCIAL PROOF -->
+  <section class="social-proof" id="social-proof">
+    <div class="container">
+      <div class="proof-grid">
+        <div class="proof-item">
+          <div class="proof-val" id="proof-total">--</div>
+          <div class="proof-label">Cadastros na fila de acesso</div>
         </div>
-
-        <h1>Condo<span class="gold">Daily</span></h1>
-        <p class="hero-tag">A diária certa, na hora certa.</p>
-        <p class="hero-problem">Mão de obra escassa?</p>
-        <p class="hero-desc">
-          Da diarista à manutenção de elevadores, o CondoDaily conecta você a profissionais prontos pra te atender na hora que precisar.
-        </p>
-        <div class="hero-badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 15l-2 5L9 9l11 4-5 2z"/><path d="M22 22l-5-5"/></svg> Em um clique</div>
-        <p class="hero-closing">A solução para seu condomínio.</p>
-
-        <!-- Animated city scene -->
-        <div class="city-scene">
-          <!-- Sun -->
-          <div class="city-sun"></div>
-          <!-- Moon -->
-          <div class="city-moon"></div>
-          <!-- Stars (appear at night) -->
-          <div class="city-stars">
-            <div class="city-star"></div>
-            <div class="city-star"></div>
-            <div class="city-star"></div>
-            <div class="city-star"></div>
-            <div class="city-star"></div>
-            <div class="city-star"></div>
-            <div class="city-star"></div>
-            <div class="city-star"></div>
-          </div>
-          <!-- Clouds -->
-          <div class="city-cloud">
-            <svg width="70" height="30" viewBox="0 0 70 30"><ellipse cx="35" cy="18" rx="30" ry="12" fill="white" opacity="0.85"/><ellipse cx="22" cy="15" rx="18" ry="10" fill="white" opacity="0.9"/><ellipse cx="48" cy="14" rx="20" ry="11" fill="white" opacity="0.88"/></svg>
-          </div>
-          <div class="city-cloud">
-            <svg width="55" height="24" viewBox="0 0 55 24"><ellipse cx="28" cy="14" rx="24" ry="10" fill="white" opacity="0.8"/><ellipse cx="18" cy="12" rx="15" ry="8" fill="white" opacity="0.85"/><ellipse cx="38" cy="11" rx="16" ry="9" fill="white" opacity="0.82"/></svg>
-          </div>
-          <!-- Trees -->
-          <div class="city-tree">
-            <svg width="28" height="38" viewBox="0 0 28 38"><rect x="11" y="22" width="6" height="16" rx="2" fill="#795548"/><circle cx="14" cy="14" r="14" fill="#66BB6A"/><circle cx="8" cy="18" r="8" fill="#81C784"/></svg>
-          </div>
-          <div class="city-tree" style="right:6%;left:auto">
-            <svg width="22" height="32" viewBox="0 0 22 32"><rect x="9" y="18" width="5" height="14" rx="2" fill="#795548"/><circle cx="11" cy="12" r="11" fill="#81C784"/><circle cx="7" cy="15" r="6" fill="#66BB6A"/></svg>
-          </div>
-          <!-- Buildings -->
-          <div class="city-buildings">
-            <div class="city-bld">
-              <div class="city-win"></div><div class="city-win lit"></div>
-              <div class="city-win lit"></div><div class="city-win"></div>
-              <div class="city-win"></div><div class="city-win lit"></div>
-              <div class="city-win lit"></div><div class="city-win"></div>
-              <div class="city-win"></div><div class="city-win lit"></div>
-            </div>
-            <div class="city-bld">
-              <div class="city-win lit"></div><div class="city-win"></div><div class="city-win lit"></div>
-              <div class="city-win"></div><div class="city-win lit"></div><div class="city-win"></div>
-              <div class="city-win lit"></div><div class="city-win"></div><div class="city-win lit"></div>
-              <div class="city-win"></div><div class="city-win lit"></div><div class="city-win"></div>
-              <div class="city-win lit"></div><div class="city-win"></div><div class="city-win lit"></div>
-            </div>
-            <div class="city-bld">
-              <div class="city-win"></div><div class="city-win lit"></div><div class="city-win"></div>
-              <div class="city-win lit"></div><div class="city-win"></div><div class="city-win lit"></div>
-              <div class="city-win"></div><div class="city-win lit"></div><div class="city-win"></div>
-              <div class="city-win lit"></div><div class="city-win"></div><div class="city-win lit"></div>
-              <div class="city-win"></div><div class="city-win lit"></div><div class="city-win"></div>
-              <div class="city-win lit"></div><div class="city-win"></div><div class="city-win lit"></div>
-            </div>
-            <div class="city-bld">
-              <div class="city-win lit"></div><div class="city-win"></div><div class="city-win lit"></div>
-              <div class="city-win"></div><div class="city-win lit"></div><div class="city-win"></div>
-              <div class="city-win lit"></div><div class="city-win"></div><div class="city-win lit"></div>
-              <div class="city-win"></div><div class="city-win lit"></div><div class="city-win"></div>
-            </div>
-            <div class="city-bld">
-              <div class="city-win"></div><div class="city-win lit"></div>
-              <div class="city-win lit"></div><div class="city-win"></div>
-              <div class="city-win"></div><div class="city-win lit"></div>
-              <div class="city-win lit"></div><div class="city-win"></div>
-              <div class="city-win"></div><div class="city-win lit"></div>
-            </div>
-          </div>
-          <!-- People -->
-          <div class="city-people">
-            <!-- Cleaner with broom -->
-            <div class="city-person">
-              <svg width="24" height="36" viewBox="0 0 24 36">
-                <circle cx="12" cy="5" r="5" fill="#FFB74D"/>
-                <rect x="7" y="10" width="10" height="12" rx="3" fill="#42A5F5"/>
-                <rect x="7" y="22" width="4" height="10" rx="2" fill="#1E88E5"/>
-                <rect x="13" y="22" width="4" height="10" rx="2" fill="#1E88E5"/>
-                <g class="person-broom">
-                  <rect x="19" y="6" width="2" height="22" rx="1" fill="#795548" transform="rotate(15 20 17)"/>
-                  <rect x="16" y="26" width="8" height="3" rx="1" fill="#A1887F" transform="rotate(15 20 27)"/>
-                </g>
-              </svg>
-            </div>
-            <!-- Worker with mop -->
-            <div class="city-person person-mop">
-              <svg width="24" height="36" viewBox="0 0 24 36">
-                <circle cx="12" cy="5" r="5" fill="#FFB74D"/>
-                <rect x="7" y="10" width="10" height="12" rx="3" fill="#66BB6A"/>
-                <rect x="7" y="22" width="4" height="10" rx="2" fill="#43A047"/>
-                <rect x="13" y="22" width="4" height="10" rx="2" fill="#43A047"/>
-                <rect x="1" y="4" width="2" height="24" rx="1" fill="#9E9E9E"/>
-                <ellipse cx="2" cy="28" rx="5" ry="2" fill="#BDBDBD" opacity="0.6"/>
-              </svg>
-            </div>
-            <!-- Gardener with spray -->
-            <div class="city-person">
-              <svg width="30" height="36" viewBox="0 0 30 36">
-                <circle cx="12" cy="5" r="5" fill="#FFB74D"/>
-                <path d="M8 3 Q12 0 16 3" stroke="#F5A623" stroke-width="2" fill="none"/>
-                <rect x="7" y="10" width="10" height="12" rx="3" fill="#FF7043"/>
-                <rect x="7" y="22" width="4" height="10" rx="2" fill="#E64A19"/>
-                <rect x="13" y="22" width="4" height="10" rx="2" fill="#E64A19"/>
-                <rect x="17" y="12" width="6" height="8" rx="2" fill="#78909C"/>
-                <circle class="person-spray" cx="26" cy="14" r="4" fill="#4FC3F7" opacity="0"/>
-              </svg>
-            </div>
-          </div>
-          <!-- Sparkles -->
-          <div class="city-sparkle">
-            <svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 0L8.5 5.5L14 7L8.5 8.5L7 14L5.5 8.5L0 7L5.5 5.5Z" fill="#FFD54F"/></svg>
-          </div>
-          <div class="city-sparkle">
-            <svg width="10" height="10" viewBox="0 0 10 10"><path d="M5 0L6.2 3.8L10 5L6.2 6.2L5 10L3.8 6.2L0 5L3.8 3.8Z" fill="#F5A623"/></svg>
-          </div>
-          <div class="city-sparkle">
-            <svg width="12" height="12" viewBox="0 0 12 12"><path d="M6 0L7.4 4.6L12 6L7.4 7.4L6 12L4.6 7.4L0 6L4.6 4.6Z" fill="#FFEE58"/></svg>
-          </div>
+        <div class="proof-item">
+          <div class="proof-val" id="proof-sindicos">--</div>
+          <div class="proof-label">Síndicos e administradores</div>
         </div>
-
-        <!-- Highlight card — urgency scenario -->
-        <div class="highlight">
-          <div class="highlight-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFBA3B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-          <div class="highlight-body">
-            <h3>Segunda-feira, 7h da manhã</h3>
-            <p>Zelador ligou doente. Às 7h15 você já tem um profissional confirmado pelo app. Isso é CondoDaily.</p>
-          </div>
+        <div class="proof-item">
+          <div class="proof-val ouro" id="proof-profissionais">--</div>
+          <div class="proof-label">Profissionais cadastrados</div>
         </div>
+        <div class="proof-item">
+          <div class="proof-val indigo">13+</div>
+          <div class="proof-label">Categorias de serviço</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="features">
+  <!-- URGENCY -->
+  <section class="urgency" id="urgency-bar">
+    <div class="container">
+      <div class="urgency-inner">
+        <div class="urgency-text">Primeiros <strong>100 cadastrados</strong> ganham acesso prioritário ao app</div>
+        <div class="urgency-counter">
+          <div class="urgency-bar-wrap">
+            <div class="urgency-bar" id="urgency-fill" style="width:0%"></div>
+          </div>
+          <div class="urgency-count"><span id="urgency-num">--</span>/100 vagas preenchidas</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-          <!-- PARA CONDOMÍNIOS -->
-          <div class="feat" onclick="this.classList.toggle('open')">
-            <div class="feat-ic v">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-                <rect x="2" y="7" width="9" height="14" rx="2" fill="#3A9E8F"/>
-                <rect x="13" y="3" width="9" height="18" rx="2" fill="#1B7A6E"/>
-                <rect x="4" y="9.5" width="2" height="1.8" rx="0.5" fill="white"/>
-                <rect x="7" y="9.5" width="2" height="1.8" rx="0.5" fill="white"/>
-                <rect x="4" y="13" width="2" height="1.8" rx="0.5" fill="white"/>
-                <rect x="7" y="13" width="2" height="1.8" rx="0.5" fill="white"/>
-                <circle cx="6.5" cy="18.5" r="1.3" fill="#F5A623"/>
-                <rect x="15" y="5.5" width="2" height="1.8" rx="0.5" fill="white"/>
-                <rect x="18" y="5.5" width="2" height="1.8" rx="0.5" fill="white"/>
-                <rect x="15" y="9" width="2" height="1.8" rx="0.5" fill="white"/>
-                <rect x="18" y="9" width="2" height="1.8" rx="0.5" fill="white"/>
-                <circle cx="17.5" cy="18.5" r="1.3" fill="#F5A623"/>
-                <rect x="15" y="12.5" width="2" height="2" rx="0.4" fill="white"/>
-              </svg>
-            </div>
-            <div style="flex:1">
-              <div class="feat-header">
-                <div>
-                  <h3>Para Condomínios</h3>
-                  <p>Chega de ficar na mão. Toque pra ver como funciona.</p>
-                </div>
-                <svg class="feat-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+  <!-- COMO FUNCIONA -->
+  <section class="section section-alt reveal" id="como-funciona">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Como funciona</div>
+        <h2 class="section-title">Simples, rápido e seguro</h2>
+        <p class="section-desc">Em três passos, seu condomínio tem profissional confirmado para a diária. Sem burocracia, sem vínculo trabalhista.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Cadastre e descreva</h3>
+          <p>Informe as áreas do condomínio, suba a convenção e nossa IA identifica os serviços que você precisa.</p>
+          <div class="step-connector"></div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Encontre e contrate</h3>
+          <p>Veja profissionais verificados disponíveis, compare avaliações e contrate a diária em minutos.</p>
+          <div class="step-connector"></div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>Acompanhe e pague</h3>
+          <p>Check-in geolocalizado, acompanhamento em tempo real e pagamento liberado após confirmação.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARA CONDOMÍNIOS -->
+  <section class="section reveal" id="condominios">
+    <div class="container">
+      <div class="benefits">
+        <div class="benefits-content">
+          <div class="section-label">Para Condomínios</div>
+          <h2>Chega de ficar na mão. Profissional confirmado em minutos.</h2>
+          <p>O zelador faltou? Precisa de limpeza urgente para o salão de festas? Com o CondoDaily, você encontra profissionais verificados prontos para atender no mesmo dia.</p>
+          <ul class="benefit-list">
+            <li class="benefit-item">
+              <div class="benefit-icon verde">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#1B7A6E" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               </div>
-              <div class="feat-detail">
-                <div class="feat-detail-inner">
-                  <ul class="feat-problems">
-                    <li>
-                      <svg class="prob-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-                      <span><strong>Passivo trabalhista:</strong> CLT gera encargos, processos e risco. Com diárias pelo app, sem vínculo empregatício.</span>
-                    </li>
-                    <li>
-                      <svg class="prob-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-                      <span><strong>Funcionário faltou:</strong> Substituto confirmado pelo app em minutos, não em dias.</span>
-                    </li>
-                    <li>
-                      <svg class="prob-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-                      <span><strong>Fim de semana sem cobertura:</strong> Profissionais disponíveis sábado, domingo e feriado.</span>
-                    </li>
-                    <li>
-                      <svg class="sol-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                      <span><strong>Todos verificados:</strong> Profissionais com documentação, avaliações reais e seguro incluso.</span>
-                    </li>
-                    <li>
-                      <svg class="sol-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                      <span><strong>Serviços completos:</strong> Limpeza, jardinagem, portaria, elétrica, elevadores, piscina e mais.</span>
-                    </li>
-                  </ul>
-                  <a href="#cadastro" class="feat-cta cta-verde" onclick="scrollToSignup('sindico')">Cadastre seu condomínio</a>
-                  <p class="feat-cta-sub">Garanta prioridade no lançamento + bônus exclusivo</p>
-                </div>
+              <div>
+                <h4>Sem risco trabalhista</h4>
+                <p>Diárias avulsas não geram CLT, encargos ou processos. Você mantém controle total sem vínculo empregatício.</p>
               </div>
-            </div>
-          </div>
-
-          <!-- PARA PROFISSIONAIS -->
-          <div class="feat" onclick="this.classList.toggle('open')">
-            <div class="feat-ic o">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-                <circle cx="12" cy="8" r="4" fill="#F5A623"/>
-                <path d="M4 20c0-3.3 3.6-6 8-6s8 2.7 8 6" stroke="#F5A623" stroke-width="2" stroke-linecap="round" fill="none"/>
-                <circle cx="19" cy="8" r="2.5" fill="#F5A623" opacity="0.3"/>
-              </svg>
-            </div>
-            <div style="flex:1">
-              <div class="feat-header">
-                <div>
-                  <h3>Para Profissionais</h3>
-                  <p>Chega de depender de indicação. Toque pra ver como funciona.</p>
-                </div>
-                <svg class="feat-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+            </li>
+            <li class="benefit-item">
+              <div class="benefit-icon verde">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#1B7A6E" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
               </div>
-              <div class="feat-detail">
-                <div class="feat-detail-inner">
-                  <ul class="feat-problems">
-                    <li>
-                      <svg class="sol-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                      <span><strong>Você define seu preço:</strong> Coloque seu valor por hora. Sem intermediário decidindo quanto você ganha.</span>
-                    </li>
-                    <li>
-                      <svg class="sol-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                      <span><strong>Receba na hora:</strong> Concluiu o serviço e fez checkout? Pagamento cai na sua conta. Sem esperar síndico pagar.</span>
-                    </li>
-                    <li>
-                      <svg class="sol-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                      <span><strong>Você avalia o condomínio:</strong> Via de mão dupla. Condomínios ruins perdem profissionais bons.</span>
-                    </li>
-                    <li>
-                      <svg class="prob-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-                      <span><strong>Chega de WhatsApp:</strong> Sem depender de grupo, indicação ou boca a boca. O app traz os clientes.</span>
-                    </li>
-                    <li>
-                      <svg class="sol-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                      <span><strong>Simples de usar:</strong> Aceite diárias, faça check-in no local, conclua e receba. Sem burocracia.</span>
-                    </li>
-                  </ul>
-                  <!-- QUIZ -->
-                  <div class="quiz-separator"><span>Teste seu preparo</span></div>
-                  <p class="quiz-intro">O mercado de serviços para condomínios <strong>cresce a cada dia</strong>. Descubra se você está pronto pra atender ou se vale se especializar nessa área.</p>
-
-                  <div id="quiz">
-                    <div class="quiz-step active" data-step="1">
-                      <div class="quiz-progress"><div class="quiz-dot filled"></div><div class="quiz-dot"></div><div class="quiz-dot"></div></div>
-                      <p class="quiz-question">Você tem experiência com serviços em condomínios?</p>
-                      <div class="quiz-options">
-                        <div class="quiz-opt" onclick="quizNext(2,2,event)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Sim, trabalho regularmente</div>
-                        <div class="quiz-opt" onclick="quizNext(2,1,event)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Já fiz alguns serviços</div>
-                        <div class="quiz-opt" onclick="quizNext(2,0,event)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Ainda não, mas quero começar</div>
-                      </div>
-                    </div>
-                    <div class="quiz-step" data-step="2">
-                      <div class="quiz-progress"><div class="quiz-dot filled"></div><div class="quiz-dot filled"></div><div class="quiz-dot"></div></div>
-                      <p class="quiz-question">Você tem MEI ou outro registro como prestador?</p>
-                      <div class="quiz-options">
-                        <div class="quiz-opt" onclick="quizNext(3,2,event)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Sim, tenho MEI ativo</div>
-                        <div class="quiz-opt" onclick="quizNext(3,1,event)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Estou em processo de abrir</div>
-                        <div class="quiz-opt" onclick="quizNext(3,0,event)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Não tenho ainda</div>
-                      </div>
-                    </div>
-                    <div class="quiz-step" data-step="3">
-                      <div class="quiz-progress"><div class="quiz-dot filled"></div><div class="quiz-dot filled"></div><div class="quiz-dot filled"></div></div>
-                      <p class="quiz-question">Tem disponibilidade para finais de semana e feriados?</p>
-                      <div class="quiz-options">
-                        <div class="quiz-opt" onclick="quizFinish(2,event)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Sim, total flexibilidade</div>
-                        <div class="quiz-opt" onclick="quizFinish(1,event)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Alguns fins de semana sim</div>
-                        <div class="quiz-opt" onclick="quizFinish(0,event)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Só dias úteis por enquanto</div>
-                      </div>
-                    </div>
-                    <div class="quiz-step" data-step="result" id="quiz-result"></div>
-                  </div>
-
-                  <a href="#cadastro" class="feat-cta cta-ouro" style="margin-top:16px" onclick="scrollToSignup('profissional')">Cadastre-se como profissional</a>
-                  <p class="feat-cta-sub">Primeiros cadastrados ganham destaque no lançamento</p>
-                </div>
+              <div>
+                <h4>Substituição urgente</h4>
+                <p>Funcionário faltou? Encontre um substituto qualificado em minutos, não em dias. Disponível inclusive fins de semana.</p>
               </div>
-            </div>
-          </div>
-
-          <!-- SEGURO INCLUSO -->
-          <div class="feat">
-            <div class="feat-ic i">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="#EDF0F7" stroke="#2A3F6B" stroke-width="1.3"/>
-                <path d="M8.5 11.5l2.5 2.5 5-5" stroke="#2A3F6B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <div>
-              <h3>Seguro Incluso</h3>
-              <p>Ambos protegidos. Check-in digital, cobertura durante todo o serviço e multa automática por no-show.</p>
-            </div>
-          </div>
-
+            </li>
+            <li class="benefit-item">
+              <div class="benefit-icon verde">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#1B7A6E" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              </div>
+              <div>
+                <h4>Profissionais verificados</h4>
+                <p>Documentação validada, avaliações de outros síndicos e seguro incluso durante toda a prestação.</p>
+              </div>
+            </li>
+            <li class="benefit-item">
+              <div class="benefit-icon verde">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#1B7A6E" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+              </div>
+              <div>
+                <h4>Gestão inteligente</h4>
+                <p>IA analisa a convenção do condomínio e recomenda serviços. Checklist de manutenção com alertas automáticos.</p>
+              </div>
+            </li>
+          </ul>
         </div>
-      </section>
-
-      <!-- Real scenarios — problem → solution -->
-      <section class="scenarios reveal stagger">
-        <p class="scenarios-label">Situações reais, resolvidas</p>
-
-        <div class="scenario">
-          <div class="scenario-emoji prob"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D99A1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
-          <div class="scenario-text">
-            <strong>O funcionário faltou sem avisar</strong>
-            <span>Abra o app, encontre um substituto em minutos. <em>Problema resolvido antes das 8h.</em></span>
+        <div class="benefits-visual">
+          <div class="bv-header">
+            <h3>Categorias disponíveis</h3>
+            <p>Serviços especializados para o seu condomínio</p>
           </div>
-        </div>
-
-        <div class="scenario">
-          <div class="scenario-emoji prob"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D99A1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/></svg></div>
-          <div class="scenario-text">
-            <strong>Festa no salão neste sábado</strong>
-            <span>Precisa de limpeza pré e pós-evento? <em>Profissionais disponíveis no fim de semana.</em></span>
+          <div class="bv-items">
+            <div class="bv-item"><div class="bv-dot green"></div><span>Limpeza geral e conservação</span></div>
+            <div class="bv-item"><div class="bv-dot green"></div><span>Jardinagem e paisagismo</span></div>
+            <div class="bv-item"><div class="bv-dot green"></div><span>Manutenção elétrica e hidráulica</span></div>
+            <div class="bv-item"><div class="bv-dot gold"></div><span>Portaria e recepção</span></div>
+            <div class="bv-item"><div class="bv-dot gold"></div><span>Vigilância e segurança</span></div>
+            <div class="bv-item"><div class="bv-dot blue"></div><span><strong>Manutenção de elevadores</strong></span></div>
+            <div class="bv-item"><div class="bv-dot blue"></div><span><strong>Seguros condominiais</strong></span></div>
+            <div class="bv-item"><div class="bv-dot blue"></div><span>Pintura, piscina, dedetização e mais</span></div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="scenario">
-          <div class="scenario-emoji sol"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1B7A6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
-          <div class="scenario-text">
-            <strong>Profissional quer mais diárias</strong>
-            <span>Sem depender de WhatsApp ou indicação. <em>O app traz os clientes até você.</em></span>
+  <!-- PARA PROFISSIONAIS E EMPRESAS -->
+  <section class="section section-alt reveal" id="profissionais">
+    <div class="container">
+      <div class="benefits" style="direction:rtl;">
+        <div class="benefits-content" style="direction:ltr;">
+          <div class="section-label">Para Profissionais e Empresas</div>
+          <h2>Seu trabalho merece reconhecimento. Ganhe mais com quem confia em você.</h2>
+          <p>Seja autônomo ou empresa de elevadores, seguros, construção ou segurança — o CondoDaily conecta você a condomínios que precisam dos seus serviços.</p>
+          <ul class="benefit-list">
+            <li class="benefit-item">
+              <div class="benefit-icon ouro">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#D99A1E" stroke-width="2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+              </div>
+              <div>
+                <h4>Você controla seu valor</h4>
+                <p>Defina sua hora e receba o valor integral. Sem intermediário decidindo quanto você ganha.</p>
+              </div>
+            </li>
+            <li class="benefit-item">
+              <div class="benefit-icon ouro">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#D99A1E" stroke-width="2" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              </div>
+              <div>
+                <h4>Demanda constante</h4>
+                <p>Condomínios precisam de manutenção o ano todo. Construa sua carteira de clientes dentro da plataforma.</p>
+              </div>
+            </li>
+            <li class="benefit-item">
+              <div class="benefit-icon ouro">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#D99A1E" stroke-width="2" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <div>
+                <h4>Reputação é seu ativo</h4>
+                <p>Cada serviço bem feito aumenta sua avaliação. Mais estrelas, mais oportunidades e melhores diárias.</p>
+              </div>
+            </li>
+            <li class="benefit-item">
+              <div class="benefit-icon ouro">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#D99A1E" stroke-width="2" stroke-linecap="round"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg>
+              </div>
+              <div>
+                <h4>Pagamento garantido</h4>
+                <p>Receba via PIX assim que o serviço for confirmado. Sem calote, sem atraso.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="benefits-visual" style="direction:ltr;">
+          <div class="bv-header">
+            <h3>Para todos os portes</h3>
+            <p>Autônomos e empresas são bem-vindos</p>
+          </div>
+          <div class="bv-items">
+            <div class="bv-item"><div class="bv-dot gold"></div><span><strong>Profissional autônomo</strong> — MEI ou pessoa física</span></div>
+            <div class="bv-item"><div class="bv-dot gold"></div><span><strong>Empresas de elevadores</strong> — manutenção preventiva</span></div>
+            <div class="bv-item"><div class="bv-dot gold"></div><span><strong>Seguradoras</strong> — seguros condominiais</span></div>
+            <div class="bv-item"><div class="bv-dot gold"></div><span><strong>Empresas de segurança</strong> — vigilância e portaria</span></div>
+            <div class="bv-item"><div class="bv-dot gold"></div><span><strong>Construtoras</strong> — obras e reformas</span></div>
+            <div class="bv-item"><div class="bv-dot gold"></div><span><strong>Serviços gerais</strong> — limpeza, jardinagem, piscina</span></div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="scenario">
-          <div class="scenario-emoji sol"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1B7A6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-          <div class="scenario-text">
-            <strong>Reputação que abre portas</strong>
-            <span>Cada serviço bem feito aumenta sua nota. <em>Mais estrelas = mais diárias.</em></span>
+  <!-- SEGURANÇA / TRUST -->
+  <section class="section reveal" id="seguranca">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Segurança e Confiança</div>
+        <h2 class="section-title">Feito por quem entende de condomínio</h2>
+        <p class="section-desc">Equipe com experiência em gestão condominial. Suporte especializado que entende legislação, não apenas chat genérico.</p>
+      </div>
+      <div class="trust-grid">
+        <div class="trust-card">
+          <div class="trust-icon verde">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#1B7A6E" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>Seguro incluso</h3>
+          <p>Cobertura durante toda a prestação do serviço. Profissional e condomínio protegidos.</p>
+        </div>
+        <div class="trust-card">
+          <div class="trust-icon verde">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#1B7A6E" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <h3>Profissionais verificados</h3>
+          <p>Documentação validada, antecedentes e avaliações de outros síndicos antes de contratar.</p>
+        </div>
+        <div class="trust-card">
+          <div class="trust-icon ouro">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#D99A1E" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          </div>
+          <h3>Pagamento seguro</h3>
+          <p>Transações processadas pelo Mercado Pago. PIX, cartão de crédito ou boleto.</p>
+        </div>
+        <div class="trust-card">
+          <div class="trust-icon indigo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#2A3F6B" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
+          <h3>LGPD e IA responsável</h3>
+          <p>Dados protegidos conforme a LGPD. Inteligência artificial com consentimento explícito.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREÇOS TRANSPARENTES -->
+  <section class="section section-alt reveal" id="precos">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Transparência</div>
+        <h2 class="section-title">Sem custos ocultos</h2>
+        <p class="section-desc">Você sabe exatamente quanto paga e quanto recebe. Sem surpresas.</p>
+      </div>
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <h3>Para Síndicos</h3>
+          <p>O valor da diária é definido pelo profissional. Você paga apenas o valor acordado mais a taxa de serviço.</p>
+          <ul class="pricing-list">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Taxa de 5% + R$ 5 de seguro por diária
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Seguro incluso no valor
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Pagamento só após confirmação do serviço
+            </li>
+          </ul>
+        </div>
+        <div class="pricing-card">
+          <h3>Para Profissionais</h3>
+          <p>Você define seu preço por hora. O pagamento é liberado via PIX assim que ambas as partes confirmam.</p>
+          <ul class="pricing-list">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Você recebe o valor integral que define
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              PIX automático após conclusão
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Sem mensalidade ou taxa de adesão
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section reveal" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Dúvidas Frequentes</div>
+        <h2 class="section-title">Tudo o que você precisa saber</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Diárias pelo CondoDaily geram vínculo empregatício?
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Não. Diárias avulsas contratadas pela plataforma não configuram vínculo CLT. O profissional atua de forma autônoma, define seu próprio preço e horário. Não há subordinação, habitualidade obrigatória ou exclusividade.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Qual a responsabilidade do síndico ao usar a plataforma?
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">O síndico contrata a diária pelo app, acompanha o check-in/check-out e confirma a conclusão. O seguro cobre eventuais incidentes durante a prestação. A plataforma cuida de toda a verificação documental do profissional.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Como funciona o seguro incluso?
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Toda diária contratada inclui uma taxa de R$ 5 que cobre o seguro durante a prestação do serviço. O seguro protege tanto o condomínio quanto o profissional em caso de incidentes no local de trabalho.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Posso usar o CondoDaily junto com funcionários CLT?
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Sim! Muitos condomínios usam a plataforma para complementar a equipe fixa. Precisa de limpeza extra no salão de festas? Zelador faltou? O CondoDaily resolve sem comprometer seu quadro de CLT.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Sou empresa de elevadores/seguros. Como me cadastrar?
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Preencha o formulário abaixo selecionando "Represento uma empresa". Nossa equipe entrará em contato para entender seus serviços e configurar seu perfil comercial na plataforma.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Em quais cidades o CondoDaily está disponível?
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Atualmente operamos em Curitiba e região metropolitana. Estamos planejando a expansão para outras capitais do Sul e Sudeste. Cadastre-se para ser notificado quando chegarmos na sua cidade.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEAD FORM -->
+  <section class="form-section reveal" id="cadastro">
+    <div class="form-inner">
+      <div class="form-text">
+        <h2>Faça parte da nova era da gestão condominial</h2>
+        <p>Cadastre-se para receber acesso antecipado ao app. Primeiros cadastrados terão benefícios exclusivos no lançamento.</p>
+        <div class="form-trust-items">
+          <div class="form-trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Acesso prioritário ao app
+          </div>
+          <div class="form-trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Suporte dedicado no onboarding
+          </div>
+          <div class="form-trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Seus dados protegidos pela LGPD
           </div>
         </div>
-      </section>
-
-      <section class="stats reveal-scale" id="stats-section">
-        <div class="stat">
-          <div class="stat-val v" data-target="15" data-suffix="+">0</div>
-          <small>Categorias de serviço</small>
-        </div>
-        <div class="stat">
-          <div class="stat-val o" data-target="100" data-suffix="%">0</div>
-          <small>Pagamento seguro</small>
-        </div>
-        <div class="stat">
-          <div class="stat-val i" data-target="24" data-suffix="h">0</div>
-          <small>Agendamento rápido</small>
-        </div>
-      </section>
-
-      <section class="cta reveal">
-        <p class="cta-label">Baixe o aplicativo</p>
-        <div class="stores">
-          <a class="store-btn sb-dark" href="#" aria-label="App Store">
-            <span class="sb-ic">
-              <svg viewBox="0 0 22 22" fill="none">
-                <path d="M15.77 7.15c-.08.06-1.55.9-1.53 2.52.02 1.94 1.68 2.62 1.7 2.63-.01.05-.27.93-.88 1.84-.53.79-1.08 1.57-1.95 1.59-.85.02-1.13-.51-2.1-.51-.98 0-1.29.49-2.09.53-.84.03-1.48-.85-2.01-1.64-1.09-1.61-1.93-4.56-.81-6.55.56-.99 1.55-1.61 2.63-1.63.82-.02 1.6.56 2.1.56.5 0 1.44-.69 2.43-.59.41.02 1.57.17 2.32 1.28l.19-.03zM13.15 4.4c.44-.54.74-1.3.66-2.05-.64.03-1.41.43-1.87.97-.41.48-.77 1.24-.67 1.98.71.05 1.44-.37 1.88-.9z" fill="currentColor"/>
-              </svg>
-            </span>
-            <span class="sb-txt">
-              <small>Disponível na</small>
-              <strong>App Store</strong>
-            </span>
-          </a>
-          <a class="store-btn sb-outline" href="#" aria-label="Google Play">
-            <span class="sb-ic">
-              <svg viewBox="0 0 22 22" fill="none">
-                <path d="M4.07 3.3a1 1 0 0 0-.37.8v13.8c0 .34.14.63.38.8l.06.04 7.74-7.74v-.18L4.13 3.27l-.06.03z" fill="#4285F4"/>
-                <path d="M14.46 13.58l-2.58-2.58v-.18l2.58-2.58.06.03 3.06 1.74c.87.5.87 1.31 0 1.8l-3.06 1.74-.06.03z" fill="#FBBC04"/>
-                <path d="M14.52 13.55L11.88 10.91 4.07 18.7c.29.3.76.34 1.3.04l9.15-5.19z" fill="#EA4335"/>
-                <path d="M14.52 8.27L5.37 3.08c-.54-.3-1.01-.27-1.3.04l7.81 7.79 2.64-2.64z" fill="#34A853"/>
-              </svg>
-            </span>
-            <span class="sb-txt">
-              <small>Disponível no</small>
-              <strong>Google Play</strong>
-            </span>
-          </a>
-        </div>
-        <div class="soon">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          Em breve nas lojas
-        </div>
-      </section>
-
-      <section class="trust reveal">
-        <div class="trust-row">
-          <div class="trust-item">
-            <svg class="c-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            Pagamento seguro
+      </div>
+      <div class="form-card">
+        <h3>Cadastre-se gratuitamente</h3>
+        <p>Leva menos de 30 segundos</p>
+        <form id="lead-form" onsubmit="submitLead(event)">
+          <div class="form-group">
+            <label for="lead-name">Nome completo</label>
+            <input type="text" id="lead-name" placeholder="Seu nome" required minlength="2">
           </div>
-          <div class="trust-item">
-            <svg class="c-v" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            Profissionais verificados
+          <div class="form-group">
+            <label for="lead-email">E-mail</label>
+            <input type="email" id="lead-email" placeholder="seu@email.com" required>
           </div>
-          <div class="trust-item">
-            <svg class="c-o" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            Dados protegidos (LGPD)
+          <div class="form-group">
+            <label for="lead-phone">Telefone (opcional)</label>
+            <input type="tel" id="lead-phone" placeholder="(41) 99999-9999">
           </div>
-        </div>
-      </section>
-
-      <!-- REFERRAL / INDIQUE -->
-      <section class="referral reveal-scale" id="cadastro">
-        <div class="referral-card">
-          <div class="referral-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
-          </div>
-          <h3>Indique e ganhe</h3>
-          <p>Conhece um síndico ou profissional que precisa do CondoDaily? Indique e ambos ganham <strong>bônus no lançamento</strong>.</p>
-          <div class="referral-form" id="referral-form">
-            <input type="text" id="ref-name" placeholder="Seu nome" class="ref-input">
-            <input type="email" id="ref-email" placeholder="Seu e-mail" class="ref-input">
-            <select id="ref-type" class="ref-input">
-              <option value="">Eu sou...</option>
-              <option value="sindico">Síndico / Administrador</option>
-              <option value="profissional">Profissional / Diarista</option>
-              <option value="morador">Morador</option>
-              <option value="outro">Outro</option>
+          <div class="form-group">
+            <label for="lead-type">Quem é você?</label>
+            <select id="lead-type" required>
+              <option value="">Selecione...</option>
+              <option value="SINDICO">Sou síndico / administrador</option>
+              <option value="PROFISSIONAL">Sou profissional autônomo</option>
+              <option value="EMPRESA">Represento uma empresa</option>
+              <option value="MORADOR">Sou morador</option>
+              <option value="OUTRO">Outro</option>
             </select>
-            <input type="text" id="ref-indica" placeholder="Nome ou e-mail de quem você indica (opcional)" class="ref-input">
-            <button type="button" class="feat-cta cta-verde" onclick="submitReferral()">Quero participar</button>
           </div>
-          <div class="referral-success" id="referral-success" style="display:none">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1B7A6E" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            <h4>Cadastro recebido!</h4>
-            <p>Vamos te avisar assim que o app estiver disponível. Quanto mais indicar, maior seu bônus.</p>
-          </div>
+          <button type="submit" class="form-submit" id="lead-btn">Quero participar</button>
+        </form>
+        <div class="form-success" id="lead-success">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <h4>Cadastro confirmado!</h4>
+          <p>Enviamos um e-mail de confirmação. Você será um dos primeiros a testar o CondoDaily.</p>
         </div>
-      </section>
+      </div>
+    </div>
+  </section>
 
-      <div class="sep"></div>
-
-      <footer class="foot reveal">
-        <a href="/" class="foot-logo">
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <a href="/" class="footer-brand">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
             <rect x="6" y="16" width="24" height="40" rx="3" fill="#1B7A6E"/>
             <rect x="34" y="4" width="24" height="52" rx="3" fill="#145C53"/>
@@ -1828,178 +1958,104 @@
           </svg>
           <span>CondoDaily</span>
         </a>
-        <div class="foot-links">
+        <div class="footer-links">
           <a href="/privacy">Política de Privacidade</a>
           <a href="/terms">Termos de Uso</a>
         </div>
-        <small>&copy; 2026 CondoDaily. Todos os direitos reservados.</small>
-      </footer>
+        <div class="footer-copy">&copy; 2026 CondoDaily. Todos os direitos reservados.</div>
+      </div>
+    </div>
+  </footer>
 
+  <!-- WHATSAPP FLOATING BUTTON -->
+  <div class="whatsapp-float" id="whatsapp-float">
+    <div class="whatsapp-tooltip" id="whatsapp-tooltip">
+      Dúvidas? Fale conosco! <span class="close-tooltip" onclick="document.getElementById('whatsapp-tooltip').style.display='none'">&times;</span>
+    </div>
+    <a href="https://wa.me/5541999874274?text=Ol%C3%A1!%20Vim%20pelo%20site%20CondoDaily%20e%20gostaria%20de%20saber%20mais." class="whatsapp-btn" target="_blank" rel="noopener" aria-label="Fale conosco pelo WhatsApp">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+  </div>
+
+  <!-- EXIT-INTENT POPUP -->
+  <div class="exit-overlay" id="exit-overlay">
+    <div class="exit-popup">
+      <button class="exit-close" onclick="closeExitPopup()" aria-label="Fechar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      <div class="exit-emoji">👋</div>
+      <h3>Espere! Não vá embora ainda</h3>
+      <p>Cadastre-se em 10 segundos e garanta acesso prioritário ao app. Sem spam, prometemos.</p>
+      <form class="exit-form" id="exit-form" onsubmit="submitExitForm(event)">
+        <input type="text" id="exit-name" placeholder="Seu nome" required minlength="2">
+        <input type="email" id="exit-email" placeholder="seu@email.com" required>
+        <select id="exit-type" required>
+          <option value="">Quem é você?</option>
+          <option value="SINDICO">Síndico / Administrador</option>
+          <option value="PROFISSIONAL">Profissional</option>
+          <option value="MORADOR">Morador</option>
+          <option value="OUTRO">Outro</option>
+        </select>
+        <button type="submit" id="exit-btn">Garantir meu acesso</button>
+        <div class="exit-form-note">Seus dados protegidos pela LGPD. Sem spam.</div>
+      </form>
+      <div class="exit-success" id="exit-success">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <h4>Cadastro confirmado!</h4>
+        <p>Vamos te avisar assim que o app estiver pronto.</p>
+      </div>
     </div>
   </div>
+
   <script>
-    // ─── Scroll Reveal (IntersectionObserver) ─────
+    // ─── Nav scroll effect ───
+    var nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', function() {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // ─── Mobile menu toggle ───
+    document.getElementById('nav-toggle').addEventListener('click', function() {
+      document.getElementById('nav-links').classList.toggle('open');
+    });
+    // Close mobile menu on link click
+    document.querySelectorAll('#nav-links a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        document.getElementById('nav-links').classList.remove('open');
+      });
+    });
+
+    // ─── FAQ accordion ───
+    function toggleFaq(btn) {
+      var item = btn.parentElement;
+      var wasOpen = item.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.faq-item').forEach(function(el) {
+        el.classList.remove('open');
+      });
+      // Toggle current
+      if (!wasOpen) item.classList.add('open');
+    }
+
+    // ─── Scroll Reveal ───
     (function() {
-      var revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+      var revealEls = document.querySelectorAll('.reveal');
       if ('IntersectionObserver' in window) {
         var observer = new IntersectionObserver(function(entries) {
           entries.forEach(function(entry) {
             if (entry.isIntersecting) {
               entry.target.classList.add('visible');
-              // For stagger containers, also reveal children
-              if (entry.target.classList.contains('stagger')) {
-                var children = entry.target.children;
-                for (var i = 0; i < children.length; i++) {
-                  (function(child, idx) {
-                    setTimeout(function() {
-                      child.style.opacity = '1';
-                      child.style.transform = 'translateY(0) translateX(0)';
-                    }, idx * 120);
-                  })(children[i], i);
-                }
-              }
               observer.unobserve(entry.target);
             }
           });
-        }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
         revealEls.forEach(function(el) { observer.observe(el); });
       } else {
-        // Fallback: show everything
         revealEls.forEach(function(el) { el.classList.add('visible'); });
       }
     })();
 
-    // ─── Animated Counter for Stats ───────────────
-    (function() {
-      var statsSection = document.getElementById('stats-section');
-      if (!statsSection) return;
-      var counted = false;
-
-      function animateCounters() {
-        if (counted) return;
-        counted = true;
-        var vals = statsSection.querySelectorAll('.stat-val');
-        vals.forEach(function(el) {
-          var target = parseInt(el.getAttribute('data-target')) || 0;
-          var suffix = el.getAttribute('data-suffix') || '';
-          var duration = 1200;
-          var start = 0;
-          var startTime = null;
-
-          function step(timestamp) {
-            if (!startTime) startTime = timestamp;
-            var progress = Math.min((timestamp - startTime) / duration, 1);
-            // Ease out cubic
-            var eased = 1 - Math.pow(1 - progress, 3);
-            var current = Math.round(start + (target - start) * eased);
-            el.textContent = current + suffix;
-            if (progress < 1) requestAnimationFrame(step);
-          }
-          requestAnimationFrame(step);
-        });
-        // Add counted class for additional CSS animation
-        var stats = statsSection.querySelectorAll('.stat');
-        stats.forEach(function(s) { s.classList.add('counted'); });
-      }
-
-      var statsObs = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            animateCounters();
-            statsObs.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.3 });
-      statsObs.observe(statsSection);
-    })();
-
-    // ─── Subtle Parallax on Atmosphere Orbs ───────
-    (function() {
-      var atm = document.querySelector('.atm');
-      var atmIndigo = document.querySelector('.atm-indigo');
-      var ticking = false;
-
-      window.addEventListener('scroll', function() {
-        if (!ticking) {
-          requestAnimationFrame(function() {
-            var scrollY = window.pageYOffset;
-            if (atm) atm.style.transform = 'translateY(' + (scrollY * 0.04) + 'px)';
-            if (atmIndigo) atmIndigo.style.transform = 'translateY(' + (-scrollY * 0.06) + 'px)';
-            ticking = false;
-          });
-          ticking = true;
-        }
-      });
-    })();
-
-    // ─── Stagger children initial state ───────────
-    (function() {
-      var staggerEls = document.querySelectorAll('.stagger');
-      staggerEls.forEach(function(parent) {
-        var children = parent.children;
-        for (var i = 0; i < children.length; i++) {
-          children[i].style.opacity = '0';
-          children[i].style.transform = 'translateY(20px)';
-          children[i].style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
-        }
-      });
-    })();
-
-    // ─── Config ───────────────────────────────────
-    var API_URL = window.location.hostname === 'localhost'
-      ? 'http://localhost:3001/api/leads'
-      : 'https://api.condodaily.com.br/api/leads';
-
-    // ─── Quiz logic ───────────────────────────────
-    var quizScore = 0;
-
-    function quizNext(nextStep, points, e) {
-      if (e) e.stopPropagation();
-      quizScore += points;
-      document.querySelector('.quiz-step.active').classList.remove('active');
-      document.querySelector('[data-step="' + nextStep + '"]').classList.add('active');
-    }
-
-    function quizFinish(points, e) {
-      if (e) e.stopPropagation();
-      quizScore += points;
-      var isReady = quizScore >= 4;
-      var resultEl = document.getElementById('quiz-result');
-
-      if (isReady) {
-        resultEl.innerHTML = '<div class="quiz-result ready">' +
-          '<div class="quiz-result-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#1B7A6E" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>' +
-          '<h4>Pronto pra atender!</h4>' +
-          '<p>Seu perfil mostra que voce ja tem experiencia e preparo. Cadastre-se agora e seja um dos primeiros profissionais do CondoDaily.</p>' +
-          '<p class="quiz-market">O mercado condominial movimenta R$ 165 bilhoes/ano no Brasil e so cresce.</p>' +
-          '<a href="#cadastro" class="feat-cta cta-ouro" onclick="scrollToSignup(\'profissional\')" style="margin-top:12px;display:inline-block;font-size:14px;padding:12px 24px">Cadastre-se agora</a></div>';
-      } else {
-        resultEl.innerHTML = '<div class="quiz-result grow">' +
-          '<div class="quiz-result-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#D99A1E" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>' +
-          '<h4>Hora de se especializar!</h4>' +
-          '<p>O mercado de condominios e enorme e esta em expansao. Cadastre-se agora — vamos te ajudar a se preparar e comecar a atender.</p>' +
-          '<p class="quiz-market">Mais de 420 mil condominios no Brasil precisam de profissionais qualificados.</p>' +
-          '<a href="#cadastro" class="feat-cta cta-ouro" onclick="scrollToSignup(\'profissional\')" style="margin-top:12px;display:inline-block;font-size:14px;padding:12px 24px">Quero me cadastrar</a></div>';
-      }
-
-      document.querySelector('.quiz-step.active').classList.remove('active');
-      resultEl.classList.add('active');
-    }
-
-    // ─── Scroll to signup with type pre-selected ──
-    function scrollToSignup(type) {
-      var typeMap = { sindico: 'sindico', profissional: 'profissional', morador: 'morador' };
-      var selectEl = document.getElementById('ref-type');
-      if (typeMap[type]) selectEl.value = typeMap[type];
-
-      setTimeout(function() {
-        document.getElementById('cadastro').scrollIntoView({ behavior: 'smooth', block: 'center' });
-        setTimeout(function() { document.getElementById('ref-name').focus(); }, 500);
-      }, 100);
-    }
-
-    // ─── Get UTM params from URL ──────────────────
+    // ─── UTM params ───
     function getUtmParams() {
       var params = new URLSearchParams(window.location.search);
       return {
@@ -2009,60 +2065,50 @@
       };
     }
 
-    // ─── Submit lead to API ───────────────────────
-    function submitReferral() {
-      var name = document.getElementById('ref-name').value.trim();
-      var email = document.getElementById('ref-email').value.trim();
-      var type = document.getElementById('ref-type').value;
-      var indica = document.getElementById('ref-indica').value.trim();
-      var btn = document.querySelector('#referral-form .feat-cta');
+    // ─── API Config ───
+    var API_URL = window.location.hostname === 'localhost'
+      ? 'http://localhost:3001/api/leads'
+      : 'https://condodaily.com.br/api/leads';
+
+    // ─── Submit lead ───
+    function submitLead(e) {
+      e.preventDefault();
+
+      var name = document.getElementById('lead-name').value.trim();
+      var email = document.getElementById('lead-email').value.trim();
+      var phone = document.getElementById('lead-phone').value.trim();
+      var type = document.getElementById('lead-type').value;
+      var btn = document.getElementById('lead-btn');
 
       if (!name || name.length < 2) {
-        alert('Preencha seu nome (minimo 2 caracteres).');
+        alert('Preencha seu nome (mínimo 2 caracteres).');
         return;
       }
       if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        alert('Preencha um e-mail valido.');
+        alert('Preencha um e-mail válido.');
         return;
       }
       if (!type) {
-        alert('Selecione quem voce e.');
+        alert('Selecione quem você é.');
         return;
       }
 
-      // Disable button while sending
       btn.textContent = 'Enviando...';
       btn.style.opacity = '0.6';
       btn.style.pointerEvents = 'none';
 
-      // Parse referral field (could be name or email)
-      var referralName = '';
-      var referralEmail = '';
-      if (indica) {
-        if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(indica)) {
-          referralEmail = indica;
-        } else {
-          referralName = indica;
-        }
-      }
-
-      // Determine source
-      var source = 'LANDING_PAGE';
-      if (indica) source = 'REFERRAL';
-      else if (quizScore > 0 && type === 'profissional') source = 'QUIZ';
-      else if (type === 'sindico') source = 'CTA_CONDOMINIO';
-      else if (type === 'profissional') source = 'CTA_PROFISSIONAL';
-
       var utm = getUtmParams();
+
+      // Map EMPRESA to OUTRO for backend compatibility
+      var apiType = type === 'EMPRESA' ? 'OUTRO' : type;
 
       var payload = {
         name: name,
         email: email,
-        type: type.toUpperCase(),
-        source: source,
-        referral_name: referralName,
-        referral_email: referralEmail,
-        quiz_score: quizScore > 0 ? quizScore : null,
+        phone: phone || null,
+        type: apiType,
+        source: type === 'SINDICO' ? 'CTA_CONDOMINIO' : (type === 'PROFISSIONAL' ? 'CTA_PROFISSIONAL' : 'LANDING_PAGE'),
+        quiz_score: null,
         utm_source: utm.utm_source,
         utm_medium: utm.utm_medium,
         utm_campaign: utm.utm_campaign,
@@ -2076,16 +2122,12 @@
       .then(function(res) { return res.json(); })
       .then(function(data) {
         if (data.success) {
-          document.getElementById('referral-form').style.display = 'none';
-          var successEl = document.getElementById('referral-success');
+          document.getElementById('lead-form').style.display = 'none';
+          var successEl = document.getElementById('lead-success');
           successEl.style.display = 'block';
-
           if (data.duplicate) {
-            successEl.querySelector('h4').textContent = 'Voce ja esta cadastrado!';
-            successEl.querySelector('p').textContent = 'Vamos te avisar assim que o app estiver disponivel. Fique de olho no seu e-mail!';
-          } else {
-            successEl.querySelector('h4').textContent = 'Cadastro confirmado!';
-            successEl.querySelector('p').textContent = 'Enviamos um e-mail de confirmacao. Quanto mais indicar, maior seu bonus no lancamento!';
+            successEl.querySelector('h4').textContent = 'Você já está cadastrado!';
+            successEl.querySelector('p').textContent = 'Vamos te avisar assim que o app estiver disponível. Fique de olho no seu e-mail!';
           }
         } else {
           alert(data.error || 'Erro ao cadastrar. Tente novamente.');
@@ -2096,18 +2138,229 @@
       })
       .catch(function(err) {
         console.error('Lead API error:', err);
-        // Fallback: save to localStorage if API is down
-        var leads = JSON.parse(localStorage.getItem('condodaily_leads') || '[]');
-        leads.push(Object.assign({}, payload, { date: new Date().toISOString() }));
-        localStorage.setItem('condodaily_leads', JSON.stringify(leads));
-
-        document.getElementById('referral-form').style.display = 'none';
-        var successEl = document.getElementById('referral-success');
-        successEl.style.display = 'block';
-        successEl.querySelector('h4').textContent = 'Cadastro recebido!';
-        successEl.querySelector('p').textContent = 'Vamos te avisar assim que o app estiver disponivel.';
+        alert('Erro de conexão. Tente novamente.');
+        btn.textContent = 'Quero participar';
+        btn.style.opacity = '1';
+        btn.style.pointerEvents = 'auto';
       });
     }
+
+    // ─── Load public stats ───
+    (function() {
+      var statsUrl = window.location.hostname === 'localhost'
+        ? 'http://localhost:3001/api/leads/public-stats'
+        : 'https://condodaily.com.br/api/leads/public-stats';
+
+      fetch(statsUrl)
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          var total = data.total || 0;
+          var sindicos = data.sindicos || 0;
+          var profissionais = data.profissionais || 0;
+
+          // Animate counters
+          animateCounter('proof-total', total);
+          animateCounter('proof-sindicos', sindicos);
+          animateCounter('proof-profissionais', profissionais);
+
+          // Urgency bar
+          var pct = Math.min(total, 100);
+          document.getElementById('urgency-num').textContent = total;
+          document.getElementById('urgency-fill').style.width = pct + '%';
+
+          if (total >= 100) {
+            document.getElementById('urgency-bar').querySelector('.urgency-text').innerHTML =
+              'Vagas prioritárias <strong>esgotadas</strong>! Cadastre-se para entrar na lista de espera';
+          }
+        })
+        .catch(function() {
+          // Fallback — hide stats if API fails
+          document.getElementById('proof-total').textContent = '7+';
+          document.getElementById('proof-sindicos').textContent = '3';
+          document.getElementById('proof-profissionais').textContent = '3';
+          document.getElementById('urgency-num').textContent = '7';
+          document.getElementById('urgency-fill').style.width = '7%';
+        });
+
+      function animateCounter(id, target) {
+        var el = document.getElementById(id);
+        if (!el || target === 0) { el.textContent = '0'; return; }
+        var duration = 800;
+        var start = 0;
+        var startTime = null;
+        function step(ts) {
+          if (!startTime) startTime = ts;
+          var progress = Math.min((ts - startTime) / duration, 1);
+          var eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.round(start + (target - start) * eased);
+          if (progress < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+    })();
+
+    // ─── Smooth scroll for CTA buttons ───
+    document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+      a.addEventListener('click', function(e) {
+        var target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // ─── Inline CTA form submit ───
+    function submitInlineCta(e) {
+      e.preventDefault();
+      var email = document.getElementById('inline-email').value.trim();
+      var btn = document.getElementById('inline-btn');
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
+
+      btn.textContent = 'Enviando...';
+      btn.disabled = true;
+
+      var utm = getUtmParams();
+      var payload = {
+        name: email.split('@')[0],
+        email: email,
+        phone: null,
+        type: 'OUTRO',
+        source: 'LANDING_PAGE',
+        quiz_score: null,
+        utm_source: utm.utm_source || 'inline_cta',
+        utm_medium: utm.utm_medium,
+        utm_campaign: utm.utm_campaign,
+      };
+
+      fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        if (data.success) {
+          document.getElementById('inline-cta-form').style.display = 'none';
+          document.getElementById('inline-success').style.display = 'flex';
+        } else {
+          btn.textContent = 'Cadastrar';
+          btn.disabled = false;
+        }
+      })
+      .catch(function() {
+        btn.textContent = 'Cadastrar';
+        btn.disabled = false;
+      });
+    }
+
+    // ─── Exit-intent popup ───
+    var exitShown = false;
+    var exitDismissed = sessionStorage.getItem('exitDismissed') === 'true';
+
+    function showExitPopup() {
+      if (exitShown || exitDismissed) return;
+      exitShown = true;
+      document.getElementById('exit-overlay').classList.add('active');
+    }
+
+    function closeExitPopup() {
+      document.getElementById('exit-overlay').classList.remove('active');
+      exitDismissed = true;
+      sessionStorage.setItem('exitDismissed', 'true');
+    }
+
+    // Desktop: detect mouse leaving viewport (exit intent)
+    document.addEventListener('mouseout', function(e) {
+      if (e.clientY <= 0 && !exitShown && !exitDismissed) {
+        showExitPopup();
+      }
+    });
+
+    // Mobile: detect scroll up fast after scrolling down (intent to leave)
+    (function() {
+      var lastScrollY = 0;
+      var scrolledDown = false;
+      var scrollTimeout = null;
+
+      window.addEventListener('scroll', function() {
+        var currentY = window.scrollY;
+        if (currentY > 400) scrolledDown = true;
+        if (scrolledDown && currentY < lastScrollY - 80 && currentY < 200) {
+          if (scrollTimeout) clearTimeout(scrollTimeout);
+          scrollTimeout = setTimeout(function() {
+            showExitPopup();
+          }, 300);
+        }
+        lastScrollY = currentY;
+      });
+    })();
+
+    // Close popup on overlay click
+    document.getElementById('exit-overlay').addEventListener('click', function(e) {
+      if (e.target === this) closeExitPopup();
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeExitPopup();
+    });
+
+    // Exit form submit
+    function submitExitForm(e) {
+      e.preventDefault();
+      var name = document.getElementById('exit-name').value.trim();
+      var email = document.getElementById('exit-email').value.trim();
+      var type = document.getElementById('exit-type').value;
+      var btn = document.getElementById('exit-btn');
+
+      if (!name || !email || !type) return;
+
+      btn.textContent = 'Enviando...';
+      btn.disabled = true;
+
+      var utm = getUtmParams();
+      var apiType = type === 'EMPRESA' ? 'OUTRO' : type;
+
+      var payload = {
+        name: name,
+        email: email,
+        phone: null,
+        type: apiType,
+        source: 'LANDING_PAGE',
+        quiz_score: null,
+        utm_source: utm.utm_source || 'exit_popup',
+        utm_medium: utm.utm_medium,
+        utm_campaign: utm.utm_campaign,
+      };
+
+      fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        if (data.success) {
+          document.getElementById('exit-form').style.display = 'none';
+          document.getElementById('exit-success').style.display = 'block';
+          setTimeout(closeExitPopup, 3000);
+        } else {
+          btn.textContent = 'Garantir meu acesso';
+          btn.disabled = false;
+        }
+      })
+      .catch(function() {
+        btn.textContent = 'Garantir meu acesso';
+        btn.disabled = false;
+      });
+    }
+
+    // ─── Auto-hide WhatsApp tooltip after 8 seconds ───
+    setTimeout(function() {
+      var tip = document.getElementById('whatsapp-tooltip');
+      if (tip) tip.style.display = 'none';
+    }, 10000);
   </script>
 </body>
 </html>

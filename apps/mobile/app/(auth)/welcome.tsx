@@ -35,7 +35,7 @@ export default function WelcomeScreen() {
             <View style={styles.featureText}>
               <Text style={styles.featureTitle}>Para Condomínios</Text>
               <Text style={styles.featureDesc}>
-                Encontre profissionais qualificados para serviços avulsos
+                Zelador faltou? Profissional confirmado em minutos.
               </Text>
             </View>
           </View>
@@ -47,7 +47,7 @@ export default function WelcomeScreen() {
             <View style={styles.featureText}>
               <Text style={styles.featureTitle}>Para Profissionais</Text>
               <Text style={styles.featureDesc}>
-                Encontre diárias com segurança e pagamento garantido
+                Aceite diárias, faça check-in e receba na hora.
               </Text>
             </View>
           </View>
@@ -59,7 +59,7 @@ export default function WelcomeScreen() {
             <View style={styles.featureText}>
               <Text style={styles.featureTitle}>Seguro Incluso</Text>
               <Text style={styles.featureDesc}>
-                Cobertura durante todo o serviço via check-in/check-out
+                Você e o profissional protegidos do início ao fim.
               </Text>
             </View>
           </View>
@@ -168,11 +168,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: SPACING.sm,
+    paddingVertical: SPACING.md,
+    paddingHorizontal: SPACING.lg,
+    backgroundColor: COLORS.primaryLight,
+    borderRadius: RADIUS.md,
   },
   howItWorksText: {
-    fontSize: FONTS.sizes.md,
-    fontFamily: FONTS.medium,
+    fontSize: FONTS.sizes.lg,
+    fontFamily: FONTS.semibold,
     color: COLORS.primary,
   },
 });

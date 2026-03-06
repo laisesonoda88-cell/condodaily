@@ -16,7 +16,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "br.com.condodaily.app",
-      "buildNumber": "1",
+      "buildNumber": "3",
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "O CondoDaily precisa da sua localização para realizar check-in e check-out nos serviços e encontrar profissionais próximos.",
         "NSLocationAlwaysUsageDescription": "O CondoDaily usa sua localização para validar check-in/check-out durante os serviços contratados.",
@@ -49,7 +49,7 @@
       },
       "edgeToEdgeEnabled": true,
       "package": "br.com.condodaily.app",
-      "versionCode": 1,
+      "versionCode": 3,
       "permissions": [
         "ACCESS_FINE_LOCATION",
         "ACCESS_COARSE_LOCATION",

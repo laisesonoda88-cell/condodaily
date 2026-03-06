@@ -62,6 +62,11 @@ export const professionalService = {
     return data;
   },
 
+  getOpportunities: async () => {
+    const { data } = await api.get('/professionals/opportunities');
+    return data;
+  },
+
   updateAvailability: async (disponivel_fim_semana: boolean, disponivel_feriados: boolean) => {
     const { data } = await api.put('/professionals/availability', {
       disponivel_fim_semana,

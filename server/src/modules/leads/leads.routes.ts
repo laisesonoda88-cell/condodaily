@@ -11,7 +11,7 @@ import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
 import { db } from '../../db/index.js';
 import { earlyLeads } from '../../db/schema.js';
 import { eq, desc, sql, count, and, gte, ilike, or } from 'drizzle-orm';
-import { sendLeadConfirmation, sendReferralNotification, sendLaunchEmail } from '../../services/email.js';
+import { sendLeadConfirmation, sendReferralNotification, sendLaunchEmail, processDripEmails, processReativacaoCampaign } from '../../services/email.js';
 
 // ─── Admin Auth Middleware ───────────────────────────────
 
@@ -35,7 +35,7 @@ function adminAuth(request: FastifyRequest, reply: FastifyReply, done: () => voi
 // ─── Input Validation ───────────────────────────────────
 
 const VALID_TYPES = ['SINDICO', 'PROFISSIONAL', 'MORADOR', 'OUTRO'];
-const VALID_SOURCES = ['LANDING_PAGE', 'REFERRAL', 'QUIZ', 'CTA_CONDOMINIO', 'CTA_PROFISSIONAL'];
+const VALID_SOURCES = ['LANDING_PAGE', 'REFERRAL', 'QUIZ', 'CTA_CONDOMINIO', 'CTA_PROFISSIONAL', 'EVENTO_2025'];
 
 function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -207,6 +207,29 @@ export async function leadRoutes(app: FastifyInstance) {
   });
 
   // ══════════════════════════════════════════════════════
+  // GET /api/leads/public-stats — Public: safe counters for landing page
+  // ══════════════════════════════════════════════════════
+
+  app.get('/public-stats', async (_request: FastifyRequest, reply: FastifyReply) => {
+    const [{ total }] = await db.select({ total: count() }).from(earlyLeads);
+
+    const byType = await db.select({
+      type: earlyLeads.type,
+      count: count(),
+    }).from(earlyLeads).groupBy(earlyLeads.type);
+
+    const typeMap: Record<string, number> = {};
+    byType.forEach(t => { typeMap[t.type] = Number(t.count); });
+
+    return reply.send({
+      total: Number(total),
+      sindicos: typeMap['SINDICO'] || 0,
+      profissionais: typeMap['PROFISSIONAL'] || 0,
+      empresas: typeMap['OUTRO'] || 0,
+    });
+  });
+
+  // ══════════════════════════════════════════════════════
   // GET /api/leads/stats — Admin: estatísticas
   // ══════════════════════════════════════════════════════
 
@@ -315,6 +338,123 @@ export async function leadRoutes(app: FastifyInstance) {
       failed,
       remaining: Number(remaining),
     });
+  });
+
+  // ══════════════════════════════════════════════════════
+  // POST /api/leads/drip — Admin: processa drip campaign
+  // ══════════════════════════════════════════════════════
+
+  app.post('/drip', {
+    preHandler: [adminAuth],
+  }, async (_request: FastifyRequest, reply: FastifyReply) => {
+    try {
+      const result = await processDripEmails();
+      return reply.send({
+        success: true,
+        message: `Drip campaign processada: ${result.sent} enviados, ${result.failed} falhas, ${result.skipped} ignorados`,
+        ...result,
+      });
+    } catch (err: any) {
+      app.log.error({ err }, 'Drip campaign error');
+      return reply.status(500).send({
+        success: false,
+        error: 'Erro ao processar drip campaign',
+      });
+    }
+  });
+
+  // ══════════════════════════════════════════════════════
+  // POST /api/leads/import-bulk — Admin: importa contatos em massa
+  // ══════════════════════════════════════════════════════
+
+  app.post('/import-bulk', {
+    preHandler: [adminAuth],
+  }, async (request: FastifyRequest, reply: FastifyReply) => {
+    const body = request.body as Record<string, any>;
+    const contacts = body.contacts as Array<{ name: string; email: string; type?: string }>;
+    const source = body.source || 'EVENTO_2025';
+
+    if (!contacts || !Array.isArray(contacts) || contacts.length === 0) {
+      return reply.status(400).send({ success: false, error: 'Envie um array de contacts [{name, email, type?}]' });
+    }
+
+    if (contacts.length > 200) {
+      return reply.status(400).send({ success: false, error: 'Maximo 200 contatos por vez' });
+    }
+
+    let imported = 0;
+    let duplicates = 0;
+    let errors = 0;
+
+    for (const contact of contacts) {
+      const name = contact.name?.trim();
+      const email = contact.email?.trim()?.toLowerCase();
+      const type = (contact.type?.toUpperCase() || 'SINDICO') as any;
+
+      if (!name || !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errors++;
+        continue;
+      }
+
+      // Check duplicate
+      const existing = await db.select({ id: earlyLeads.id })
+        .from(earlyLeads)
+        .where(eq(earlyLeads.email, email))
+        .limit(1);
+
+      if (existing.length > 0) {
+        duplicates++;
+        continue;
+      }
+
+      // Get next VIP position
+      const [{ maxPos }] = await db.select({
+        maxPos: sql<number>`COALESCE(MAX(${earlyLeads.vip_position}), 0)`
+      }).from(earlyLeads);
+
+      await db.insert(earlyLeads).values({
+        name,
+        email,
+        type,
+        source: source as any,
+        vip_position: Number(maxPos) + 1,
+        email_sent: false,
+      });
+
+      imported++;
+    }
+
+    return reply.send({
+      success: true,
+      message: `Importacao concluida: ${imported} novos, ${duplicates} duplicados, ${errors} invalidos`,
+      imported,
+      duplicates,
+      errors,
+      total: contacts.length,
+    });
+  });
+
+  // ══════════════════════════════════════════════════════
+  // POST /api/leads/reativacao — Admin: campanha base existente
+  // ══════════════════════════════════════════════════════
+
+  app.post('/reativacao', {
+    preHandler: [adminAuth],
+  }, async (_request: FastifyRequest, reply: FastifyReply) => {
+    try {
+      const result = await processReativacaoCampaign();
+      return reply.send({
+        success: true,
+        message: `Campanha reativacao: ${result.sent} enviados, ${result.failed} falhas`,
+        ...result,
+      });
+    } catch (err: any) {
+      app.log.error({ err }, 'Reativacao campaign error');
+      return reply.status(500).send({
+        success: false,
+        error: 'Erro ao processar campanha de reativacao',
+      });
+    }
   });
 
   // ══════════════════════════════════════════════════════
